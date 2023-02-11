@@ -13,10 +13,10 @@
     "@react-three/fiber": "^8.11.0",
     "@react-three/p2": "^0.0.6",
     "@types/three": "^0.149.0",
-    "jotai": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "three": "^0.149.0"
+    "three": "^0.149.0",
+    "zustand": "^4.3.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
