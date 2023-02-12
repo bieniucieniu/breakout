@@ -1,16 +1,21 @@
 import { useBox } from "@react-three/p2";
-import { Brick } from "../../types";
+export type Brick = {
+  name: string;
+  args: [number, number, number?];
+  position: [number, number];
+  points?: number;
+};
 
 export const createCoordsGrid = ({
   gridSize,
   args,
   position,
 }: {
-  gridSize: [rows: number, columns: number];
+  gridSize: [columns: number, rows: number];
   args: [width: number, height: number];
   position?: [number, number];
 }): [number, number][] => {
-  const [rows, columns] = gridSize;
+  const [columns, rows] = gridSize;
   const [width, height] = args;
   const cords: [number, number][] = [];
   const xStep = width / columns;
@@ -35,10 +40,10 @@ export const createBricksGrid = ({
   position,
   brickSize,
 }: {
-  gridSize: [rows: number, columns: number];
+  gridSize: [columns: number, rows: number];
   args: [width: number, height: number];
-  position?: [number, number];
-  brickSize?: [number, number];
+  position?: [x: number, y: number];
+  brickSize?: [width: number, height: number, depth?: number];
 }): Brick[] => {
   const coords = createCoordsGrid({
     gridSize,
@@ -47,7 +52,7 @@ export const createBricksGrid = ({
   });
 
   const bricks = coords.map((coords) => ({
-    args: brickSize || [1, 1],
+    args: brickSize || [1, 1, 1],
     position: coords,
     name: `brick-${coords[0]}-${coords[1]}`,
   }));
@@ -60,13 +65,13 @@ const Brick = ({
   position,
   material,
 }: {
-  args: [number, number];
+  args: [number, number, number?];
   position: [number, number];
   material?: p2.Material;
 }) => {
   const [ref, api] = useBox(() => ({
-    mass: 0,
-    args,
+    type: "Kinematic",
+    args: [args[0], args[1]],
     position,
     material,
   }));

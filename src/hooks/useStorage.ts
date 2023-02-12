@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Brick } from "../types";
+import { Brick } from "../components/game/Bricks";
 import defaultConfig from "../defaultConfig";
 
 type Storage = {
