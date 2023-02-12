@@ -1,6 +1,7 @@
+import { Color } from "@react-three/fiber";
 import { useBox } from "@react-three/p2";
 
-export const StaticBox = ({
+export const KinematicBox = ({
   args,
   position,
   material,
@@ -9,10 +10,10 @@ export const StaticBox = ({
   args: [width: number, height: number, depth?: number];
   position: [x: number, y: number];
   material?: p2.Material;
-  color?: THREE.Color;
+  color?: Color;
 }) => {
   const [ref] = useBox(() => ({
-    type: "Static",
+    type: "Kinematic",
     args: [args[0], args[1]],
     position,
     material,

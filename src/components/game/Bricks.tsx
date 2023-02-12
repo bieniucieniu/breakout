@@ -1,3 +1,4 @@
+import { Color } from "@react-three/fiber";
 import { useBox } from "@react-three/p2";
 export type Brick = {
   name: string;
@@ -64,10 +65,12 @@ const Brick = ({
   args,
   position,
   material,
+  color,
 }: {
   args: [number, number, number?];
   position: [number, number];
   material?: p2.Material;
+  color?: Color;
 }) => {
   const [ref, api] = useBox(() => ({
     type: "Kinematic",
@@ -79,7 +82,7 @@ const Brick = ({
     // @ts-expect-error
     <mesh ref={ref}>
       <boxBufferGeometry args={args} />
-      <meshStandardMaterial color="hotpink" />
+      <meshStandardMaterial color={color || "hotpink"} />
     </mesh>
   );
 };
