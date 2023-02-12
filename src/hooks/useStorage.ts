@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { Brick } from "../types";
+import defaultConfig from "../defaultConfig";
 
 type Storage = {
   Paused: boolean;
@@ -10,6 +11,8 @@ type Storage = {
   resetLifes: () => void;
   bricks: Brick[];
   setBricks: (bricks: Brick[]) => void;
+  config: typeof defaultConfig;
+  setConfig: (config: typeof defaultConfig) => void;
 };
 
 export const useStorage = create<Storage>((set) => ({
@@ -21,4 +24,6 @@ export const useStorage = create<Storage>((set) => ({
   resetLifes: () => set({ lifes: 3 }),
   bricks: [],
   setBricks: (bricks) => set({ bricks: bricks }),
+  config: defaultConfig,
+  setConfig: (config) => set({ config: config }),
 }));
