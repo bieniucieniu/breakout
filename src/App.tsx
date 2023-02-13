@@ -41,6 +41,7 @@ export const App = () => {
           left: 0,
           zIndex: 1,
         }}
+        cameraPosition={[0, 0, 64]}
       />
     </div>
   );

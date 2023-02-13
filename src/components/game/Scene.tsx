@@ -1,7 +1,9 @@
 import { OrbitControls } from "@react-three/drei";
 import { useEffect } from "react";
 import { Material } from "three";
+import { radToDeg } from "three/src/math/MathUtils";
 import { useStorage } from "../../hooks/useStorage";
+import { Ball } from "./Ball";
 import { BricksGrid, createBricksGrid } from "./Bricks";
 import { KinematicBox } from "./KinenaticBox";
 
@@ -20,6 +22,7 @@ export const Scene = () => {
         args: config.grid.args,
         position: [0, config.args[1] / 4],
         brickSize: config.brick.args,
+        maxPoints: config.brick.maxPoints,
       })
     );
   }, []);
@@ -59,6 +62,12 @@ export const Scene = () => {
           position={[(config.args[0] + config.border.tickness) / 2, 0]}
           color={config.border.color}
           material={materials.default}
+        />
+
+        <Ball
+          position={config.ball.defaultPosition}
+          radius={config.ball.radius}
+          material={materials.ball}
         />
 
         {/* bricks */}

@@ -19,10 +19,28 @@ export default {
       speed: 10,
     },
     ball: {
-      radius: 10,
+      radius: 1,
+      defaultPosition: [0, 0] as [number, number],
+      defaultVelocity: [0, 0] as [number, number],
+      color: "#FFFFFF",
     },
     brick: {
       args: [6, 3] as [number, number],
+      colors: [
+        "hsl(000, 100%, 50%)",
+        "hsl(030, 100%, 50%)",
+        "hsl(060, 100%, 50%)",
+        "hsl(090, 100%, 50%)",
+        "hsl(120, 100%, 50%)",
+        "hsl(150, 100%, 50%)",
+        "hsl(180, 100%, 50%)",
+        "hsl(210, 100%, 50%)",
+        "hsl(240, 100%, 50%)",
+        "hsl(270, 100%, 50%)",
+        "hsl(300, 100%, 50%)",
+        "hsl(330, 100%, 50%)",
+      ],
+      maxPoints: 12,
     },
     lights: [
       {
@@ -47,6 +65,11 @@ export default {
         id: 2,
         friction: 0,
         restitution: 0.9,
+      },
+      ball: {
+        id: 3,
+        friction: 0,
+        restitution: 1.1,
       },
     },
   },

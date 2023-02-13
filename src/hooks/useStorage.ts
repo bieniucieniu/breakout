@@ -3,7 +3,8 @@ import { Brick } from "../components/game/Bricks";
 import defaultConfig from "../defaultConfig";
 
 type Storage = {
-  Paused: boolean;
+  paused: boolean;
+  setPaused: (paused: boolean) => void;
   switchPaused: () => void;
   score: number;
   increaseScore: (score?: number) => void;
@@ -16,8 +17,9 @@ type Storage = {
 };
 
 export const useStorage = create<Storage>((set) => ({
-  Paused: false,
-  switchPaused: () => set((state) => ({ Paused: !state.Paused })),
+  paused: false,
+  setPaused: (paused) => set((state) => ({ paused: paused })),
+  switchPaused: () => set((state) => ({ paused: !state.paused })),
   score: 0,
   increaseScore: (score) => set({ score }),
   lifes: 3,

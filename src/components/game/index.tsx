@@ -1,6 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/p2";
 import { useStorage } from "../../hooks/useStorage";
+import { useWindowFocus } from "../../hooks/useWindowFocus";
 import { Scene } from "./Scene";
 
 export default ({
@@ -10,16 +11,24 @@ export default ({
   style?: React.CSSProperties;
   cameraPosition?: [number, number, number];
 }) => {
-  const { config } = useStorage((state) => ({
+  const { config, paused, setPaused } = useStorage((state) => ({
     config: state.config.game,
+    paused: state.paused,
+    setPaused: state.setPaused,
   }));
 
+  useWindowFocus(
+    () => setPaused(false),
+    () => setPaused(true)
+  );
+
   return (
-    <Canvas style={style} camera={{ position: [0, 0, 64] }}>
+    <Canvas style={style} camera={{ position: cameraPosition }}>
       <Physics
         normalIndex={2}
         stepSize={1 / config.fps}
         gravity={config.gravity}
+        isPaused={paused}
       >
         <Scene />
       </Physics>
