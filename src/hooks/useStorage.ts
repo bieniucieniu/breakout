@@ -14,6 +14,8 @@ type Storage = {
   setBricks: (bricks: Brick[]) => void;
   config: typeof defaultConfig;
   setConfig: (config: typeof defaultConfig) => void;
+  PadControlls: { left: Boolean; right: Boolean };
+  setPadControlls: ({ left, right }: { left: Boolean; right: Boolean }) => void;
 };
 
 export const useStorage = create<Storage>((set) => ({
@@ -28,4 +30,6 @@ export const useStorage = create<Storage>((set) => ({
   setBricks: (bricks) => set({ bricks: bricks }),
   config: defaultConfig,
   setConfig: (config) => set({ config: config }),
+  PadControlls: { left: false, right: false },
+  setPadControlls: (args) => set({ PadControlls: args }),
 }));
