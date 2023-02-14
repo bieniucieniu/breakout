@@ -16,7 +16,7 @@ export default {
       args: [100, 20] as [number, number],
       speed: 10,
       angularSpeed: 2,
-      angleLimit: Math.PI / 6,
+      maxAngle: Math.PI / 6,
     },
     ball: {
       radius: 1,

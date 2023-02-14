@@ -60,7 +60,64 @@ export const Paddle = ({
     return unSub;
   }, []);
 
+  const positionRef = useRef(position);
+  const angleRef = useRef(0);
+
+  const subscribePaddleTracker = () => {
+    api.position.subscribe((pos) => {
+      positionRef.current = pos;
+    });
+    api.angle.subscribe((angle) => {
+      angleRef.current = angle;
+    });
+  };
+
+  useEffect(() => {
+    const unSub = subscribePaddleTracker();
+    return unSub;
+  }, []);
+
+  const allowVelocity = useRef(true);
+  const allowAngularVelocity = useRef(true);
+
   useFrame(() => {
+    //pos limits
+    if (positionRef.current[0] < -config.args[0] / 2 + args[0] / 2) {
+      api.position.set(
+        -config.args[0] / 2 + args[0] / 2,
+        positionRef.current[1]
+      );
+      allowVelocity.current = false;
+    } else {
+      allowVelocity.current = true;
+    }
+
+    if (positionRef.current[0] > config.args[0] / 2 - args[0] / 2) {
+      api.position.set(
+        config.args[0] / 2 - args[0] / 2,
+        positionRef.current[1]
+      );
+      allowVelocity.current = false;
+    } else {
+      allowVelocity.current = true;
+    }
+
+    // angle limits
+    if (angleRef.current > config.paddle.maxAngle) {
+      api.angle.set(config.paddle.maxAngle);
+      allowAngularVelocity.current = false;
+    } else {
+      allowAngularVelocity.current = true;
+    }
+
+    if (angleRef.current < -config.paddle.maxAngle) {
+      api.angle.set(-config.paddle.maxAngle);
+      allowAngularVelocity.current = false;
+    } else {
+      allowAngularVelocity.current = true;
+    }
+
+    //movement
     if (PadControllsRef.current.left && PadControllsRef.current.right) {
       //hold both keys
       api.velocity.set(0, 0);
