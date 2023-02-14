@@ -4,6 +4,7 @@ import { useStorage } from "../../hooks/useStorage";
 import { Ball } from "./Ball";
 import { BricksGrid, createBricksGrid } from "./Bricks";
 import { KinematicBox } from "./KinenaticBox";
+import { Paddle } from "./Paddle";
 
 export const Scene = () => {
   const { bricks, setBricks, config, materials } = useStorage((state) => ({
@@ -66,6 +67,12 @@ export const Scene = () => {
           position={config.ball.defaultPosition}
           radius={config.ball.radius}
           material={materials.ball}
+        />
+
+        <Paddle
+          position={[0, -config.args[1] / 2]}
+          args={[5, 1, 1]}
+          color={"red"}
         />
 
         {/* bricks */}

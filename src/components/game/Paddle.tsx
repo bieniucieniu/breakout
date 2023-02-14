@@ -1,8 +1,9 @@
+import { useFrame } from "@react-three/fiber";
 import { useBox } from "@react-three/p2";
 import { useEffect, useRef } from "react";
 import { useStorage } from "../../hooks/useStorage";
 
-export const Pad = ({
+export const Paddle = ({
   args,
   position,
   color = "white",
@@ -46,15 +47,34 @@ export const Pad = ({
         PadControllsRef.current = { ...PadControllsRef.current, right: false };
       }
     };
+    window.addEventListener("keydown", keyDown);
+    window.addEventListener("keyup", keyUp);
+
+    return () => {
+      window.removeEventListener("keydown", keyDown);
+      window.removeEventListener("keyup", keyUp);
+    };
   };
   useEffect(() => {
     const unSub = SubcribeControlls();
     return unSub;
   }, []);
 
+  useFrame(() => {
+    if (PadControllsRef.current.left && PadControllsRef.current.right) {
+      api.velocity.set(0, 0);
+    } else if (PadControllsRef.current.left) {
+      api.velocity.set(-config.paddle.speed, 0);
+    } else if (PadControllsRef.current.right) {
+      api.velocity.set(config.paddle.speed, 0);
+    } else {
+      api.velocity.set(0, 0);
+    }
+  });
+
   return (
     //@ts-expect-error
-    <mesh ref={ref} castShadow receiveShadow>
+    <mesh ref={ref}>
       <boxGeometry args={args} />
       <meshStandardMaterial color={color} />
     </mesh>
