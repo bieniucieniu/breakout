@@ -1,5 +1,3 @@
-import { Color } from "three";
-
 export default {
   game: {
     fps: 60,
@@ -17,6 +15,8 @@ export default {
     paddle: {
       args: [100, 20] as [number, number],
       speed: 10,
+      angularSpeed: 2,
+      angleLimit: Math.PI / 6,
     },
     ball: {
       radius: 1,

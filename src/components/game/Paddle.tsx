@@ -29,7 +29,7 @@ export const Paddle = ({
 
   const PadControllsRef = useRef({ left: false, right: false });
 
-  const SubcribeControlls = () => {
+  const SubscribeControlls = () => {
     const keyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft" || e.key === "a") {
         PadControllsRef.current = { ...PadControllsRef.current, left: true };
@@ -56,19 +56,27 @@ export const Paddle = ({
     };
   };
   useEffect(() => {
-    const unSub = SubcribeControlls();
+    const unSub = SubscribeControlls();
     return unSub;
   }, []);
 
   useFrame(() => {
     if (PadControllsRef.current.left && PadControllsRef.current.right) {
+      //hold both keys
       api.velocity.set(0, 0);
+      api.angularVelocity.set(0);
     } else if (PadControllsRef.current.left) {
+      //left
       api.velocity.set(-config.paddle.speed, 0);
+      api.angularVelocity.set(config.paddle.angularSpeed);
     } else if (PadControllsRef.current.right) {
+      //right
       api.velocity.set(config.paddle.speed, 0);
+      api.angularVelocity.set(-config.paddle.angularSpeed);
     } else {
+      //none
       api.velocity.set(0, 0);
+      api.angularVelocity.set(0);
     }
   });
 
