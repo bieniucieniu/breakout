@@ -1,4 +1,5 @@
 import { OrbitControls } from "@react-three/drei";
+import { useContactMaterial } from "@react-three/p2";
 import { useEffect } from "react";
 import { useStorage } from "../../hooks/useStorage";
 import { Ball } from "./Ball";
@@ -13,6 +14,22 @@ export const Scene = () => {
     config: state.config.game,
     materials: state.config.game.materials,
   }));
+
+  //ball bricks
+  useContactMaterial(materials.ball, materials.brick, {
+    friction: 0,
+    restitution: 0.8,
+  });
+  //ball paddle
+  useContactMaterial(materials.ball, materials.paddle, {
+    friction: 0,
+    restitution: 1.3,
+  });
+  //ball boarder aka defalult
+  useContactMaterial(materials.ball, materials.default, {
+    friction: 0,
+    restitution: 1,
+  });
 
   useEffect(() => {
     setBricks(
@@ -73,6 +90,7 @@ export const Scene = () => {
           position={[0, -config.args[1] / 2]}
           args={[5, 1, 1]}
           color={"red"}
+          material={materials.paddle}
         />
 
         {/* bricks */}
