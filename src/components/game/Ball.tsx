@@ -19,7 +19,7 @@ export const Ball = ({
 
   return (
     // @ts-expect-error
-    <mesh ref={ref}>
+    <mesh ref={ref} name={"ball"}>
       <sphereGeometry args={[radius]} />
       <meshStandardMaterial color="white" />
     </mesh>

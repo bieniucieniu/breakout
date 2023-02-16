@@ -1,5 +1,6 @@
 import { Color } from "@react-three/fiber";
 import { useBox } from "@react-three/p2";
+import { useRef } from "react";
 import { useStorage } from "../../hooks/useStorage";
 export type Brick = {
   name: string;
@@ -55,11 +56,11 @@ export const createBricksGrid = ({
     position,
   });
 
-  const bricks = coords.map((coords) => ({
+  const bricks = coords.map((coords, i) => ({
     args: brickSize || [1, 1, 1],
     position: coords,
-    name: `brick-${coords[0]}-${coords[1]}`,
-    points: maxPoints || 1,
+    name: `brick[${coords[0].toFixed(2)},${coords[1].toFixed(2)}]`,
+    points: maxPoints ? (i % maxPoints) + 1 : 1,
   }));
 
   return bricks;
@@ -70,21 +71,49 @@ const Brick = ({
   position,
   material,
   color,
+  name,
+  points,
 }: {
   args: [number, number, number?];
   position: [number, number];
   material?: p2.Material;
   color?: Color;
+  name?: string;
+  points?: number;
 }) => {
+  const { bricks, setBricks } = useStorage((stage) => ({
+    bricks: stage.bricks,
+    setBricks: stage.setBricks,
+  }));
+  const pointsRef = useRef(points);
+
   const [ref, api] = useBox(() => ({
     type: "Kinematic",
     args: [args[0], args[1]],
     position,
     material,
+    onCollide: ({ body, target }) => {
+      if (body.name === "ball") {
+        if (pointsRef.current) {
+          pointsRef.current -= 1;
+          const newBricks = bricks.map((e) => {
+            if (e.name === target.name) {
+              e.points = pointsRef.current;
+            }
+            return e;
+          });
+          setBricks(newBricks);
+        }
+        if (!pointsRef.current) {
+          target.removeFromParent();
+          api.collisionResponse.set(false);
+        }
+      }
+    },
   }));
   return (
     // @ts-expect-error
-    <mesh ref={ref}>
+    <mesh ref={ref} name={name}>
       <boxBufferGeometry args={args} />
       <meshStandardMaterial color={color || "hotpink"} />
     </mesh>
@@ -94,11 +123,9 @@ const Brick = ({
 export const BricksGrid = ({
   bricks,
   material,
-  maxPoints = 1,
 }: {
   bricks: Brick[];
   material?: p2.Material;
-  maxPoints?: number;
 }) => {
   const { colors } = useStorage((state) => ({
     colors: state.config.game.brick.colors,
@@ -111,7 +138,7 @@ export const BricksGrid = ({
           key={i}
           {...brick}
           material={material}
-          color={colors[i % colors.length]}
+          color={colors[brick.points ? brick.points - 1 : 0]}
         />
       ))}
     </>
