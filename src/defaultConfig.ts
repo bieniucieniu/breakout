@@ -13,10 +13,10 @@ export default {
       args: [64, 32] as [number, number],
     },
     paddle: {
-      args: [100, 20] as [number, number],
-      speed: 10,
+      args: [10, 1] as [number, number],
+      speed: 40,
       angularSpeed: 2,
-      maxAngle: Math.PI / 6,
+      maxAngle: Math.PI / 8,
     },
     ball: {
       radius: 1,

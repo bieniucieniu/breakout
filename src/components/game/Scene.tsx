@@ -88,7 +88,7 @@ export const Scene = () => {
 
         <Paddle
           position={[0, -config.args[1] / 2]}
-          args={[5, 1, 1]}
+          args={config.paddle.args}
           color={"red"}
           material={materials.paddle}
         />

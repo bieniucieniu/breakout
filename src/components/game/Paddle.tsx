@@ -10,13 +10,13 @@ export const Paddle = ({
   material,
 }: {
   position: [number, number];
-  args: [number, number, number];
+  args: [number, number];
   color?: string;
   material?: p2.Material;
 }) => {
   const [ref, api] = useBox(() => ({
     type: "Kinematic",
-    args: [args[0], args[1]],
+    args,
     position,
     material,
   }));
