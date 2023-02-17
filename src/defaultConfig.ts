@@ -1,6 +1,6 @@
 export default {
   game: {
-    fps: 60,
+    tickRate: 60,
     args: [64, 64] as [number, number],
     gravity: [0, -9.82] as [number, number],
     border: {
@@ -64,7 +64,7 @@ export default {
       brick: {
         id: 2,
         friction: 0,
-        restitution: 0.9,
+        restitution: 0.7,
       },
       ball: {
         id: 3,

@@ -26,7 +26,7 @@ export default ({
     <Canvas style={style} camera={{ position: cameraPosition }}>
       <Physics
         normalIndex={2}
-        stepSize={1 / config.fps}
+        stepSize={1 / config.tickRate}
         gravity={config.gravity}
         isPaused={paused}
       >
