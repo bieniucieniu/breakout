@@ -18,7 +18,7 @@ export const Scene = () => {
   //ball bricks
   useContactMaterial(materials.ball, materials.brick, {
     friction: 0,
-    restitution: 0.8,
+    restitution: 0.6,
   });
   //ball paddle
   useContactMaterial(materials.ball, materials.paddle, {
