@@ -59,17 +59,17 @@ export default {
       paddle: {
         id: 1,
         friction: 0,
-        restitution: 1.3,
+        restitution: 1,
       },
       brick: {
         id: 2,
         friction: 0,
-        restitution: 0.7,
+        restitution: 1,
       },
       ball: {
         id: 3,
         friction: 0,
-        restitution: 1.1,
+        restitution: 1,
       },
     },
   },
