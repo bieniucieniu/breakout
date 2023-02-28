@@ -7,6 +7,42 @@ import { BricksGrid, createBricksGrid } from "./Bricks";
 import { KinematicBox } from "./KinenaticBox";
 import { Paddle } from "./Paddle";
 
+export const Boarder = () => {
+  const { boardArgs, border, materials } = useStorage((state) => ({
+    config: state.config.game,
+    border: state.config.game.border,
+    boardArgs: state.config.game.args,
+    materials: state.config.game.materials,
+  }));
+
+  return (
+    <>
+      <KinematicBox
+        args={[border.tickness, boardArgs[1], border.depth]}
+        position={[-(boardArgs[0] + border.tickness) / 2, 0]}
+        color={border.color}
+        material={materials.default}
+      />
+      <KinematicBox
+        args={[
+          boardArgs[0] + border.tickness * 2,
+          border.tickness,
+          border.depth,
+        ]}
+        position={[0, (boardArgs[1] + border.tickness) / 2]}
+        color={border.color}
+        material={materials.default}
+      />
+      <KinematicBox
+        args={[border.tickness, boardArgs[1], border.depth]}
+        position={[(boardArgs[0] + border.tickness) / 2, 0]}
+        color={border.color}
+        material={materials.default}
+      />
+    </>
+  );
+};
+
 export const Scene = () => {
   const { bricks, setBricks, config, materials } = useStorage((state) => ({
     bricks: state.bricks,
@@ -57,44 +93,11 @@ export const Scene = () => {
         </mesh> */}
 
         {/* border */}
-        <KinematicBox
-          args={[config.border.tickness, config.args[1], config.border.depth]}
-          position={[-(config.args[0] + config.border.tickness) / 2, 0]}
-          color={config.border.color}
-          material={materials.default}
-        />
-        <KinematicBox
-          args={[
-            config.args[0] + config.border.tickness * 2,
-            config.border.tickness,
-            config.border.depth,
-          ]}
-          position={[0, (config.args[1] + config.border.tickness) / 2]}
-          color={config.border.color}
-          material={materials.default}
-        />
-        <KinematicBox
-          args={[config.border.tickness, config.args[1], config.border.depth]}
-          position={[(config.args[0] + config.border.tickness) / 2, 0]}
-          color={config.border.color}
-          material={materials.default}
-        />
-
-        <Ball
-          radius={config.ball.radius}
-          position={config.ball.defaultPosition}
-          material={materials.ball}
-        />
-
-        <Paddle
-          position={[0, -config.args[1] / 2]}
-          args={config.paddle.args}
-          color={"red"}
-          material={materials.paddle}
-        />
-
+        <Boarder />
+        <Ball position={config.ball.defaultPosition} />
+        <Paddle position={[0, -config.args[1] / 2]} />
         {/* bricks */}
-        <BricksGrid bricks={bricks} material={materials.brick} />
+        <BricksGrid bricks={bricks} />
       </group>
     </>
   );

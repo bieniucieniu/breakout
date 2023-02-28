@@ -120,15 +120,10 @@ const Brick = ({
   );
 };
 
-export const BricksGrid = ({
-  bricks,
-  material,
-}: {
-  bricks: Brick[];
-  material?: p2.Material;
-}) => {
-  const { colors } = useStorage((state) => ({
+export const BricksGrid = ({ bricks }: { bricks: Brick[] }) => {
+  const { colors, materials } = useStorage((state) => ({
     colors: state.config.game.brick.colors,
+    materials: state.config.game.materials,
   }));
 
   return (
@@ -137,7 +132,7 @@ export const BricksGrid = ({
         <Brick
           key={i}
           {...brick}
-          material={material}
+          material={materials.brick}
           color={colors[brick.points ? brick.points - 1 : 0]}
         />
       ))}

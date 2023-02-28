@@ -1,27 +1,25 @@
 import { useCircle } from "@react-three/p2";
+import { useStorage } from "../../hooks/useStorage";
 
-export const Ball = ({
-  position,
-  radius,
-  material,
-}: {
-  position: [number, number];
-  radius: number;
-  material?: p2.Material;
-}) => {
+export const Ball = ({ position }: { position: [number, number] }) => {
+  const { ball, materials } = useStorage((state) => ({
+    ball: state.config.game.ball,
+    materials: state.config.game.materials,
+  }));
+
   const [ref] = useCircle(() => ({
-    type: "Dynamic",
     mass: 1,
+    type: "Dynamic",
     position,
-    material,
-    args: [radius],
+    material: materials.ball,
+    args: [ball.radius],
   }));
 
   return (
     // @ts-expect-error
     <mesh ref={ref} name={"ball"}>
-      <sphereGeometry args={[radius]} />
-      <meshToonMaterial color="white" />
+      <sphereGeometry args={[ball.radius]} />
+      <meshToonMaterial color={ball.color} />
     </mesh>
   );
 };
