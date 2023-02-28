@@ -17,6 +17,7 @@ export default {
       speed: 40,
       angularSpeed: 2,
       maxAngle: Math.PI / 8,
+      color: "#FF0000",
     },
     ball: {
       radius: 1,
