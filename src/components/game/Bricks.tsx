@@ -115,7 +115,7 @@ const Brick = ({
     // @ts-expect-error
     <mesh ref={ref} name={name}>
       <boxBufferGeometry args={args} />
-      <meshStandardMaterial color={color || "hotpink"} />
+      <meshToonMaterial color={color || "hotpink"} />
     </mesh>
   );
 };

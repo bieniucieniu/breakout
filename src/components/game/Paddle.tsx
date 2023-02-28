@@ -141,7 +141,7 @@ export const Paddle = ({
     //@ts-expect-error
     <mesh ref={ref}>
       <boxGeometry args={args} />
-      <meshStandardMaterial color={color} />
+      <meshToonMaterial color={color} />
     </mesh>
   );
 };

@@ -21,7 +21,7 @@ export const Ball = ({
     // @ts-expect-error
     <mesh ref={ref} name={"ball"}>
       <sphereGeometry args={[radius]} />
-      <meshStandardMaterial color="white" />
+      <meshToonMaterial color="white" />
     </mesh>
   );
 };

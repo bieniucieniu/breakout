@@ -51,10 +51,10 @@ export const Scene = () => {
       ))}
       <group>
         {/* bg */}
-        <mesh position={[0, 0, -1]}>
+        {/* <mesh position={[0, 0, -1]}>
           <planeGeometry args={config.args} />
           <meshStandardMaterial color="white" />
-        </mesh>
+        </mesh> */}
 
         {/* border */}
         <KinematicBox
@@ -81,8 +81,8 @@ export const Scene = () => {
         />
 
         <Ball
-          position={config.ball.defaultPosition}
           radius={config.ball.radius}
+          position={config.ball.defaultPosition}
           material={materials.ball}
         />
 
