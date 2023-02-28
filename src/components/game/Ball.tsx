@@ -1,5 +1,5 @@
 import { useCircle } from "@react-three/p2";
-import { useStorage } from "../../hooks/useStorage";
+import { useStorage } from "../hooks/useStorage";
 
 export const Ball = ({ position }: { position: [number, number] }) => {
   const { ball, materials } = useStorage((state) => ({

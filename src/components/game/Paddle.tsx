@@ -1,7 +1,7 @@
 import { useFrame } from "@react-three/fiber";
 import { useBox } from "@react-three/p2";
 import { useEffect, useRef } from "react";
-import { useStorage } from "../../hooks/useStorage";
+import { useStorage } from "../hooks/useStorage";
 
 export const Paddle = ({ position }: { position: [number, number] }) => {
   const { paddle, materials, boardArgs, PadControlls, setPadControlls } =

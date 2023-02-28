@@ -1,7 +1,7 @@
 import { OrbitControls } from "@react-three/drei";
 import { useContactMaterial } from "@react-three/p2";
 import { useEffect } from "react";
-import { useStorage } from "../../hooks/useStorage";
+import { useStorage } from "../hooks/useStorage";
 import { Ball } from "./Ball";
 import { BricksGrid, createBricksGrid } from "./Bricks";
 import { KinematicBox } from "./KinenaticBox";

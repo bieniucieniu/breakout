@@ -1,7 +1,7 @@
 import { Color } from "@react-three/fiber";
 import { useBox } from "@react-three/p2";
 import { useRef } from "react";
-import { useStorage } from "../../hooks/useStorage";
+import { useStorage } from "../hooks/useStorage";
 export type Brick = {
   name: string;
   args: [number, number, number?];

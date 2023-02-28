@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { Brick } from "../components/game/Bricks";
-import defaultConfig from "../defaultConfig";
+import { Brick } from "../game/Bricks";
+import defaultConfig from "../../defaultConfig";
 
 type Storage = {
   paused: boolean;

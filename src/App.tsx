@@ -12,7 +12,7 @@ export const App = () => {
         gridTemplateColumns: "1fr 1fr 1fr",
       }}
     >
-      {/* <div
+      <div
         style={{
           gridColumn: "1",
           backgroundColor: "red",
@@ -31,7 +31,7 @@ export const App = () => {
           zIndex: 2,
           backgroundColor: "red",
         }}
-      ></div> */}
+      ></div>
       <Game
         style={{
           width: "100vw",
