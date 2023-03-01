@@ -1,5 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/p2";
+import { useRef, useState } from "react";
 import { useStorage } from "../hooks/useStorage";
 import { useWindowFocus } from "../hooks/useWindowFocus";
 import { Scene } from "./Scene";
@@ -17,9 +18,11 @@ export default ({
     setPaused: state.setPaused,
   }));
 
+  const [windowFocused, setWindowFocused] = useState(true);
+
   useWindowFocus(
-    () => setPaused(false),
-    () => setPaused(true)
+    () => setWindowFocused(true),
+    () => setWindowFocused(false)
   );
 
   return (
@@ -27,8 +30,9 @@ export default ({
       <Physics
         normalIndex={2}
         stepSize={1 / config.tickRate}
-        gravity={config.gravity}
-        isPaused={paused}
+        // gravity={config.gravity}
+        gravity={[0, 10]}
+        isPaused={paused || !windowFocused}
       >
         <Scene />
       </Physics>
