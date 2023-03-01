@@ -7,7 +7,9 @@ type Storage = {
   setPaused: (paused: boolean) => void;
   switchPaused: () => void;
   score: number;
-  increaseScore: (score?: number) => void;
+  setScore: (score: number) => void;
+  initScore: number;
+  setInitScore: (score: number) => void;
   lifes: number;
   resetLifes: () => void;
   bricks: Brick[];
@@ -20,10 +22,12 @@ type Storage = {
 
 export const useStorage = create<Storage>((set) => ({
   paused: false,
-  setPaused: (paused) => set((state) => ({ paused: paused })),
+  setPaused: (paused) => set(() => ({ paused: paused })),
   switchPaused: () => set((state) => ({ paused: !state.paused })),
   score: 0,
-  increaseScore: (score) => set({ score }),
+  setScore: (score) => set(() => ({ score: score })),
+  initScore: 0,
+  setInitScore: (score) => set(() => ({ initScore: score })),
   lifes: 3,
   resetLifes: () => set({ lifes: 3 }),
   bricks: [],

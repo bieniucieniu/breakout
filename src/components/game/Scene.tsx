@@ -1,6 +1,6 @@
 import { OrbitControls } from "@react-three/drei";
 import { useContactMaterial } from "@react-three/p2";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useStorage } from "../hooks/useStorage";
 import { Ball } from "./Ball";
 import { BricksGrid, createBricksGrid } from "./Bricks";
@@ -44,11 +44,24 @@ export const Boarder = () => {
 };
 
 export const Scene = () => {
-  const { bricks, setBricks, config, materials } = useStorage((state) => ({
+  const {
+    bricks,
+    setBricks,
+    config,
+    materials,
+    setScore,
+    score,
+    initScore,
+    setInitScore,
+  } = useStorage((state) => ({
     bricks: state.bricks,
     setBricks: state.setBricks,
     config: state.config.game,
     materials: state.config.game.materials,
+    setScore: state.setScore,
+    score: state.score,
+    initScore: state.initScore,
+    setInitScore: state.setInitScore,
   }));
 
   //ball bricks
@@ -77,7 +90,28 @@ export const Scene = () => {
         maxPoints: config.brick.maxPoints,
       })
     );
+
+    setInitScore(
+      (() => {
+        if (config.brick.maxPoints)
+          return (
+            (Math.floor(
+              (config.grid.gridSize[0] * config.grid.gridSize[1]) /
+                config.brick.maxPoints
+            ) *
+              config.brick.maxPoints *
+              (config.brick.maxPoints + 1)) /
+            2
+          );
+        else return config.grid.gridSize[0] * config.grid.gridSize[1];
+      })()
+    );
   }, []);
+
+  useEffect(() => {
+    setScore(initScore - bricks.reduce((acc, brick) => acc + brick.points!, 0));
+    console.log(score);
+  }, [bricks]);
 
   return (
     <>
