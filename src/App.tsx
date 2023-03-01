@@ -1,37 +1,52 @@
 import Game from "./components/game";
+import { GameNavigation } from "./components/gameNavigation";
 
 export const App = () => {
   return (
     <div
       style={{
-        width: "100vw",
         height: "100vh",
         backgroundColor: "black",
         overflow: "hidden",
-        display: "Grid",
-        gridTemplateColumns: "1fr 1fr 1fr",
       }}
     >
+      <GameNavigation
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 2,
+          height: "4rem",
+        }}
+      />
       <div
         style={{
-          gridColumn: "1",
-          backgroundColor: "red",
           zIndex: 2,
+          display: "Grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          height: "100%",
         }}
-      ></div>
-      <div
-        style={{
-          gridColumn: "2",
-          zIndex: 2,
-        }}
-      ></div>
-      <div
-        style={{
-          gridColumn: "3",
-          zIndex: 2,
-          backgroundColor: "red",
-        }}
-      ></div>
+      >
+        <div
+          style={{
+            gridColumn: "1",
+            backgroundColor: "red",
+            zIndex: 2,
+          }}
+        ></div>
+        <div
+          style={{
+            gridColumn: "2",
+            zIndex: 2,
+          }}
+        ></div>
+        <div
+          style={{
+            gridColumn: "3",
+            zIndex: 2,
+            backgroundColor: "red",
+          }}
+        ></div>
+      </div>
       <Game
         style={{
           width: "100vw",
