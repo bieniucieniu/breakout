@@ -21,7 +21,7 @@ const Button = ({
         height: "100%",
         width: "100%",
         zIndex: hover ? 1 : 0,
-        transform: hover ? "scale(1.01)" : "scale(1)",
+        transform: hover ? "scale(1.01)" : "",
         transition: "transform 0s",
         ...style,
       }}
