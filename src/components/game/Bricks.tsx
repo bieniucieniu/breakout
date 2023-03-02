@@ -92,6 +92,8 @@ const Brick = ({
     args: [args[0], args[1]],
     position,
     material,
+
+    //colision handling //colision handling //colision handling //colision handling
     onCollide: ({ body, target }) => {
       if (body.name === "ball") {
         if (pointsRef.current) {
@@ -110,6 +112,7 @@ const Brick = ({
         }
       }
     },
+    //colision handling //colision handling //colision handling //colision handling
   }));
   return (
     // @ts-expect-error
