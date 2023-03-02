@@ -44,25 +44,22 @@ export const Boarder = () => {
 };
 
 export const Scene = () => {
-  const {
-    bricks,
-    setBricks,
-    config,
-    materials,
-    setScore,
-    score,
-    initScore,
-    setInitScore,
-  } = useStorage((state) => ({
+  const { bricks, setBricks } = useStorage((state) => ({
     bricks: state.bricks,
     setBricks: state.setBricks,
-    config: state.config.game,
-    materials: state.config.game.materials,
-    setScore: state.setScore,
-    score: state.score,
-    initScore: state.initScore,
-    setInitScore: state.setInitScore,
   }));
+  const { score, setScore } = useStorage((state) => ({
+    score: state.score,
+    setScore: state.setScore,
+  }));
+  const { config, materials, initScore, setInitScore } = useStorage(
+    (state) => ({
+      config: state.config.game,
+      materials: state.config.game.materials,
+      initScore: state.initScore,
+      setInitScore: state.setInitScore,
+    })
+  );
 
   //ball bricks
   useContactMaterial(materials.ball, materials.brick, {
