@@ -74,7 +74,7 @@ export const Scene = () => {
   //ball boarder aka defalult
   useContactMaterial(materials.ball, materials.default, {
     friction: 0,
-    restitution: 1,
+    restitution: 0.6,
   });
 
   useEffect(() => {

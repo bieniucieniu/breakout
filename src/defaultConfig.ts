@@ -16,7 +16,7 @@ export default {
       args: [10, 1] as [number, number],
       speed: 60,
       angularSpeed: 2,
-      maxAngle: Math.PI / 8,
+      maxAngle: Math.PI / 12,
       color: "#FF0000",
     },
     ball: {
