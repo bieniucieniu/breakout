@@ -52,14 +52,14 @@ export const Scene = () => {
     score: state.score,
     setScore: state.setScore,
   }));
-  const { config, materials, initScore, setInitScore } = useStorage(
-    (state) => ({
-      config: state.config.game,
-      materials: state.config.game.materials,
-      initScore: state.initScore,
-      setInitScore: state.setInitScore,
-    })
-  );
+  const { initScore, setInitScore } = useStorage((state) => ({
+    initScore: state.initScore,
+    setInitScore: state.setInitScore,
+  }));
+  const { config, materials } = useStorage((state) => ({
+    config: state.config.game,
+    materials: state.config.game.materials,
+  }));
 
   //ball bricks
   useContactMaterial(materials.ball, materials.brick, {
