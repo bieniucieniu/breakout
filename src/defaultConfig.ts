@@ -14,14 +14,14 @@ export default {
     },
     paddle: {
       args: [10, 1] as [number, number],
-      speed: 40,
+      speed: 60,
       angularSpeed: 2,
       maxAngle: Math.PI / 8,
       color: "#FF0000",
     },
     ball: {
       radius: 1,
-      defaultPosition: [0, 0] as [number, number],
+      defaultPosition: [0, -1] as [number, number],
       defaultVelocity: [0, 0] as [number, number],
       color: "#FFFFFF",
     },
