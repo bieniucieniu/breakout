@@ -18,7 +18,7 @@ export const App = () => {
           height: "4rem",
         }}
       />
-      <div
+      {/* <div
         style={{
           zIndex: 2,
           display: "Grid",
@@ -46,7 +46,7 @@ export const App = () => {
             backgroundColor: "red",
           }}
         ></div>
-      </div>
+      </div> */}
       <Game
         style={{
           width: "100vw",

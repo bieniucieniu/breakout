@@ -4,7 +4,8 @@ import { useEffect, useRef } from "react";
 import { useStorage } from "../hooks/useStorage";
 
 export const Ball = ({ position }: { position: [number, number] }) => {
-  const { ball, materials } = useStorage((state) => ({
+  const { config, ball, materials } = useStorage((state) => ({
+    config: state.config,
     ball: state.config.game.ball,
     materials: state.config.game.materials,
   }));
@@ -19,7 +20,6 @@ export const Ball = ({ position }: { position: [number, number] }) => {
 
   const velocity = useRef([0, 0]);
   const StuckCounter = useRef(0);
-
   useEffect(() => {
     const unsub = api.velocity.subscribe((v) => {
       velocity.current = v;
@@ -42,6 +42,30 @@ export const Ball = ({ position }: { position: [number, number] }) => {
       }
       if (StuckCounter.current > 10) {
         api.velocity.set(Math.random() * 2 - 1, 1);
+      }
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const lastPosition = useRef([0, 0]);
+  useEffect(() => {
+    const unsub = api.position.subscribe((v) => {
+      lastPosition.current = v;
+    });
+
+    return unsub;
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (
+        lastPosition.current[0] > config.game.args[0] / 2 ||
+        lastPosition.current[0] < -config.game.args[0] / 2 ||
+        lastPosition.current[1] > config.game.args[1] / 2 ||
+        lastPosition.current[1] < -config.game.args[1] / 2
+      ) {
+        api.velocity.set(0, 0);
+        api.position.copy(config.game.ball.defaultPosition);
       }
     }, 1000);
     return () => clearInterval(id);
