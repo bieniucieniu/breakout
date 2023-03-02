@@ -30,7 +30,6 @@ export const Ball = ({ position }: { position: [number, number] }) => {
 
   useEffect(() => {
     const id = setInterval(() => {
-      console.log(velocity.current);
       if (
         velocity.current[0] < 0.001 &&
         velocity.current[1] < 0.001 &&
