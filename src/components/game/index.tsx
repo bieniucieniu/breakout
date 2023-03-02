@@ -30,8 +30,8 @@ export default ({
       <Physics
         normalIndex={2}
         stepSize={1 / config.tickRate}
-        // gravity={config.gravity}
-        gravity={[0, 10]}
+        gravity={config.gravity}
+        // gravity={[0, 10]}
         isPaused={paused || !windowFocused}
       >
         <Scene />
