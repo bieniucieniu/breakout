@@ -36,7 +36,7 @@ export const Scene = () => {
 
   return (
     <>
-      <OrbitControls />
+      {/* <OrbitControls /> */}
       {config.lights.map((light, index) => (
         <pointLight key={index} position={light.position} />
       ))}
