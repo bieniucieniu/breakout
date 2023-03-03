@@ -69,6 +69,7 @@ export const GameNavigation = ({ style }: { style?: React.CSSProperties }) => {
   const paused = useStorage((state) => state.paused);
   const switchPaused = useStorage((state) => state.switchPaused);
   const score = useStorage((state) => state.score);
+  const lifes = useStorage((state) => state.lifes);
   const resetGame = useStorage((state) => state.resetGame);
 
   useEffect(() => {
@@ -95,7 +96,7 @@ export const GameNavigation = ({ style }: { style?: React.CSSProperties }) => {
     >
       <Button name="resetgame" onClick={resetGame} />
       <ValueDisplay name="score" value={score} />
-      <ValueDisplay />
+      <ValueDisplay name="lifes" value={lifes} />
 
       <Button
         // onClick={() => setPaused(!paused)}

@@ -27,8 +27,15 @@ export const useStorage = create<Storage>((set) => ({
   increaseScore: (score) => set((state) => ({ score: state.score + score })),
   resetScore: () => set(() => ({ score: 0 })),
   lifes: 3,
-  removeLife: () => set((state) => ({ lifes: state.lifes - 1 })),
-  resetLifes: () => set({ lifes: 3 }),
+  removeLife: () =>
+    set((state) => {
+      if (state.lifes > 1) {
+        return { lifes: state.lifes - 1 };
+      }
+      state.resetGame();
+      return {};
+    }),
+  resetLifes: () => set((state) => ({ lifes: state.config.game.lifes })),
   bricks: [],
   setBricks: (bricks) => set({ bricks: bricks }),
   config: defaultConfig,

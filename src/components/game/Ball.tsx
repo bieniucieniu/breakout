@@ -9,6 +9,7 @@ export const Ball = ({ position }: { position: [number, number] }) => {
     ball: state.config.game.ball,
     materials: state.config.game.materials,
   }));
+  const removeLife = useStorage((state) => state.removeLife);
 
   const [ref, api] = useCircle(() => ({
     mass: 1,
@@ -66,6 +67,7 @@ export const Ball = ({ position }: { position: [number, number] }) => {
       ) {
         api.velocity.set(0, 0);
         api.position.copy(config.game.ball.defaultPosition);
+        removeLife();
       }
     }, 500);
     return () => clearInterval(id);
