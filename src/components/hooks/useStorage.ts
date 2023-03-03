@@ -34,19 +34,17 @@ export const useStorage = create<Storage>((set) => ({
   config: defaultConfig,
   setConfig: (config) => set({ config: config }),
   resetGame: () =>
-    set((state) => {
-      return {
-        paused: false,
-        score: 0,
-        lifes: 3,
-        bricks: createBricksGrid({
-          gridSize: state.config.game.grid.gridSize,
-          args: state.config.game.grid.args,
-          position: [0, state.config.game.args[1] / 4],
-          brickSize: state.config.game.brick.args,
-          maxPoints: state.config.game.brick.maxPoints,
-        }),
-        PadControlls: { left: false, right: false },
-      };
-    }),
+    set((state) => ({
+      paused: true,
+      score: 0,
+      lifes: 3,
+      bricks: createBricksGrid({
+        gridSize: state.config.game.grid.gridSize,
+        args: state.config.game.grid.args,
+        position: [0, state.config.game.args[1] / 4],
+        brickSize: state.config.game.brick.args,
+        maxPoints: state.config.game.brick.maxPoints,
+      }),
+      PadControlls: { left: false, right: false },
+    })),
 }));

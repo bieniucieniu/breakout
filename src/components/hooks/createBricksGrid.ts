@@ -2,7 +2,7 @@ export type Brick = {
   name: string;
   args: [number, number, number?];
   position: [number, number];
-  points?: number;
+  points: number;
 };
 
 export const createCoordsGrid = ({

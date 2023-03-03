@@ -18,7 +18,6 @@ export const Scene = () => {
   useEffect(() => {
     resetGame();
   }, []);
-
   //ball bricks
   useContactMaterial(materials.ball, materials.brick, {
     friction: 0,
@@ -42,17 +41,9 @@ export const Scene = () => {
         <pointLight key={index} position={light.position} />
       ))}
       <group>
-        {/* bg */}
-        {/* <mesh position={[0, 0, -1]}>
-          <planeGeometry args={config.args} />
-          <meshStandardMaterial color="white" />
-        </mesh> */}
-
-        {/* border */}
         <Boarder />
         <Ball position={config.ball.defaultPosition} />
         <Paddle position={[0, -config.args[1] / 2]} />
-        {/* bricks */}
         <BricksGrid bricks={bricks} />
       </group>
     </>
