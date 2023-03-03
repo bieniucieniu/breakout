@@ -56,11 +56,6 @@ export const Scene = () => {
     config: state.config.game,
     materials: state.config.game.materials,
   }));
-  const { lifes, removeLife, resetLifes } = useStorage((state) => ({
-    lifes: state.lifes,
-    removeLife: state.removeLife,
-    resetLifes: state.resetLifes,
-  }));
   const resetGame = useStorage((state) => state.resetGame);
 
   useEffect(() => {
