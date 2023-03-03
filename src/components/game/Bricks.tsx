@@ -85,6 +85,11 @@ const Brick = ({
     bricks: stage.bricks,
     setBricks: stage.setBricks,
   }));
+
+  const { score, increaseScore } = useStorage((state) => ({
+    score: state.score,
+    increaseScore: state.increaseScore,
+  }));
   const pointsRef = useRef(points);
 
   const [ref, api] = useBox(() => ({
@@ -106,6 +111,7 @@ const Brick = ({
           });
           setBricks(newBricks);
         }
+        increaseScore(1);
         if (!pointsRef.current) {
           target.removeFromParent();
           api.collisionResponse.set(false);

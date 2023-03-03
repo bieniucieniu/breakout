@@ -48,18 +48,34 @@ export const Scene = () => {
     bricks: state.bricks,
     setBricks: state.setBricks,
   }));
-  const { score, setScore } = useStorage((state) => ({
+  const { score, resetScore } = useStorage((state) => ({
     score: state.score,
-    setScore: state.setScore,
-  }));
-  const { initScore, setInitScore } = useStorage((state) => ({
-    initScore: state.initScore,
-    setInitScore: state.setInitScore,
+    resetScore: state.resetScore,
   }));
   const { config, materials } = useStorage((state) => ({
     config: state.config.game,
     materials: state.config.game.materials,
   }));
+
+  const { lifes, removeLife, resetLifes } = useStorage((state) => ({
+    lifes: state.lifes,
+    removeLife: state.removeLife,
+    resetLifes: state.resetLifes,
+  }));
+
+  const resetGame = () => {
+    resetLifes();
+    resetScore();
+    setBricks(
+      createBricksGrid({
+        gridSize: config.grid.gridSize,
+        args: config.grid.args,
+        position: [0, config.args[1] / 4],
+        brickSize: config.brick.args,
+        maxPoints: config.brick.maxPoints,
+      })
+    );
+  };
 
   //ball bricks
   useContactMaterial(materials.ball, materials.brick, {
@@ -87,28 +103,7 @@ export const Scene = () => {
         maxPoints: config.brick.maxPoints,
       })
     );
-
-    setInitScore(
-      (() => {
-        if (config.brick.maxPoints)
-          return (
-            (Math.floor(
-              (config.grid.gridSize[0] * config.grid.gridSize[1]) /
-                config.brick.maxPoints
-            ) *
-              config.brick.maxPoints *
-              (config.brick.maxPoints + 1)) /
-            2
-          );
-        else return config.grid.gridSize[0] * config.grid.gridSize[1];
-      })()
-    );
   }, []);
-
-  useEffect(() => {
-    setScore(initScore - bricks.reduce((acc, brick) => acc + brick.points!, 0));
-    console.log(score);
-  }, [bricks]);
 
   return (
     <>
