@@ -1,9 +1,9 @@
 import { OrbitControls } from "@react-three/drei";
 import { useContactMaterial } from "@react-three/p2";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useStorage } from "../hooks/useStorage";
 import { Ball } from "./Ball";
-import { BricksGrid, createBricksGrid } from "./Bricks";
+import { BricksGrid } from "./Bricks";
 import { KinematicBox } from "./KinenaticBox";
 import { Paddle } from "./Paddle";
 
@@ -56,26 +56,16 @@ export const Scene = () => {
     config: state.config.game,
     materials: state.config.game.materials,
   }));
-
   const { lifes, removeLife, resetLifes } = useStorage((state) => ({
     lifes: state.lifes,
     removeLife: state.removeLife,
     resetLifes: state.resetLifes,
   }));
+  const resetGame = useStorage((state) => state.resetGame);
 
-  const resetGame = () => {
-    resetLifes();
-    resetScore();
-    setBricks(
-      createBricksGrid({
-        gridSize: config.grid.gridSize,
-        args: config.grid.args,
-        position: [0, config.args[1] / 4],
-        brickSize: config.brick.args,
-        maxPoints: config.brick.maxPoints,
-      })
-    );
-  };
+  useEffect(() => {
+    resetGame();
+  }, []);
 
   //ball bricks
   useContactMaterial(materials.ball, materials.brick, {
@@ -92,18 +82,6 @@ export const Scene = () => {
     friction: 0,
     restitution: 0.6,
   });
-
-  useEffect(() => {
-    setBricks(
-      createBricksGrid({
-        gridSize: config.grid.gridSize,
-        args: config.grid.args,
-        position: [0, config.args[1] / 4],
-        brickSize: config.brick.args,
-        maxPoints: config.brick.maxPoints,
-      })
-    );
-  }, []);
 
   return (
     <>
