@@ -7,30 +7,28 @@ import { Brick } from "../hooks/createBricksGrid";
 const Brick = ({
   args,
   position,
+  points,
   material,
   color,
   name,
-  points,
 }: {
   args: [number, number, number?];
   position: [number, number];
+  points: number;
   material?: p2.Material;
   color?: Color;
   name?: string;
-  points?: number;
 }) => {
   const { bricks, setBricks } = useStorage((stage) => ({
     bricks: stage.bricks,
     setBricks: stage.setBricks,
   }));
-
-  const { score, increaseScore } = useStorage((state) => ({
-    score: state.score,
+  const { increaseScore } = useStorage((state) => ({
     increaseScore: state.increaseScore,
   }));
   const pointsRef = useRef(points);
 
-  const [ref, api] = useBox(() => ({
+  const [ref] = useBox(() => ({
     type: "Kinematic",
     args: [args[0], args[1]],
     position,
@@ -48,11 +46,7 @@ const Brick = ({
             return e;
           });
           setBricks(newBricks);
-        }
-        increaseScore(1);
-        if (!pointsRef.current) {
-          target.removeFromParent();
-          api.collisionResponse.set(false);
+          increaseScore(1);
         }
       }
     },
@@ -75,14 +69,17 @@ export const BricksGrid = ({ bricks }: { bricks: Brick[] }) => {
 
   return (
     <>
-      {bricks.map((brick, i) => (
-        <Brick
-          key={i}
-          {...brick}
-          material={materials.brick}
-          color={colors[brick.points ? brick.points - 1 : 0]}
-        />
-      ))}
+      {bricks.map(
+        (brick, i) =>
+          brick.points > 0 && (
+            <Brick
+              key={i}
+              {...brick}
+              material={materials.brick}
+              color={colors[brick.points ? brick.points - 1 : 0]}
+            />
+          )
+      )}
     </>
   );
 };
