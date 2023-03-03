@@ -67,7 +67,7 @@ export const Ball = ({ position }: { position: [number, number] }) => {
         api.velocity.set(0, 0);
         api.position.copy(config.game.ball.defaultPosition);
       }
-    }, 1000);
+    }, 500);
     return () => clearInterval(id);
   }, []);
 
