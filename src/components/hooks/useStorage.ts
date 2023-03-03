@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Brick } from "../game/Bricks";
+import { Brick, createBricksGrid } from "./createBricksGrid";
 import defaultConfig from "../../defaultConfig";
 
 type Storage = {
@@ -16,8 +16,6 @@ type Storage = {
   setBricks: (bricks: Brick[]) => void;
   config: typeof defaultConfig;
   setConfig: (config: typeof defaultConfig) => void;
-  PadControlls: { left: Boolean; right: Boolean };
-  setPadControlls: ({ left, right }: { left: Boolean; right: Boolean }) => void;
   resetGame: () => void;
 };
 
@@ -35,16 +33,19 @@ export const useStorage = create<Storage>((set) => ({
   setBricks: (bricks) => set({ bricks: bricks }),
   config: defaultConfig,
   setConfig: (config) => set({ config: config }),
-  PadControlls: { left: false, right: false },
-  setPadControlls: (args) => set({ PadControlls: args }),
   resetGame: () =>
-    set(() => {
+    set((state) => {
       return {
         paused: false,
         score: 0,
         lifes: 3,
-        bricks: [],
-        config: defaultConfig,
+        bricks: createBricksGrid({
+          gridSize: state.config.game.grid.gridSize,
+          args: state.config.game.grid.args,
+          position: [0, state.config.game.args[1] / 4],
+          brickSize: state.config.game.brick.args,
+          maxPoints: state.config.game.brick.maxPoints,
+        }),
         PadControlls: { left: false, right: false },
       };
     }),

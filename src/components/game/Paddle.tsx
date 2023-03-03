@@ -4,15 +4,12 @@ import { useEffect, useRef } from "react";
 import { useStorage } from "../hooks/useStorage";
 
 export const Paddle = ({ position }: { position: [number, number] }) => {
-  const { paddle, materials, boardArgs, PadControlls, setPadControlls } =
-    useStorage((state) => ({
-      config: state.config.game,
-      paddle: state.config.game.paddle,
-      materials: state.config.game.materials,
-      boardArgs: state.config.game.args,
-      PadControlls: state.PadControlls,
-      setPadControlls: state.setPadControlls,
-    }));
+  const { paddle, materials, boardArgs } = useStorage((state) => ({
+    config: state.config.game,
+    paddle: state.config.game.paddle,
+    materials: state.config.game.materials,
+    boardArgs: state.config.game.args,
+  }));
 
   const [ref, api] = useBox(() => ({
     type: "Kinematic",
@@ -37,7 +34,6 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
         PadControllsRef.current = { ...PadControllsRef.current, left: false };
       }
       if (e.key === "ArrowRight" || e.key === "d") {
-        setPadControlls({ ...PadControlls, right: false });
         PadControllsRef.current = { ...PadControllsRef.current, right: false };
       }
     };
