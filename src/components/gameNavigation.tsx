@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useStorage } from "./hooks/useStorage";
 
 const Button = ({
@@ -66,11 +66,17 @@ export const ValueDisplay = ({
   );
 };
 export const GameNavigation = ({ style }: { style?: React.CSSProperties }) => {
-  const { paused, switchPaused, score } = useStorage((state) => ({
-    paused: state.paused,
-    switchPaused: state.switchPaused,
-    score: state.score,
-  }));
+  const paused = useStorage((state) => state.paused);
+  const switchPaused = useStorage((state) => state.switchPaused);
+  const score = useStorage((state) => state.score);
+  const resetGame = useStorage((state) => state.resetGame);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => e.key === " " && switchPaused();
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   return (
     <nav
       style={{
@@ -87,7 +93,7 @@ export const GameNavigation = ({ style }: { style?: React.CSSProperties }) => {
         ...style,
       }}
     >
-      <Button />
+      <Button name="resetgame" onClick={resetGame} />
       <ValueDisplay name="score" value={score} />
       <ValueDisplay />
 
