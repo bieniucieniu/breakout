@@ -130,7 +130,7 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
 
   return (
     //@ts-expect-error
-    <mesh ref={ref}>
+    <mesh ref={ref} position={position}>
       <boxGeometry args={paddle.args} />
       <meshToonMaterial color={paddle.color} />
     </mesh>
