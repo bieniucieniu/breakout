@@ -44,18 +44,11 @@ export const Boarder = () => {
 };
 
 export const Scene = () => {
-  const { bricks, setBricks } = useStorage((state) => ({
-    bricks: state.bricks,
-    setBricks: state.setBricks,
-  }));
-  const { score, resetScore } = useStorage((state) => ({
-    score: state.score,
-    resetScore: state.resetScore,
-  }));
   const { config, materials } = useStorage((state) => ({
     config: state.config.game,
     materials: state.config.game.materials,
   }));
+  const bricks = useStorage((state) => state.bricks);
   const resetGame = useStorage((state) => state.resetGame);
 
   useEffect(() => {
