@@ -3,10 +3,18 @@ import { GameNavigation } from "./GameNavigation";
 
 export const Breakout = () => {
   return (
-    <>
+    <div
+      style={{
+        height: "100vh",
+        backgroundColor: "black",
+        overflow: "hidden",
+      }}
+    >
       <GameNavigation
         style={{
-          bottom: 0,
+          position: "sticky",
+          top: 0,
+          zIndex: 2,
           height: "4rem",
         }}
       />
@@ -17,9 +25,10 @@ export const Breakout = () => {
           position: "absolute",
           top: 0,
           left: 0,
+          zIndex: 1,
         }}
         cameraPosition={[0, 15, 64]}
       />
-    </>
+    </div>
   );
 };
