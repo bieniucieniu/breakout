@@ -37,6 +37,7 @@ export const Ball = ({ position }: { position: [number, number] }) => {
         velocity.current[1] > -0.001
       ) {
         StuckCounter.current++;
+        console.log(StuckCounter.current);
       } else {
         StuckCounter.current = 0;
       }
@@ -44,7 +45,7 @@ export const Ball = ({ position }: { position: [number, number] }) => {
         api.velocity.set(0, 0);
         api.position.copy(config.game.ball.defaultPosition);
       }
-    }, 1000);
+    }, 300);
     return () => clearInterval(id);
   }, []);
 
@@ -69,7 +70,7 @@ export const Ball = ({ position }: { position: [number, number] }) => {
         api.position.copy(config.game.ball.defaultPosition);
         removeLife();
       }
-    }, 500);
+    }, 300);
     return () => clearInterval(id);
   }, []);
 
