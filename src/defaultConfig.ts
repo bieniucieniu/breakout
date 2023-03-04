@@ -47,9 +47,11 @@ export default {
     lights: [
       {
         position: [10, 10, 10] as [number, number, number],
+        intensity: 0.4,
       },
       {
         position: [-10, 10, 10] as [number, number, number],
+        intensity: 0.4,
       },
     ],
     materials: {

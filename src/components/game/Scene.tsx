@@ -38,7 +38,7 @@ export const Scene = () => {
     <>
       {/* <OrbitControls /> */}
       {config.lights.map((light, index) => (
-        <pointLight key={index} position={light.position} />
+        <pointLight key={index} {...light} />
       ))}
       <group>
         <Boarder />
