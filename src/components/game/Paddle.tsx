@@ -5,7 +5,6 @@ import { useStorage } from "../hooks/useStorage";
 
 export const Paddle = ({ position }: { position: [number, number] }) => {
   const { paddle, materials, boardArgs } = useStorage((state) => ({
-    config: state.config.game,
     paddle: state.config.game.paddle,
     materials: state.config.game.materials,
     boardArgs: state.config.game.args,
