@@ -41,7 +41,8 @@ export const Ball = ({ position }: { position: [number, number] }) => {
         StuckCounter.current = 0;
       }
       if (StuckCounter.current > 10) {
-        api.velocity.set(Math.random() * 2 - 1, 1);
+        api.velocity.set(0, 0);
+        api.position.copy(config.game.ball.defaultPosition);
       }
     }, 1000);
     return () => clearInterval(id);
