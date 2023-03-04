@@ -22,7 +22,7 @@ export const KinematicBox = ({
   return (
     // @ts-expect-error
     <mesh ref={ref} position={position}>
-      <boxBufferGeometry args={args} />
+      <boxGeometry args={args} />
       <meshStandardMaterial color={color || "white"} />
     </mesh>
   );
