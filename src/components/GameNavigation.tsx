@@ -85,12 +85,19 @@ export const GameNavigation = ({ style }: { style?: React.CSSProperties }) => {
         borderStyle: "outset",
         backgroundColor: "blue",
         borderColor: "blue",
+
         margin: ".3rem",
+        padding: ".3rem",
+
         display: "grid",
         alignItems: "center",
         gridTemplateColumns: "repeat(4, 1fr)",
         gap: ".5rem",
-        padding: ".3rem",
+
+        position: "sticky",
+        top: 0,
+        zIndex: 2,
+        height: "4rem",
         ...style,
       }}
     >

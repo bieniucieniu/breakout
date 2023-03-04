@@ -10,14 +10,7 @@ export const Breakout = () => {
         overflow: "hidden",
       }}
     >
-      <GameNavigation
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 2,
-          height: "4rem",
-        }}
-      />
+      <GameNavigation />
       <Game
         style={{
           width: "100vw",
