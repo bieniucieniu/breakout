@@ -16,7 +16,7 @@ type Storage = {
   setBricks: (bricks: Brick[]) => void;
   config: typeof defaultConfig;
   setConfig: (config: typeof defaultConfig) => void;
-  resetGame: () => void;
+  setGame: () => void;
 };
 
 export const useStorage = create<Storage>((set) => ({
@@ -32,7 +32,7 @@ export const useStorage = create<Storage>((set) => ({
       if (state.lifes > 1) {
         return { lifes: state.lifes - 1 };
       }
-      state.resetGame();
+      state.setGame();
       return {};
     }),
   resetLifes: () => set((state) => ({ lifes: state.config.game.lifes })),
@@ -40,7 +40,7 @@ export const useStorage = create<Storage>((set) => ({
   setBricks: (bricks) => set({ bricks: bricks }),
   config: defaultConfig,
   setConfig: (config) => set({ config: config }),
-  resetGame: () =>
+  setGame: () =>
     set((state) => ({
       paused: true,
       score: 0,

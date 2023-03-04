@@ -1,4 +1,3 @@
-import { OrbitControls } from "@react-three/drei";
 import { useContactMaterial } from "@react-three/p2";
 import { useEffect } from "react";
 import { useStorage } from "../hooks/useStorage";
@@ -13,11 +12,12 @@ export const Scene = () => {
     materials: state.config.game.materials,
   }));
   const bricks = useStorage((state) => state.bricks);
-  const resetGame = useStorage((state) => state.resetGame);
+  const setGame = useStorage((state) => state.setGame);
 
   useEffect(() => {
-    resetGame();
+    setGame();
   }, []);
+
   //ball bricks
   useContactMaterial(materials.ball, materials.brick, {
     friction: 0,
