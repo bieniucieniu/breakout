@@ -1,4 +1,4 @@
-export default {
+const defaultConfig = {
   game: {
     lifes: 3,
     tickRate: 60,
@@ -15,6 +15,8 @@ export default {
     },
     paddle: {
       args: [10, 1] as [number, number],
+      defaultPosition: [0, -64 / 2] as [number, number],
+      defaultaAngle: 0,
       speed: 60,
       angularSpeed: 2,
       maxAngle: Math.PI / 12,
@@ -78,3 +80,5 @@ export default {
     },
   },
 };
+
+export default defaultConfig;

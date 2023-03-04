@@ -43,7 +43,7 @@ export const Scene = () => {
       <group>
         <Boarder />
         <Ball position={config.ball.defaultPosition} />
-        <Paddle position={[0, -config.args[1] / 2]} />
+        <Paddle position={config.paddle.defaultPosition} />
         <BricksGrid bricks={bricks} />
       </group>
     </>
