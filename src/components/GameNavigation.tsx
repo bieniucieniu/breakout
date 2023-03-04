@@ -70,7 +70,7 @@ export const GameNavigation = ({ style }: { style?: React.CSSProperties }) => {
   const switchPaused = useStorage((state) => state.switchPaused);
   const score = useStorage((state) => state.score);
   const lifes = useStorage((state) => state.lifes);
-  const resetGame = useStorage((state) => state.resetGame);
+  const setGame = useStorage((state) => state.setGame);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => e.key === " " && switchPaused();
@@ -94,15 +94,10 @@ export const GameNavigation = ({ style }: { style?: React.CSSProperties }) => {
         ...style,
       }}
     >
-      <Button name="resetgame" onClick={resetGame} />
+      <Button onClick={switchPaused} name={paused ? "start" : "stop"} />
       <ValueDisplay name="score" value={score} />
       <ValueDisplay name="lifes" value={lifes} />
-
-      <Button
-        // onClick={() => setPaused(!paused)}
-        onClick={switchPaused}
-        name={paused ? "start" : "stop"}
-      />
+      <Button name="resetgame" onClick={setGame} />
     </nav>
   );
 };
