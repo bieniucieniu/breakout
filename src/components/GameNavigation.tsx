@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useStorage } from "./hooks/useStorage";
+import { button, valueDisplay, navbar } from "./styles/navbar.css";
 
-const Button = ({
+export const Button = ({
   style,
   name,
   onClick,
@@ -14,17 +15,7 @@ const Button = ({
 
   return (
     <button
-      style={{
-        borderStyle: "inset",
-        borderColor: "white",
-        borderWidth: "0.3rem",
-        height: "100%",
-        width: "100%",
-        zIndex: hover ? 1 : 0,
-        transform: hover ? "scale(1.01)" : "",
-        transition: "transform 0s",
-        ...style,
-      }}
+      className={button}
       onClick={onClick}
       onMouseOver={(e) => {
         setHover(true);
@@ -46,26 +37,14 @@ export const ValueDisplay = ({
   value?: number;
 }) => {
   return (
-    <div
-      style={{
-        borderStyle: "inset",
-        borderColor: "white",
-        backgroundColor: "white",
-        borderWidth: "0.3rem",
-        height: "100%",
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <div className={valueDisplay}>
       {name}
       {name && " : "}
       {value}
     </div>
   );
 };
-export const GameNavigation = ({ style }: { style?: React.CSSProperties }) => {
+export const GameNavigation = () => {
   const paused = useStorage((state) => state.paused);
   const switchPaused = useStorage((state) => state.switchPaused);
   const score = useStorage((state) => state.score);
@@ -79,28 +58,7 @@ export const GameNavigation = ({ style }: { style?: React.CSSProperties }) => {
   }, []);
 
   return (
-    <nav
-      style={{
-        borderWidth: ".4rem",
-        borderStyle: "outset",
-        backgroundColor: "blue",
-        borderColor: "blue",
-
-        margin: ".3rem",
-        padding: ".3rem",
-
-        display: "grid",
-        alignItems: "center",
-        gridTemplateColumns: "repeat(4, 1fr)",
-        gap: ".5rem",
-
-        position: "sticky",
-        top: 0,
-        zIndex: 2,
-        height: "4rem",
-        ...style,
-      }}
-    >
+    <nav className={navbar}>
       <Button onClick={switchPaused} name={paused ? "start" : "stop"} />
       <ValueDisplay name="score" value={score} />
       <ValueDisplay name="lifes" value={lifes} />

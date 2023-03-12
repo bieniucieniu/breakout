@@ -1,27 +1,14 @@
 import Game from "./game";
 import { GameNavigation } from "./GameNavigation";
+import { breakout, game } from "./styles/breakout.css";
 
 export const Breakout = () => {
+  console.log(breakout);
+
   return (
-    <div
-      style={{
-        height: "100vh",
-        backgroundColor: "black",
-        overflow: "hidden",
-      }}
-    >
+    <div className={breakout}>
       <GameNavigation />
-      <Game
-        style={{
-          width: "100vw",
-          height: "100vh",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          zIndex: 1,
-        }}
-        cameraPosition={[0, 15, 64]}
-      />
+      <Game className={game} cameraPosition={[0, 15, 64]} />
     </div>
   );
 };

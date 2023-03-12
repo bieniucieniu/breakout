@@ -6,11 +6,11 @@ import { useWindowFocus } from "../hooks/useWindowFocus";
 import { Scene } from "./Scene";
 
 export default ({
-  style,
   cameraPosition,
+  className,
 }: {
-  style?: React.CSSProperties;
   cameraPosition?: [number, number, number];
+  className?: string;
 }) => {
   const { config, paused } = useStorage((state) => ({
     config: state.config.game,
@@ -25,7 +25,7 @@ export default ({
   );
 
   return (
-    <Canvas style={style} camera={{ position: cameraPosition }}>
+    <Canvas className={className} camera={{ position: cameraPosition }}>
       <Physics
         normalIndex={2}
         stepSize={1 / config.tickRate}
