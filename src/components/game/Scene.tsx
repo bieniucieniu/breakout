@@ -12,10 +12,10 @@ export const Scene = () => {
     materials: state.config.game.materials,
   }));
   const bricks = useStorage((state) => state.bricks);
-  const setGame = useStorage((state) => state.setGame);
+  const setupGame = useStorage((state) => state.setupGame);
 
   useEffect(() => {
-    setGame();
+    setupGame();
   }, []);
 
   //ball bricks

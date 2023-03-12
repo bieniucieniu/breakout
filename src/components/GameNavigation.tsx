@@ -7,14 +7,14 @@ export const GameNavigation = () => {
   const switchPaused = useStorage((state) => state.switchPaused);
   const score = useStorage((state) => state.score);
   const lifes = useStorage((state) => state.lifes);
-  const setGame = useStorage((state) => state.setGame);
+  const setupGame = useStorage((state) => state.setupGame);
 
   return (
     <nav className={navbar}>
       <Button onClick={switchPaused} name={paused ? "start" : "stop"} />
       <ValueDisplay name="score" value={score} />
       <ValueDisplay name="lifes" value={lifes} />
-      <Button name="resetgame" onClick={setGame} />
+      <Button name="resetgame" onClick={setupGame} />
     </nav>
   );
 };
