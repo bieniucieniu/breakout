@@ -39,12 +39,6 @@ export const GameNavigation = () => {
   const lifes = useStorage((state) => state.lifes);
   const setGame = useStorage((state) => state.setGame);
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => e.key === " " && switchPaused();
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
   return (
     <nav className={navbar}>
       <Button onClick={switchPaused} name={paused ? "start" : "stop"} />

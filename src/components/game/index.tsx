@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/p2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useStorage } from "../hooks/useStorage";
 import { useWindowFocus } from "../hooks/useWindowFocus";
 import { Scene } from "./Scene";
@@ -12,10 +12,9 @@ export default ({
   cameraPosition?: [number, number, number];
   className?: string;
 }) => {
-  const { config, paused } = useStorage((state) => ({
-    config: state.config.game,
-    paused: state.paused,
-  }));
+  const config = useStorage((state) => state.config.game);
+  const paused = useStorage((state) => state.paused);
+  const switchPaused = useStorage((state) => state.switchPaused);
 
   const [windowFocused, setWindowFocused] = useState(true);
 
@@ -23,6 +22,12 @@ export default ({
     () => setWindowFocused(true),
     () => setWindowFocused(false)
   );
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => e.key === " " && switchPaused();
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <Canvas className={className} camera={{ position: cameraPosition }}>
