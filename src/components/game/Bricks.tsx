@@ -1,6 +1,5 @@
 import { Color } from "@react-three/fiber";
 import { useBox } from "@react-three/p2";
-import { useRef } from "react";
 import { useStorage } from "../hooks/useStorage";
 import { Brick } from "../hooks/createBricksGrid";
 
@@ -26,7 +25,6 @@ const Brick = ({
   const { increaseScore } = useStorage((state) => ({
     increaseScore: state.increaseScore,
   }));
-  const pointsRef = useRef(points);
 
   const [ref] = useBox(() => ({
     type: "Kinematic",
@@ -37,17 +35,14 @@ const Brick = ({
     //colision handling //colision handling //colision handling //colision handling
     onCollide: ({ body, target }) => {
       if (body.name === "ball") {
-        if (pointsRef.current) {
-          pointsRef.current -= 1;
-          const newBricks = bricks.map((e) => {
-            if (e.name === target.name) {
-              e.points = pointsRef.current;
-            }
-            return e;
-          });
-          setBricks(newBricks);
-          increaseScore(1);
-        }
+        const newBricks = bricks.map((e) => {
+          if (e.name === target.name) {
+            e.points = e.points - 1;
+          }
+          return e;
+        });
+        setBricks(newBricks);
+        increaseScore(1);
       }
     },
     //colision handling //colision handling //colision handling //colision handling
@@ -66,6 +61,7 @@ export const BricksGrid = ({ bricks }: { bricks: Brick[] }) => {
     colors: state.config.game.brick.colors,
     materials: state.config.game.materials,
   }));
+  // const {bricks} = useStorage((state) => state.bricks);
 
   return (
     <>
