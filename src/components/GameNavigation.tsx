@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useStorage } from "./hooks/useStorage";
 import { button, valueDisplay, navbar } from "./styles/navbar.css";
 
 export const Button = ({
-  style,
   name,
   onClick,
 }: {
@@ -11,19 +10,8 @@ export const Button = ({
   style?: React.CSSProperties;
   onClick?: () => void;
 }) => {
-  const [hover, setHover] = useState(false);
-
   return (
-    <button
-      className={button}
-      onClick={onClick}
-      onMouseOver={(e) => {
-        setHover(true);
-      }}
-      onMouseLeave={(e) => {
-        setHover(false);
-      }}
-    >
+    <button className={button} onClick={onClick}>
       {name}
     </button>
   );
