@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import { globalStyle, style } from "@vanilla-extract/css";
 
 export const pauseMenu = style({
   position: "absolute",
@@ -15,11 +15,36 @@ export const pauseMenuContent = style({
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "50%",
-  height: "50%",
-  backgroundColor: "white",
+  backgroundColor: "blue",
+  width: "auto",
+  height: "auto",
+  maxWidth: "80vw",
+  maxHeight: "80vh",
+
+  borderWidth: "1rem",
+  borderStyle: "outset",
+  borderColor: "blue",
+
+  padding: "3rem",
+});
+
+export const pauseMenuButtons = style({
   display: "flex",
   flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
+  justifyContent: "space-around",
+  gap: "2rem",
+});
+
+globalStyle(`${pauseMenuContent} button`, {
+  width: "20rem",
+  maxWidth: "70vh",
+  height: "3rem",
+  fontSize: "1.5rem",
+});
+
+export const pauseMenuTitle = style({
+  fontSize: "2rem",
+  textAlign: "center",
+  paddingBottom: "2rem",
+  color: "white",
 });
