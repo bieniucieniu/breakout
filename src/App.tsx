@@ -16,9 +16,5 @@ const firebaseConfig = {
 const firebase = initializeApp(firebaseConfig);
 
 export const App = () => {
-  return (
-    <>
-      <Breakout />
-    </>
-  );
+  return <Breakout />;
 };

@@ -6,7 +6,6 @@ export const game = style({
   position: "absolute",
   top: 0,
   left: 0,
-  zIndex: 1,
 });
 
 export const breakout = style({
