@@ -29,10 +29,9 @@ export const useStorage = create<Storage>((set) => ({
   lifes: 3,
   removeLife: () =>
     set((state) => {
-      if (state.lifes > 1) {
+      if (state.lifes > 0) {
         return { lifes: state.lifes - 1 };
       }
-      state.setupGame();
       return {};
     }),
   resetLifes: () => set((state) => ({ lifes: state.config.game.lifes })),

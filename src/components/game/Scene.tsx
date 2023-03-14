@@ -13,6 +13,7 @@ export const Scene = () => {
   }));
   const bricks = useStorage((state) => state.bricks);
   const setupGame = useStorage((state) => state.setupGame);
+  const lifes = useStorage((state) => state.lifes);
 
   useEffect(() => {
     setupGame();
@@ -33,6 +34,12 @@ export const Scene = () => {
     friction: 0,
     restitution: 0.6,
   });
+
+  useEffect(() => {
+    if (lifes === 0) {
+      setupGame();
+    }
+  }, [lifes]);
 
   return (
     <>
