@@ -6,7 +6,6 @@ import { Brick } from "../hooks/createBricksGrid";
 const Brick = ({
   args,
   position,
-  points,
   material,
   color,
   name,
@@ -69,7 +68,6 @@ export const BricksGrid = ({ bricks }: { bricks: Brick[] }) => {
         (brick, i) =>
           brick.points > 0 && (
             <Brick
-              key={i}
               {...brick}
               material={materials.brick}
               color={colors[brick.points ? brick.points - 1 : 0]}
