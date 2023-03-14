@@ -38,7 +38,7 @@ export const useStorage = create<Storage>((set) => ({
   resetLifes: () => set((state) => ({ lifes: state.config.game.lifes })),
   bricks: [],
   setBricks: (bricks) => set({ bricks: bricks }),
-  config: defaultConfig,
+  config: JSON.parse(JSON.stringify(defaultConfig)),
   setConfig: (config) => set({ config: config }),
   setupGame: () =>
     set((state) => ({
@@ -52,6 +52,5 @@ export const useStorage = create<Storage>((set) => ({
         brickSize: state.config.game.brick.args,
         maxPoints: state.config.game.brick.maxPoints,
       }),
-      PadControlls: { left: false, right: false },
     })),
 }));
