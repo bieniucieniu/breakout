@@ -60,7 +60,6 @@ export const BricksGrid = ({ bricks }: { bricks: Brick[] }) => {
     colors: state.config.game.brick.colors,
     materials: state.config.game.materials,
   }));
-  // const {bricks} = useStorage((state) => state.bricks);
 
   return (
     <>
