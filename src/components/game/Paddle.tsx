@@ -10,8 +10,7 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
     boardArgs: state.config.game.args,
   }));
 
-  const lifes = useStorage((state) => state.lifes);
-  const gameStage = useStorage((state) => state.gameStage);
+  const lives = useStorage((state) => state.lives);
 
   const [ref, api] = useBox(() => ({
     type: "Kinematic",
@@ -21,20 +20,18 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
   }));
 
   useEffect(() => {
-    if (lifes === 0) {
+    if (lives === 0) {
       api.position.set(position[0], position[1]);
       api.angle.set(0);
       api.velocity.set(0, 0);
       api.angularVelocity.set(0);
     }
-  }, [lifes]);
+  }, [lives]);
 
   const PadControllsRef = useRef({ left: false, right: false });
 
   const SubscribeControlls = () => {
     const keyDown = (e: KeyboardEvent) => {
-      if (gameStage !== 2) return;
-
       if (e.key === "ArrowLeft" || e.key === "a") {
         PadControllsRef.current = { ...PadControllsRef.current, left: true };
       }
@@ -43,8 +40,6 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
       }
     };
     const keyUp = (e: KeyboardEvent) => {
-      if (gameStage !== 2) return;
-
       if (e.key === "ArrowLeft" || e.key === "a") {
         PadControllsRef.current = { ...PadControllsRef.current, left: false };
       }

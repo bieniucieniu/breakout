@@ -3,13 +3,15 @@ import { GameNavigation } from "./GameNavigation";
 import { breakout, game } from "./styles/breakout.css";
 import { useStorage } from "../hooks/useStorage";
 import { PauseMenu } from "./PauseMenu";
+import { StartMenu } from "./StartMenu";
 
 export const Breakout = () => {
   console.log(breakout);
+  const gameStage = useStorage((state) => state.gameStage);
 
   return (
     <div className={breakout}>
-      <PauseMenu />
+      {gameStage === "starting" ? <StartMenu /> : <PauseMenu />}
       <GameNavigation />
       <Game className={game} cameraPosition={[0, 15, 64]} />
     </div>
