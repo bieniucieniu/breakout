@@ -1,10 +1,8 @@
-import { useStorage } from "./hooks/useStorage";
 import "./index.css";
-
 import { initializeApp } from "firebase/app";
-import { Route, Router } from "wouter";
-import { breakout } from "./components/styles/breakout.css";
+import { Link, Route, Router } from "wouter";
 import { Breakout } from "./components/Breakout";
+import { center, centeredTitle } from "./components/styles/basicStyles.css";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJeF_fin_zPcrxK6RWmu_BcJ2xTp19Pn8",
@@ -19,11 +17,13 @@ const firebaseConfig = {
 const firebase = initializeApp(firebaseConfig);
 
 export const App = () => {
-  const gameStage = useStorage((state) => state.gameStage);
-
   return (
     <Router>
-      <Route path="/" />
+      <Route path="/">
+        <Link href="/game" className={centeredTitle}>
+          game
+        </Link>
+      </Route>
       <Route path="/game" component={Breakout} />
     </Router>
   );

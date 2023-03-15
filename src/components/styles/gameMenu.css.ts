@@ -1,4 +1,5 @@
 import { globalStyle, style } from "@vanilla-extract/css";
+import { center, title } from "./basicStyles.css";
 
 export const menuBG = style({
   position: "absolute",
@@ -12,13 +13,6 @@ export const menuBG = style({
 
 export const invisible = style({
   visibility: "hidden",
-});
-
-export const center = style({
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
 });
 
 export const pauseMenuContent = style([
@@ -56,21 +50,12 @@ globalStyle(`${menuButtons} > button`, {
   fontSize: "1.5rem",
 });
 
-export const title = style({
-  fontSize: "2rem",
-  textAlign: "center",
-  padding: "auto",
-  color: "white",
-});
-
 export const pauseMenuTitle = style([
   title,
   {
     paddingBottom: "2rem",
   },
 ]);
-
-export const startTitle = style([title, center]);
 
 export const key = style([
   {

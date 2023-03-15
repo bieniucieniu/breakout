@@ -1,6 +1,7 @@
-import { menuBG, startTitle, key } from "./styles/gameMenu.css";
+import { menuBG, key } from "./styles/gameMenu.css";
 import { useEffect } from "react";
 import { useStorage } from "../hooks/useStorage";
+import { centeredTitle } from "./styles/basicStyles.css";
 
 export const StartMenu = () => {
   const { setGameStage, switchPaused } = useStorage((state) => ({
@@ -21,7 +22,7 @@ export const StartMenu = () => {
 
   return (
     <div className={menuBG}>
-      <h1 className={startTitle}>
+      <h1 className={centeredTitle}>
         Press <span className={key}>Space</span> to start
       </h1>
     </div>
