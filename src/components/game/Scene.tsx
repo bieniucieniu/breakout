@@ -1,10 +1,11 @@
 import { useContactMaterial } from "@react-three/p2";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useStorage } from "../../hooks/useStorage";
 import { Ball } from "./Ball";
 import { BricksGrid } from "./Bricks";
 import { Boarder } from "./Boarder";
 import { Paddle } from "./Paddle";
+import { useThree } from "@react-three/fiber";
 
 export const Scene = () => {
   const { config, materials } = useStorage((state) => ({
@@ -33,6 +34,28 @@ export const Scene = () => {
     friction: 0,
     restitution: 0.6,
   });
+
+  const { camera } = useThree();
+
+  const handleCameraPosition = (e?: UIEvent) => {
+    e && e.preventDefault();
+    const width = window.innerWidth;
+    if (width < 500) {
+      camera.position.set(0, 0, 120);
+    } else if (width < 700) {
+      camera.position.set(0, 0, 100);
+    } else if (width < 1000) {
+      camera.position.set(0, 0, 80);
+    } else {
+      camera.position.set(0, 0, 64);
+    }
+  };
+
+  useEffect(() => {
+    handleCameraPosition();
+    window.addEventListener("resize", handleCameraPosition);
+    return () => window.removeEventListener("resize", handleCameraPosition);
+  }, []);
 
   return (
     <>
