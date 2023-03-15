@@ -1,4 +1,4 @@
-import { useStorage } from "./hooks/useStorage";
+import { useStorage } from "../hooks/useStorage";
 import { navbar } from "./styles/navbar.css";
 import { Button, ValueDisplay } from "./basicComponents";
 

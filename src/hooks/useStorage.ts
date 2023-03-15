@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { Brick, createBricksGrid } from "./createBricksGrid";
-import defaultConfig from "../../defaultConfig";
+import defaultConfig from "../defaultConfig";
 
 type Storage = {
   paused: boolean;

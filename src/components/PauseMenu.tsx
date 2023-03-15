@@ -5,7 +5,7 @@ import {
   pauseMenuTitle,
 } from "./styles/pauseMenu.css";
 import { Button } from "./basicComponents";
-import { useStorage } from "./hooks/useStorage";
+import { useStorage } from "../hooks/useStorage";
 
 export const PauseMenu = () => {
   const setPause = useStorage((state) => state.setPaused);

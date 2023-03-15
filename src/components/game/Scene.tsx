@@ -1,6 +1,6 @@
 import { useContactMaterial } from "@react-three/p2";
 import { useEffect } from "react";
-import { useStorage } from "../hooks/useStorage";
+import { useStorage } from "../../hooks/useStorage";
 import { Ball } from "./Ball";
 import { BricksGrid } from "./Bricks";
 import { Boarder } from "./Boarder";

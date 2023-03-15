@@ -1,7 +1,7 @@
 import Game from "./game";
 import { GameNavigation } from "./GameNavigation";
 import { breakout, game } from "./styles/breakout.css";
-import { useStorage } from "./hooks/useStorage";
+import { useStorage } from "../hooks/useStorage";
 import { PauseMenu } from "./PauseMenu";
 
 export const Breakout = () => {

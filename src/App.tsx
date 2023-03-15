@@ -1,5 +1,5 @@
 import { Breakout } from "./components/Breakout";
-import { useStorage } from "./components/hooks/useStorage";
+import { useStorage } from "./hooks/useStorage";
 import "./index.css";
 
 import { initializeApp } from "firebase/app";
