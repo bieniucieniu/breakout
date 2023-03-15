@@ -1,8 +1,10 @@
-import { Breakout } from "./components/Breakout";
 import { useStorage } from "./hooks/useStorage";
 import "./index.css";
 
 import { initializeApp } from "firebase/app";
+import { Route, Router } from "wouter";
+import { breakout } from "./components/styles/breakout.css";
+import { Breakout } from "./components/Breakout";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJeF_fin_zPcrxK6RWmu_BcJ2xTp19Pn8",
@@ -19,5 +21,10 @@ const firebase = initializeApp(firebaseConfig);
 export const App = () => {
   const gameStage = useStorage((state) => state.gameStage);
 
-  return gameStage ? <Breakout /> : <></>;
+  return (
+    <Router>
+      <Route path="/" />
+      <Route path="/game" component={Breakout} />
+    </Router>
+  );
 };
