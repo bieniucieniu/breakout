@@ -26,5 +26,4 @@ export const navbar = style({
 
 globalStyle(`.${navbar} > *`, {
   fontSize: "1.3rem",
-  fontWeight: "400",
 });
