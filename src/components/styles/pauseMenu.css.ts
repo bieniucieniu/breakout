@@ -10,22 +10,31 @@ export const pauseMenu = style({
   backgroundColor: "rgba(0, 0, 0, 0.7)",
 });
 
+export const invisible = style({
+  visibility: "hidden",
+});
+
 export const pauseMenuContent = style({
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
+
   backgroundColor: "blue",
-  width: "auto",
-  height: "auto",
-  maxWidth: "80vw",
-  maxHeight: "80vh",
+  minWidth: "25rem",
+
+  padding: "3rem",
+
+  "@media": {
+    "screen and (max-width: 410px)": {
+      minWidth: "20rem",
+      padding: "1.5rem",
+    },
+  },
 
   borderWidth: "1rem",
   borderStyle: "outset",
   borderColor: "blue",
-
-  padding: "3rem",
 });
 
 export const pauseMenuButtons = style({
@@ -35,8 +44,8 @@ export const pauseMenuButtons = style({
   gap: "2rem",
 });
 
-globalStyle(`${pauseMenuContent} button`, {
-  width: "20rem",
+globalStyle(`${pauseMenuButtons} button`, {
+  width: "auto",
   maxWidth: "70vh",
   height: "3rem",
   fontSize: "1.5rem",
