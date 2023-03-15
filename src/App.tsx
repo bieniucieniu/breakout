@@ -1,4 +1,5 @@
 import { Breakout } from "./components/Breakout";
+import { useStorage } from "./components/hooks/useStorage";
 import "./index.css";
 
 import { initializeApp } from "firebase/app";
@@ -16,5 +17,7 @@ const firebaseConfig = {
 const firebase = initializeApp(firebaseConfig);
 
 export const App = () => {
-  return <Breakout />;
+  const gameStage = useStorage((state) => state.gameStage);
+
+  return gameStage ? <Breakout /> : <></>;
 };

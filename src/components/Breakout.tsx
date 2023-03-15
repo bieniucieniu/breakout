@@ -6,7 +6,6 @@ import { PauseMenu } from "./PauseMenu";
 
 export const Breakout = () => {
   console.log(breakout);
-  const paused = useStorage((state) => state.paused);
 
   return (
     <div className={breakout}>

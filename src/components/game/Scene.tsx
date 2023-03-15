@@ -37,7 +37,6 @@ export const Scene = () => {
 
   useEffect(() => {
     if (lifes === 0) {
-      setupGame();
     }
   }, [lifes]);
 

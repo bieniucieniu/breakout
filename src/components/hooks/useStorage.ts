@@ -17,6 +17,11 @@ type Storage = {
   config: typeof defaultConfig;
   setConfig: (config: typeof defaultConfig) => void;
   setupGame: () => void;
+  // 0 - not in game | 1 - starting | 2 - playing | 3 - over
+  gameStage: number;
+  increaseGameStage: () => void;
+  resetGameStage: () => void;
+  endGameStage: () => void;
 };
 
 export const useStorage = create<Storage>((set) => ({
@@ -52,4 +57,14 @@ export const useStorage = create<Storage>((set) => ({
         maxPoints: state.config.game.brick.maxPoints,
       }),
     })),
+  gameStage: 0,
+  increaseGameStage: () =>
+    set((state) => {
+      if (state.gameStage < 3) {
+        return { gameStage: state.gameStage + 1 };
+      }
+      return {};
+    }),
+  resetGameStage: () => set(() => ({ gameStage: 0 })),
+  endGameStage: () => set(() => ({ gameStage: 3 })),
 }));
