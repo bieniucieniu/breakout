@@ -12,7 +12,7 @@ export const Breakout = () => {
     <div className={breakout}>
       {gameStage === "starting" ? <StartMenu /> : <PauseMenu />}
       <GameNavigation />
-      <Game className={game} cameraPosition={[0, 15, 64]} />
+      <Game className={game} cameraPosition={[0, 0, 64]} />
     </div>
   );
 };
