@@ -11,7 +11,7 @@ export const navbar = style({
 
   display: "grid",
   alignItems: "center",
-  gridTemplateColumns: "repeat(4, 1fr)",
+  gridTemplateColumns: "repeat(3, 1fr)",
   gap: ".5rem",
 
   height: "4rem",
@@ -26,4 +26,12 @@ export const navbar = style({
 
 globalStyle(`.${navbar} > *`, {
   fontSize: "1.3rem",
+});
+
+globalStyle(`.${navbar} > *:nth-child(3)`, {
+  "@media": {
+    "screen and (max-width: 600px)": {
+      gridColumn: "1 / 3",
+    },
+  },
 });
