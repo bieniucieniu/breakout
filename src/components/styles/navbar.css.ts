@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import { globalStyle, style } from "@vanilla-extract/css";
 
 export const navbar = style({
   borderWidth: ".4rem",
@@ -22,4 +22,9 @@ export const navbar = style({
       height: "8rem",
     },
   },
+});
+
+globalStyle(`.${navbar} > *`, {
+  fontSize: "1.3rem",
+  fontWeight: "400",
 });

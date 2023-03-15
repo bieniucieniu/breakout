@@ -2,12 +2,12 @@ import { globalStyle } from "@vanilla-extract/css";
 
 globalStyle("*", {
   boxSizing: "border-box",
-  padding: 0,
-  margin: 0,
-  fontFamily: "Roboto, sans-serif",
+  fontFamily: "'Roboto Mono', monospace",
 });
 
-globalStyle("#root", {
+globalStyle("html, body", {
+  padding: "0",
+  margin: "0",
   height: "100vh",
   backgroundColor: "black",
   overflow: "hidden",
