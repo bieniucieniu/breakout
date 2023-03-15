@@ -6,7 +6,6 @@ import { PauseMenu } from "./PauseMenu";
 import { StartMenu } from "./StartMenu";
 
 export const Breakout = () => {
-  console.log(breakout);
   const gameStage = useStorage((state) => state.gameStage);
 
   return (

@@ -37,7 +37,6 @@ export const Ball = ({ position }: { position: [number, number] }) => {
         velocity.current[1] > -0.001
       ) {
         StuckCounter.current++;
-        console.log(StuckCounter.current);
       } else {
         StuckCounter.current = 0;
       }
