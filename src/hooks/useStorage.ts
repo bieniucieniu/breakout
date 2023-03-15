@@ -4,42 +4,40 @@ import defaultConfig from "../defaultConfig";
 
 type Storage = {
   paused: boolean;
-  setPaused: (paused: boolean) => void;
+  setPause: (paused: boolean) => void;
   switchPaused: () => void;
   score: number;
   increaseScore: (score: number) => void;
   resetScore: () => void;
-  lifes: number;
+  lives: number;
   removeLife: () => void;
-  resetLifes: () => void;
+  resetlives: () => void;
   bricks: Brick[];
   setBricks: (bricks: Brick[]) => void;
   config: typeof defaultConfig;
   setConfig: (config: typeof defaultConfig) => void;
   setupGame: () => void;
-  // 0 - not in game | 1 - starting | 2 - playing | 3 - over
-  gameStage: number;
-  increaseGameStage: () => void;
+  gameStage: "starting" | "playing" | "over";
   resetGameStage: () => void;
-  endGameStage: () => void;
+  setGameStage: (stage: "starting" | "playing" | "over") => void;
 };
 
 export const useStorage = create<Storage>((set) => ({
   paused: false,
-  setPaused: (paused) => set(() => ({ paused: paused })),
+  setPause: (paused) => set(() => ({ paused: paused })),
   switchPaused: () => set((state) => ({ paused: !state.paused })),
   score: 0,
   increaseScore: (score) => set((state) => ({ score: state.score + score })),
   resetScore: () => set(() => ({ score: 0 })),
-  lifes: 3,
+  lives: 3,
   removeLife: () =>
     set((state) => {
-      if (state.lifes > 0) {
-        return { lifes: state.lifes - 1 };
+      if (state.lives > 0) {
+        return { lives: state.lives - 1 };
       }
       return {};
     }),
-  resetLifes: () => set((state) => ({ lifes: state.config.game.lifes })),
+  resetlives: () => set((state) => ({ lives: state.config.game.lives })),
   bricks: [],
   setBricks: (bricks) => set({ bricks: bricks }),
   config: JSON.parse(JSON.stringify(defaultConfig)),
@@ -48,7 +46,7 @@ export const useStorage = create<Storage>((set) => ({
     set((state) => ({
       paused: true,
       score: 0,
-      lifes: 3,
+      lives: 3,
       bricks: createBricksGrid({
         gridSize: state.config.game.grid.gridSize,
         args: state.config.game.grid.args,
@@ -57,14 +55,7 @@ export const useStorage = create<Storage>((set) => ({
         maxPoints: state.config.game.brick.maxPoints,
       }),
     })),
-  gameStage: 0,
-  increaseGameStage: () =>
-    set((state) => {
-      if (state.gameStage < 3) {
-        return { gameStage: state.gameStage + 1 };
-      }
-      return {};
-    }),
-  resetGameStage: () => set(() => ({ gameStage: 0 })),
-  endGameStage: () => set(() => ({ gameStage: 3 })),
+  gameStage: "starting",
+  setGameStage: (stage) => set(() => ({ gameStage: stage })),
+  resetGameStage: () => set(() => ({ gameStage: "starting" })),
 }));

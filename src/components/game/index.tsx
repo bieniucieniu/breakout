@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/p2";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useStorage } from "../../hooks/useStorage";
 import { useWindowFocus } from "../../hooks/useWindowFocus";
 import { Scene } from "./Scene";
@@ -22,15 +22,6 @@ export default ({
     () => setWindowFocused(true),
     () => setWindowFocused(false)
   );
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (gameStage !== 2) return;
-      e.key === " " && switchPaused();
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
 
   return (
     <Canvas className={className} camera={{ position: cameraPosition }}>

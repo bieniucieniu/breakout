@@ -1,27 +1,42 @@
 import {
-  pauseMenu,
-  pauseMenuButtons,
-  pauseMenuContent,
+  menuBG,
+  menuButtons,
   pauseMenuTitle,
-} from "./styles/pauseMenu.css";
+  pauseMenuContent,
+} from "./styles/gameMenu.css";
 import { Button } from "./basicComponents";
 import { useStorage } from "../hooks/useStorage";
+import { useEffect } from "react";
+import { Link } from "wouter";
 
 export const PauseMenu = () => {
-  const setPause = useStorage((state) => state.setPaused);
+  const setPause = useStorage((state) => state.setPause);
   const paused = useStorage((state) => state.paused);
   const gameStage = useStorage((state) => state.gameStage);
+  const switchPaused = useStorage((state) => state.switchPaused);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      e.key === " " && switchPaused();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <div
-      className={pauseMenu}
-      style={{ visibility: gameStage === 2 && paused ? "visible" : "hidden" }}
+      className={menuBG}
+      style={{
+        visibility: gameStage === "playing" && paused ? "visible" : "hidden",
+      }}
     >
       <div className={pauseMenuContent}>
         <h1 className={pauseMenuTitle}>Paused</h1>
-        <div className={pauseMenuButtons}>
+        <div className={menuButtons}>
           <Button name="resume" onClick={() => setPause(false)} />
-          <Button name="quit" />
+          <Link href="/">
+            <Button name="quit" />
+          </Link>
         </div>
       </div>
     </div>
