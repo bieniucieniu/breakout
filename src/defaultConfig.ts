@@ -1,6 +1,6 @@
 const defaultConfig = {
   game: {
-    lifes: 3,
+    lives: 3,
     tickRate: 60,
     args: [64, 64] as [number, number],
     gravity: [0, -9.82] as [number, number],
