@@ -30,7 +30,7 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
 
   const PadControllsRef = useRef({ left: false, right: false });
 
-  const SubscribeControlls = () => {
+  const subscribeControlls = () => {
     const keyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft" || e.key === "a") {
         PadControllsRef.current = { ...PadControllsRef.current, left: true };
@@ -56,7 +56,37 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
     };
   };
   useEffect(() => {
-    const unSub = SubscribeControlls();
+    const unSub = subscribeControlls();
+    return unSub;
+  }, []);
+
+  const subscribeTouchControlls = () => {
+    const touchStart = (e: TouchEvent) => {
+      const windowWidth = window.innerWidth;
+      const touchX = e.touches[0].clientX;
+
+      if (touchX < windowWidth / 2) {
+        PadControllsRef.current = { left: true, right: false };
+        return;
+      }
+      if (touchX >= windowWidth / 2) {
+        PadControllsRef.current = { left: false, right: true };
+        return;
+      }
+    };
+    const touchEnd = (e: TouchEvent) => {
+      PadControllsRef.current = { left: false, right: false };
+    };
+    window.addEventListener("touchstart", touchStart);
+    window.addEventListener("touchend", touchEnd);
+
+    return () => {
+      window.removeEventListener("touchstart", touchStart);
+      window.removeEventListener("touchend", touchEnd);
+    };
+  };
+  useEffect(() => {
+    const unSub = subscribeTouchControlls();
     return unSub;
   }, []);
 
