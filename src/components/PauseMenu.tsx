@@ -7,15 +7,25 @@ import {
 import { Button } from "./basicComponents";
 import { useStorage } from "../hooks/useStorage";
 import { Link } from "wouter";
-import type { KeyboardEvent } from "react";
+import { KeyboardEvent, useEffect, useRef } from "react";
 
 export const PauseMenu = () => {
   const setPause = useStorage((state) => state.setPause);
   const paused = useStorage((state) => state.paused);
   const gameStage = useStorage((state) => state.gameStage);
 
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    if (paused) {
+      ref.current.focus();
+    }
+  }, [paused]);
+
   return (
     <div
+      ref={ref}
       className={menuBG}
       style={{
         visibility: gameStage === "playing" && paused ? "visible" : "hidden",

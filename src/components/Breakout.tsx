@@ -4,10 +4,12 @@ import { breakout, game } from "./styles/breakout.css";
 import { useStorage } from "../hooks/useStorage";
 import { PauseMenu } from "./PauseMenu";
 import { StartMenu } from "./StartMenu";
-import type { KeyboardEvent, TouchEvent } from "react";
+import { GameOver } from "./GameOver";
+import { KeyboardEvent, TouchEvent, useEffect, useRef } from "react";
 
 export const Breakout = () => {
   const gameStage = useStorage((state) => state.gameStage);
+  const paused = useStorage((state) => state.paused);
   const { setGameStage, switchPaused, setPaddleControlls } = useStorage(
     (state) => ({
       setGameStage: state.setGameStage,
@@ -15,6 +17,7 @@ export const Breakout = () => {
       setPaddleControlls: state.setPaddleControlls,
     })
   );
+
   const startMenuControlls = {
     onKeyDown: (e: KeyboardEvent) => {
       switch (e.code) {
@@ -78,15 +81,31 @@ export const Breakout = () => {
       }
     },
   };
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    if (!paused) {
+      ref.current.focus();
+    }
+  }, [paused]);
+
   return (
     <div
+      ref={ref}
       className={breakout}
       tabIndex={0}
       {...(gameStage === "starting" ? startMenuControlls : gameControlls)}
     >
-      {gameStage === "starting" ? <StartMenu /> : <PauseMenu />}
-      <GameNavigation />
-      <Game className={game} cameraPosition={[0, 0, 64]} />
+      {gameStage === "over" ? (
+        <GameOver />
+      ) : (
+        <>
+          {gameStage === "starting" ? <StartMenu /> : <PauseMenu />}
+          <GameNavigation />
+          <Game className={game} cameraPosition={[0, 0, 64]} />
+        </>
+      )}
     </div>
   );
 };
