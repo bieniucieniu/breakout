@@ -57,8 +57,26 @@ export const Breakout = () => {
           break;
       }
     },
-    onTouchStart: (e: TouchEvent) => {},
-    onTouchEnd: (e: TouchEvent) => {},
+    onTouchStart: (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (touch.clientX < window.innerWidth / 2) {
+        setPaddleControlls({ left: true });
+      } else {
+        setPaddleControlls({ right: true });
+      }
+    },
+    onTouchEnd: (e: TouchEvent) => {
+      if (e.touches.length) {
+        setPaddleControlls({ left: false, right: false });
+        return;
+      }
+      const touch = e.changedTouches[0];
+      if (touch.clientX < window.innerWidth / 2) {
+        setPaddleControlls({ left: false });
+      } else {
+        setPaddleControlls({ right: false });
+      }
+    },
   };
   return (
     <div
