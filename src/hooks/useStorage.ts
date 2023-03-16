@@ -20,6 +20,8 @@ type Storage = {
   gameStage: "starting" | "playing" | "over";
   resetGameStage: () => void;
   setGameStage: (stage: "starting" | "playing" | "over") => void;
+  isTouchEnabled: boolean;
+  setIsTouchEnabled: (enabled: boolean) => void;
 };
 
 export const useStorage = create<Storage>((set) => ({
@@ -58,4 +60,6 @@ export const useStorage = create<Storage>((set) => ({
   gameStage: "starting",
   setGameStage: (stage) => set(() => ({ gameStage: stage })),
   resetGameStage: () => set(() => ({ gameStage: "starting" })),
+  isTouchEnabled: false,
+  setIsTouchEnabled: (enabled) => set(() => ({ isTouchEnabled: enabled })),
 }));
