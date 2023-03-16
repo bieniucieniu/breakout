@@ -4,13 +4,21 @@ import { useState } from "react";
 import { useStorage } from "../../hooks/useStorage";
 import { useWindowFocus } from "../../hooks/useWindowFocus";
 import { Scene } from "./Scene";
+import type { KeyboardEvent, TouchEvent } from "react";
 
 export default ({
   cameraPosition,
   className,
+  contorlls,
 }: {
   cameraPosition?: [number, number, number];
   className?: string;
+  contorlls?: {
+    onKeyDown?: (e: KeyboardEvent) => void;
+    onKeyUp?: (e: KeyboardEvent) => void;
+    onTouchStart?: (e: TouchEvent) => void;
+    onTouchEnd?: (e: TouchEvent) => void;
+  };
 }) => {
   const config = useStorage((state) => state.config.game);
   const paused = useStorage((state) => state.paused);
@@ -22,7 +30,12 @@ export default ({
   );
 
   return (
-    <Canvas className={className} camera={{ position: cameraPosition }}>
+    <Canvas
+      className={className}
+      camera={{ position: cameraPosition }}
+      {...contorlls}
+      tabIndex={0}
+    >
       <Physics
         normalIndex={2}
         stepSize={1 / config.tickRate}

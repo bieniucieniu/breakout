@@ -6,22 +6,13 @@ import {
 } from "./styles/gameMenu.css";
 import { Button } from "./basicComponents";
 import { useStorage } from "../hooks/useStorage";
-import { useEffect } from "react";
 import { Link } from "wouter";
+import type { KeyboardEvent } from "react";
 
 export const PauseMenu = () => {
   const setPause = useStorage((state) => state.setPause);
   const paused = useStorage((state) => state.paused);
   const gameStage = useStorage((state) => state.gameStage);
-  const switchPaused = useStorage((state) => state.switchPaused);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      e.key === " " && switchPaused();
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
 
   return (
     <div
