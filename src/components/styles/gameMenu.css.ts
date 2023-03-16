@@ -29,10 +29,6 @@ export const pauseMenuContent = style([
         padding: "1.5rem",
       },
     },
-
-    borderWidth: "1rem",
-    borderStyle: "outset",
-    borderColor: "blue",
   },
 ]);
 

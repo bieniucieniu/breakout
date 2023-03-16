@@ -1,12 +1,8 @@
 import { globalStyle, style } from "@vanilla-extract/css";
 
 export const navbar = style({
-  borderWidth: ".4rem",
-  borderStyle: "outset",
-  borderColor: "blue",
   backgroundColor: "blue",
 
-  margin: ".3rem",
   padding: ".3rem",
 
   display: "grid",

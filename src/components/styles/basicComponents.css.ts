@@ -1,10 +1,9 @@
 import { style } from "@vanilla-extract/css";
 
 export const container = style({
-  borderStyle: "inset",
-  borderColor: "white",
-  backgroundColor: "white",
-  borderWidth: "4px",
+  boxShadow: "4px 4px 0 #000000",
+
+  backgroundColor: "#ffffff",
   height: "100%",
   width: "100%",
 });
@@ -12,6 +11,7 @@ export const container = style({
 export const button = style([
   container,
   {
+    border: "none",
     zIndex: 1,
     ":hover": {
       transform: "scale(101%)",
