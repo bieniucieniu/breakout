@@ -2,7 +2,7 @@ import "./index.css";
 import { initializeApp } from "firebase/app";
 import { Link, Route, Router } from "wouter";
 import { Breakout } from "./components/Breakout";
-import { center, centeredTitle } from "./components/styles/basicStyles.css";
+import { centeredTitle } from "./components/styles/basicStyles.css";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJeF_fin_zPcrxK6RWmu_BcJ2xTp19Pn8",
