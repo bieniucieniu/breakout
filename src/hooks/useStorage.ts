@@ -37,7 +37,8 @@ export const useStorage = create<Storage>((set) => ({
   lives: 3,
   removeLife: () =>
     set((state) => {
-      if (state.lives > 0) {
+      if (state.lives <= 1) state.setGameStage("over");
+      if (state.lives > 1) {
         return { lives: state.lives - 1 };
       }
       return {};
