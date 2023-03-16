@@ -3,3 +3,4 @@
 [ ]scoreboard
 [ ]scoreboard page
 [ ]configuration menu
+[ ]touch controls
