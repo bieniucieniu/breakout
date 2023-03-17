@@ -1,5 +1,5 @@
 import { useContactMaterial } from "@react-three/p2";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useStorage } from "../../hooks/useStorage";
 import { Ball } from "./Ball";
 import { BricksGrid } from "./Bricks";
@@ -13,11 +13,6 @@ export const Scene = () => {
     materials: state.config.game.materials,
   }));
   const bricks = useStorage((state) => state.bricks);
-  const setupGame = useStorage((state) => state.setupGame);
-
-  useEffect(() => {
-    setupGame();
-  }, []);
 
   //ball bricks
   useContactMaterial(materials.ball, materials.brick, {

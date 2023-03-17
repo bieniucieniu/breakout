@@ -10,13 +10,14 @@ import { KeyboardEvent, TouchEvent, useEffect, useRef } from "react";
 export const Breakout = () => {
   const gameStage = useStorage((state) => state.gameStage);
   const paused = useStorage((state) => state.paused);
-  const { setGameStage, switchPaused, setPaddleControlls } = useStorage(
-    (state) => ({
+  const { setGameStage, switchPaused, setPaddleControlls, setupGame } =
+    useStorage((state) => ({
       setGameStage: state.setGameStage,
       switchPaused: state.switchPaused,
       setPaddleControlls: state.setPaddleControlls,
-    })
-  );
+      setupGame: state.setupGame,
+    }));
+
   const controlls = {
     starting: {
       onKeyDown: (e: KeyboardEvent) => {
@@ -91,6 +92,11 @@ export const Breakout = () => {
       },
     },
   };
+
+  useEffect(() => {
+    if (gameStage !== "starting") return;
+    setupGame();
+  }, [gameStage]);
 
   const ref = useRef<HTMLDivElement>(null);
 
