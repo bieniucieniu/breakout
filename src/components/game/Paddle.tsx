@@ -10,6 +10,7 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
     boardArgs: state.config.game.args,
   }));
   const lives = useStorage((state) => state.lives);
+  const gameStage = useStorage((state) => state.gameStage);
 
   const [ref, api] = useBox(() => ({
     type: "Kinematic",
@@ -19,13 +20,13 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
   }));
 
   useEffect(() => {
-    if (lives === 0) {
+    if (gameStage === "starting") {
       api.position.set(position[0], position[1]);
       api.angle.set(0);
       api.velocity.set(0, 0);
       api.angularVelocity.set(0);
     }
-  }, [lives]);
+  }, [gameStage]);
 
   const paddleControllsRef = useRef(useStorage.getState().paddleControlls);
   useEffect(() =>
