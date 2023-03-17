@@ -1,7 +1,7 @@
 import { Color } from "@react-three/fiber";
 import { useBox } from "@react-three/p2";
 import { useStorage } from "../../hooks/useStorage";
-import { Brick } from "../../hooks/createBricksGrid";
+import type { Brick } from "../../hooks/createBricksGrid";
 
 const Brick = ({
   args,

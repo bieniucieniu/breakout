@@ -7,7 +7,7 @@ import {
 import { Button } from "./basicComponents";
 import { useStorage } from "../hooks/useStorage";
 import { Link } from "wouter";
-import { KeyboardEvent, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export const PauseMenu = () => {
   const setPause = useStorage((state) => state.setPause);

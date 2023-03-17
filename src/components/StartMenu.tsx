@@ -1,6 +1,5 @@
 import { menuBG, key } from "./styles/gameMenu.css";
 import { centeredTitle } from "./styles/basicStyles.css";
-import type { KeyboardEvent } from "react";
 
 export const StartMenu = () => {
   return (
