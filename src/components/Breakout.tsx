@@ -4,7 +4,7 @@ import { breakout, game } from "./styles/breakout.css";
 import { useStorage } from "../hooks/useStorage";
 import { PauseMenu } from "./PauseMenu";
 import { StartMenu } from "./StartMenu";
-import { GameOver } from "./GameOver";
+import { GameOverMenu } from "./GameOverMenu";
 import { KeyboardEvent, TouchEvent, useEffect, useRef } from "react";
 
 export const Breakout = () => {
@@ -81,7 +81,15 @@ export const Breakout = () => {
         }
       },
     },
-    over: {},
+    over: {
+      onKeyDown: (e: KeyboardEvent) => {
+        switch (e.code) {
+          case "Space":
+            setGameStage("starting");
+            break;
+        }
+      },
+    },
   };
 
   const ref = useRef<HTMLDivElement>(null);
@@ -96,9 +104,11 @@ export const Breakout = () => {
   return (
     <div ref={ref} className={breakout} tabIndex={0} {...controlls[gameStage]}>
       {
-        { starting: <StartMenu />, playing: <PauseMenu />, over: <GameOver /> }[
-          gameStage
-        ]
+        {
+          starting: <StartMenu />,
+          playing: <PauseMenu />,
+          over: <GameOverMenu />,
+        }[gameStage]
       }
       <GameNavigation />
       <Game className={game} cameraPosition={[0, 0, 64]} />
