@@ -5,8 +5,7 @@ export const StartMenu = () => {
   return (
     <div className={menuBG}>
       <h1 className={centeredTitle}>
-        Press <span className={key}>Space</span> or{" "}
-        <span className={key}>Esc</span> to start
+        Press <span className={key}>Space</span> to start
       </h1>
     </div>
   );
