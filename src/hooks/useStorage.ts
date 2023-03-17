@@ -63,14 +63,12 @@ export const useStorage = create<Storage>((set) => ({
         brickSize: state.config.game.brick.args,
         maxPoints: state.config.game.brick.maxPoints,
       }),
+      paddleControlls: { left: false, right: false },
     })),
   gameStage: "starting",
   setGameStage: (stage) => set(() => ({ gameStage: stage })),
   resetGameStage: () => set(() => ({ gameStage: "starting" })),
-  paddleControlls: {
-    left: false,
-    right: false,
-  },
+  paddleControlls: { left: false, right: false },
   setPaddleControlls: (controlls) =>
     set((state) => ({
       paddleControlls: { ...state.paddleControlls, ...controlls },
