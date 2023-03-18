@@ -30,6 +30,9 @@ export const Breakout = () => {
             break;
         }
       },
+      onTouchStart: () => {
+        setGameStage("playing");
+      },
     },
 
     playing: {
