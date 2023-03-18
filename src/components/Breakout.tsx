@@ -82,6 +82,7 @@ export const Breakout = () => {
         }
       },
     },
+
     over: {
       onKeyDown: (e: KeyboardEvent) => {
         switch (e.code) {
@@ -94,8 +95,7 @@ export const Breakout = () => {
   };
 
   useEffect(() => {
-    if (gameStage !== "starting") return;
-    setupGame();
+    if (gameStage === "starting") setupGame();
   }, [gameStage]);
 
   const ref = useRef<HTMLDivElement>(null);
