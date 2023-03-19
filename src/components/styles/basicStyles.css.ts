@@ -13,6 +13,12 @@ export const title = style({
   textAlign: "center",
   padding: "auto",
   color: "white",
+  "@media": {
+    "screen and (max-width: 450px)": {
+      fontSize: "1.5rem",
+      lineHeight: "2.5rem",
+    },
+  },
 });
 
 export const centeredTitle = style([title, center]);
