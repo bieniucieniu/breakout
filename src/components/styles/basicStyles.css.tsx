@@ -9,6 +9,7 @@ export const center = style({
 
 export const title = style({
   fontSize: "2rem",
+  lineHeight: "3.5rem",
   textAlign: "center",
   padding: "auto",
   color: "white",

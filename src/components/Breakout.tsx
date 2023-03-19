@@ -94,6 +94,9 @@ export const Breakout = () => {
             break;
         }
       },
+      onTouchStart: () => {
+        setGameStage("starting");
+      },
     },
   };
 
