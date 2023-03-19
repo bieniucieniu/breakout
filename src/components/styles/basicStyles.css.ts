@@ -21,4 +21,18 @@ export const title = style({
   },
 });
 
+export const subTitle = style({
+  fontSize: "1.5rem",
+  lineHeight: "2.5rem",
+  textAlign: "center",
+  padding: "auto",
+  color: "white",
+  "@media": {
+    "screen and (max-width: 450px)": {
+      fontSize: "1rem",
+      lineHeight: "1.5rem",
+    },
+  },
+});
+
 export const centeredTitle = style([title, center]);
