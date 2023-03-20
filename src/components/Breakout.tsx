@@ -23,10 +23,7 @@ export const Breakout = () => {
       onKeyDown: (e: KeyboardEvent) => {
         switch (e.code) {
           case "Space":
-            switchPaused();
-            if (gameStage === "starting") {
-              setGameStage("playing");
-            }
+            setGameStage("playing");
             break;
         }
       },

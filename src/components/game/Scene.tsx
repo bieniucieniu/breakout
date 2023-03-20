@@ -6,6 +6,7 @@ import { BricksGrid } from "./Bricks";
 import { Boarder } from "./Boarder";
 import { Paddle } from "./Paddle";
 import { useThree } from "@react-three/fiber";
+import { game } from "../styles/breakout.css";
 
 export const Scene = () => {
   const { config, materials } = useStorage((state) => ({
@@ -13,6 +14,7 @@ export const Scene = () => {
     materials: state.config.game.materials,
   }));
   const bricks = useStorage((state) => state.bricks);
+  const gameStage = useStorage((state) => state.gameStage);
 
   //ball bricks
   useContactMaterial(materials.ball, materials.brick, {
@@ -60,9 +62,11 @@ export const Scene = () => {
       ))}
       <group>
         <Boarder />
-        <Ball position={config.ball.defaultPosition} />
         <Paddle position={config.paddle.defaultPosition} />
         <BricksGrid bricks={bricks} />
+        {gameStage === "playing" && (
+          <Ball position={config.ball.defaultPosition} />
+        )}
       </group>
     </>
   );

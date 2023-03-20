@@ -39,7 +39,6 @@ export const useStorage = create<Storage>((set) => ({
     set((state) => {
       if (state.lives <= 1) {
         state.setGameStage("over");
-        state.setPause(true);
       }
       if (state.lives > 0) {
         return { lives: state.lives - 1 };
@@ -53,7 +52,6 @@ export const useStorage = create<Storage>((set) => ({
   setConfig: (config) => set({ config: config }),
   setupGame: () =>
     set((state) => ({
-      paused: true,
       score: 0,
       lives: 3,
       bricks: createBricksGrid({
