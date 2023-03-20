@@ -5,7 +5,6 @@ export const Button = ({
   onClick,
 }: {
   name?: string;
-  style?: React.CSSProperties;
   onClick?: () => void;
 }) => {
   return (
