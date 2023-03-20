@@ -4,8 +4,9 @@ import {
   useAuthState,
 } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
+import { googleButton } from "./styles/authButton.css";
 
-export const SignIn = () => {
+export const SignInWithGoogle = () => {
   const [signInWithGoogle, _user, loading, errorIn] = useSignInWithGoogle(auth);
 
   if (errorIn) {
@@ -15,7 +16,9 @@ export const SignIn = () => {
     <span>Loading...</span>
   ) : (
     <span>
-      <button onClick={() => signInWithGoogle()}>sign In With Google</button>
+      <button className={googleButton} onClick={() => signInWithGoogle()}>
+        sign In With Google
+      </button>
     </span>
   );
 };
@@ -53,7 +56,13 @@ export const Auth = ({ className }: { className?: string }) => {
   }
   return (
     <div className={className}>
-      {loading ? <span>Loading...</span> : user ? <SignOut /> : <SignIn />}
+      {loading ? (
+        <span>Loading...</span>
+      ) : user ? (
+        <SignOut />
+      ) : (
+        <SignInWithGoogle />
+      )}
     </div>
   );
 };
