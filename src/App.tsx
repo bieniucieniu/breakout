@@ -1,15 +1,19 @@
 import "./index.css";
-import { Route, Router } from "wouter";
+import { Route, Switch } from "wouter";
 import { Breakout } from "./components/Breakout";
 import { MainMenu } from "./components/MainMenu";
-import { DB } from "./components/DB";
+import { Scoreboard } from "./components/Scoreboard";
+import { centeredTitle } from "./components/styles/basicStyles.css";
 
 export const App = () => {
   return (
-    <Router>
+    <Switch>
       <Route path="/" component={MainMenu} />
       <Route path="/game" component={Breakout} />
-      <Route path="/db" component={DB} />
-    </Router>
+      <Route path="/scoreboard" component={Scoreboard} />
+      <Route>
+        <div className={centeredTitle}>nothing here</div>
+      </Route>
+    </Switch>
   );
 };
