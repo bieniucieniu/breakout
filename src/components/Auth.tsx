@@ -5,64 +5,62 @@ import {
 } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
 import { googleButton } from "./styles/authButton.css";
+import { button } from "./styles/basicComponents.css";
 
-export const SignInWithGoogle = () => {
+export const SignInWithGoogle = ({ className }: { className?: string }) => {
   const [signInWithGoogle, _user, loading, errorIn] = useSignInWithGoogle(auth);
 
   if (errorIn) {
-    return <span>Error: {errorIn.message}</span>;
+    return <span className={className}>Error: {errorIn.message}</span>;
   }
-  return loading ? (
-    <span>Loading...</span>
-  ) : (
-    <span>
-      <button className={googleButton} onClick={() => signInWithGoogle()}>
-        sign In With Google
-      </button>
+  return (
+    <span className={className}>
+      {loading ? (
+        "Loading..."
+      ) : (
+        <button className={button} onClick={() => signInWithGoogle()}>
+          sign In With Google
+        </button>
+      )}
     </span>
   );
 };
 
-export const SignOut = () => {
+export const SignOut = ({ className }: { className?: string }) => {
   const [signOut, loading, errorOut] = useSignOut(auth);
 
   if (errorOut) {
-    return <span>Error: {errorOut.message}</span>;
+    return <span className={className}>Error: {errorOut.message}</span>;
   }
 
-  return loading ? (
-    <span>loading...</span>
-  ) : (
-    <span>
-      <button
-        onClick={(e) => {
-          signOut();
-        }}
-      >
-        logout
-      </button>
+  return (
+    <span className={className}>
+      {loading ? (
+        "Loading..."
+      ) : (
+        <button
+          className={button}
+          onClick={(e) => {
+            signOut();
+          }}
+        >
+          logout
+        </button>
+      )}
     </span>
   );
 };
 
-export const Auth = ({ className }: { className?: string }) => {
+export const AuthButton = ({ className }: { className?: string }) => {
   const [user, loading, error] = useAuthState(auth);
   if (error) {
-    return (
-      <div className={className}>
-        <span>Error: {error.message}</span>;
-      </div>
-    );
+    return <span className={className}>Error: {error.message}</span>;
   }
-  return (
-    <div className={className}>
-      {loading ? (
-        <span>Loading...</span>
-      ) : user ? (
-        <SignOut />
-      ) : (
-        <SignInWithGoogle />
-      )}
-    </div>
+  return loading ? (
+    <span className={className}>Loading...</span>
+  ) : user ? (
+    <SignOut className={className} />
+  ) : (
+    <SignInWithGoogle className={className} />
   );
 };
