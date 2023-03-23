@@ -3,6 +3,7 @@ import { globalStyle } from "@vanilla-extract/css";
 globalStyle("*", {
   boxSizing: "border-box",
   fontFamily: "'Roboto Mono', monospace",
+  color: "white",
 });
 
 globalStyle("html, body", {

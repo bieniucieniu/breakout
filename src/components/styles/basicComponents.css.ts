@@ -11,6 +11,7 @@ export const container = style({
 export const button = style([
   container,
   {
+    color: "black",
     border: "none",
     zIndex: 1,
     ":hover": {
@@ -22,6 +23,7 @@ export const button = style([
 export const valueDisplay = style([
   container,
   {
+    color: "black",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
