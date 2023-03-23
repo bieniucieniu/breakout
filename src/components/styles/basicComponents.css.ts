@@ -19,6 +19,15 @@ export const button = style([
   },
 ]);
 
+export const linkButton = style([
+  button,
+  {
+    textDecoration: "none",
+    color: "inherit",
+    cursor: "pointer",
+  },
+]);
+
 export const valueDisplay = style([
   container,
   {

@@ -4,9 +4,8 @@ import {
   pauseMenuTitle,
   pauseMenuContent,
 } from "./styles/gameMenu.css";
-import { Button } from "./basicComponents";
+import { Button, LinkButton } from "./Buttons";
 import { useStorage } from "../hooks/useStorage";
-import { useLocation } from "wouter";
 import { useEffect, useRef } from "react";
 
 export const PauseMenu = () => {
@@ -25,8 +24,6 @@ export const PauseMenu = () => {
     }
   }, [paused]);
 
-  const [_location, setLocation] = useLocation();
-
   return (
     <div
       ref={ref}
@@ -39,12 +36,12 @@ export const PauseMenu = () => {
         <h1 className={pauseMenuTitle}>Paused</h1>
         <div className={menuButtons}>
           <Button name="resume" onClick={() => setPause(false)} />
-          <Button
-            name="quit"
+          <LinkButton
+            name="quit to menu"
+            href="/"
             onClick={() => {
               setuptGame();
               setGameStage("starting");
-              setLocation("/");
             }}
           />
         </div>
