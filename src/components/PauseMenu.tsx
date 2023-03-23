@@ -4,13 +4,14 @@ import {
   pauseMenuTitle,
   pauseMenuContent,
 } from "./styles/gameMenu.css";
-import { Button } from "./basicComponents";
+import { Button, LinkButton } from "./Buttons";
 import { useStorage } from "../hooks/useStorage";
-import { Link } from "wouter";
 import { useEffect, useRef } from "react";
 
 export const PauseMenu = () => {
   const setPause = useStorage((state) => state.setPause);
+  const setuptGame = useStorage((state) => state.setupGame);
+  const setGameStage = useStorage((state) => state.setGameStage);
   const paused = useStorage((state) => state.paused);
   const gameStage = useStorage((state) => state.gameStage);
 
@@ -35,9 +36,14 @@ export const PauseMenu = () => {
         <h1 className={pauseMenuTitle}>Paused</h1>
         <div className={menuButtons}>
           <Button name="resume" onClick={() => setPause(false)} />
-          <Link href="/">
-            <Button name="quit" />
-          </Link>
+          <LinkButton
+            name="quit to menu"
+            href="/"
+            onClick={() => {
+              setuptGame();
+              setGameStage("starting");
+            }}
+          />
         </div>
       </div>
     </div>

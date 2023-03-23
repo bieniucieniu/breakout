@@ -5,7 +5,7 @@ import { AuthButton } from "./Auth";
 export const MainMenu = () => {
   return (
     <div className={center}>
-      <Link href="/game" className={title}>
+      <Link href="/breakout" className={title}>
         game
       </Link>
       <br />

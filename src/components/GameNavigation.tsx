@@ -1,6 +1,7 @@
 import { useStorage } from "../hooks/useStorage";
 import { navbar } from "./styles/gameNavigation.css";
-import { Button, ValueDisplay } from "./basicComponents";
+import { Button } from "./Buttons";
+import { ValueDisplay } from "./Display";
 
 export const GameNavigation = () => {
   const paused = useStorage((state) => state.paused);
