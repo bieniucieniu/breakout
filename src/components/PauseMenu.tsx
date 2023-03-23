@@ -39,10 +39,7 @@ export const PauseMenu = () => {
           <LinkButton
             name="quit to menu"
             href="/"
-            onClick={() => {
-              setuptGame();
-              setGameStage("starting");
-            }}
+            onClick={() => setGameStage("starting")}
           />
         </div>
       </div>
