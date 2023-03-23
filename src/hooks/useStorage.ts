@@ -29,12 +29,16 @@ type Storage = {
 
 export const useStorage = create<Storage>((set) => ({
   paused: false,
+  score: 0,
+  lives: 3,
+  gameStage: "starting",
+  paddleControlls: { left: false, right: false },
+  bricks: [],
+  config: JSON.parse(JSON.stringify(defaultConfig)),
   setPause: (paused) => set(() => ({ paused: paused })),
   switchPaused: () => set((state) => ({ paused: !state.paused })),
-  score: 0,
   increaseScore: (score) => set((state) => ({ score: state.score + score })),
   resetScore: () => set(() => ({ score: 0 })),
-  lives: 3,
   removeLife: () =>
     set((state) => {
       if (state.lives <= 1) {
@@ -46,14 +50,15 @@ export const useStorage = create<Storage>((set) => ({
       return {};
     }),
   resetlives: () => set((state) => ({ lives: state.config.game.lives })),
-  bricks: [],
   setBricks: (bricks) => set({ bricks: bricks }),
-  config: JSON.parse(JSON.stringify(defaultConfig)),
   setConfig: (config) => set({ config: config }),
   setupGame: () =>
     set((state) => ({
+      paused: false,
       score: 0,
       lives: 3,
+      gameStage: "starting",
+      paddleControlls: { left: false, right: false },
       bricks: createBricksGrid({
         gridSize: state.config.game.grid.gridSize,
         args: state.config.game.grid.args,
@@ -61,12 +66,9 @@ export const useStorage = create<Storage>((set) => ({
         brickSize: state.config.game.brick.args,
         maxPoints: state.config.game.brick.maxPoints,
       }),
-      paddleControlls: { left: false, right: false },
     })),
-  gameStage: "starting",
   setGameStage: (stage) => set(() => ({ gameStage: stage })),
   resetGameStage: () => set(() => ({ gameStage: "starting" })),
-  paddleControlls: { left: false, right: false },
   setPaddleControlls: (controlls) =>
     set((state) => ({
       paddleControlls: { ...state.paddleControlls, ...controlls },

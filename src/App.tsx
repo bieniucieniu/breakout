@@ -9,7 +9,7 @@ export const App = () => {
   return (
     <Switch>
       <Route path="/" component={MainMenu} />
-      <Route path="/game" component={Breakout} />
+      <Route path="/breakout" component={Breakout} />
       <Route path="/scoreboard" component={Scoreboard} />
       <Route>
         <div className={centeredTitle}>nothing here</div>
