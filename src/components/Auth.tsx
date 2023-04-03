@@ -4,8 +4,6 @@ import {
   useAuthState,
 } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
-import { googleButton } from "./styles/authButton.css";
-import { button } from "./styles/basicComponents.css";
 
 export const SignInWithGoogle = ({ className }: { className?: string }) => {
   const [signInWithGoogle, _user, loading, errorIn] = useSignInWithGoogle(auth);
@@ -18,9 +16,7 @@ export const SignInWithGoogle = ({ className }: { className?: string }) => {
       {loading ? (
         "Loading..."
       ) : (
-        <button className={button} onClick={() => signInWithGoogle()}>
-          sign In With Google
-        </button>
+        <button onClick={() => signInWithGoogle()}>sign In With Google</button>
       )}
     </span>
   );
@@ -39,7 +35,6 @@ export const SignOut = ({ className }: { className?: string }) => {
         "Loading..."
       ) : (
         <button
-          className={button}
           onClick={(e) => {
             signOut();
           }}
@@ -51,7 +46,7 @@ export const SignOut = ({ className }: { className?: string }) => {
   );
 };
 
-export const AuthButton = ({ className }: { className?: string }) => {
+export const Auth = ({ className }: { className?: string }) => {
   const [user, loading, error] = useAuthState(auth);
   if (error) {
     return <span className={className}>Error: {error.message}</span>;
