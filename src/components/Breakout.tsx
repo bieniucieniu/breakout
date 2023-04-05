@@ -1,6 +1,6 @@
 import Game from "./game";
 import { GameNavigation } from "./GameNavigation";
-import { breakout, game } from "./styles/breakout.css";
+import { breakout } from "./styles/breakout.css";
 import { useStorage } from "../hooks/useStorage";
 import { PauseMenu } from "./PauseMenu";
 import { StartMenu } from "./StartMenu";
@@ -120,7 +120,7 @@ export const Breakout = () => {
         }[gameStage]
       }
       <GameNavigation />
-      <Game className={game} cameraPosition={[0, 0, 64]} />
+      <Game cameraPosition={[0, 0, 64]} />
     </div>
   );
 };

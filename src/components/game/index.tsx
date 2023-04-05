@@ -1,18 +1,17 @@
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/p2";
 import { useState } from "react";
 import { useStorage } from "../../hooks/useStorage";
 import { useWindowFocus } from "../../hooks/useWindowFocus";
 import { Scene } from "./Scene";
 import type { KeyboardEvent, TouchEvent } from "react";
+import { game } from "../styles/breakout.css";
 
 export default ({
   cameraPosition,
-  className,
   contorlls,
 }: {
   cameraPosition?: [number, number, number];
-  className?: string;
   contorlls?: {
     onKeyDown?: (e: KeyboardEvent) => void;
     onKeyUp?: (e: KeyboardEvent) => void;
@@ -31,7 +30,7 @@ export default ({
 
   return (
     <Canvas
-      className={className}
+      className={game}
       camera={{ position: cameraPosition }}
       {...contorlls}
       tabIndex={0}
