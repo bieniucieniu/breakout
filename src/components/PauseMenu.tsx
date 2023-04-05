@@ -32,7 +32,7 @@ export const PauseMenu = () => {
       ref={ref}
       className={menuBG}
       style={{
-        visibility: gameStage === "playing" && paused ? "visible" : "hidden",
+        visibility: paused ? "visible" : "hidden",
       }}
     >
       <div className={pauseMenuContent}>
