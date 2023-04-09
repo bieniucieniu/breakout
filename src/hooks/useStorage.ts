@@ -17,9 +17,10 @@ type Storage = {
   config: typeof defaultConfig;
   setConfig: (config: typeof defaultConfig) => void;
   setupGame: () => void;
-  gameStage: "starting" | "playing" | "over";
-  resetGameStage: () => void;
-  setGameStage: (stage: "starting" | "playing" | "over") => void;
+  gameStage: "init" | "playing" | "over";
+  startGame: () => void;
+  endGame: () => void;
+  resetGame: () => void;
   paddleControlls: {
     left: boolean;
     right: boolean;
@@ -31,7 +32,7 @@ export const useStorage = create<Storage>((set) => ({
   paused: false,
   score: 0,
   lives: 3,
-  gameStage: "starting",
+  gameStage: "init",
   paddleControlls: { left: false, right: false },
   bricks: [],
   config: JSON.parse(JSON.stringify(defaultConfig)),
@@ -42,7 +43,6 @@ export const useStorage = create<Storage>((set) => ({
   removeLife: () =>
     set((state) => {
       if (state.lives <= 1) {
-        state.setGameStage("over");
       }
       if (state.lives > 0) {
         return { lives: state.lives - 1 };
@@ -57,7 +57,7 @@ export const useStorage = create<Storage>((set) => ({
       paused: false,
       score: 0,
       lives: 3,
-      gameStage: "starting",
+      gameStage: "init",
       paddleControlls: { left: false, right: false },
       bricks: createBricksGrid({
         gridSize: state.config.game.grid.gridSize,
@@ -67,8 +67,30 @@ export const useStorage = create<Storage>((set) => ({
         maxPoints: state.config.game.brick.maxPoints,
       }),
     })),
-  setGameStage: (stage) => set(() => ({ gameStage: stage })),
-  resetGameStage: () => set(() => ({ gameStage: "starting" })),
+  startGame: () => {
+    set((state) => {
+      if (state.gameStage === "init") {
+        return { gameStage: "playing" };
+      }
+      return {};
+    });
+  },
+  endGame: () => {
+    set((state) => {
+      if (state.gameStage === "playing") {
+        return { gameStage: "over" };
+      }
+      return {};
+    });
+  },
+  resetGame: () => {
+    set((state) => {
+      if (state.gameStage === "over" || state.gameStage === "playing") {
+        return { gameStage: "init" };
+      }
+      return {};
+    });
+  },
   setPaddleControlls: (controlls) =>
     set((state) => ({
       paddleControlls: { ...state.paddleControlls, ...controlls },

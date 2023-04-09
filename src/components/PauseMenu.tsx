@@ -10,10 +10,8 @@ import { useEffect, useRef } from "react";
 
 export const PauseMenu = () => {
   const setPause = useStorage((state) => state.setPause);
-  const setuptGame = useStorage((state) => state.setupGame);
-  const setGameStage = useStorage((state) => state.setGameStage);
+  const endGame = useStorage((state) => state.endGame);
   const paused = useStorage((state) => state.paused);
-  const gameStage = useStorage((state) => state.gameStage);
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -29,18 +27,14 @@ export const PauseMenu = () => {
       ref={ref}
       className={menuBG}
       style={{
-        visibility: gameStage === "playing" && paused ? "visible" : "hidden",
+        visibility: paused ? "visible" : "hidden",
       }}
     >
       <div className={pauseMenuContent}>
         <h1 className={pauseMenuTitle}>Paused</h1>
         <div className={menuButtons}>
           <Button name="resume" onClick={() => setPause(false)} />
-          <LinkButton
-            name="quit to menu"
-            href="/"
-            onClick={() => setGameStage("starting")}
-          />
+          <LinkButton name="quit to menu" href="/" onClick={() => endGame()} />
         </div>
       </div>
     </div>

@@ -5,30 +5,33 @@ import { useStorage } from "../hooks/useStorage";
 import { PauseMenu } from "./PauseMenu";
 import { StartMenu } from "./StartMenu";
 import { GameOverMenu } from "./GameOverMenu";
-import { KeyboardEvent, TouchEvent, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import type { KeyboardEvent, TouchEvent } from "react";
 
 export const Breakout = () => {
   const gameStage = useStorage((state) => state.gameStage);
   const paused = useStorage((state) => state.paused);
-  const { setGameStage, switchPaused, setPaddleControlls, setupGame } =
-    useStorage((state) => ({
-      setGameStage: state.setGameStage,
+  const { startGame, switchPaused, setPaddleControlls, setupGame } = useStorage(
+    (state) => ({
+      startGame: state.startGame,
+      resetGame: state.resetGame,
       switchPaused: state.switchPaused,
       setPaddleControlls: state.setPaddleControlls,
       setupGame: state.setupGame,
-    }));
+    })
+  );
 
   const controlls = {
-    starting: {
+    init: {
       onKeyDown: (e: KeyboardEvent) => {
         switch (e.code) {
           case "Space":
-            setGameStage("playing");
+            startGame();
             break;
         }
       },
       onTouchStart: () => {
-        setGameStage("playing");
+        startGame();
       },
     },
 
@@ -87,18 +90,18 @@ export const Breakout = () => {
       onKeyDown: (e: KeyboardEvent) => {
         switch (e.code) {
           case "Space":
-            setGameStage("starting");
+            startGame();
             break;
         }
       },
       onTouchStart: () => {
-        setGameStage("starting");
+        startGame();
       },
     },
   };
 
   useEffect(() => {
-    if (gameStage === "starting") setupGame();
+    if (gameStage === "init") setupGame();
   }, []);
 
   const ref = useRef<HTMLDivElement>(null);
@@ -114,7 +117,7 @@ export const Breakout = () => {
     <div ref={ref} className={breakout} tabIndex={0} {...controlls[gameStage]}>
       {
         {
-          starting: <StartMenu />,
+          init: <StartMenu />,
           playing: <PauseMenu />,
           over: <GameOverMenu />,
         }[gameStage]
