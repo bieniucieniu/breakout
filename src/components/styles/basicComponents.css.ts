@@ -14,8 +14,9 @@ export const button = style([
     color: "black",
     border: "none",
     zIndex: 1,
+    transition: "transform 0.1s ease-in-out",
     ":hover": {
-      transform: "scale(101%)",
+      transform: "scale(102%)",
     },
   },
 ]);
@@ -23,8 +24,6 @@ export const button = style([
 export const linkButton = style([
   button,
   {
-    textDecoration: "none",
-    color: "inherit",
     cursor: "pointer",
   },
 ]);
