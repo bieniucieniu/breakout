@@ -6,33 +6,27 @@ import {
 import { auth } from "../firebase";
 
 export const SignInWithGoogle = ({ className }: { className?: string }) => {
-  const [signInWithGoogle, _user, loading, errorIn] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, _user, loading, error] = useSignInWithGoogle(auth);
 
-  if (errorIn) {
-    return <span className={className}>Error: {errorIn.message}</span>;
-  }
   return (
     <span className={className}>
       {loading ? (
-        "Loading..."
+        <span>Loading...</span>
       ) : (
         <button onClick={() => signInWithGoogle()}>sign In With Google</button>
       )}
+      <span>{error && `Error: ${error.message}`}</span>
     </span>
   );
 };
 
 export const SignOut = ({ className }: { className?: string }) => {
-  const [signOut, loading, errorOut] = useSignOut(auth);
-
-  if (errorOut) {
-    return <span className={className}>Error: {errorOut.message}</span>;
-  }
+  const [signOut, loading, error] = useSignOut(auth);
 
   return (
     <span className={className}>
       {loading ? (
-        "Loading..."
+        <span>Loading...</span>
       ) : (
         <button
           onClick={(e) => {
@@ -42,6 +36,7 @@ export const SignOut = ({ className }: { className?: string }) => {
           logout
         </button>
       )}
+      <span>{error && `Error: ${error.message}`}</span>
     </span>
   );
 };
