@@ -19,6 +19,7 @@ const scoresCollection = collection(db, "scores");
 
 export const addScore = ({ score }: { score: number }) => {
   if (!auth.currentUser) return;
+  if (score <= 0) return;
 
   addDoc(scoresCollection, {
     name: auth.currentUser.displayName,
