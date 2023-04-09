@@ -1,6 +1,11 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { collection, getFirestore, addDoc } from "firebase/firestore";
+import {
+  collection,
+  getFirestore,
+  addDoc,
+  Timestamp,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJeF_fin_zPcrxK6RWmu_BcJ2xTp19Pn8",
@@ -25,6 +30,6 @@ export const addScore = ({ score }: { score: number }) => {
     name: auth.currentUser.displayName,
     uid: auth.currentUser.uid,
     score,
-    date: Date.now(),
+    date: Timestamp.fromDate(new Date()),
   });
 };
