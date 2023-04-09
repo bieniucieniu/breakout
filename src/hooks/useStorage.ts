@@ -9,7 +9,6 @@ type Storage = {
   switchPaused: () => void;
   score: number;
   increaseScore: (score: number) => void;
-  // resetScore: () => void;
   lives: number;
   removeLife: () => void;
   resetlives: () => void;
