@@ -43,13 +43,9 @@ export const SignOut = ({ className }: { className?: string }) => {
 };
 
 export const Auth = () => {
-  const [user, loading, error] = useAuthState(auth);
-  if (error) {
-    return <span className={authStyle}>Error: {error.message}</span>;
-  }
-  return loading ? (
-    <span className={authStyle}>Loading...</span>
-  ) : user ? (
+  const [user] = useAuthState(auth);
+
+  return user ? (
     <SignOut className={authStyle} />
   ) : (
     <SignInWithGoogle className={authStyle} />
