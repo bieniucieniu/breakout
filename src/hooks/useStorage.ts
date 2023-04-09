@@ -83,6 +83,7 @@ export const useStorage = create<Storage>((set) => ({
         return {
           gameStage: "over",
           paddleControlls: { left: false, right: false },
+          paused: true,
         };
       }
       return {};
