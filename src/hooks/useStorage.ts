@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { Brick, createBricksGrid } from "./createBricksGrid";
 import defaultConfig from "../defaultConfig";
+import { addScore } from "../firebase";
 
 type Storage = {
   paused: boolean;
@@ -8,7 +9,7 @@ type Storage = {
   switchPaused: () => void;
   score: number;
   increaseScore: (score: number) => void;
-  resetScore: () => void;
+  // resetScore: () => void;
   lives: number;
   removeLife: () => void;
   resetlives: () => void;
@@ -39,10 +40,11 @@ export const useStorage = create<Storage>((set) => ({
   setPause: (paused) => set(() => ({ paused: paused })),
   switchPaused: () => set((state) => ({ paused: !state.paused })),
   increaseScore: (score) => set((state) => ({ score: state.score + score })),
-  resetScore: () => set(() => ({ score: 0 })),
   removeLife: () =>
     set((state) => {
       if (state.lives <= 1) {
+        state.endGame();
+        return { lives: 0 };
       }
       if (state.lives > 0) {
         return { lives: state.lives - 1 };
@@ -78,7 +80,11 @@ export const useStorage = create<Storage>((set) => ({
   endGame: () => {
     set((state) => {
       if (state.gameStage === "playing") {
-        return { gameStage: "over" };
+        addScore({ score: state.score });
+        return {
+          gameStage: "over",
+          paddleControlls: { left: false, right: false },
+        };
       }
       return {};
     });
