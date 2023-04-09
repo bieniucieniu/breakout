@@ -20,7 +20,7 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
   }));
 
   useEffect(() => {
-    if (gameStage === "starting") {
+    if (gameStage === "init") {
       api.position.set(position[0], position[1]);
       api.angle.set(0);
       api.velocity.set(0, 0);
