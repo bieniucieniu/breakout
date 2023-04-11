@@ -11,15 +11,14 @@ import type { KeyboardEvent, TouchEvent } from "react";
 export const Breakout = () => {
   const gameStage = useStorage((state) => state.gameStage);
   const paused = useStorage((state) => state.paused);
-  const { startGame, switchPaused, setPaddleControlls, setupGame } = useStorage(
-    (state) => ({
+  const { resetGame, startGame, switchPaused, setPaddleControlls, setupGame } =
+    useStorage((state) => ({
       startGame: state.startGame,
       resetGame: state.resetGame,
       switchPaused: state.switchPaused,
       setPaddleControlls: state.setPaddleControlls,
       setupGame: state.setupGame,
-    })
-  );
+    }));
 
   const controlls = {
     init: {
@@ -90,12 +89,12 @@ export const Breakout = () => {
       onKeyDown: (e: KeyboardEvent) => {
         switch (e.code) {
           case "Space":
-            startGame();
+            resetGame();
             break;
         }
       },
       onTouchStart: () => {
-        startGame();
+        resetGame();
       },
     },
   };
