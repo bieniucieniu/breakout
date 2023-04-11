@@ -26,6 +26,7 @@ type Storage = {
     right: boolean;
   };
   setPaddleControlls: (controlls: { left?: boolean; right?: boolean }) => void;
+  lastScore: number;
 };
 
 export const useStorage = create<Storage>((set) => ({
@@ -35,6 +36,7 @@ export const useStorage = create<Storage>((set) => ({
   gameStage: "init",
   paddleControlls: { left: false, right: false },
   bricks: [],
+  lastScore: 0,
   config: JSON.parse(JSON.stringify(defaultConfig)),
   setPause: (paused) => set(() => ({ paused: paused })),
   switchPaused: () => set((state) => ({ paused: !state.paused })),
@@ -79,11 +81,13 @@ export const useStorage = create<Storage>((set) => ({
   endGame: () => {
     set((state) => {
       if (state.gameStage === "playing") {
-        addScore({ score: state.score });
+        state.score !== state.lastScore && addScore({ score: state.score });
+
         return {
           gameStage: "over",
           paddleControlls: { left: false, right: false },
           paused: true,
+          lastScore: state.score,
         };
       }
       return {};
