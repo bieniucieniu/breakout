@@ -10,7 +10,7 @@ export const SignInWithGoogle = ({ className }: { className?: string }) => {
   const [signInWithGoogle, _user, loading, error] = useSignInWithGoogle(auth);
 
   return (
-    <span className={className}>
+    <span className={`${authStyle} ${className}`}>
       {loading ? (
         <span>Loading...</span>
       ) : (
@@ -25,12 +25,12 @@ export const SignOut = ({ className }: { className?: string }) => {
   const [signOut, loading, error] = useSignOut(auth);
 
   return (
-    <span className={className}>
+    <span className={`${authStyle} ${className}`}>
       {loading ? (
         <span>Loading...</span>
       ) : (
         <button
-          onClick={(e) => {
+          onClick={() => {
             signOut();
           }}
         >
@@ -42,12 +42,12 @@ export const SignOut = ({ className }: { className?: string }) => {
   );
 };
 
-export const Auth = () => {
+export const Auth = ({ className }: { className?: string }) => {
   const [user] = useAuthState(auth);
 
   return user ? (
-    <SignOut className={authStyle} />
+    <SignOut className={className} />
   ) : (
-    <SignInWithGoogle className={authStyle} />
+    <SignInWithGoogle className={className} />
   );
 };
