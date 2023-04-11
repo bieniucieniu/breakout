@@ -13,18 +13,8 @@ export const PauseMenu = () => {
   const endGame = useStorage((state) => state.endGame);
   const paused = useStorage((state) => state.paused);
 
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!ref.current) return;
-    if (paused) {
-      ref.current.focus();
-    }
-  }, [paused]);
-
   return (
     <div
-      ref={ref}
       className={menuBG}
       style={{
         visibility: paused ? "visible" : "hidden",
