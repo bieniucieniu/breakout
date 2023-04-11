@@ -30,7 +30,7 @@ export default ({
   return (
     <Canvas
       className={className}
-      camera={{ position: config.camera.position }}
+      camera={{ position: config.camera.position.default }}
       {...contorlls}
       tabIndex={0}
     >
