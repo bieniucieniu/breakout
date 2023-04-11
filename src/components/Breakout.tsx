@@ -101,7 +101,7 @@ export const Breakout = () => {
 
   useEffect(() => {
     if (gameStage === "init") setupGame();
-  }, []);
+  }, [gameStage]);
 
   const ref = useRef<HTMLDivElement>(null);
 
