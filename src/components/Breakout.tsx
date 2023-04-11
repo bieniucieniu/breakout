@@ -123,7 +123,7 @@ export const Breakout = () => {
         }[gameStage]
       }
       <GameNavigation />
-      <Game className={game} cameraPosition={[0, 0, 64]} />
+      <Game className={game} />
     </div>
   );
 };

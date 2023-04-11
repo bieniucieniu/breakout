@@ -6,7 +6,6 @@ import { BricksGrid } from "./Bricks";
 import { Boarder } from "./Boarder";
 import { Paddle } from "./Paddle";
 import { useThree } from "@react-three/fiber";
-import { game } from "../styles/breakout.css";
 
 export const Scene = () => {
   const { config, materials } = useStorage((state) => ({
@@ -38,13 +37,11 @@ export const Scene = () => {
     e && e.preventDefault();
     const width = window.innerWidth;
     if (width < 500) {
-      camera.position.set(0, 0, 120);
+      camera.position.set(...config.camera.position["500"]);
     } else if (width < 700) {
-      camera.position.set(0, 0, 100);
-    } else if (width < 1000) {
-      camera.position.set(0, 0, 80);
+      camera.position.set(...config.camera.position["700"]);
     } else {
-      camera.position.set(0, 0, 64);
+      camera.position.set(...config.camera.position["default"]);
     }
   };
 

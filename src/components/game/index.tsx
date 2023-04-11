@@ -7,11 +7,9 @@ import { Scene } from "./Scene";
 import type { KeyboardEvent, TouchEvent } from "react";
 
 export default ({
-  cameraPosition,
   className,
   contorlls,
 }: {
-  cameraPosition?: [number, number, number];
   className?: string;
   contorlls?: {
     onKeyDown?: (e: KeyboardEvent) => void;
@@ -32,7 +30,7 @@ export default ({
   return (
     <Canvas
       className={className}
-      camera={{ position: cameraPosition }}
+      camera={{ position: config.camera.position }}
       {...contorlls}
       tabIndex={0}
     >
