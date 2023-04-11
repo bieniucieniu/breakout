@@ -96,6 +96,7 @@ export const useStorage = create<Storage>((set) => ({
   resetGame: () => {
     set((state) => {
       if (state.gameStage === "over" || state.gameStage === "playing") {
+        state.setupGame();
         return { gameStage: "init" };
       }
       return {};
