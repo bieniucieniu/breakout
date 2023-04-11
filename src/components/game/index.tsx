@@ -5,13 +5,12 @@ import { useStorage } from "../../hooks/useStorage";
 import { useWindowFocus } from "../../hooks/useWindowFocus";
 import { Scene } from "./Scene";
 import type { KeyboardEvent, TouchEvent } from "react";
-import { game } from "../styles/breakout.css";
 
 export default ({
-  cameraPosition,
+  className,
   contorlls,
 }: {
-  cameraPosition?: [number, number, number];
+  className?: string;
   contorlls?: {
     onKeyDown?: (e: KeyboardEvent) => void;
     onKeyUp?: (e: KeyboardEvent) => void;
@@ -30,8 +29,8 @@ export default ({
 
   return (
     <Canvas
-      className={game}
-      camera={{ position: cameraPosition }}
+      className={className}
+      camera={{ position: config.camera.position.default }}
       {...contorlls}
       tabIndex={0}
     >

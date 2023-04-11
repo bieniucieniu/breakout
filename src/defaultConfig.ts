@@ -4,6 +4,13 @@ const defaultConfig = {
     tickRate: 60,
     args: [64, 64] as [number, number],
     gravity: [0, -9.82] as [number, number],
+    camera: {
+      position: {
+        default: [0, 0, 80] as [number, number, number],
+        "700": [0, -10, 80] as [number, number, number],
+        "500": [0, -35, 100] as [number, number, number],
+      },
+    },
     border: {
       tickness: 2,
       depth: 2,

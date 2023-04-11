@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { center, title } from "./styles/basicStyles.css";
-// import { AuthButton } from "./Auth";
+import { Auth } from "./Auth";
 
 export const MainMenu = () => {
   return (
@@ -9,7 +9,7 @@ export const MainMenu = () => {
         game
       </Link>
       <br />
-      {/* <AuthButton /> */}
+      <Auth />
     </div>
   );
 };
