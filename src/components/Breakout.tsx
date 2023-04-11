@@ -111,7 +111,7 @@ export const Breakout = () => {
     if (!paused) {
       ref.current.focus();
     }
-  }, [paused]);
+  }, [paused, gameStage, undefined]);
 
   return (
     <div ref={ref} className={breakout} tabIndex={0} {...controlls[gameStage]}>

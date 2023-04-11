@@ -7,7 +7,7 @@ export const navbar = style({
 
   display: "grid",
   alignItems: "center",
-  gridTemplateColumns: "repeat(3, 1fr)",
+  gridTemplateColumns: "repeat(4, 1fr)",
   gap: ".5rem",
 
   height: "4rem",
