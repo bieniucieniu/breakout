@@ -1,5 +1,5 @@
 import { useStorage } from "../storage";
-import { navbar } from "./styles/gameNavigation.css";
+import { gameNav } from "./styles/gameNavigation.css";
 import { Button } from "./Buttons";
 import { Display } from "./Display";
 
@@ -29,7 +29,7 @@ export const GameNavigation = () => {
   };
 
   return (
-    <nav className={navbar}>
+    <nav className={gameNav}>
       <Button onClick={switchPaused} name={paused ? "start" : "stop"} />
       <Button onClick={easyMode} name="easymode" />
       <Display name="score" value={score} />
