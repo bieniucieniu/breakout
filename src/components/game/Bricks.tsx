@@ -21,9 +21,7 @@ const Brick = ({
     bricks: stage.bricks,
     setBricks: stage.setBricks,
   }));
-  const { increaseScore } = useStorage((state) => ({
-    increaseScore: state.increaseScore,
-  }));
+  const brickHited = useStorage((state) => state.brickHited);
 
   const [ref] = useBox(() => ({
     type: "Kinematic",
@@ -34,14 +32,7 @@ const Brick = ({
     //colision handling //colision handling //colision handling //colision handling
     onCollide: ({ body, target }) => {
       if (body.name === "ball") {
-        const newBricks = bricks.map((e) => {
-          if (e.name === target.name) {
-            e.points = e.points - 1;
-          }
-          return e;
-        });
-        setBricks(newBricks);
-        increaseScore(1);
+        brickHited(target.name);
       }
     },
     //colision handling //colision handling //colision handling //colision handling
