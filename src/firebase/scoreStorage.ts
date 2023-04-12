@@ -42,7 +42,7 @@ export const useScores = ({
   orderedBy?: "score" | "date" | "name";
   direction?: "asc" | "desc";
   limitedTo?: number;
-}) => {
+} = {}) => {
   const q = query(
     scoresCollectionRef,
     orderBy(orderedBy || "score", direction || "desc"),

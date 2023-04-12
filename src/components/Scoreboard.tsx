@@ -1,9 +1,9 @@
 import { Auth } from "./Auth";
-import { scoreboardNav } from "./styles/scoreboard.css";
+import { scoreboard, scoreboardNav } from "./styles/scoreboard.css";
 import { useScores } from "../firebase/scoreStorage";
 
 export const Scoreboard = () => {
-  const { scores, loading, error } = useScores({});
+  const { scores, loading, error } = useScores();
 
   return (
     <>
@@ -11,7 +11,7 @@ export const Scoreboard = () => {
         <h1>Scoreboard</h1>
         <Auth />
       </nav>
-      <div>
+      <div className={scoreboard}>
         <h2>Leaderboard</h2>
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error.message}</p>}
