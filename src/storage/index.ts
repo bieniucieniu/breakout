@@ -9,7 +9,7 @@ type Storage = {
   switchPaused: () => void;
   score: number;
   increaseScore: (score: number) => void;
-  brickHited: (brickName: string, score?: number) => void;
+  brickHit: (brickName: string, score?: number) => void;
   lives: number;
   removeLife: () => void;
   resetlives: () => void;
@@ -42,7 +42,7 @@ export const useStorage = create<Storage>((set) => ({
   setPause: (paused) => set(() => ({ paused: paused })),
   switchPaused: () => set((state) => ({ paused: !state.paused })),
   increaseScore: (score) => set((state) => ({ score: state.score + score })),
-  brickHited: (brickName, score) =>
+  brickHit: (brickName, score) =>
     set((state) => {
       const newBricks = state.bricks.map((e) => {
         if (e.name === brickName) {
