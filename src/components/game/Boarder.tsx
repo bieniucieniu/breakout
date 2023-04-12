@@ -1,4 +1,4 @@
-import { useStorage } from "../../hooks/useStorage";
+import { useStorage } from "../../storage";
 import { KinematicBox } from "./KinenaticBox";
 
 export const Boarder = () => {

@@ -5,7 +5,7 @@ import {
   pauseMenuContent,
 } from "./styles/gameMenu.css";
 import { Button, LinkButton } from "./Buttons";
-import { useStorage } from "../hooks/useStorage";
+import { useStorage } from "../storage";
 import { useEffect, useRef } from "react";
 
 export const PauseMenu = () => {

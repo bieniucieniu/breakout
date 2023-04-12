@@ -1,7 +1,7 @@
 import Game from "./game";
 import { GameNavigation } from "./GameNavigation";
 import { breakout, game } from "./styles/breakout.css";
-import { useStorage } from "../hooks/useStorage";
+import { useStorage } from "../storage";
 import { PauseMenu } from "./PauseMenu";
 import { StartMenu } from "./StartMenu";
 import { GameOverMenu } from "./GameOverMenu";
@@ -110,7 +110,7 @@ export const Breakout = () => {
     if (!paused) {
       ref.current.focus();
     }
-  }, [paused]);
+  }, [paused, gameStage, undefined]);
 
   return (
     <div ref={ref} className={breakout} tabIndex={0} {...controlls[gameStage]}>

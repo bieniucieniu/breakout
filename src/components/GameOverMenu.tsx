@@ -1,6 +1,6 @@
 import { menuBG, key } from "./styles/gameMenu.css";
 import { centeredTitle } from "./styles/basicStyles.css";
-import { useStorage } from "../hooks/useStorage";
+import { useStorage } from "../storage";
 import { useEffect, useRef } from "react";
 
 export const GameOverMenu = () => {

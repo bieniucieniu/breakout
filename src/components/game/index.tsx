@@ -1,8 +1,8 @@
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/p2";
-import { useState } from "react";
-import { useStorage } from "../../hooks/useStorage";
-import { useWindowFocus } from "../../hooks/useWindowFocus";
+import { useRef, useState } from "react";
+import { useStorage } from "../../storage";
+import { useWindowFocus } from "../../functions/useWindowFocus";
 import { Scene } from "./Scene";
 
 export default ({ className }: { className?: string }) => {

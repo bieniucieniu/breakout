@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Brick, createBricksGrid } from "./createBricksGrid";
+import { Brick, createBricksGrid } from "../functions/createBricksGrid";
 import defaultConfig from "../defaultConfig";
 import { addScore } from "../firebase";
 
