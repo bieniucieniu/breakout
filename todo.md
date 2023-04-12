@@ -1,5 +1,5 @@
 - [ ] database
-	- [ ] pushing data
+	- [x] pushing data
 	- [ ] scoreboard page
 		- [ ] scoreboard
 	- [ ] user profile
