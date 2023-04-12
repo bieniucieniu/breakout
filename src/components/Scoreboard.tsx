@@ -1,6 +1,7 @@
 import { Auth } from "./Auth";
 import { scoreboard, scoreboardNav } from "./styles/scoreboard.css";
 import { useScores } from "../firebase/scoreStorage";
+import { Display } from "./Display";
 
 export const Scoreboard = () => {
   const { scores, loading, error } = useScores();
@@ -9,7 +10,9 @@ export const Scoreboard = () => {
     <>
       <nav className={scoreboardNav}>
         <h1>Scoreboard</h1>
-        <Auth />
+        <Display>
+          <Auth />
+        </Display>
       </nav>
       <div className={scoreboard}>
         <h2>Leaderboard</h2>
