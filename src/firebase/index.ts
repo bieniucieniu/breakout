@@ -1,14 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { useCollection } from "react-firebase-hooks/firestore";
 import {
   collection,
   getFirestore,
-  addDoc,
   Timestamp,
-  query,
-  limit,
-  orderBy,
+  CollectionReference,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -21,33 +17,17 @@ const firebaseConfig = {
   measurementId: "G-T4N4VR9CTK",
 };
 
+interface Data {
+  name: string;
+  uid: string;
+  score: number;
+  date: Timestamp;
+}
+
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 const db = getFirestore(app);
-const scoresCollectionRef = collection(db, "scores");
-
-export const addScore = ({ score }: { score: number }) => {
-  if (!auth.currentUser) return;
-  if (score <= 0) return;
-
-  addDoc(scoresCollectionRef, {
-    name: auth.currentUser.displayName,
-    uid: auth.currentUser.uid,
-    score,
-    date: Timestamp.fromDate(new Date()),
-  });
-};
-
-export const useScores = ({
-  orderedBy = "score",
-  limitedTo = 10,
-}: {
-  orderedBy?: "score" | "date" | "name";
-  limitedTo?: number;
-}) => {
-  const q = query(scoresCollectionRef, orderBy(orderedBy), limit(limitedTo));
-
-  return useCollection(q, {
-    snapshotListenOptions: { includeMetadataChanges: true },
-  });
-};
+export const scoresCollectionRef = collection(
+  db,
+  "scores"
+) as CollectionReference<Data>;
