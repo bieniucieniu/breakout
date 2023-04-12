@@ -4,9 +4,13 @@ import {
   useAuthState,
 } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
-import { authStyle, errorStyle, googleButton } from "./styles/auth.css";
-import { Display } from "./Display";
-import { Button } from "./Buttons";
+import {
+  authButton,
+  authContainer,
+  authStyle,
+  errorStyle,
+  googleButton,
+} from "./styles/auth.css";
 
 export const SignInWithGoogle = ({ className }: { className?: string }) => {
   const [signInWithGoogle, _user, loading, error] = useSignInWithGoogle(auth);
@@ -14,13 +18,11 @@ export const SignInWithGoogle = ({ className }: { className?: string }) => {
   return (
     <span className={`${authStyle} ${className}`}>
       {loading ? (
-        <Display>Loading...</Display>
+        <div className={authContainer}>Loading...</div>
       ) : (
-        <Display>
-          <button onClick={() => signInWithGoogle()} className={googleButton}>
-            sign In With Google
-          </button>
-        </Display>
+        <button onClick={() => signInWithGoogle()} className={googleButton}>
+          sign In With Google
+        </button>
       )}
       {error ? (
         <span className={errorStyle}>Error: {error.message}</span>
@@ -35,14 +37,16 @@ export const SignOut = ({ className }: { className?: string }) => {
   return (
     <span className={`${authStyle} ${className}`}>
       {loading ? (
-        <Display>Loading...</Display>
+        <div className={authContainer}>Loading...</div>
       ) : (
-        <Button
+        <button
           onClick={() => {
             signOut();
           }}
-          name="logout"
-        />
+          className={authButton}
+        >
+          logout
+        </button>
       )}
       {error ? (
         <span className={errorStyle}>Error: {error.message}</span>
