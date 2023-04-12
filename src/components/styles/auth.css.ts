@@ -23,11 +23,19 @@ import { globalStyle, style } from "@vanilla-extract/css";
 
 export const authStyle = style({
   display: "flex",
+  position: "relative",
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "flex-start",
-  height: "56px",
   fontSize: "14px",
+});
+
+export const errorStyle = style({
+  position: "absolute",
+  top: "36px",
+  color: "#fff",
+  backgroundColor: "rgba(0,0,0,0.5)",
+  zIndex: "1",
 });
 
 globalStyle(`${authStyle}>button`, {

@@ -4,7 +4,7 @@ import {
   useAuthState,
 } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
-import { authStyle } from "./styles/auth.css";
+import { authStyle, errorStyle } from "./styles/auth.css";
 
 export const SignInWithGoogle = ({ className }: { className?: string }) => {
   const [signInWithGoogle, _user, loading, error] = useSignInWithGoogle(auth);
@@ -16,7 +16,9 @@ export const SignInWithGoogle = ({ className }: { className?: string }) => {
       ) : (
         <button onClick={() => signInWithGoogle()}>sign In With Google</button>
       )}
-      <span>{error ? `Error: ${error.message}` : " "}</span>
+      {error ? (
+        <span className={errorStyle}>Error: {error.message}</span>
+      ) : null}
     </span>
   );
 };
@@ -37,7 +39,9 @@ export const SignOut = ({ className }: { className?: string }) => {
           logout
         </button>
       )}
-      <span>{error ? `Error: ${error.message}` : " "}</span>
+      {error ? (
+        <span className={errorStyle}>Error: {error.message}</span>
+      ) : null}
     </span>
   );
 };
