@@ -1,5 +1,5 @@
 import { Auth } from "./Auth";
-import { scoreboardNav } from "./styles/scoreboardNav.css";
+import { scoreboardNav } from "./styles/scoreboard.css";
 import { useScores } from "../firebase/scoreStorage";
 
 export const Scoreboard = () => {
