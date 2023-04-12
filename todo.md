@@ -10,3 +10,4 @@
   - [ ] update global config :p
 - [ ] update css path/structure/etc
 - [ ] paddle movent in 2d
+- [ ] cleanup classNames prop -> React.HTMLProps<HTMLDivElement>w
