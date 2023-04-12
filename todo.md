@@ -1,11 +1,12 @@
 - [ ] database
-	- [x] pushing data
-	- [ ] scoreboard page
-		- [ ] scoreboard
-	- [ ] user profile
-		- [ ] login with discord
-		- [ ] login with #???
+  - [x] pushing data
+  - [ ] scoreboard page
+    - [ ] scoreboard
+  - [ ] user profile
+    - [ ] login with discord
+    - [ ] login with #???
 - [ ] configuration menu
-	- [ ] difficult levels (1 / 2 / 3)
-	- [ ] update global config :p
+  - [ ] difficult levels (1 / 2 / 3)
+  - [ ] update global config :p
 - [ ] update css path/structure/etc
+- [ ] paddle movent in 2d
