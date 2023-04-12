@@ -1,4 +1,4 @@
-import { button, valueDisplay } from "./styles/basicComponents.css";
+import { button, display } from "./styles/basicComponents.css";
 
 export const ValueDisplay = ({
   name,
@@ -8,7 +8,7 @@ export const ValueDisplay = ({
   value?: number;
 }) => {
   return (
-    <div className={valueDisplay}>
+    <div className={display}>
       {name}
       {name && " : "}
       {value}

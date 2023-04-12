@@ -28,7 +28,7 @@ export const linkButton = style([
   },
 ]);
 
-export const valueDisplay = style([
+export const display = style([
   container,
   {
     color: "black",
