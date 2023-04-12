@@ -1,20 +1,8 @@
 import { style } from "@vanilla-extract/css";
 import { center } from "./basicStyles.css";
+import { navbar } from "./navbar.css";
 
-export const scoreboardNav = style({
-  zIndex: "1",
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "space-between",
-  backgroundColor: "blue",
-
-  padding: ".3rem",
-
-  gap: ".5rem",
-
-  height: "4rem",
-});
+export const scoreboardNav = style([navbar, {}]);
 
 export const scoreboard = style([
   center,

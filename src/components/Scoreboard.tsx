@@ -9,7 +9,7 @@ export const Scoreboard = () => {
   return (
     <>
       <nav className={scoreboardNav}>
-        <h1>Scoreboard</h1>
+        <Display>Scoreboard</Display>
         <Display>
           <Auth />
         </Display>
