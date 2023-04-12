@@ -1,16 +1,28 @@
 import { button, display } from "./styles/basicComponents.css";
 
-export const ValueDisplay = ({
-  name,
-  value,
-}: {
-  name?: string;
+type ValueProps = {
+  children?: never;
   value?: number;
-}) => {
+  name?: string;
+};
+
+type ChildrenProps = {
+  children?: React.ReactNode;
+  value?: never;
+  name?: never;
+};
+
+type Props = (ValueProps | ChildrenProps) & React.HTMLProps<HTMLDivElement>;
+
+export const Display = ({ name, value, children, ...props }: Props) => {
+  if (children) {
+    return <div className={display}>{children}</div>;
+  }
+
   return (
-    <div className={display}>
+    <div className={display} {...props}>
       {name}
-      {name && " : "}
+      {name ?? value ?? " : "}
       {value}
     </div>
   );
