@@ -8,6 +8,9 @@ export const MainMenu = () => {
       <Link href="/breakout" className={title}>
         game
       </Link>
+      <Link href="/scoreboard" className={title}>
+        scoreboard
+      </Link>
       <br />
       <Auth />
     </div>
