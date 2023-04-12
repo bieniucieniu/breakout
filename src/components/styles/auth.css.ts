@@ -22,12 +22,9 @@ import { globalStyle, style } from "@vanilla-extract/css";
 // });
 
 export const authStyle = style({
-  display: "flex",
   position: "relative",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "flex-start",
-  fontSize: "14px",
+  width: "100%",
+  height: "100%",
 });
 
 export const errorStyle = style({
@@ -38,20 +35,35 @@ export const errorStyle = style({
   zIndex: "1",
 });
 
-globalStyle(`${authStyle}>button`, {
-  alignItems: "center",
-  height: "36px",
-  fontSize: "14px",
-  padding: "inherit",
-  backgroundColor: "#fff",
+export const googleButton = style({
+  transition: "background-color .3s, box-shadow .3s",
+  padding: "12px 16px 12px 42px",
+  border: "none",
+  borderRadius: "3px",
+  boxShadow: "0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25)",
   color: "#757575",
-  borderRadius: "4px",
-  border: "1px solid #ddd",
-  boxShadow: "0 1px 1px rgba(0,0,0,0.2)",
+  fontSize: "14px",
   fontWeight: "500",
-  cursor: "pointer",
+  fontFamily: "Roboto Mono, sans-serif",
+  margin: "0 ",
+
+  ":before": {
+    content: "''",
+    position: "absolute",
+    top: "50%",
+    left: "10px",
+    width: "20px",
+    height: "20px",
+    marginTop: "-9px",
+    backgroundImage:
+      "url(https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg)",
+    backgroundSize: "20px 20px",
+  },
 });
 
-globalStyle(`${authStyle}>span`, {
+globalStyle(`${authStyle}>div`, {
   fontSize: "14px",
+  padding: "12px 16px 12px 42px",
+  fontWeight: "500",
+  border: "none",
 });
