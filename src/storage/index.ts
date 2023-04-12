@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { Brick, createBricksGrid } from "../functions/createBricksGrid";
 import defaultConfig from "../defaultConfig";
-import { addScore } from "../firebase";
+import { addScore } from "../firebase/scoreStorage";
 
 type Storage = {
   paused: boolean;

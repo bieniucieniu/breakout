@@ -1,11 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import {
-  collection,
-  getFirestore,
-  Timestamp,
-  CollectionReference,
-} from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJeF_fin_zPcrxK6RWmu_BcJ2xTp19Pn8",
@@ -17,17 +12,6 @@ const firebaseConfig = {
   measurementId: "G-T4N4VR9CTK",
 };
 
-interface Data {
-  name: string;
-  uid: string;
-  score: number;
-  date: Timestamp;
-}
-
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-const db = getFirestore(app);
-export const scoresCollectionRef = collection(
-  db,
-  "scores"
-) as CollectionReference<Data>;
+export const db = getFirestore(app);
