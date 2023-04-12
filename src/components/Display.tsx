@@ -1,9 +1,9 @@
-import { button, display } from "./styles/basicComponents.css";
+import { display } from "./styles/basicComponents.css";
 
 type ValueProps = {
-  children?: never;
-  value?: number;
   name?: string;
+  value?: number;
+  children?: never;
 };
 
 type ChildrenProps = {
@@ -14,15 +14,25 @@ type ChildrenProps = {
 
 type Props = (ValueProps | ChildrenProps) & React.HTMLProps<HTMLDivElement>;
 
-export const Display = ({ name, value, children, ...props }: Props) => {
+export const Display = ({
+  name,
+  value,
+  children,
+  className,
+  ...props
+}: Props) => {
   if (children) {
-    return <div className={display}>{children}</div>;
+    return (
+      <div className={`${display} ${className}`} {...props}>
+        {children}
+      </div>
+    );
   }
 
   return (
-    <div className={display} {...props}>
+    <div className={`${display} ${className}`} {...props}>
       {name}
-      {name ?? value ?? " : "}
+      {value !== undefined && " : "}
       {value}
     </div>
   );
