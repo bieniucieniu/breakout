@@ -4,64 +4,50 @@ import {
   useAuthState,
 } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
-import {
-  authButton,
-  authContainer,
-  authStyle,
-  errorStyle,
-  googleButton,
-} from "./styles/auth.css";
+import { authButton, errorStyle, googleButton } from "./styles/auth.css";
 
-export const SignInWithGoogle = ({
-  className,
-  ...props
-}: React.HTMLProps<HTMLSpanElement>) => {
+type ButtonProps = React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
+
+export const SignInWithGoogle = ({ className, ...props }: ButtonProps) => {
   const [signInWithGoogle, _user, loading, error] = useSignInWithGoogle(auth);
 
   return (
-    <span className={`${authStyle} ${className}`} {...props}>
-      {loading ? (
-        <div className={authContainer}>Loading...</div>
-      ) : (
-        <button onClick={() => signInWithGoogle()} className={googleButton}>
-          sign In With Google
-        </button>
-      )}
+    <button
+      onClick={() => signInWithGoogle()}
+      className={`${googleButton} ${className}`}
+      {...props}
+    >
+      sign In With Google
       {error ? (
         <span className={errorStyle}>Error: {error.message}</span>
       ) : null}
-    </span>
+    </button>
   );
 };
 
-export const SignOut = ({
-  className,
-  ...props
-}: React.HTMLProps<HTMLSpanElement>) => {
+export const SignOut = ({ className, ...props }: ButtonProps) => {
   const [signOut, loading, error] = useSignOut(auth);
 
   return (
-    <span className={`${authStyle} ${className}`} {...props}>
-      {loading ? (
-        <div className={authContainer}>Loading...</div>
-      ) : (
-        <button
-          onClick={() => {
-            signOut();
-          }}
-          className={authButton}
-        >
-          logout
-        </button>
-      )}
+    <button
+      onClick={() => {
+        signOut();
+      }}
+      className={`${authButton} ${className}`}
+      {...props}
+    >
+      logout
       {error ? (
         <span className={errorStyle}>Error: {error.message}</span>
       ) : null}
-    </span>
+    </button>
   );
 };
 
-export const Auth = ({ ...props }: React.HTMLProps<HTMLSpanElement>) => {
+export const Auth = ({ ...props }: ButtonProps) => {
   const [user] = useAuthState(auth);
 
   return user ? <SignOut {...props} /> : <SignInWithGoogle {...props} />;

@@ -1,13 +1,5 @@
 import { style } from "@vanilla-extract/css";
 
-export const authStyle = style({
-  position: "relative",
-  width: "100%",
-  height: "100%",
-  padding: "0",
-  margin: "0",
-});
-
 export const errorStyle = style({
   position: "absolute",
   top: "80px",
@@ -16,43 +8,21 @@ export const errorStyle = style({
   zIndex: "1",
 });
 
-// globalStyle(`${authStyle} > div`, {
-//   transition: "background-color .3s, box-shadow .3s",
-//   padding: "12px 16px 12px 42px",
-//   border: "none",
-//   borderRadius: "3px",
-//   color: "#757575",
-//   fontSize: "14px",
-//   fontWeight: "500",
-//   fontFamily: "Roboto Mono, sans-serif",
-//   margin: "0 ",
-// });
-
-export const authContainer = style({
+export const authButton = style({
+  position: "relative",
+  width: "100%",
+  height: "100%",
   margin: "12px 16px",
-  padding: "0",
-  border: "none",
   borderRadius: "3px",
+  padding: "12px 16px 12px 16px",
+  border: "none",
   color: "#757575",
   fontSize: "14px",
   fontWeight: "500",
   fontFamily: "Roboto Mono, sans-serif",
 });
 
-export const authButton = style([
-  authContainer,
-  {
-    padding: "12px 16px 12px 16px",
-    border: "none",
-    color: "#757575",
-    fontSize: "14px",
-    fontWeight: "500",
-    fontFamily: "Roboto Mono, sans-serif",
-  },
-]);
-
 export const googleButton = style([
-  authContainer,
   authButton,
   {
     position: "relative",
