@@ -18,6 +18,7 @@ export const SignInWithGoogle = ({ className, ...props }: ButtonProps) => {
     <button
       onClick={() => signInWithGoogle()}
       className={`${googleButton} ${className}`}
+      disabled={loading}
       {...props}
     >
       sign In With Google
@@ -37,6 +38,7 @@ export const SignOut = ({ className, ...props }: ButtonProps) => {
         signOut();
       }}
       className={`${authButton} ${className}`}
+      disabled={loading}
       {...props}
     >
       logout
