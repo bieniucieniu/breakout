@@ -3,6 +3,7 @@ import { style } from "@vanilla-extract/css";
 export const errorStyle = style({
   position: "absolute",
   top: "80px",
+  left: "0",
   color: "#fff",
   backgroundColor: "rgba(0,0,0,0.5)",
   zIndex: "1",
