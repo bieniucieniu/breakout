@@ -4,7 +4,12 @@ import {
   useAuthState,
 } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
-import { authButton, errorStyle, googleButton } from "./styles/auth.css";
+import {
+  authButton,
+  authWraper,
+  errorStyle,
+  googleButton,
+} from "./styles/auth.css";
 import type { AuthError } from "firebase/auth";
 import { useEffect, useState } from "react";
 
@@ -17,13 +22,10 @@ const Error = ({ error }: { error: AuthError | Error }) => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
+    setVisible(true);
     const timeout = setTimeout(() => setVisible(false), 5000);
     return () => clearTimeout(timeout);
-  }, []);
-
-  useEffect(() => {
-    setVisible(true);
-  }, [error]);
+  }, [error, undefined]);
 
   return (
     <span
@@ -40,15 +42,17 @@ export const SignInWithGoogle = ({ className, ...props }: ButtonProps) => {
   const [signInWithGoogle, _user, loading, error] = useSignInWithGoogle(auth);
 
   return (
-    <button
-      onClick={() => signInWithGoogle()}
-      className={`${googleButton} ${className}`}
-      disabled={loading}
-      {...props}
-    >
-      sign In With Google
+    <div className={authWraper}>
+      <button
+        onClick={() => signInWithGoogle()}
+        className={`${googleButton} ${className}`}
+        disabled={loading}
+        {...props}
+      >
+        sign In With Google
+      </button>
       {error ? <Error error={error} /> : null}
-    </button>
+    </div>
   );
 };
 
@@ -56,17 +60,19 @@ export const SignOut = ({ className, ...props }: ButtonProps) => {
   const [signOut, loading, error] = useSignOut(auth);
 
   return (
-    <button
-      onClick={() => {
-        signOut();
-      }}
-      className={`${authButton} ${className}`}
-      disabled={loading}
-      {...props}
-    >
-      logout
+    <div className={authWraper}>
+      <button
+        onClick={() => {
+          signOut();
+        }}
+        className={`${authButton} ${className}`}
+        disabled={loading}
+        {...props}
+      >
+        logout
+      </button>
       {error ? <Error error={error} /> : null}
-    </button>
+    </div>
   );
 };
 

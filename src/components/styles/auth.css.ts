@@ -1,5 +1,13 @@
 import { style } from "@vanilla-extract/css";
 
+export const authWraper = style({
+  position: "relative",
+  width: "100%",
+  height: "100%",
+  margin: 0,
+  padding: 0,
+});
+
 export const errorStyle = style({
   position: "absolute",
   top: "80px",
@@ -10,10 +18,8 @@ export const errorStyle = style({
 });
 
 export const authButton = style({
-  position: "relative",
   width: "100%",
   height: "100%",
-  margin: "12px 16px",
   borderRadius: "3px",
   padding: "12px 16px 12px 16px",
   border: "none",
