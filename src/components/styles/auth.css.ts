@@ -11,6 +11,7 @@ export const authWraper = style({
 export const errorStyle = style({
   position: "absolute",
   top: "80px",
+  fontSize: ".8rem",
   left: "0",
   color: "#fff",
   backgroundColor: "rgba(0,0,0,0.5)",
@@ -23,10 +24,12 @@ export const authButton = style({
   borderRadius: "3px",
   padding: "12px 16px 12px 16px",
   border: "none",
-  color: "#757575",
-  fontSize: "14px",
+  color: "black",
   fontWeight: "500",
   fontFamily: "Roboto Mono, sans-serif",
+  ":hover": {
+    transform: "scale(102%)",
+  },
 });
 
 export const googleButton = style([
@@ -35,7 +38,9 @@ export const googleButton = style([
     position: "relative",
     padding: "12px 16px 12px 42px",
     transition: "background-color .3s, box-shadow .3s",
+    color: "#757575",
     borderRadius: "3px",
+    fontSize: "1rem",
     boxShadow: "0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25)",
 
     ":before": {
