@@ -1,15 +1,27 @@
-import { menuBG, key } from "./styles/gameMenu.css";
-import { centeredTitle } from "./styles/basicStyles.css";
+import { menuBG, mainMenu } from "./styles/gameMenu.css";
+import { title } from "./styles/basicStyles.css";
+import { Keys } from "./Display";
 
 export const StartMenu = () => {
   return (
     <div className={menuBG}>
-      <h1 className={centeredTitle}>
-        Press <span className={key}>Space</span> /<br />
-        <span className={key}>tap screen</span> <br />
-        to start
-        <br />
-      </h1>
+      <div className={mainMenu}>
+        <div>
+          press
+          <Keys keys={["A", "<-"]} />
+          to move left
+        </div>
+        <h1 className={title}>
+          Press
+          <Keys keys={["Space", "tap screen"]} />
+          to start
+        </h1>
+        <div>
+          press
+          <Keys keys={["D", "->"]} />
+          to move right
+        </div>
+      </div>
     </div>
   );
 };

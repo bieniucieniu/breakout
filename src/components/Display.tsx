@@ -37,3 +37,22 @@ export const Display = ({
     </div>
   );
 };
+
+import { key } from "./styles/gameMenu.css";
+
+type Keys = {
+  keys: string[];
+} & React.HTMLProps<HTMLDivElement>;
+
+export const Keys = ({ keys, className, ...props }: Keys) => {
+  return (
+    <div className={className} {...props}>
+      {keys.map((k, i) => (
+        <>
+          {i !== 0 && " / "}
+          <span className={key}>{k}</span>
+        </>
+      ))}
+    </div>
+  );
+};
