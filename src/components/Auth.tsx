@@ -12,11 +12,14 @@ import {
   googleButton,
 } from "./styles/auth.css";
 
-export const SignInWithGoogle = ({ className }: { className?: string }) => {
+export const SignInWithGoogle = ({
+  className,
+  ...props
+}: React.HTMLProps<HTMLSpanElement>) => {
   const [signInWithGoogle, _user, loading, error] = useSignInWithGoogle(auth);
 
   return (
-    <span className={`${authStyle} ${className}`}>
+    <span className={`${authStyle} ${className}`} {...props}>
       {loading ? (
         <div className={authContainer}>Loading...</div>
       ) : (
@@ -31,11 +34,14 @@ export const SignInWithGoogle = ({ className }: { className?: string }) => {
   );
 };
 
-export const SignOut = ({ className }: { className?: string }) => {
+export const SignOut = ({
+  className,
+  ...props
+}: React.HTMLProps<HTMLSpanElement>) => {
   const [signOut, loading, error] = useSignOut(auth);
 
   return (
-    <span className={`${authStyle} ${className}`}>
+    <span className={`${authStyle} ${className}`} {...props}>
       {loading ? (
         <div className={authContainer}>Loading...</div>
       ) : (
@@ -55,12 +61,8 @@ export const SignOut = ({ className }: { className?: string }) => {
   );
 };
 
-export const Auth = ({ className }: { className?: string }) => {
+export const Auth = ({ ...props }: React.HTMLProps<HTMLSpanElement>) => {
   const [user] = useAuthState(auth);
 
-  return user ? (
-    <SignOut className={className} />
-  ) : (
-    <SignInWithGoogle className={className} />
-  );
+  return user ? <SignOut {...props} /> : <SignInWithGoogle {...props} />;
 };
