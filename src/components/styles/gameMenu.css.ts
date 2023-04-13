@@ -15,6 +15,28 @@ export const invisible = style({
   visibility: "hidden",
 });
 
+export const mainMenu = style([
+  center,
+  {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, minmax(15rem, 1fr))",
+    gap: "20rem",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+]);
+
+globalStyle(`${mainMenu} > *`, {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+});
+
+globalStyle(`${mainMenu} > div`, {
+  opacity: ".8",
+});
+
 export const pauseMenuContent = style([
   center,
   {
