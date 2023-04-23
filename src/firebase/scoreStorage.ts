@@ -1,11 +1,12 @@
 import { auth, db } from "./index";
 import {
-  Timestamp,
   addDoc,
   query,
   limit,
   orderBy,
   collection,
+  serverTimestamp,
+  type Timestamp,
   type CollectionReference,
 } from "firebase/firestore";
 import { useCollection } from "react-firebase-hooks/firestore";
@@ -14,7 +15,7 @@ type Data = {
   name: string;
   uid: string;
   score: number;
-  date: Timestamp;
+  timestamp: Timestamp;
 };
 
 export const scoresCollectionRef = collection(
@@ -30,7 +31,7 @@ export const addScore = ({ score }: { score: number }) => {
     name: auth.currentUser.displayName,
     uid: auth.currentUser.uid,
     score,
-    date: Timestamp.fromDate(new Date()),
+    timestamp: serverTimestamp(),
   });
 };
 
