@@ -4,16 +4,6 @@ import { useState } from "react";
 import { useStorage } from "../../storage";
 import { useWindowFocus } from "../../functions/useWindowFocus";
 import { Scene } from "./Scene";
-import { Keys } from "../Display";
-
-const GameControllsHint = () => {
-  return (
-    <div>
-      <Keys keys={["space", "esc"]} /> to pause
-      <Keys keys={["<-", "A", "D", "->"]} /> movement
-    </div>
-  );
-};
 
 export default ({ className }: { className?: string }) => {
   const config = useStorage((state) => state.config.game);
@@ -26,21 +16,18 @@ export default ({ className }: { className?: string }) => {
   );
 
   return (
-    <>
-      <GameControllsHint />
-      <Canvas
-        className={className}
-        camera={{ position: config.camera.position.default }}
+    <Canvas
+      className={className}
+      camera={{ position: config.camera.position.default }}
+    >
+      <Physics
+        normalIndex={2}
+        stepSize={1 / config.tickRate}
+        gravity={config.gravity}
+        isPaused={paused || !windowFocused}
       >
-        <Physics
-          normalIndex={2}
-          stepSize={1 / config.tickRate}
-          gravity={config.gravity}
-          isPaused={paused || !windowFocused}
-        >
-          <Scene />
-        </Physics>
-      </Canvas>
-    </>
+        <Scene />
+      </Physics>
+    </Canvas>
   );
 };

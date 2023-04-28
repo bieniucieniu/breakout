@@ -7,6 +7,21 @@ import { StartMenu } from "./StartMenu";
 import { GameOverMenu } from "./GameOverMenu";
 import { useEffect, useRef } from "react";
 import type { KeyboardEvent, TouchEvent } from "react";
+import { gameControllsHints } from "./styles/gameControllsHints.css";
+import { Keys } from "./Display";
+
+const GameControllsHints = () => {
+  return (
+    <div className={gameControllsHints}>
+      <div>
+        <Keys keys={["space", "esc"]} /> to pause
+      </div>
+      <div>
+        <Keys keys={["<-", "A", "D", "->"]} /> movement
+      </div>
+    </div>
+  );
+};
 
 export const Breakout = () => {
   const gameStage = useStorage((state) => state.gameStage);
@@ -122,6 +137,7 @@ export const Breakout = () => {
         }[gameStage]
       }
       <GameNavigation />
+      <GameControllsHints />
       <Game className={game} />
     </div>
   );
