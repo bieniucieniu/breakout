@@ -4,50 +4,74 @@ import {
   useAuthState,
 } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
-import { authStyle } from "./styles/auth.css";
+import {
+  authButton,
+  authWraper,
+  errorStyle,
+  googleButton,
+} from "./styles/auth.css";
+import type { AuthError } from "firebase/auth";
+import { useEffect, useState } from "react";
 
-export const SignInWithGoogle = ({ className }: { className?: string }) => {
+type ButtonProps = React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
+
+const Error = ({ error }: { error: AuthError | Error }) => {
+  const [visible, setVisible] = useState(true);
+
+  return (
+    <span
+      onClick={() => setVisible(false)}
+      style={{ visibility: visible ? "visible" : "hidden" }}
+      className={errorStyle}
+    >
+      Error: {error.message}
+    </span>
+  );
+};
+
+export const SignInWithGoogle = ({ className, ...props }: ButtonProps) => {
   const [signInWithGoogle, _user, loading, error] = useSignInWithGoogle(auth);
 
   return (
-    <span className={`${authStyle} ${className}`}>
-      {loading ? (
-        <span>Loading...</span>
-      ) : (
-        <button onClick={() => signInWithGoogle()}>sign In With Google</button>
-      )}
-      <span>{error ? `Error: ${error.message}` : " "}</span>
-    </span>
+    <div className={authWraper}>
+      <button
+        onClick={() => signInWithGoogle()}
+        className={`${googleButton} ${className}`}
+        disabled={loading}
+        {...props}
+      >
+        sign In With Google
+      </button>
+      {error ? <Error error={error} /> : null}
+    </div>
   );
 };
 
-export const SignOut = ({ className }: { className?: string }) => {
+export const SignOut = ({ className, ...props }: ButtonProps) => {
   const [signOut, loading, error] = useSignOut(auth);
 
   return (
-    <span className={`${authStyle} ${className}`}>
-      {loading ? (
-        <span>Loading...</span>
-      ) : (
-        <button
-          onClick={() => {
-            signOut();
-          }}
-        >
-          logout
-        </button>
-      )}
-      <span>{error ? `Error: ${error.message}` : " "}</span>
-    </span>
+    <div className={authWraper}>
+      <button
+        onClick={() => {
+          signOut();
+        }}
+        className={`${authButton} ${className}`}
+        disabled={loading}
+        {...props}
+      >
+        logout
+      </button>
+      {error ? <Error error={error} /> : null}
+    </div>
   );
 };
 
-export const Auth = ({ className }: { className?: string }) => {
+export const Auth = ({ ...props }: ButtonProps) => {
   const [user] = useAuthState(auth);
 
-  return user ? (
-    <SignOut className={className} />
-  ) : (
-    <SignInWithGoogle className={className} />
-  );
+  return user ? <SignOut {...props} /> : <SignInWithGoogle {...props} />;
 };

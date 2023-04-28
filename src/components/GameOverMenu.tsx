@@ -1,7 +1,7 @@
-import { menuBG, key } from "./styles/gameMenu.css";
+import { menuBG } from "./styles/gameMenu.css";
 import { centeredTitle } from "./styles/basicStyles.css";
-import { useStorage } from "../hooks/useStorage";
-import { useEffect, useRef } from "react";
+import { useStorage } from "../storage";
+import { Keys } from "./Display";
 
 export const GameOverMenu = () => {
   const lastScore = useStorage((state) => state.lastScore);
@@ -12,8 +12,7 @@ export const GameOverMenu = () => {
         Game Over <br />
         your score: {lastScore}
         <br />
-        Press <span className={key}>Space</span> /<br />
-        <span className={key}>tap screen</span> <br />
+        <Keys keys={["Space", "tap screen"]} />
         to restart
       </h1>
     </div>

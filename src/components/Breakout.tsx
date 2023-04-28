@@ -1,13 +1,12 @@
 import Game from "./game";
 import { GameNavigation } from "./GameNavigation";
-import { breakout } from "./styles/breakout.css";
-import { useStorage } from "../hooks/useStorage";
+import { breakout, game } from "./styles/breakout.css";
+import { useStorage } from "../storage";
 import { PauseMenu } from "./PauseMenu";
 import { StartMenu } from "./StartMenu";
 import { GameOverMenu } from "./GameOverMenu";
 import { useEffect, useRef } from "react";
 import type { KeyboardEvent, TouchEvent } from "react";
-import { game } from "./styles/breakout.css";
 
 export const Breakout = () => {
   const gameStage = useStorage((state) => state.gameStage);

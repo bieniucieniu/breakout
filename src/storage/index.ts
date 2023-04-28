@@ -1,7 +1,7 @@
 import { create } from "zustand";
-import { Brick, createBricksGrid } from "./createBricksGrid";
+import { Brick, createBricksGrid } from "../functions/createBricksGrid";
 import defaultConfig from "../defaultConfig";
-import { addScore } from "../firebase";
+import { addScore } from "../firebase/scoreStorage";
 
 type Storage = {
   paused: boolean;
@@ -9,6 +9,7 @@ type Storage = {
   switchPaused: () => void;
   score: number;
   increaseScore: (score: number) => void;
+  brickHit: (brickName: string, score?: number) => void;
   lives: number;
   removeLife: () => void;
   resetlives: () => void;
@@ -19,7 +20,7 @@ type Storage = {
   setupGame: () => void;
   gameStage: "init" | "playing" | "over";
   startGame: () => void;
-  endGame: () => void;
+  endGame: (lastScore?: number) => void;
   resetGame: () => void;
   paddleControlls: {
     left: boolean;
@@ -41,6 +42,22 @@ export const useStorage = create<Storage>((set) => ({
   setPause: (paused) => set(() => ({ paused: paused })),
   switchPaused: () => set((state) => ({ paused: !state.paused })),
   increaseScore: (score) => set((state) => ({ score: state.score + score })),
+  brickHit: (brickName, score) =>
+    set((state) => {
+      const newBricks = state.bricks.map((e) => {
+        if (e.name === brickName) {
+          e.points = e.points - 1;
+        }
+        return e;
+      });
+      const n = newBricks.reduce((sum, b) => sum + b.points, 0);
+
+      if (n <= 0) {
+        state.endGame(state.score + (score || 1));
+      }
+
+      return { bricks: newBricks, score: state.score + (score || 1) };
+    }),
   removeLife: () =>
     set((state) => {
       if (state.lives <= 1) {
@@ -78,10 +95,11 @@ export const useStorage = create<Storage>((set) => ({
       return {};
     });
   },
-  endGame: () => {
+  endGame: (lastScore) => {
     set((state) => {
       if (state.gameStage === "playing") {
-        state.score !== state.lastScore && addScore({ score: state.score });
+        state.score !== state.lastScore &&
+          addScore({ score: lastScore ?? state.score });
 
         return {
           gameStage: "over",

@@ -1,7 +1,7 @@
-import { useStorage } from "../hooks/useStorage";
-import { navbar } from "./styles/gameNavigation.css";
+import { useStorage } from "../storage";
+import { gameNav } from "./styles/gameNavigation.css";
 import { Button } from "./Buttons";
-import { ValueDisplay } from "./Display";
+import { Display } from "./Display";
 
 export const GameNavigation = () => {
   const paused = useStorage((state) => state.paused);
@@ -29,11 +29,12 @@ export const GameNavigation = () => {
   };
 
   return (
-    <nav className={navbar}>
+    <nav className={gameNav}>
       <Button onClick={switchPaused} name={paused ? "start" : "stop"} />
       <Button onClick={easyMode} name="easymode" />
-      <ValueDisplay name="score" value={score} />
-      <ValueDisplay name="lives" value={lives} />
+
+      <Display name="score" value={score} />
+      <Display name="lives" value={lives} />
     </nav>
   );
 };

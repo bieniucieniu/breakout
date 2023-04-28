@@ -1,17 +1,58 @@
-import { button, valueDisplay } from "./styles/basicComponents.css";
+import { display } from "./styles/basicComponents.css";
 
-export const ValueDisplay = ({
-  name,
-  value,
-}: {
+type ValueProps = {
   name?: string;
   value?: number;
-}) => {
+  children?: never;
+};
+
+type ChildrenProps = {
+  children?: React.ReactNode;
+  value?: never;
+  name?: never;
+};
+
+type Props = (ValueProps | ChildrenProps) & React.HTMLProps<HTMLDivElement>;
+
+export const Display = ({
+  name,
+  value,
+  children,
+  className,
+  ...props
+}: Props) => {
+  if (children) {
+    return (
+      <div className={`${display} ${className}`} {...props}>
+        {children}
+      </div>
+    );
+  }
+
   return (
-    <div className={valueDisplay}>
+    <div className={`${display} ${className}`} {...props}>
       {name}
-      {name && " : "}
+      {value !== undefined && " : "}
       {value}
+    </div>
+  );
+};
+
+import { key } from "./styles/gameMenu.css";
+
+type Keys = {
+  keys: string[];
+} & React.HTMLProps<HTMLDivElement>;
+
+export const Keys = ({ keys, className, ...props }: Keys) => {
+  return (
+    <div className={className} {...props}>
+      {keys.map((k, i) => (
+        <>
+          {i !== 0 && " / "}
+          <span className={key}>{k}</span>
+        </>
+      ))}
     </div>
   );
 };

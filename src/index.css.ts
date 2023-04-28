@@ -4,6 +4,7 @@ globalStyle("*", {
   boxSizing: "border-box",
   fontFamily: "'Roboto Mono', monospace",
   color: "white",
+  fontSize: "1.1rem",
 });
 
 globalStyle("html, body", {

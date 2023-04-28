@@ -1,33 +1,8 @@
 import { globalStyle, style } from "@vanilla-extract/css";
+import { navbar } from "./navbar.css";
 
-export const navbar = style({
-  backgroundColor: "blue",
+export const gameNav = style([navbar]);
 
-  padding: ".3rem",
-
-  display: "grid",
-  alignItems: "center",
-  gridTemplateColumns: "repeat(4, 1fr)",
-  gap: ".5rem",
-
-  height: "4rem",
-
-  "@media": {
-    "screen and (max-width: 600px)": {
-      gridTemplateColumns: "repeat(2, 1fr)",
-      height: "8rem",
-    },
-  },
-});
-
-globalStyle(`.${navbar} > *`, {
+globalStyle(`.${gameNav} > *`, {
   fontSize: "1.3rem",
-});
-
-globalStyle(`.${navbar} > *:nth-child(3)`, {
-  "@media": {
-    "screen and (max-width: 600px)": {
-      gridColumn: "1 / 3",
-    },
-  },
 });

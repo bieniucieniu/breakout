@@ -1,5 +1,14 @@
-[ ]database
-[ ]pushing data
-[ ]scoreboard
-[ ]scoreboard page
-[ ]configuration menu
+- [ ] database
+  - [x] pushing data
+  - [ ] scoreboard page
+    - [ ] scoreboard
+  - [ ] user profile
+    - [ ] login with discord
+    - [ ] login with #???
+- [ ] configuration menu
+  - [ ] difficult levels (1 / 2 / 3)
+  - [ ] update global config :p
+- [ ] update css path/structure/etc
+- [ ] paddle movent in 2d
+- [ ] cleanup classNames prop -> React.HTMLProps<HTMLDivElement>
+- [ ] controlls hints touch/keyboard
