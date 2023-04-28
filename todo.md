@@ -11,4 +11,6 @@
 - [ ] update css path/structure/etc
 - [ ] paddle movent in 2d
 - [ ] cleanup classNames prop -> React.HTMLProps<HTMLDivElement>
-- [ ] controlls hints touch/keyboard
+- [ ] controlls hints 
+	- [x]  keyboard
+	- [ ]  touch
