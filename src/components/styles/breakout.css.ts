@@ -10,4 +10,5 @@ export const game = style({
 
 export const breakout = style({
   height: "100vh",
+  position: "relative",
 });
