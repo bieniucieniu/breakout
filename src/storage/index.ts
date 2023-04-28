@@ -98,9 +98,8 @@ export const useStorage = create<Storage>((set) => ({
   endGame: (lastScore) => {
     set((state) => {
       if (state.gameStage === "playing") {
-        state.score !== state.lastScore
-          ? addScore({ score: lastScore ?? state.score })
-          : null;
+        state.score !== state.lastScore &&
+          addScore({ score: lastScore ?? state.score });
 
         return {
           gameStage: "over",
