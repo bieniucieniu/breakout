@@ -4,7 +4,7 @@ import { useScores } from "../firebase/scoreStorage";
 import { Display } from "./Display";
 
 export const Scoreboard = () => {
-  const { scores, loading, error } = useScores();
+  const [scores, loading, error] = useScores();
 
   return (
     <>
@@ -24,7 +24,9 @@ export const Scoreboard = () => {
               const s = score.data();
               return (
                 <li key={score.id}>
-                  <span>{`${s.score}\t${s.name}\t${s.date.toDate()}`}</span>
+                  <span>{`${s.score}\t${
+                    s.name
+                  }\t${s.timestamp.toDate()}`}</span>
                 </li>
               );
             })}

@@ -49,13 +49,8 @@ export const useScores = ({
     orderBy(orderedBy || "score", direction || "desc"),
     limit(limitedTo || 10)
   );
-  const [scores, loading, error] = useCollection(q, {
+
+  return useCollection(q, {
     snapshotListenOptions: { includeMetadataChanges: true },
   });
-
-  return {
-    scores,
-    loading,
-    error,
-  };
 };
