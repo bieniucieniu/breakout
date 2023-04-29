@@ -32,6 +32,7 @@ export const GameNavigation = () => {
     <nav className={gameNav}>
       <Button onClick={switchPaused} name={paused ? "start" : "stop"} />
       <Button onClick={easyMode} name="easymode" />
+
       <Display name="score" value={score} />
       <Display name="lives" value={lives} />
     </nav>
