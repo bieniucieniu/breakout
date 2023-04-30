@@ -51,62 +51,98 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
     return unSub;
   }, []);
 
-  useFrame(() => {
-    //pos limits
-    if (positionRef.current[0] < -boardArgs[0] / 2 + paddle.args[0] / 2) {
-      api.position.set(
-        -boardArgs[0] / 2 + paddle.args[0] / 2,
-        positionRef.current[1]
-      );
+  // useFrame(() => {
+  //   //pos limits
+  //   if (positionRef.current[0] < -boardArgs[0] / 2 + paddle.args[0] / 2) {
+  //     api.position.set(
+  //       -boardArgs[0] / 2 + paddle.args[0] / 2,
+  //       positionRef.current[1]
+  //     );
+  //   }
+
+  //   if (positionRef.current[0] > boardArgs[0] / 2 - paddle.args[0] / 2) {
+  //     api.position.set(
+  //       boardArgs[0] / 2 - paddle.args[0] / 2,
+  //       positionRef.current[1]
+  //     );
+  //   }
+
+  //   if (positionRef.current[1] < -boardArgs[1] / 2 + paddle.args[1] / 2) {
+  //     api.position.set(
+  //       positionRef.current[0],
+  //       -boardArgs[1] / 2 + paddle.args[1] / 2
+  //     );
+  //   }
+
+  //   if (positionRef.current[1] > -10) {
+  //     api.position.set(positionRef.current[0], -10);
+  //   }
+  // });
+
+  const vec = useRef([0, 0] as [number, number]);
+
+  const posHandler = () => {
+    if (positionRef.current[0] < paddle.bounds.x[0]) {
+      api.position.set(paddle.bounds.x[0], positionRef.current[1]);
+
+      if (vec.current[0] < 0) vec.current[0] = 0;
+    } else if (positionRef.current[0] > paddle.bounds.x[1]) {
+      api.position.set(paddle.bounds.x[1], positionRef.current[1]);
+
+      if (vec.current[0] > 0) vec.current[0] = 0;
     }
 
-    if (positionRef.current[0] > boardArgs[0] / 2 - paddle.args[0] / 2) {
-      api.position.set(
-        boardArgs[0] / 2 - paddle.args[0] / 2,
-        positionRef.current[1]
-      );
+    if (positionRef.current[1] < paddle.bounds.y[0]) {
+      api.position.set(paddle.bounds.y[0], positionRef.current[0]);
+
+      if (vec.current[1] < 0) vec.current[1] = 0;
+    } else if (positionRef.current[1] > paddle.bounds.y[1]) {
+      api.position.set(positionRef.current[0], paddle.bounds.y[1]);
+
+      if (vec.current[1] > 0) vec.current[1] = 0;
     }
 
-    if (positionRef.current[1] < -boardArgs[1] / 2 + paddle.args[1] / 2) {
-      api.position.set(
-        positionRef.current[0],
-        -boardArgs[1] / 2 + paddle.args[1] / 2
-      );
-    }
+    api.velocity.set(vec.current[0] * 10, vec.current[1] * 10);
+  };
 
-    // if (positionRef.current[1] > boardArgs[1] / 2 - paddle.args[1] / 2) {
-    //   api.position.set(
-    //     positionRef.current[0],
-    //     boardArgs[1] / 2 - paddle.args[1] / 2
-    //   );
-    // }
-    if (positionRef.current[1] > -10) {
-      api.position.set(positionRef.current[0], -10);
+  const angleHandler = () => {
+    if (angleRef.current > 0) {
+      if (angleRef.current > paddle.maxAngle) {
+        api.angularVelocity.set(0);
+        api.angle.set(paddle.maxAngle);
+      } else {
+        api.angularVelocity.set(vec.current[0] / 2);
+      }
+    } else {
+      if (angleRef.current < -paddle.maxAngle) {
+        api.angularVelocity.set(0);
+        api.angle.set(-paddle.maxAngle);
+      } else {
+        api.angularVelocity.set(-vec.current[0] / 2);
+      }
     }
-  });
+  };
+
+  const movementHandler = () => {
+    if (vec.current[0] > 1 || vec.current[0] < -1) {
+      posHandler();
+      angleHandler();
+    } else {
+      api.velocity.set(0, 0);
+      api.angularVelocity.set(0);
+    }
+  };
 
   const { viewport } = useThree();
 
   useFrame(({ mouse }) => {
-    const vec = [
+    vec.current = [
       (mouse.x * viewport.width) / 2 - positionRef.current[0],
       (mouse.y * viewport.height) / 2 - positionRef.current[1],
     ] as [number, number];
-    api.velocity.set(vec[0] * 10, vec[1] * 10);
+    // api.velocity.set(vec.current[0] * 10, vec.current[1] * 10);
 
-    angleRef.current += vec[0] * 0.1;
-
-    if (angleRef.current > paddle.maxAngle) {
-      api.angle.set(paddle.maxAngle);
-    }
-    if (angleRef.current < -paddle.maxAngle) {
-      api.angle.set(-paddle.maxAngle);
-    }
-    if (vec[0] > 1 || vec[0] < -1) {
-      api.angularVelocity.set(vec[0] / 2);
-    } else {
-      api.angularVelocity.set(0);
-    }
+    movementHandler();
   });
 
   return (
