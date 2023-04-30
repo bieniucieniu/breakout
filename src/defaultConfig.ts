@@ -7,9 +7,10 @@ const defaultConfig = {
     camera: {
       position: {
         default: [0, 0, 80] as [number, number, number],
-        "700": [0, -10, 80] as [number, number, number],
-        "500": [0, -35, 100] as [number, number, number],
+        "750": [0, 0, 100] as [number, number, number],
+        "500": [0, 0, 140] as [number, number, number],
       },
+      fov: 60,
     },
     border: {
       tickness: 2,

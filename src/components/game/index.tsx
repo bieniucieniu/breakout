@@ -18,12 +18,18 @@ export default ({ className }: { className?: string }) => {
   return (
     <Canvas
       className={className}
-      camera={{ position: config.camera.position.default }}
+      camera={{
+        position: config.camera.position.default,
+        fov: config.camera.fov,
+        near: 0.1,
+        far: 1000,
+      }}
     >
       <Physics
         normalIndex={2}
         stepSize={1 / config.tickRate}
         gravity={config.gravity}
+        tolerance={0.0001}
         isPaused={paused || !windowFocused}
       >
         <Scene />

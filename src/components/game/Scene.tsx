@@ -39,7 +39,7 @@ export const Scene = () => {
     if (width < 500) {
       camera.position.set(...config.camera.position["500"]);
     } else if (width < 700) {
-      camera.position.set(...config.camera.position["700"]);
+      camera.position.set(...config.camera.position["750"]);
     } else {
       camera.position.set(...config.camera.position["default"]);
     }
