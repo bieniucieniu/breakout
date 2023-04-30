@@ -17,10 +17,6 @@ const Brick = ({
   color?: Color;
   name?: string;
 }) => {
-  const { bricks, setBricks } = useStorage((stage) => ({
-    bricks: stage.bricks,
-    setBricks: stage.setBricks,
-  }));
   const brickHit = useStorage((state) => state.brickHit);
 
   const [ref] = useBox(() => ({
