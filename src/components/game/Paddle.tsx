@@ -86,36 +86,37 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
       api.angle.set(paddle.maxAngle);
     } else if (angleRef.current < -paddle.maxAngle) {
       api.angle.set(-paddle.maxAngle);
-    } else {
-      if (paddleControllsRef.current.left && paddleControllsRef.current.right) {
-        api.angularVelocity.set(0);
-      } else if (paddleControllsRef.current.left) {
-        api.angularVelocity.set(paddle.angularSpeed);
-      } else if (paddleControllsRef.current.right) {
-        api.angularVelocity.set(-paddle.angularSpeed);
-      } else {
-        api.angularVelocity.set(0);
-      }
     }
+    // else {
+    //   if (paddleControllsRef.current.left && paddleControllsRef.current.right) {
+    //     api.angularVelocity.set(0);
+    //   } else if (paddleControllsRef.current.left) {
+    //     api.angularVelocity.set(paddle.angularSpeed);
+    //   } else if (paddleControllsRef.current.right) {
+    //     api.angularVelocity.set(-paddle.angularSpeed);
+    //   } else {
+    //     api.angularVelocity.set(0);
+    //   }
+    // }
 
     //movement
-    // if (paddleControllsRef.current.left && paddleControllsRef.current.right) {
-    //   //hold both keys
-    //   api.velocity.set(0, 0);
-    //   api.angularVelocity.set(0);
-    // } else if (paddleControllsRef.current.left) {
-    //   //left
-    //   api.velocity.set(-paddle.speed, 0);
-    //   api.angularVelocity.set(paddle.angularSpeed);
-    // } else if (paddleControllsRef.current.right) {
-    //   //right
-    //   api.velocity.set(paddle.speed, 0);
-    //   api.angularVelocity.set(-paddle.angularSpeed);
-    // } else {
-    //   //none
-    //   api.velocity.set(0, 0);
-    //   api.angularVelocity.set(0);
-    // }
+    if (paddleControllsRef.current.left && paddleControllsRef.current.right) {
+      //hold both keys
+      api.velocity.set(0, 0);
+      api.angularVelocity.set(0);
+    } else if (paddleControllsRef.current.left) {
+      //left
+      api.velocity.set(-paddle.speed, 0);
+      api.angularVelocity.set(paddle.angularSpeed);
+    } else if (paddleControllsRef.current.right) {
+      //right
+      api.velocity.set(paddle.speed, 0);
+      api.angularVelocity.set(-paddle.angularSpeed);
+    } else {
+      //none
+      api.velocity.set(0, 0);
+      api.angularVelocity.set(0);
+    }
   });
 
   return (
