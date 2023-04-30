@@ -1,4 +1,4 @@
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useBox } from "@react-three/p2";
 import { useEffect, useRef } from "react";
 import { useStorage } from "../../storage";
@@ -74,49 +74,37 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
       );
     }
 
-    if (positionRef.current[1] > boardArgs[1] / 2 - paddle.args[1] / 2) {
-      api.position.set(
-        positionRef.current[0],
-        boardArgs[1] / 2 - paddle.args[1] / 2
-      );
+    // if (positionRef.current[1] > boardArgs[1] / 2 - paddle.args[1] / 2) {
+    //   api.position.set(
+    //     positionRef.current[0],
+    //     boardArgs[1] / 2 - paddle.args[1] / 2
+    //   );
+    // }
+    if (positionRef.current[1] > -10) {
+      api.position.set(positionRef.current[0], -10);
     }
+  });
 
-    // angle
-    if (angleRef.current > paddle.maxAngle) {
-      api.angle.set(paddle.maxAngle);
-    } else if (angleRef.current < -paddle.maxAngle) {
-      api.angle.set(-paddle.maxAngle);
-    }
-    // else {
-    //   if (paddleControllsRef.current.left && paddleControllsRef.current.right) {
-    //     api.angularVelocity.set(0);
-    //   } else if (paddleControllsRef.current.left) {
-    //     api.angularVelocity.set(paddle.angularSpeed);
-    //   } else if (paddleControllsRef.current.right) {
-    //     api.angularVelocity.set(-paddle.angularSpeed);
+  const { viewport } = useThree();
+
+  useFrame(({ mouse }) => {
+    const vec = [
+      (mouse.x * viewport.width) / 2 - positionRef.current[0],
+      (mouse.y * viewport.height) / 2 - positionRef.current[1],
+    ] as [number, number];
+    api.velocity.set(vec[0] * 10, vec[1] * 10);
+
+    // if (angleRef.current > paddle.maxAngle) {
+    //   api.angle.set(paddle.maxAngle);
+    // } else if (angleRef.current < -paddle.maxAngle) {
+    //   api.angle.set(-paddle.maxAngle);
+    // } else {
+    //   if (vec[0] > 1) {
+    //     api.angularVelocity.set(vec[0] / (2 * Math.PI));
     //   } else {
     //     api.angularVelocity.set(0);
     //   }
     // }
-
-    //movement
-    if (paddleControllsRef.current.left && paddleControllsRef.current.right) {
-      //hold both keys
-      api.velocity.set(0, 0);
-      api.angularVelocity.set(0);
-    } else if (paddleControllsRef.current.left) {
-      //left
-      api.velocity.set(-paddle.speed, 0);
-      api.angularVelocity.set(paddle.angularSpeed);
-    } else if (paddleControllsRef.current.right) {
-      //right
-      api.velocity.set(paddle.speed, 0);
-      api.angularVelocity.set(-paddle.angularSpeed);
-    } else {
-      //none
-      api.velocity.set(0, 0);
-      api.angularVelocity.set(0);
-    }
   });
 
   return (
