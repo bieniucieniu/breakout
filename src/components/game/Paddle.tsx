@@ -94,17 +94,19 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
     ] as [number, number];
     api.velocity.set(vec[0] * 10, vec[1] * 10);
 
-    // if (angleRef.current > paddle.maxAngle) {
-    //   api.angle.set(paddle.maxAngle);
-    // } else if (angleRef.current < -paddle.maxAngle) {
-    //   api.angle.set(-paddle.maxAngle);
-    // } else {
-    //   if (vec[0] > 1) {
-    //     api.angularVelocity.set(vec[0] / (2 * Math.PI));
-    //   } else {
-    //     api.angularVelocity.set(0);
-    //   }
-    // }
+    angleRef.current += vec[0] * 0.1;
+
+    if (angleRef.current > paddle.maxAngle) {
+      api.angle.set(paddle.maxAngle);
+    }
+    if (angleRef.current < -paddle.maxAngle) {
+      api.angle.set(-paddle.maxAngle);
+    }
+    if (vec[0] > 1 || vec[0] < -1) {
+      api.angularVelocity.set(vec[0] / 2);
+    } else {
+      api.angularVelocity.set(0);
+    }
   });
 
   return (
