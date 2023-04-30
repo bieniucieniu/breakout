@@ -67,6 +67,7 @@ export const Breakout = () => {
           case "KeyW":
           case "ArrowUp":
             setPaddleControlls({ up: true });
+            break;
           case "KeyD":
           case "ArrowRight":
             setPaddleControlls({ right: true });
