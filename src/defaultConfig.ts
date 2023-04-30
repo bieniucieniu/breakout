@@ -1,7 +1,7 @@
 const defaultConfig = {
   game: {
     lives: 3,
-    tickRate: 60,
+    tickRate: 30,
     args: [64, 64] as [number, number],
     gravity: [0, -9.82] as [number, number],
     camera: {
@@ -25,7 +25,11 @@ const defaultConfig = {
       args: [10, 1] as [number, number],
       defaultPosition: [0, -64 / 2] as [number, number],
       defaultaAngle: 0,
-      speed: 60,
+      bounds: {
+        x: [-32 + 10 / 2, 32 - 10 / 2] as [min: number, max: number],
+        y: [-32 + 1 / 2, -10 - 1 / 2] as [min: number, max: number],
+      },
+      velocity: 10,
       angularSpeed: 2,
       maxAngle: Math.PI / 12,
       color: "#FF0000",
