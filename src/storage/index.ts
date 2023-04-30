@@ -24,9 +24,16 @@ type Storage = {
   resetGame: () => void;
   paddleControlls: {
     left: boolean;
+    down: boolean;
+    up: boolean;
     right: boolean;
   };
-  setPaddleControlls: (controlls: { left?: boolean; right?: boolean }) => void;
+  setPaddleControlls: (controlls: {
+    left?: boolean;
+    down?: boolean;
+    up?: boolean;
+    right?: boolean;
+  }) => void;
   lastScore: number;
 };
 
@@ -35,7 +42,7 @@ export const useStorage = create<Storage>((set) => ({
   score: 0,
   lives: 3,
   gameStage: "init",
-  paddleControlls: { left: false, right: false },
+  paddleControlls: { left: false, down: false, up: false, right: false },
   bricks: [],
   lastScore: 0,
   config: JSON.parse(JSON.stringify(defaultConfig)),
@@ -78,7 +85,12 @@ export const useStorage = create<Storage>((set) => ({
       score: 0,
       lives: 3,
       gameStage: "init",
-      paddleControlls: { left: false, right: false },
+      paddleControlls: {
+        left: false,
+        down: false,
+        up: false,
+        right: false,
+      },
       bricks: createBricksGrid({
         gridSize: state.config.game.grid.gridSize,
         args: state.config.game.grid.args,
@@ -103,7 +115,12 @@ export const useStorage = create<Storage>((set) => ({
 
         return {
           gameStage: "over",
-          paddleControlls: { left: false, right: false },
+          paddleControlls: {
+            left: false,
+            down: false,
+            up: false,
+            right: false,
+          },
           paused: true,
           lastScore: state.score,
         };
