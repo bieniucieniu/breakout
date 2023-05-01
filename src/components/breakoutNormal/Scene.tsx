@@ -39,12 +39,12 @@ export const Scene = () => {
         <pointLight key={index} {...light} />
       ))}
       <group>
-        <Boarder />
         <Paddle position={config.paddle.defaultPosition} />
+        {/* <Boarder />
         <BricksGrid bricks={bricks} />
         {gameStage === "playing" && (
           <Ball position={config.ball.defaultPosition} />
-        )}
+        )} */}
       </group>
     </>
   );
