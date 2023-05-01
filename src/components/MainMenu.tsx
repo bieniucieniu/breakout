@@ -6,8 +6,11 @@ import { mainMenu } from "./styles/mainMenu.css";
 export const MainMenu = () => {
   return (
     <div className={mainMenu}>
-      <Link href="/breakout" className={title}>
+      <Link href="/breakoutNormal" className={title}>
         game
+      </Link>
+      <Link href="/breakout" className={title}>
+        game w gravity
       </Link>
       <Link href="/scoreboard" className={title}>
         scoreboard

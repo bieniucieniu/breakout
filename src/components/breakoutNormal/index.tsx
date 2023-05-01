@@ -1,7 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { useState } from "react";
 import { useStorage } from "../../storage";
-import { useWindowFocus } from "../../functions/useWindowFocus";
 import { Scene } from "./Scene";
 
 export default ({ className }: { className?: string }) => {

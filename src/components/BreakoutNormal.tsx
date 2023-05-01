@@ -1,4 +1,4 @@
-import Game from "./breakoutG";
+import Game from "./breakoutNormal";
 import { GameNavigation } from "./GameNavigation";
 import { breakout, game } from "./styles/breakout.css";
 import { useStorage } from "../storage";
@@ -10,20 +10,7 @@ import type { KeyboardEvent, TouchEvent } from "react";
 import { gameControllsHints } from "./styles/gameControllsHints.css";
 import { Keys } from "./Display";
 
-const GameControllsHints = () => {
-  return (
-    <div className={gameControllsHints}>
-      <div>
-        <Keys keys={["space", "esc"]} /> to pause
-      </div>
-      <div>
-        <Keys keys={["<-", "A", "D", "->"]} /> movement
-      </div>
-    </div>
-  );
-};
-
-export const BreakoutG = () => {
+export const BreakoutNormal = () => {
   const gameStage = useStorage((state) => state.gameStage);
   const paused = useStorage((state) => state.paused);
   const { resetGame, startGame, switchPaused, setPaddleControlls, setupGame } =
