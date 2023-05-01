@@ -14,22 +14,21 @@ export default ({ className }: { className?: string }) => {
     () => setWindowFocused(true),
     () => setWindowFocused(false)
   );
-
   return (
     <Canvas
       className={className}
       camera={{
         position: config.camera.position.default,
         fov: config.camera.fov,
-        near: 0.1,
-        far: 1000,
+        near: 70,
+        far: 150,
       }}
     >
       <Physics
         normalIndex={2}
         stepSize={1 / config.tickRate}
         gravity={config.gravity}
-        tolerance={0.0001}
+        tolerance={0.000976562}
         isPaused={paused || !windowFocused}
       >
         <Scene />
