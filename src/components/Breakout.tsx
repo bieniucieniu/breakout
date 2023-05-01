@@ -152,7 +152,6 @@ export const Breakout = () => {
         }[gameStage]
       }
       <GameNavigation />
-      <GameControllsHints />
       <Game className={game} />
     </div>
   );

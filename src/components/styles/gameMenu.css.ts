@@ -18,8 +18,7 @@ export const invisible = style({
 export const mainMenu = style([
   center,
   {
-    display: "grid",
-    gridTemplateColumns: "repeat(3, minmax(15rem, 1fr))",
+    display: "flex",
     gap: "20rem",
     justifyContent: "center",
     alignItems: "center",

@@ -6,21 +6,11 @@ export const StartMenu = () => {
   return (
     <div className={menuBG}>
       <div className={mainMenu}>
-        <div>
-          press
-          <Keys keys={["A", "<-"]} />
-          to move left
-        </div>
         <h1 className={title}>
           Press
           <Keys keys={["Space", "tap screen"]} />
           to start
         </h1>
-        <div>
-          press
-          <Keys keys={["D", "->"]} />
-          to move right
-        </div>
       </div>
     </div>
   );
