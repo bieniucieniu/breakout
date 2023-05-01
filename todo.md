@@ -1,7 +1,8 @@
 - [ ] database
   - [x] pushing data
   - [ ] scoreboard page
-    - [ ] scoreboard
+    - [x] scoreboard
+    - [ ] sb styling
   - [ ] user profile
     - [ ] login with discord
     - [ ] login with #???
@@ -9,8 +10,19 @@
   - [ ] difficult levels (1 / 2 / 3)
   - [ ] update global config :p
 - [ ] update css path/structure/etc
-- [ ] paddle movent in 2d
+- [x] paddle movent in 2d
 - [ ] cleanup classNames prop -> React.HTMLProps<HTMLDivElement>
-- [ ] controlls hints 
+- [x] controlls hints 
 	- [x]  keyboard
-	- [ ]  touch
+	- [x]  touch
+- [ ] normal breakout
+	- [ ] ball
+		- [ ] move
+		- [ ] collison
+		- [ ] paddle angle
+	- [ ] paddle 
+		- [ ] controlls
+		- [ ] collison w ball
+	- [ ] brick
+	- [ ] border
+	- [ ] collison 
