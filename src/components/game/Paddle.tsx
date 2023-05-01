@@ -4,10 +4,9 @@ import { useEffect, useRef } from "react";
 import { useStorage } from "../../storage";
 
 export const Paddle = ({ position }: { position: [number, number] }) => {
-  const { paddle, materials, boardArgs } = useStorage((state) => ({
+  const { paddle, materials } = useStorage((state) => ({
     paddle: state.config.game.paddle,
     materials: state.config.game.materials,
-    boardArgs: state.config.game.args,
   }));
   const gameStage = useStorage((state) => state.gameStage);
 
@@ -79,54 +78,91 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
   //   }
   // });
 
-  const vec = useRef([0, 0] as [number, number]);
+  const vector = useRef([0, 0] as [number, number]);
 
-  const posHandler = () => {
-    if (positionRef.current[0] < paddle.bounds.x[0]) {
+  const posHandler = (vec: [number, number]) => {
+    if (positionRef.current[0] <= paddle.bounds.x[0]) {
       api.position.set(paddle.bounds.x[0], positionRef.current[1]);
 
-      if (vec.current[0] < 0) vec.current[0] = 0;
-    } else if (positionRef.current[0] > paddle.bounds.x[1]) {
+      if (vector.current[0] < 0) vector.current[0] = 0;
+    } else if (positionRef.current[0] >= paddle.bounds.x[1]) {
       api.position.set(paddle.bounds.x[1], positionRef.current[1]);
 
-      if (vec.current[0] > 0) vec.current[0] = 0;
+      if (vector.current[0] > 0) vector.current[0] = 0;
     }
 
-    if (positionRef.current[1] < paddle.bounds.y[0]) {
+    if (positionRef.current[1] <= paddle.bounds.y[0]) {
       api.position.set(paddle.bounds.y[0], positionRef.current[0]);
 
-      if (vec.current[1] < 0) vec.current[1] = 0;
-    } else if (positionRef.current[1] > paddle.bounds.y[1]) {
+      if (vector.current[1] < 0) vector.current[1] = 0;
+    } else if (positionRef.current[1] >= paddle.bounds.y[1]) {
       api.position.set(positionRef.current[0], paddle.bounds.y[1]);
 
-      if (vec.current[1] > 0) vec.current[1] = 0;
+      if (vector.current[1] > 0) vector.current[1] = 0;
     }
 
-    api.velocity.set(vec.current[0] * 10, vec.current[1] * 10);
+    api.velocity.set(vector.current[0] * 10, vector.current[1] * 10);
   };
 
-  const angleHandler = () => {
+  const angleHandler = (vec: [number, number]) => {
     if (angleRef.current > 0) {
       if (angleRef.current > paddle.maxAngle) {
         api.angularVelocity.set(0);
         api.angle.set(paddle.maxAngle);
       } else {
-        api.angularVelocity.set(vec.current[0] / 2);
+        api.angularVelocity.set(vector.current[0] / 2);
       }
     } else {
       if (angleRef.current < -paddle.maxAngle) {
         api.angularVelocity.set(0);
         api.angle.set(-paddle.maxAngle);
       } else {
-        api.angularVelocity.set(-vec.current[0] / 2);
+        api.angularVelocity.set(-vector.current[0] / 2);
       }
     }
   };
 
   const movementHandler = () => {
-    if (vec.current[0] > 1 || vec.current[0] < -1) {
-      posHandler();
-      angleHandler();
+    if (vector.current[0] > 1 || vector.current[0] < -1) {
+      // posHandler([...vector.current]);
+      // angleHandler([...vector.current]);
+      if (positionRef.current[0] <= paddle.bounds.x[0]) {
+        api.position.set(paddle.bounds.x[0], positionRef.current[1]);
+
+        if (vector.current[0] < 0) vector.current[0] = 0;
+      } else if (positionRef.current[0] >= paddle.bounds.x[1]) {
+        api.position.set(paddle.bounds.x[1], positionRef.current[1]);
+
+        if (vector.current[0] > 0) vector.current[0] = 0;
+      }
+
+      if (positionRef.current[1] <= paddle.bounds.y[0]) {
+        api.position.set(paddle.bounds.y[0], positionRef.current[0]);
+
+        if (vector.current[1] < 0) vector.current[1] = 0;
+      } else if (positionRef.current[1] >= paddle.bounds.y[1]) {
+        api.position.set(positionRef.current[0], paddle.bounds.y[1]);
+
+        if (vector.current[1] > 0) vector.current[1] = 0;
+      }
+      api.velocity.set(vector.current[0] * 10, vector.current[1] * 10);
+
+      ////angle////angle////
+      if (vector.current[0] > 0) {
+        if (angleRef.current >= paddle.maxAngle) {
+          api.angularVelocity.set(0);
+          api.angle.set(paddle.maxAngle);
+        } else {
+          api.angularVelocity.set(vector.current[0] / 2);
+        }
+      } else {
+        if (angleRef.current <= -paddle.maxAngle) {
+          api.angularVelocity.set(0);
+          api.angle.set(-paddle.maxAngle);
+        } else {
+          api.angularVelocity.set(vector.current[0] / 2);
+        }
+      }
     } else {
       api.velocity.set(0, 0);
       api.angularVelocity.set(0);
@@ -136,7 +172,7 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
   const { viewport } = useThree();
 
   useFrame(({ mouse }) => {
-    vec.current = [
+    vector.current = [
       (mouse.x * viewport.width) / 2 - positionRef.current[0],
       (mouse.y * viewport.height) / 2 - positionRef.current[1],
     ] as [number, number];
