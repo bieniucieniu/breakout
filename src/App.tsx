@@ -1,6 +1,6 @@
 import "./index.css";
 import { Route, Switch } from "wouter";
-import { Breakout } from "./components/Breakout";
+import { Breakout } from "./components/BreakoutG";
 import { MainMenu } from "./components/MainMenu";
 import { Scoreboard } from "./components/Scoreboard";
 import { centeredTitle } from "./components/styles/basicStyles.css";

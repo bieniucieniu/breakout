@@ -1,4 +1,4 @@
-import Game from "./game";
+import Game from "./breakoutG";
 import { GameNavigation } from "./GameNavigation";
 import { breakout, game } from "./styles/breakout.css";
 import { useStorage } from "../storage";
