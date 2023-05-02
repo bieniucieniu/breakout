@@ -18,19 +18,26 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
   const ref = useRef<THREE.Mesh>(null!);
 
   const { viewport } = useThree();
-  const vector = useRef([0, 0] as [number, number]);
+  const vector = useRef([0, 0, 0] as [number, number, number]);
   useFrame(({ mouse }) => {
     vector.current = [
       (mouse.x * viewport.width) / 2 - ref.current.position.x,
       (mouse.y * viewport.height) / 2 - ref.current.position.y,
-    ] as [number, number];
+      0,
+    ];
+    ref.current.position.x += vector.current[0] * 0.1;
+    ref.current.position.y += vector.current[1] * 0.1;
+    ref.current.rotateZ(vector.current[0] * 0.01);
+    if (ref.current.rotation.z > paddle.maxAngle)
+      ref.current.rotation.z = paddle.maxAngle;
+    if (ref.current.rotation.z < -paddle.maxAngle)
+      ref.current.rotation.z = -paddle.maxAngle;
   });
 
   return (
-    //@ts-expect-error
-    <mesh ref={ref} position={position}>
+    <mesh ref={ref} position={[...paddle.defaultPosition, 0]}>
       <boxGeometry args={paddle.args} />
-      <meshToonMaterial color={paddle.color} />
+      <meshToonMaterial color={"red"} />
     </mesh>
   );
 };
