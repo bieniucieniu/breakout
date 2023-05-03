@@ -1,5 +1,4 @@
 import { useStorage } from "../../storage";
-import { KinematicBox } from "./KinenaticBox";
 
 export const Boarder = () => {
   const { boardArgs, border, materials } = useStorage((state) => ({
@@ -11,28 +10,28 @@ export const Boarder = () => {
 
   return (
     <>
-      <KinematicBox
-        args={[border.tickness, boardArgs[1], border.depth]}
-        position={[-(boardArgs[0] + border.tickness) / 2, 0]}
-        color={border.color}
-        material={materials.default}
-      />
-      <KinematicBox
-        args={[
-          boardArgs[0] + border.tickness * 2,
-          border.tickness,
-          border.depth,
-        ]}
-        position={[0, (boardArgs[1] + border.tickness) / 2]}
-        color={border.color}
-        material={materials.default}
-      />
-      <KinematicBox
-        args={[border.tickness, boardArgs[1], border.depth]}
-        position={[(boardArgs[0] + border.tickness) / 2, 0]}
-        color={border.color}
-        material={materials.default}
-      />
+      <mesh position={[-(boardArgs[0] + border.tickness) / 2, 0, 0]}>
+        <boxBufferGeometry
+          args={[border.tickness, boardArgs[1], border.depth]}
+        />
+        <meshStandardMaterial color={border.color} />
+      </mesh>
+      <mesh position={[0, (boardArgs[1] + border.tickness) / 2, 0]}>
+        <boxBufferGeometry
+          args={[
+            boardArgs[0] + border.tickness * 2,
+            border.tickness,
+            border.depth,
+          ]}
+        />
+        <meshStandardMaterial color={border.color} />
+      </mesh>
+      <mesh position={[(boardArgs[0] + border.tickness) / 2, 0, 0]}>
+        <boxBufferGeometry
+          args={[border.tickness, boardArgs[1], border.depth]}
+        />
+        <meshStandardMaterial color={border.color} />
+      </mesh>
     </>
   );
 };
