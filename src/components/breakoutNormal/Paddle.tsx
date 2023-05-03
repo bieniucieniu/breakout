@@ -27,11 +27,6 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
     ];
     ref.current.position.x += vector.current[0] * 0.1;
     ref.current.position.y += vector.current[1] * 0.1;
-    ref.current.rotateZ(vector.current[0] * 0.01);
-    if (ref.current.rotation.z > paddle.maxAngle)
-      ref.current.rotation.z = paddle.maxAngle;
-    if (ref.current.rotation.z < -paddle.maxAngle)
-      ref.current.rotation.z = -paddle.maxAngle;
   });
 
   return (
