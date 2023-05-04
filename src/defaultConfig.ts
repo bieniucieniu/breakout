@@ -29,9 +29,14 @@ const defaultConfig = {
         x: [-32 + 10 / 2, 32 - 10 / 2] as [min: number, max: number],
         y: [-32 + 1 / 2, -10 - 1 / 2] as [min: number, max: number],
       },
-      acceleration: 10,
       maxSpeed: {
-        x: 2,
+        x: 0.4,
+        y: 0.4,
+      },
+
+      acceleration: 10,
+      maxSpeedG: {
+        x: 5,
         y: 5,
       },
       angularSpeed: 2,
@@ -43,6 +48,8 @@ const defaultConfig = {
       defaultPosition: [0, -1] as [number, number],
       defaultVelocity: [0, 0] as [number, number],
       color: "#FFFFFF",
+      speed: 0.4,
+      minVerticalSpeed: 0.2,
     },
     brick: {
       args: [6, 3] as [number, number],
