@@ -49,7 +49,6 @@ const defaultConfig = {
       defaultVelocity: [0, 0] as [number, number],
       color: "#FFFFFF",
       speed: 0.4,
-      minVerticalSpeed: 0.2,
     },
     brick: {
       args: [6, 3] as [number, number],
