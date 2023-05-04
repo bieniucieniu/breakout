@@ -2,7 +2,11 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { useStorage } from "../../storage";
 
-export const Paddle = ({ position }: { position: [number, number] }) => {
+export const Paddle = ({
+  positionRef,
+}: {
+  positionRef: React.MutableRefObject<THREE.Vector3>;
+}) => {
   const { paddle } = useStorage((state) => ({
     paddle: state.config.game.paddle,
   }));
@@ -19,14 +23,18 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
 
   const { viewport } = useThree();
   const vector = useRef([0, 0, 0] as [number, number, number]);
+  const maxSpeed = [paddle.maxSpeed.x / 10, paddle.maxSpeed.y / 10];
   useFrame(({ mouse }) => {
     vector.current = [
-      (mouse.x * viewport.width) / 2 - ref.current.position.x,
-      (mouse.y * viewport.height) / 2 - ref.current.position.y,
+      ((mouse.x * viewport.width) / 2 - ref.current.position.x) * maxSpeed[0],
+      ((mouse.y * viewport.height) / 2 - ref.current.position.y) * maxSpeed[1],
       0,
     ];
-    ref.current.position.x += vector.current[0] * 0.1;
-    ref.current.position.y += vector.current[1] * 0.1;
+
+    ref.current.position.x += vector.current[0];
+    ref.current.position.y += vector.current[1];
+
+    positionRef.current = ref.current.position;
   });
 
   return (

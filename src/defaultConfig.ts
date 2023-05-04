@@ -30,7 +30,10 @@ const defaultConfig = {
         y: [-32 + 1 / 2, -10 - 1 / 2] as [min: number, max: number],
       },
       acceleration: 10,
-      maxSpeed: 5,
+      maxSpeed: {
+        x: 2,
+        y: 5,
+      },
       angularSpeed: 2,
       maxAngle: Math.PI / 12,
       color: "#FF0000",

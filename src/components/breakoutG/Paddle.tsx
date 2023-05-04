@@ -107,14 +107,12 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
       (mouse.y * viewport.height) / 2 - positionRef.current[1],
     ] as [number, number];
     // api.velocity.set(vec.current[0] * 10, vec.current[1] * 10);
-    if (vector.current[0] > paddle.maxSpeed)
-      vector.current[0] = paddle.maxSpeed;
+    const maxSpeed = [paddle.maxSpeed.x, paddle.maxSpeed.y];
+    if (vector.current[0] > maxSpeed[0]) vector.current[0] = maxSpeed[0];
     if (vector.current[0] < -paddle.maxSpeed)
       vector.current[0] = -paddle.maxSpeed;
-    if (vector.current[1] > paddle.maxSpeed)
-      vector.current[1] = paddle.maxSpeed;
-    if (vector.current[1] < -paddle.maxSpeed)
-      vector.current[1] = -paddle.maxSpeed;
+    if (vector.current[1] > maxSpeed[1]) vector.current[1] = maxSpeed[1];
+    if (vector.current[1] < -maxSpeed[1]) vector.current[1] = -maxSpeed[1];
     movementHandler();
   });
 
