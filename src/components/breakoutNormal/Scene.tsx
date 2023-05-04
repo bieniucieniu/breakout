@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useStorage } from "../../storage";
 import { Ball } from "./Ball";
 import { BricksGrid } from "./Bricks";
 import { Boarder } from "./Boarder";
 import { Paddle } from "./Paddle";
 import { useThree } from "@react-three/fiber";
+import { Vector3 } from "three";
 
 export const Scene = () => {
   const { config } = useStorage((state) => ({
@@ -32,6 +33,8 @@ export const Scene = () => {
     return () => window.removeEventListener("resize", handleCameraPosition);
   }, []);
 
+  const paddlePosition = useRef(new Vector3());
+
   return (
     <>
       {/* <OrbitControls /> */}
@@ -39,10 +42,13 @@ export const Scene = () => {
         <pointLight key={index} {...light} />
       ))}
       <group>
-        <Paddle position={config.paddle.defaultPosition} />
+        <Paddle positionRef={paddlePosition} />
         <Boarder />
         <BricksGrid bricks={bricks} />
-        <Ball position={config.ball.defaultPosition} />
+        <Ball
+          position={config.ball.defaultPosition}
+          paddlePositionRef={paddlePosition}
+        />
       </group>
     </>
   );
