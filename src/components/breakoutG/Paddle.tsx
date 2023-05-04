@@ -101,13 +101,14 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
 
   const { viewport } = useThree();
 
+  const maxSpeed = [paddle.maxSpeedG.x, paddle.maxSpeedG.y];
+
   useFrame(({ mouse }) => {
     vector.current = [
       (mouse.x * viewport.width) / 2 - positionRef.current[0],
       (mouse.y * viewport.height) / 2 - positionRef.current[1],
     ] as [number, number];
     // api.velocity.set(vec.current[0] * 10, vec.current[1] * 10);
-    const maxSpeed = [paddle.maxSpeed.x, paddle.maxSpeed.y];
     if (vector.current[0] > maxSpeed[0]) vector.current[0] = maxSpeed[0];
     if (vector.current[0] < -paddle.maxSpeed)
       vector.current[0] = -paddle.maxSpeed;
