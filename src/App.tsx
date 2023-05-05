@@ -10,7 +10,7 @@ export const App = () => {
   return (
     <Switch>
       <Route path="/" component={MainMenu} />
-      <Route path="/breakout" component={BreakoutGravity} />
+      <Route path="/breakoutGravity" component={BreakoutGravity} />
       <Route path="/breakoutNormal" component={BreakoutNormal} />
       <Route path="/scoreboard" component={Scoreboard} />
       <Route>
