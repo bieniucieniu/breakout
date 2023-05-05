@@ -16,13 +16,16 @@
 	- [x]  keyboard
 	- [x]  touch
 - [ ] normal breakout
-	- [ ] ball
-		- [ ] move
-		- [ ] collison
-		- [ ] paddle angle
+	- [x] ball
+		- [x] move
+		- [x] collison
+		- [x] paddle angle
 	- [ ] paddle 
-		- [ ] controlls
-		- [ ] collison w ball
-	- [ ] brick
-	- [ ] border
-	- [ ] collison 
+		- [x] controlls
+		- [x] collison w ball
+		- [ ] pause
+	- [x] brick
+	- [x] border
+	- [x] collison 
+	- [ ] fix brick edge case y axis
+		- [ ] add ball radius 😝 
