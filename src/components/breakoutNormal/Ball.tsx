@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useStorage } from "../../storage";
 import { useFrame } from "@react-three/fiber";
 import { Vector2 } from "three";
@@ -17,10 +17,32 @@ export const Ball = ({
   const bricks = useStorage((state) => state.bricks);
   const brickHit = useStorage((state) => state.brickHit);
   const removeLife = useStorage((state) => state.removeLife);
+  const gameStage = useStorage((state) => state.gameStage);
+  const paused = useStorage((state) => state.paused);
   const ref = useRef<THREE.Mesh>(null!);
-  const vector = useRef(
-    new Vector2(ball.speed * Math.sqrt(2), ball.speed * Math.sqrt(2))
-  );
+  const vector = useRef(new Vector2(0));
+  const vecTemp = useRef(new Vector2(0));
+
+  useEffect(() => {
+    if (gameStage === "init") vector.current.set(0, 0);
+    else if (gameStage === "playing")
+      vector.current.set(ball.speed * Math.sqrt(2), ball.speed * Math.sqrt(2));
+    else if (gameStage === "over") vector.current.set(0, 0);
+  }, [gameStage]);
+
+  useEffect(() => {
+    if (paused) {
+      if (vecTemp.current.x === 0 && vecTemp.current.y === 0) {
+        vecTemp.current.copy(vector.current);
+        vector.current.set(0, 0);
+      }
+    } else {
+      if (vector.current.x === 0 && vector.current.y === 0) {
+        vector.current.copy(vecTemp.current);
+        vecTemp.current.set(0, 0);
+      }
+    }
+  }, [paused]);
 
   const paddlePosition = paddlePositionRef.current;
   const paddleSize = config.game.paddle.args;
@@ -51,9 +73,8 @@ export const Ball = ({
       ballPosition.y < -config.game.args[1] / 2 + ballRadius &&
       vector.current.y < 0
     ) {
-      vector.current.y *= -1;
-      // removeLife();
-      // ref.current.position.set(...ball.defaultPosition, 0);
+      removeLife();
+      ref.current.position.set(...ball.defaultPosition, 0);
     }
 
     if (
