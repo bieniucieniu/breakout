@@ -2,6 +2,7 @@ import { useStorage } from "../storage";
 import { gameNav } from "./styles/gameNavigation.css";
 import { Button } from "./Buttons";
 import { Display } from "./Display";
+import { Timer } from "./Timer";
 
 export const GameNavigation = () => {
   const paused = useStorage((state) => state.paused);
@@ -14,27 +15,12 @@ export const GameNavigation = () => {
     resetGame: state.resetGame,
   }));
 
-  const easyMode = () => {
-    setConfig({
-      game: {
-        ...config.game,
-        brick: {
-          ...config.game.brick,
-          maxPoints: 1,
-        },
-      },
-    });
-
-    resetGame();
-  };
-
   return (
     <nav className={gameNav}>
       <Button onClick={switchPaused} name={paused ? "start" : "stop"} />
-      <Button onClick={easyMode} name="easymode" />
-
       <Display name="score" value={score} />
       <Display name="lives" value={lives} />
+      <Timer />
     </nav>
   );
 };
