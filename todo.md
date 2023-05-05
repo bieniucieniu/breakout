@@ -12,20 +12,20 @@
 - [ ] update css path/structure/etc
 - [x] paddle movent in 2d
 - [ ] cleanup classNames prop -> React.HTMLProps<HTMLDivElement>
-- [x] controlls hints 
-	- [x]  keyboard
-	- [x]  touch
+- [x] controlls hints
+  - [x] keyboard
+  - [x] touch
 - [ ] normal breakout
-	- [x] ball
-		- [x] move
-		- [x] collison
-		- [x] paddle angle
-	- [ ] paddle 
-		- [x] controlls
-		- [x] collison w ball
-		- [ ] pause
-	- [x] brick
-	- [x] border
-	- [x] collison 
-	- [ ] fix brick edge case y axis
-		- [ ] add ball radius 😝 
+  - [x] ball
+    - [x] move
+    - [x] collison
+    - [x] paddle angle
+  - [ ] paddle
+    - [x] controlls
+    - [x] collison w ball
+    - [ ] pause
+  - [x] brick
+  - [x] border
+  - [x] collison
+  - [x] fix brick edge case y axis
+    - [x] add ball radius 😝
