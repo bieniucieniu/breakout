@@ -23,7 +23,7 @@ const GameControllsHints = () => {
   );
 };
 
-export const BreakoutG = () => {
+export const BreakoutGravity = () => {
   const gameStage = useStorage((state) => state.gameStage);
   const paused = useStorage((state) => state.paused);
   const { resetGame, startGame, switchPaused, setPaddleControlls, setupGame } =
