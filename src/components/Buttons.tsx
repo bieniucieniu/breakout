@@ -1,17 +1,20 @@
 import { useLocation } from "wouter";
 import { button, linkButton } from "./styles/basicComponents.css";
 
+type Button = { name: string } & React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
+
 export const Button = ({
   name,
-  onClick,
   className,
+  ...props
 }: {
   name?: string;
-  onClick?: () => void;
-  className?: string;
-}) => {
+} & Button) => {
   return (
-    <button className={`${button} ${className}`} onClick={onClick}>
+    <button className={`${button} ${className}`} {...props}>
       {name}
     </button>
   );
@@ -19,15 +22,15 @@ export const Button = ({
 
 export const LinkButton = ({
   name,
-  onClick,
   href,
+  onClick,
   className,
+  ...props
 }: {
   name?: string;
   onClick?: () => void;
   href: string;
-  className?: string;
-}) => {
+} & Button) => {
   const [_location, setLocation] = useLocation();
 
   return (
@@ -37,6 +40,7 @@ export const LinkButton = ({
         onClick && onClick();
         setLocation(href);
       }}
+      {...props}
     >
       {name}
     </button>
