@@ -45,6 +45,7 @@ type Storage = {
     gravity?: number;
   }) => void;
   gameType: "classic" | "time" | "gravity";
+  setGameType: (type: "classic" | "time" | "gravity") => void;
 };
 
 export const useStorage = create<Storage>((set) => ({
@@ -164,4 +165,5 @@ export const useStorage = create<Storage>((set) => ({
         gravity: time ?? state.lastScore.gravity,
       },
     })),
+  setGameType: (type) => set(() => ({ gameType: type })),
 }));
