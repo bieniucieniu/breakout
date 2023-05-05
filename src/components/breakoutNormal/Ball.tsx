@@ -116,6 +116,7 @@ export const Ball = ({
           vector.current.x *= -1;
           vector.current.y *= -1;
         }
+        brickHit(brick.name);
       }
     }
   });
