@@ -20,7 +20,7 @@ type Storage = {
   setupGame: () => void;
   gameStage: "init" | "playing" | "over";
   startGame: () => void;
-  endGame: (lastScore?: number) => void;
+  endGame: (lastScore?: number, push?: boolean) => void;
   resetGame: () => void;
   paddleControlls: {
     left: boolean;
@@ -34,7 +34,17 @@ type Storage = {
     up?: boolean;
     right?: boolean;
   }) => void;
-  lastScore: number;
+  lastScore: {
+    classic: number;
+    time: number;
+    gravity: number;
+  };
+  setLastScore: (prop: {
+    classic?: number;
+    time?: number;
+    gravity?: number;
+  }) => void;
+  gameType: "classic" | "time" | "gravity";
 };
 
 export const useStorage = create<Storage>((set) => ({
@@ -44,8 +54,9 @@ export const useStorage = create<Storage>((set) => ({
   gameStage: "init",
   paddleControlls: { left: false, down: false, up: false, right: false },
   bricks: [],
-  lastScore: 0,
+  lastScore: { classic: 0, time: 0, gravity: 0 },
   config: JSON.parse(JSON.stringify(defaultConfig)),
+  gameType: "classic",
   setPause: (paused) => set(() => ({ paused: paused })),
   switchPaused: () => set((state) => ({ paused: !state.paused })),
   increaseScore: (score) => set((state) => ({ score: state.score + score })),
@@ -107,11 +118,16 @@ export const useStorage = create<Storage>((set) => ({
       return {};
     });
   },
-  endGame: (lastScore) => {
+  endGame: (lastScore, push = true) => {
     set((state) => {
       if (state.gameStage === "playing") {
-        state.score !== state.lastScore &&
+        if (push) {
           addScore({ score: lastScore ?? state.score });
+        }
+
+        state.setLastScore({
+          [state.gameType]: lastScore ?? state.score,
+        });
 
         return {
           gameStage: "over",
@@ -122,7 +138,6 @@ export const useStorage = create<Storage>((set) => ({
             right: false,
           },
           paused: true,
-          lastScore: state.score,
         };
       }
       return {};
@@ -140,5 +155,13 @@ export const useStorage = create<Storage>((set) => ({
   setPaddleControlls: (controlls) =>
     set((state) => ({
       paddleControlls: { ...state.paddleControlls, ...controlls },
+    })),
+  setLastScore: ({ classic, gravity, time }) =>
+    set((state) => ({
+      lastScore: {
+        classic: classic ?? state.lastScore.classic,
+        time: gravity ?? state.lastScore.time,
+        gravity: time ?? state.lastScore.gravity,
+      },
     })),
 }));
