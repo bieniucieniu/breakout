@@ -45,7 +45,7 @@ const defaultConfig = {
     },
     ball: {
       radius: 1,
-      defaultPosition: [0, -1] as [number, number],
+      defaultPosition: [0, -10] as [number, number],
       defaultVelocity: [0, 0] as [number, number],
       color: "#FFFFFF",
       speed: 0.4,
