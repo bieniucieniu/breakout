@@ -2,7 +2,7 @@ import Game from "./breakoutGravity";
 import { GameNavigation } from "./GameNavigation";
 import { breakout, game } from "./styles/breakout.css";
 import { useStorage } from "../storage";
-import { PauseMenu } from "./PauseMenu";
+import { PauseMenu } from "./GamePauseMenu";
 import { StartMenu } from "./StartMenu";
 import { GameOverMenu } from "./GameOverMenu";
 import { useEffect, useRef } from "react";
