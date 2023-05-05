@@ -107,16 +107,14 @@ export const Ball = ({
           ballPosition.x < brick.position[0] + brickSize[0] / 2
         ) {
           vector.current.y *= -1;
+          brickHit(brick.name);
         } else if (
           ballPosition.y > brick.position[1] - brickSize[1] / 2 &&
           ballPosition.y < brick.position[1] + brickSize[1] / 2
         ) {
           vector.current.x *= -1;
-        } else {
-          vector.current.x *= -1;
-          vector.current.y *= -1;
+          brickHit(brick.name);
         }
-        brickHit(brick.name);
       }
     }
   });
