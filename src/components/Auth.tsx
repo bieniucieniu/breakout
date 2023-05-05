@@ -11,7 +11,7 @@ import {
   googleButton,
 } from "./styles/auth.css";
 import type { AuthError } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type ButtonProps = React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
