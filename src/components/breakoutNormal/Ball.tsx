@@ -73,6 +73,7 @@ export const Ball = ({
       ballPosition.y < -config.game.args[1] / 2 + ballRadius &&
       vector.current.y < 0
     ) {
+      vector.current.y *= -1;
       removeLife();
       ref.current.position.set(...ball.defaultPosition, 0);
     }
@@ -94,26 +95,26 @@ export const Ball = ({
     ref.current.position.y += vector.current.y;
 
     for (const brick of bricks) {
+      if (brick.points <= 0) continue;
       if (
         ballPosition.x > brick.position[0] - brickSize[0] / 2 - ballRadius &&
         ballPosition.x < brick.position[0] + brickSize[0] / 2 + ballRadius &&
         ballPosition.y > brick.position[1] - brickSize[1] / 2 - ballRadius &&
         ballPosition.y < brick.position[1] + brickSize[1] / 2 + ballRadius
       ) {
-        if (brick.points <= 0) continue;
         if (
-          (ballPosition.y - brick.position[0] >= 0 && vector.current.y < 0) ||
-          (ballPosition.y - brick.position[0] < 0 && vector.current.y > 0)
+          ballPosition.x > brick.position[0] - brickSize[0] / 2 &&
+          ballPosition.x < brick.position[0] + brickSize[0] / 2
         ) {
           vector.current.y *= -1;
-          brickHit(brick.name);
-        }
-        if (
-          (ballPosition.x - brick.position[0] >= 0 && vector.current.x < 0) ||
-          (ballPosition.x - brick.position[0] < 0 && vector.current.x > 0)
+        } else if (
+          ballPosition.y > brick.position[1] - brickSize[1] / 2 &&
+          ballPosition.y < brick.position[1] + brickSize[1] / 2
         ) {
           vector.current.x *= -1;
-          brickHit(brick.name);
+        } else {
+          vector.current.x *= -1;
+          vector.current.y *= -1;
         }
       }
     }
