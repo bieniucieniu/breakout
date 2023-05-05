@@ -15,15 +15,16 @@
 - [x] controlls hints
   - [x] keyboard
   - [x] touch
-- [ ] normal breakout
+- [x] normal breakout
   - [x] ball
     - [x] move
     - [x] collison
     - [x] paddle angle
-  - [ ] paddle
+	- [x] pause
+  - [x] paddle
     - [x] controlls
     - [x] collison w ball
-    - [ ] pause
+    - [x] pause
   - [x] brick
   - [x] border
   - [x] collison
