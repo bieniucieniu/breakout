@@ -28,26 +28,30 @@ export const Ball = ({
     if (
       ballPosition.x > config.game.args[0] / 2 - ballRadius &&
       vector.current.x > 0
-    )
+    ) {
       vector.current.x *= -1;
+    }
 
     if (
       ballPosition.x < -config.game.args[0] / 2 + ballRadius &&
       vector.current.x < 0
-    )
+    ) {
       vector.current.x *= -1;
+    }
 
     if (
       ballPosition.y > config.game.args[1] / 2 - ballRadius &&
       vector.current.y > 0
-    )
+    ) {
       vector.current.y *= -1;
+    }
 
     if (
       ballPosition.y < -config.game.args[1] / 2 + ballRadius &&
       vector.current.y < 0
-    )
+    ) {
       removeLife();
+    }
 
     if (
       ballPosition.x > paddlePosition.x - paddleSize[0] / 2 - ballRadius &&
