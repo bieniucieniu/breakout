@@ -28,7 +28,10 @@ export const MainMenu = () => {
         />
       </div>
       <span className={spaceItemsVer}>
-        <Link href="/breakoutNormal" className={title}>
+        <Link
+          href={gameType === "gravity" ? "/breakoutGravity" : "/breakoutNormal"}
+          className={title}
+        >
           play
         </Link>
         <span style={{ fontSize: "1.5rem", opacity: ".5" }}>{gameType}</span>
