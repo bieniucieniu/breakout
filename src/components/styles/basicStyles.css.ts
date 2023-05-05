@@ -15,6 +15,8 @@ export const title = style({
   fontSize: "2rem",
   lineHeight: "3.5rem",
   textAlign: "center",
+  justifyContent: "center",
+  alignItems: "center",
   padding: "auto",
   color: "white",
   "@media": {
@@ -40,3 +42,11 @@ export const subTitle = style({
 });
 
 export const centeredTitle = style([title, center]);
+
+export const spaceItemsVer = style({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: "1rem",
+});
