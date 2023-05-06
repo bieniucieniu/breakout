@@ -18,9 +18,9 @@ export const GameNavigation = () => {
   return (
     <nav className={gameNav}>
       <Button onClick={switchPaused} name={paused ? "start" : "stop"} />
-      <Display name="score" value={score} />
-      <Display name="lives" value={lives} />
-      <Display name={msToTime(time)} />
+      <Display text="score" value={score} />
+      <Display text="lives" value={lives} />
+      <Display text={msToTime(time)} />
     </nav>
   );
 };

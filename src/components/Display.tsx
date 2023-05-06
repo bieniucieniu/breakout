@@ -1,7 +1,7 @@
 import { display } from "./styles/basicComponents.css";
 
 type ValueProps = {
-  name?: string;
+  text?: string;
   value?: number;
   children?: never;
 };
@@ -9,14 +9,14 @@ type ValueProps = {
 type ChildrenProps = {
   children?: React.ReactNode;
   value?: never;
-  name?: never;
+  text?: never;
 };
 
 type DisplayProps = (ValueProps | ChildrenProps) &
   React.HTMLProps<HTMLDivElement>;
 
 export const Display = ({
-  name,
+  text,
   value,
   children,
   className,
@@ -32,7 +32,7 @@ export const Display = ({
 
   return (
     <div className={`${display} ${className}`} {...props}>
-      {name}
+      {text}
       {value !== undefined && " : "}
       {value}
     </div>
