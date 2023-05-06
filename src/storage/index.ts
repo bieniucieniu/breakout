@@ -20,7 +20,7 @@ type Storage = {
   setupGame: () => void;
   gameStage: "init" | "playing" | "over";
   startGame: () => void;
-  endGame: (lastScore?: number, push?: boolean) => void;
+  endGame: (props?: { score?: number; push?: boolean }) => void;
   resetGame: () => void;
   paddleControlls: {
     left: boolean;
@@ -72,7 +72,7 @@ export const useStorage = create<Storage>((set) => ({
       const n = newBricks.reduce((sum, b) => sum + b.points, 0);
 
       if (n <= 0) {
-        state.endGame(state.score + (score || 1));
+        state.endGame({ score: state.score + (score || 1) });
       }
 
       return { bricks: newBricks, score: state.score + (score || 1) };
@@ -119,15 +119,15 @@ export const useStorage = create<Storage>((set) => ({
       return {};
     });
   },
-  endGame: (lastScore, push = true) => {
+  endGame: (props) => {
     set((state) => {
       if (state.gameStage === "playing") {
-        if (push) {
-          addScore({ score: lastScore ?? state.score });
+        if (props?.push) {
+          addScore({ score: props?.score ?? state.score });
         }
 
         state.setLastScore({
-          [state.gameType]: lastScore ?? state.score,
+          [state.gameType]: props?.score ?? state.score,
         });
 
         return {

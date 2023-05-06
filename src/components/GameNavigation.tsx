@@ -8,11 +8,12 @@ export const GameNavigation = () => {
   const paused = useStorage((state) => state.paused);
   const timerConfig = useStorage((state) => state.config.game.timer);
   const switchPaused = useStorage((state) => state.switchPaused);
+  const endGame = useStorage((state) => state.endGame);
   const score = useStorage((state) => state.score);
   const lives = useStorage((state) => state.lives);
   const gameType = useStorage((state) => state.gameType);
 
-  const [time] = useTimer(timerConfig[gameType]);
+  const [time] = useTimer({ ...timerConfig[gameType], onEnd: () => endGame });
 
   return (
     <nav className={gameNav}>
