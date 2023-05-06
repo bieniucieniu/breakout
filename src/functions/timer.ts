@@ -5,6 +5,8 @@ type Props = {
   start?: number;
   end?: number;
   delta?: number;
+  onStart?: () => void;
+  onEnd?: () => void;
   onTime?: [onMs: number, func: (current: number, delta: number) => void][];
   onTick?: (current: number, delta: number) => void;
 };
@@ -18,7 +20,7 @@ export const msToTime = (milliseconds: number) => {
   const mins = (s - secs) / 60;
 
   return mins !== 0
-    ? `${negative ? "-" : ""}${mins}:${secs}`
+    ? `${negative ? "-" : ""}${mins} : ${secs}`
     : `${negative ? "-" : ""}${secs}.${ms}`;
 };
 
@@ -26,9 +28,11 @@ export const useTimer = ({
   isRunning = true,
   start = 0,
   end = Infinity,
-  onTime = [],
   delta = 10,
+  onStart,
+  onEnd,
   onTick,
+  onTime = [],
 }: Props) => {
   const [time, setTime] = useState(start);
   const timeRef = useRef(start);
@@ -42,12 +46,16 @@ export const useTimer = ({
 
   useEffect(() => {
     let interval: NodeJS.Timer;
+    onStart && onStart();
+
     if (isRunning) {
       interval = setInterval(() => {
         timeRef.current += delta;
         setTime(timeRef.current);
-        if (delta > 0 ? timeRef.current >= end : timeRef.current <= end)
+        if (delta > 0 ? timeRef.current >= end : timeRef.current <= end) {
           clearInterval(interval);
+          onEnd && onEnd();
+        }
 
         onTick && onTick(timeRef.current, delta);
 
@@ -63,5 +71,5 @@ export const useTimer = ({
     };
   }, [isRunning, start, end, delta, onTick, onTime]);
 
-  return [time, reset] as const;
+  return [time, reset] as [time: number, reset: () => number];
 };
