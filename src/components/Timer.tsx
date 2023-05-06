@@ -1,14 +1,6 @@
-import { useEffect, useRef, useState } from "react";
 import { display } from "./styles/basicComponents.css";
-
-type props = {
-  isRunning?: boolean;
-  start?: number;
-  end?: number;
-  delta?: number;
-  onTime?: [onMs: number, func: (current: number, delta: number) => void][];
-  onTick?: (current: number, delta: number) => void;
-} & React.HTMLProps<HTMLDivElement>;
+import { useTimer, msToTime } from "../functions/timer";
+type Props = Parameters<typeof useTimer>[0] & React.HTMLProps<HTMLDivElement>;
 
 export const Timer = ({
   isRunning = true,
@@ -18,31 +10,19 @@ export const Timer = ({
   delta = 10,
   onTick,
   className,
-}: props) => {
-  const [time, setTime] = useState(start);
-  const timeRef = useRef(start);
-
-  useEffect(() => {
-    let interval: NodeJS.Timer;
-    if (isRunning) {
-      interval = setInterval(() => {
-        timeRef.current += delta;
-        setTime(timeRef.current);
-        if (timeRef.current >= end) clearInterval(interval);
-
-        onTick && onTick(timeRef.current, delta);
-
-        onTime.forEach(([onMs, func]) => {
-          if (timeRef.current === onMs) {
-            func(timeRef.current, delta);
-          }
-        });
-      }, delta);
-    }
-    return () => {
-      clearInterval(interval);
-    };
-  }, [isRunning, start, end, delta, onTick, onTime]);
-
-  return <div className={`${display} ${className}`}>{time}</div>;
+  ...props
+}: Props) => {
+  const [time, clear] = useTimer({
+    isRunning,
+    start,
+    end,
+    delta,
+    onTime,
+    onTick,
+  });
+  return (
+    <div className={`${display} ${className}`} {...props}>
+      {msToTime(time)}
+    </div>
+  );
 };

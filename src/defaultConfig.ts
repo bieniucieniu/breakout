@@ -100,6 +100,23 @@ const defaultConfig = {
         restitution: 1,
       },
     },
+    timer: {
+      classic: {
+        start: 0,
+        end: Infinity,
+        delta: 10,
+      },
+      time: {
+        start: 300_000,
+        end: 0,
+        delta: 10,
+      },
+      gravity: {
+        start: 0,
+        end: Infinity,
+        delta: 10,
+      },
+    },
   },
 };
 
