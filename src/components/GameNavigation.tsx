@@ -15,7 +15,10 @@ export const GameNavigation = () => {
 
   const [time] = useTimer({
     ...timerConfig[gameType],
-    onEnd: gameType === "time" ? () => endGame({ push: true }) : undefined,
+    onEnd:
+      gameType === "time"
+        ? () => endGame({ push: true, time: time })
+        : undefined,
   });
 
   return (

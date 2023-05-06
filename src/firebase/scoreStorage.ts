@@ -17,25 +17,25 @@ type Data = {
   uid: string;
   score: number;
   timestamp: Timestamp;
+  gameType: "classic" | "time" | "gravity";
+  ms: number;
 };
 
-const collectionsRefs = {
-  classic: collection(db, "scores-classic") as CollectionReference<Data>,
-  time: collection(db, "scores-time") as CollectionReference<Data>,
-  gravity: collection(db, "scores-gravity") as CollectionReference<Data>,
-};
+export const addScore = ({ score, ms }: { score: number; ms?: number }) => {
+  if (!auth.currentUser || score <= 0) return;
 
-export const addScore = ({ score }: { score: number }) => {
-  if (!auth.currentUser) return;
-  if (score <= 0) return;
   const gameType = useStorage.getState().gameType;
-  const ref = collectionsRefs[gameType];
+  if (!ms || gameType !== "time") return;
+
+  const ref = collection(db, `scores-${gameType}`) as CollectionReference<Data>;
 
   addDoc(ref, {
-    name: auth.currentUser.displayName,
+    name: auth.currentUser.displayName || "Anonymous",
+    gameType,
     uid: auth.currentUser.uid,
     score,
     timestamp: serverTimestamp(),
+    ms: ms || 0,
   });
 };
 
@@ -51,7 +51,7 @@ export const useScores = ({
   const gameType = useStorage((state) => state.gameType);
 
   const q = query(
-    collectionsRefs[gameType],
+    collection(db, `scores-${gameType}`) as CollectionReference<Data>,
     orderBy(orderedBy || "score", direction || "desc"),
     limit(limitedTo || 10)
   );

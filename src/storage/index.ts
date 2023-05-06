@@ -20,7 +20,7 @@ type Storage = {
   setupGame: () => void;
   gameStage: "init" | "playing" | "over";
   startGame: () => void;
-  endGame: (props?: { score?: number; push?: boolean }) => void;
+  endGame: (props?: { score?: number; push?: boolean; time?: number }) => void;
   resetGame: () => void;
   paddleControlls: {
     left: boolean;
@@ -123,7 +123,10 @@ export const useStorage = create<Storage>((set) => ({
     set((state) => {
       if (state.gameStage === "playing") {
         if (props?.push) {
-          addScore({ score: props?.score ?? state.score });
+          addScore({
+            score: props?.score ?? state.score,
+            ms: props?.time ?? 0,
+          });
         }
 
         state.setLastScore({
