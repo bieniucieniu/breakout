@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { display } from "./styles/basicComponents.css";
-import { useStorage } from "../storage";
 
 type props = {
   isRunning?: boolean;
@@ -16,24 +15,26 @@ export const Timer = ({
   start = 0,
   end = Infinity,
   onTime = [],
-  delta = 1000,
+  delta = 10,
   onTick,
   className,
 }: props) => {
   const [time, setTime] = useState(start);
+  const timeRef = useRef(start);
 
   useEffect(() => {
     let interval: NodeJS.Timer;
     if (isRunning) {
       interval = setInterval(() => {
-        setTime(time + delta);
-        if (time >= end) clearInterval(interval);
+        timeRef.current += delta;
+        setTime(timeRef.current);
+        if (timeRef.current >= end) clearInterval(interval);
 
-        onTick && onTick(time, delta);
+        onTick && onTick(timeRef.current, delta);
 
         onTime.forEach(([onMs, func]) => {
-          if (time === onMs) {
-            func(time, delta);
+          if (timeRef.current === onMs) {
+            func(timeRef.current, delta);
           }
         });
       }, delta);
@@ -41,7 +42,7 @@ export const Timer = ({
     return () => {
       clearInterval(interval);
     };
-  }, [time, isRunning]);
+  }, [isRunning, start, end, delta, onTick, onTime]);
 
   return <div className={`${display} ${className}`}>{time}</div>;
 };
