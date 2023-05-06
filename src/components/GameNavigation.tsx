@@ -2,7 +2,7 @@ import { useStorage } from "../storage";
 import { gameNav } from "./styles/gameNavigation.css";
 import { Button } from "./Buttons";
 import { Display } from "./Display";
-import { Timer } from "./Timer";
+import { useTimer, msToTime } from "../functions/timer";
 
 export const GameNavigation = () => {
   const paused = useStorage((state) => state.paused);
@@ -12,12 +12,14 @@ export const GameNavigation = () => {
   const lives = useStorage((state) => state.lives);
   const gameType = useStorage((state) => state.gameType);
 
+  const [time] = useTimer(timerConfig[gameType]);
+
   return (
     <nav className={gameNav}>
       <Button onClick={switchPaused} name={paused ? "start" : "stop"} />
       <Display name="score" value={score} />
       <Display name="lives" value={lives} />
-      <Timer {...timerConfig[gameType]} />
+      <Display name={msToTime(time)} />
     </nav>
   );
 };
