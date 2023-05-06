@@ -13,7 +13,10 @@ export const GameNavigation = () => {
   const lives = useStorage((state) => state.lives);
   const gameType = useStorage((state) => state.gameType);
 
-  const [time] = useTimer({ ...timerConfig[gameType], onEnd: () => endGame });
+  const [time] = useTimer({
+    ...timerConfig[gameType],
+    onEnd: gameType === "time" ? () => endGame({ push: true }) : undefined,
+  });
 
   return (
     <nav className={gameNav}>
