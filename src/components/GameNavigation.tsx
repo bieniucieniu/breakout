@@ -9,11 +9,6 @@ export const GameNavigation = () => {
   const switchPaused = useStorage((state) => state.switchPaused);
   const score = useStorage((state) => state.score);
   const lives = useStorage((state) => state.lives);
-  const config = useStorage((state) => state.config);
-  const setConfig = useStorage((state) => state.setConfig);
-  const { resetGame } = useStorage((state) => ({
-    resetGame: state.resetGame,
-  }));
 
   return (
     <nav className={gameNav}>

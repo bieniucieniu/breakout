@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { display } from "./styles/basicComponents.css";
 import { useStorage } from "../storage";
 
 type props = {
+  isRunning?: boolean;
   start?: number;
   end?: number;
   delta?: number;
@@ -11,31 +12,36 @@ type props = {
 } & React.HTMLProps<HTMLDivElement>;
 
 export const Timer = ({
+  isRunning = true,
   start = 0,
   end = Infinity,
   onTime = [],
-  delta = 1,
+  delta = 1000,
   onTick,
   className,
 }: props) => {
-  const paused = useStorage((state) => state.paused);
   const [time, setTime] = useState(start);
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (paused) return;
-      if (time >= end) clearInterval(interval);
+    let interval: NodeJS.Timer;
+    if (isRunning) {
+      interval = setInterval(() => {
+        setTime(time + delta);
+        if (time >= end) clearInterval(interval);
 
-      onTick && onTick(time, delta);
+        onTick && onTick(time, delta);
 
-      onTime.forEach(([onMs, func]) => {
-        if (time === onMs) {
-          func(time, delta);
-        }
-      });
-      setTime(time + delta);
-    }, delta);
+        onTime.forEach(([onMs, func]) => {
+          if (time === onMs) {
+            func(time, delta);
+          }
+        });
+      }, delta);
+    }
+    return () => {
+      clearInterval(interval);
+    };
+  }, [time, isRunning]);
 
-    return () => clearInterval(interval);
-  }, []);
   return <div className={`${display} ${className}`}>{time}</div>;
 };
