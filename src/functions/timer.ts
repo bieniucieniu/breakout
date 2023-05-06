@@ -29,7 +29,6 @@ export const useTimer = ({
   start = 0,
   end = Infinity,
   delta = 10,
-  onStart,
   onEnd,
   onTick,
   onTime = [],
@@ -46,7 +45,6 @@ export const useTimer = ({
 
   useEffect(() => {
     let interval: NodeJS.Timer;
-    onStart && onStart();
 
     if (isRunning) {
       interval = setInterval(() => {
