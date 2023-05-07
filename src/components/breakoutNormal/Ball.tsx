@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useStorage } from "../../storage";
 import { useFrame } from "@react-three/fiber";
 import { Vector2 } from "three";
@@ -28,8 +28,14 @@ export const Ball = ({
   const ballRadius = ball.radius;
   const brickSize = config.game.brick.args;
 
-  const minVerSpeed = Math.sin(ball.minAngle) * ball.speed;
-  const minHorSpeed = Math.cos(ball.minAngle) * ball.speed;
+  const minVerSpeed = useMemo(
+    () => Math.sin(ball.minAngle) * ball.speed,
+    [config]
+  );
+  const minHorSpeed = useMemo(
+    () => Math.cos(ball.minAngle) * ball.speed,
+    [config]
+  );
 
   useFrame((_, delta) => {
     const ballPosition = ref.current.position;
