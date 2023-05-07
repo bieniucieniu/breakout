@@ -21,6 +21,10 @@ export const Ball = ({
   const vector = useRef(
     new Vector2(ball.speed / Math.sqrt(2), ball.speed / Math.sqrt(2))
   );
+  const { paused, gameStage } = useStorage((state) => ({
+    paused: state.paused,
+    gameStage: state.gameStage,
+  }));
 
   const paddlePosition = paddlePositionRef.current;
   const paddleSize = config.game.paddle.args;
@@ -37,6 +41,7 @@ export const Ball = ({
   );
 
   useFrame((_, delta) => {
+    if (paused || gameStage !== "playing") return;
     const ballPosition = ref.current.position;
 
     if (
