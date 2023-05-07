@@ -26,7 +26,6 @@ export const MainMenu = () => {
           onClick={() => setGameType("gravity")}
           disabled={gameType === "gravity"}
         />
-        <p className={subText}>only time mode will be pushed to db</p>
       </div>
       <span className={spaceItemsVer}>
         <Link
