@@ -3,6 +3,7 @@ import { Auth } from "./Auth";
 import { scoreboard, scoreboardNav } from "./styles/scoreboard.css";
 import { useScores } from "../firebase/scoreStorage";
 import { Display } from "./Display";
+import { GameTypeSelector } from "./GameTypeSelector";
 
 export const Scoreboard = () => {
   const [data, loading, error] = useScores();
@@ -15,6 +16,7 @@ export const Scoreboard = () => {
           <Auth />
         </Display>
       </nav>
+      <GameTypeSelector />
       <div className={scoreboard}>
         <h2>Leaderboard</h2>
         {loading && <p>Loading...</p>}
