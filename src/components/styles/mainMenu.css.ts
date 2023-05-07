@@ -6,6 +6,5 @@ export const mainMenu = style([
   {
     display: "grid",
     gridTemplateRows: "repeat(5, minmax(0, 1fr))",
-    gap: "1rem",
   },
 ]);

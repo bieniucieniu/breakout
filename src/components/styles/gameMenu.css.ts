@@ -19,7 +19,7 @@ export const mainMenu = style([
   center,
   {
     display: "flex",
-    gap: "20rem",
+    gap: "10rem",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -63,7 +63,6 @@ export const menuButtons = style({
 globalStyle(`${menuButtons} > button`, {
   width: "auto",
   maxWidth: "70vh",
-  height: "3rem",
   fontSize: "1.5rem",
 });
 

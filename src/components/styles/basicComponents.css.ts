@@ -6,6 +6,7 @@ export const container = style({
   backgroundColor: "#ffffff",
   height: "100%",
   width: "100%",
+  textAlign: "center",
 });
 
 export const button = style([
@@ -13,7 +14,9 @@ export const button = style([
   {
     color: "black",
     border: "none",
+    lineHeight: "2.5",
     zIndex: 1,
+    width: "auto",
     transition:
       "transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out, background-color 0.1s ease-in-out",
 
