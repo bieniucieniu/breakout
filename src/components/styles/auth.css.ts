@@ -27,6 +27,7 @@ export const authButton = style({
   color: "black",
   fontWeight: "500",
   fontFamily: "Roboto Mono, sans-serif",
+  transition: "transform .2s ease-in-out",
   ":hover": {
     transform: "scale(102%)",
   },
