@@ -26,7 +26,7 @@ export const Ball = ({
   useEffect(() => {
     if (gameStage === "init") vector.current.set(0, 0);
     else if (gameStage === "playing")
-      vector.current.set(ball.speed * Math.sqrt(2), ball.speed * Math.sqrt(2));
+      vector.current.set(ball.speed / Math.sqrt(2), ball.speed / Math.sqrt(2));
     else if (gameStage === "over") vector.current.set(0, 0);
   }, [gameStage]);
 
@@ -89,8 +89,15 @@ export const Ball = ({
 
       vector.current.y *= -1;
       vector.current.rotateAround(new Vector2(0, 0), -r);
+      if (vector.current.y < ball.minVerticalSpeed) {
+        vector.current.y = ball.minVerticalSpeed;
+        vector.current.x = Math.sqrt(
+          (ball.speed ^ 2) - (ball.minVerticalSpeed ^ 2)
+        );
+        if (vector.current.length() < ball.speed)
+          vector.current.setLength(ball.speed);
+      }
     }
-    console.log(vector.current.length());
     ref.current.position.x += vector.current.x;
     ref.current.position.y += vector.current.y;
 
@@ -108,12 +115,14 @@ export const Ball = ({
         ) {
           vector.current.y *= -1;
           brickHit(brick.name);
+          break;
         } else if (
           ballPosition.y > brick.position[1] - brickSize[1] / 2 &&
           ballPosition.y < brick.position[1] + brickSize[1] / 2
         ) {
           vector.current.x *= -1;
           brickHit(brick.name);
+          break;
         }
       }
     }
