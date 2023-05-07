@@ -91,9 +91,10 @@ export const Ball = ({
       vector.current.rotateAround(new Vector2(0, 0), -r);
       if (vector.current.y < ball.minVerticalSpeed) {
         vector.current.y = ball.minVerticalSpeed;
-        vector.current.x = Math.sqrt(
-          (ball.speed ^ 2) - (ball.minVerticalSpeed ^ 2)
-        );
+        vector.current.x =
+          vector.current.x > 0
+            ? Math.sqrt((ball.speed ^ 2) - (ball.minVerticalSpeed ^ 2))
+            : -Math.sqrt((ball.speed ^ 2) - (ball.minVerticalSpeed ^ 2));
         if (vector.current.length() < ball.speed)
           vector.current.setLength(ball.speed);
       }
