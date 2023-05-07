@@ -125,13 +125,12 @@ export const useStorage = create<Storage>((set) => ({
   endGame: (props) => {
     set((state) => {
       if (state.gameStage === "playing") {
-        if (props?.push) {
+        if (props?.push !== undefined && props.push) {
           addScore({
             gameType: state.gameType,
             score: props?.score ?? state.score,
-            ms: props?.time ?? state.lastTime,
+            ms: props?.time,
           });
-          state.setLastTime(null);
         }
 
         state.setLastScore({

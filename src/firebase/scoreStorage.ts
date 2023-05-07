@@ -18,7 +18,7 @@ type Data = {
   score: number;
   timestamp: Timestamp;
   gameType: "classic" | "time" | "gravity";
-  ms: number | null;
+  ms?: number | null;
 };
 
 export const addScore = ({
@@ -40,7 +40,7 @@ export const addScore = ({
     uid: auth.currentUser.uid,
     score,
     timestamp: serverTimestamp(),
-    ms: ms,
+    ms,
   });
 };
 
