@@ -1,6 +1,8 @@
 import { Canvas } from "@react-three/fiber";
 import { useStorage } from "../../storage";
 import { Scene } from "./Scene";
+import { BakeShadows, Preload } from "@react-three/drei";
+import { Suspense } from "react";
 
 export default ({ className }: { className?: string }) => {
   const config = useStorage((state) => state.config.game);
@@ -15,7 +17,11 @@ export default ({ className }: { className?: string }) => {
         far: 150,
       }}
     >
-      <Scene />
+      <Suspense fallback={null}>
+        <Preload all />
+        <BakeShadows />
+        <Scene />
+      </Suspense>
     </Canvas>
   );
 };

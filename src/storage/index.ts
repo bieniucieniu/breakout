@@ -46,8 +46,8 @@ type Storage = {
   }) => void;
   gameType: "classic" | "time" | "gravity";
   setGameType: (type: "classic" | "time" | "gravity") => void;
-  lastTime: number;
-  setLastTime: (time: number) => void;
+  lastTime: number | null;
+  setLastTime: (time: number | null) => void;
 };
 
 export const useStorage = create<Storage>((set) => ({
@@ -127,9 +127,11 @@ export const useStorage = create<Storage>((set) => ({
       if (state.gameStage === "playing") {
         if (props?.push) {
           addScore({
+            gameType: state.gameType,
             score: props?.score ?? state.score,
-            ms: props?.time ?? 0,
+            ms: props?.time ?? state.lastTime,
           });
+          state.setLastTime(null);
         }
 
         state.setLastScore({

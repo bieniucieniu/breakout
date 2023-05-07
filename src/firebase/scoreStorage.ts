@@ -18,14 +18,19 @@ type Data = {
   score: number;
   timestamp: Timestamp;
   gameType: "classic" | "time" | "gravity";
-  ms: number;
+  ms: number | null;
 };
 
-export const addScore = ({ score, ms }: { score: number; ms?: number }) => {
+export const addScore = ({
+  score,
+  gameType,
+  ms,
+}: {
+  score: number;
+  gameType: "classic" | "time" | "gravity";
+  ms?: number | null;
+}) => {
   if (!auth.currentUser || score <= 0) return;
-
-  const gameType = useStorage.getState().gameType;
-  if (!ms || gameType !== "time") return;
 
   const ref = collection(db, `scores-${gameType}`) as CollectionReference<Data>;
 
@@ -35,7 +40,7 @@ export const addScore = ({ score, ms }: { score: number; ms?: number }) => {
     uid: auth.currentUser.uid,
     score,
     timestamp: serverTimestamp(),
-    ms: ms || 0,
+    ms: ms,
   });
 };
 
