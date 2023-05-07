@@ -16,17 +16,19 @@
   - [x] keyboard
   - [x] touch
 - [x] normal breakout
-  - [x] ball
-    - [x] move
-    - [x] collison
-    - [x] paddle angle
-	- [x] pause
-  - [x] paddle
-    - [x] controlls
-    - [x] collison w ball
-    - [x] pause
-  - [x] brick
-  - [x] border
-  - [x] collison
-  - [x] fix brick edge case y axis
-    - [x] add ball radius 😝
+	- [x] ball
+		- [x] move
+		- [x] collison
+		- [x] paddle angle
+		- [x] pause
+	- [x] paddle
+		- [x] controlls
+		- [x] collison w ball
+		- [x] pause
+		- [x] brick
+		- [x] border
+		- [x] collison
+	- [x] fix brick edge case y axis
+		- [x] add ball radius 😝
+
+- [ ] improve onTime triger in timer
