@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useStorage } from "../../storage";
 import { useFrame } from "@react-three/fiber";
 import { Vector2 } from "three";
+import { min } from "date-fns";
 
 export const Ball = ({
   position,
@@ -26,6 +27,9 @@ export const Ball = ({
   const paddleSize = config.game.paddle.args;
   const ballRadius = ball.radius;
   const brickSize = config.game.brick.args;
+
+  const minVerSpeed = Math.sin(ball.minAngle) * ball.speed;
+  const minHorSpeed = Math.cos(ball.minAngle) * ball.speed;
 
   useFrame((_, delta) => {
     const ballPosition = ref.current.position;
@@ -67,18 +71,21 @@ export const Ball = ({
 
       vector.current.y *= -1;
       vector.current.rotateAround(new Vector2(0, 0), -r);
-      if (vector.current.y < ball.minVerticalSpeed) {
-        vector.current.y = ball.minVerticalSpeed;
-        vector.current.x =
-          vector.current.x > 0
-            ? Math.sqrt((ball.speed ^ 2) - (ball.minVerticalSpeed ^ 2))
-            : -Math.sqrt((ball.speed ^ 2) - (ball.minVerticalSpeed ^ 2));
+
+      if (vector.current.y > -minVerSpeed) {
+        vector.current.y = -minVerSpeed;
+        vector.current.x = vector.current.x > 0 ? minHorSpeed : -minHorSpeed;
+
+        if (vector.current.length() < ball.speed)
+          vector.current.setLength(ball.speed);
+      } else if (vector.current.y < -ball.speed) {
+        vector.current.y = -ball.speed;
+        vector.current.x = vector.current.x > 0 ? ball.speed : -ball.speed;
+
         if (vector.current.length() < ball.speed)
           vector.current.setLength(ball.speed);
       }
     }
-    ref.current.position.x += vector.current.x * delta;
-    ref.current.position.y += vector.current.y * delta;
 
     for (const brick of bricks) {
       if (brick.points <= 0) continue;
@@ -105,6 +112,9 @@ export const Ball = ({
         }
       }
     }
+
+    ref.current.position.x += vector.current.x * delta;
+    ref.current.position.y += vector.current.y * delta;
   });
 
   return (
