@@ -11,8 +11,6 @@ export const Paddle = ({
     paddle: state.config.game.paddle,
     args: state.config.game.args,
   }));
-  const gameStage = useStorage((state) => state.gameStage);
-
   const paddleControllsRef = useRef(useStorage.getState().paddleControlls);
   useEffect(() =>
     useStorage.subscribe(

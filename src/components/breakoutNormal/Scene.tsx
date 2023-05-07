@@ -12,7 +12,16 @@ export const Scene = () => {
     config: state.config.game,
   }));
   const bricks = useStorage((state) => state.bricks);
-  const gameStage = useStorage((state) => state.gameStage);
+
+  const { paused, gameStage } = useStorage((state) => ({
+    paused: state.paused,
+    gameStage: state.gameStage,
+  }));
+
+  useThree((state) => {
+    state.frameloop = paused || gameStage !== "playing" ? "demand" : "always";
+  });
+
   const { camera } = useThree();
 
   const handleCameraPosition = (e?: UIEvent) => {
