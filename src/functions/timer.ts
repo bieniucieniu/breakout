@@ -62,7 +62,7 @@ export const useTimer = ({
             func(timeRef.current, delta);
           }
         });
-      }, delta);
+      }, Math.abs(delta));
     }
     return () => {
       clearInterval(interval);
