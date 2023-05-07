@@ -22,18 +22,10 @@ type Storage = {
   startGame: () => void;
   endGame: (props?: { score?: number; push?: boolean; time?: number }) => void;
   resetGame: () => void;
-  paddleControlls: {
-    left: boolean;
-    down: boolean;
-    up: boolean;
-    right: boolean;
-  };
-  setPaddleControlls: (controlls: {
-    left?: boolean;
-    down?: boolean;
-    up?: boolean;
-    right?: boolean;
-  }) => void;
+  ballPosition: [number, number];
+  setBallPosition: (position: [number, number]) => void;
+  paddlePosition: [number, number];
+  setPaddlePosition: (position: [number, number]) => void;
   lastScore: {
     classic: number;
     time: number;
@@ -55,12 +47,13 @@ export const useStorage = create<Storage>((set) => ({
   score: 0,
   lives: 3,
   gameStage: "init",
-  paddleControlls: { left: false, down: false, up: false, right: false },
   bricks: [],
   lastScore: { classic: 0, time: 0, gravity: 0 },
   config: JSON.parse(JSON.stringify(defaultConfig)),
   gameType: "classic",
   lastTime: 0,
+  ballPosition: [...defaultConfig.game.ball.defaultPosition],
+  paddlePosition: [...defaultConfig.game.paddle.defaultPosition],
   setPause: (paused) => set(() => ({ paused: paused })),
   switchPaused: () => set((state) => ({ paused: !state.paused })),
   increaseScore: (score) => set((state) => ({ score: state.score + score })),
@@ -100,12 +93,6 @@ export const useStorage = create<Storage>((set) => ({
       score: 0,
       lives: 3,
       gameStage: "init",
-      paddleControlls: {
-        left: false,
-        down: false,
-        up: false,
-        right: false,
-      },
       bricks: createBricksGrid({
         gridSize: state.config.game.grid.gridSize,
         args: state.config.game.grid.args,
@@ -139,13 +126,9 @@ export const useStorage = create<Storage>((set) => ({
 
         return {
           gameStage: "over",
-          paddleControlls: {
-            left: false,
-            down: false,
-            up: false,
-            right: false,
-          },
           paused: true,
+          ballPosition: [...state.config.game.ball.defaultPosition],
+          paddlePosition: [...state.config.game.paddle.defaultPosition],
         };
       }
       return {};
@@ -160,10 +143,7 @@ export const useStorage = create<Storage>((set) => ({
       return {};
     });
   },
-  setPaddleControlls: (controlls) =>
-    set((state) => ({
-      paddleControlls: { ...state.paddleControlls, ...controlls },
-    })),
+
   setLastScore: ({ classic, gravity, time }) =>
     set((state) => ({
       lastScore: {
@@ -174,4 +154,6 @@ export const useStorage = create<Storage>((set) => ({
     })),
   setGameType: (type) => set(() => ({ gameType: type })),
   setLastTime: (time) => set(() => ({ lastTime: time })),
+  setBallPosition: (position) => set(() => ({ ballPosition: position })),
+  setPaddlePosition: (position) => set(() => ({ paddlePosition: position })),
 }));

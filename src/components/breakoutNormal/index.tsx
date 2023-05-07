@@ -25,7 +25,7 @@ export default ({ className }: { className?: string }) => {
         near: 70,
         far: 150,
       }}
-      frameloop={paused || gameStage !== "playing" ? "demand" : "always"}
+      frameloop={!paused && gameStage === "playing" ? "always" : "demand"}
     >
       <Suspense fallback={<Fallback />}>
         <Preload all />

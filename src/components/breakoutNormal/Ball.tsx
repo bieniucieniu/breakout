@@ -1,8 +1,7 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import { useStorage } from "../../storage";
 import { useFrame } from "@react-three/fiber";
 import { Vector2 } from "three";
-import { min } from "date-fns";
 
 export const Ball = ({
   position,
@@ -106,16 +105,26 @@ export const Ball = ({
           ballPosition.x < brick.position[0] + brickSize[0] / 2
         ) {
           vector.current.y *= -1;
-          brickHit(brick.name);
-          break;
         } else if (
           ballPosition.y > brick.position[1] - brickSize[1] / 2 &&
           ballPosition.y < brick.position[1] + brickSize[1] / 2
         ) {
           vector.current.x *= -1;
-          brickHit(brick.name);
-          break;
+        } else {
+          const v = [
+            brick.position[0] - ballPosition.x,
+            brick.position[1] - ballPosition.y,
+          ];
+          if (
+            v[0] > 0 == vector.current.x > 0 &&
+            v[1] > 0 == vector.current.y > 0
+          ) {
+            vector.current.x *= -1;
+            vector.current.y *= -1;
+          }
         }
+        brickHit(brick.name);
+        break;
       }
     }
 

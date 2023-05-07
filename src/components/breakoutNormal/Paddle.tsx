@@ -4,19 +4,15 @@ import { useStorage } from "../../storage";
 
 export const Paddle = ({
   positionRef,
+  position,
 }: {
   positionRef: React.MutableRefObject<THREE.Vector3>;
+  position: [number, number];
 }) => {
   const { paddle, args } = useStorage((state) => ({
     paddle: state.config.game.paddle,
     args: state.config.game.args,
   }));
-  const paddleControllsRef = useRef(useStorage.getState().paddleControlls);
-  useEffect(() =>
-    useStorage.subscribe(
-      (state) => (paddleControllsRef.current = state.paddleControlls)
-    )
-  );
 
   const ref = useRef<THREE.Mesh>(null!);
 
@@ -52,7 +48,7 @@ export const Paddle = ({
   });
 
   return (
-    <mesh ref={ref} position={[...paddle.defaultPosition, 0]}>
+    <mesh ref={ref} position={[...position, 0]}>
       <boxGeometry args={paddle.args} />
       <meshToonMaterial color={"red"} />
     </mesh>

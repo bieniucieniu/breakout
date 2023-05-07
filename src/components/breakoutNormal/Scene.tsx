@@ -8,19 +8,12 @@ import { useThree } from "@react-three/fiber";
 import { Vector3 } from "three";
 
 export const Scene = () => {
-  const { config } = useStorage((state) => ({
-    config: state.config.game,
-  }));
+  const config = useStorage((state) => state.config.game);
   const bricks = useStorage((state) => state.bricks);
-
-  const { paused, gameStage } = useStorage((state) => ({
-    paused: state.paused,
-    gameStage: state.gameStage,
+  const { ballPosition, paddlePosition } = useStorage((state) => ({
+    ballPosition: state.ballPosition,
+    paddlePosition: state.paddlePosition,
   }));
-
-  useThree((state) => {
-    state.frameloop = paused || gameStage !== "playing" ? "demand" : "always";
-  });
 
   const { camera } = useThree();
 
@@ -42,7 +35,7 @@ export const Scene = () => {
     return () => window.removeEventListener("resize", handleCameraPosition);
   }, []);
 
-  const paddlePosition = useRef(new Vector3());
+  const paddlePositionRef = useRef(new Vector3());
 
   return (
     <>
@@ -51,13 +44,10 @@ export const Scene = () => {
         <pointLight key={index} {...light} />
       ))}
       <group>
-        <Paddle positionRef={paddlePosition} />
+        <Paddle position={paddlePosition} positionRef={paddlePositionRef} />
         <Boarder />
         <BricksGrid bricks={bricks} />
-        <Ball
-          position={config.ball.defaultPosition}
-          paddlePositionRef={paddlePosition}
-        />
+        <Ball position={ballPosition} paddlePositionRef={paddlePositionRef} />
       </group>
     </>
   );
