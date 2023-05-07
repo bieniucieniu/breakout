@@ -19,6 +19,14 @@ export const gameTypeButtons = style({
   gridRow: "span 2",
 });
 
+export const subText = style({
+  fontSize: ".7rem",
+  textAlign: "center",
+  color: "#aaa",
+  fontWeight: 300,
+  gridColumn: "span 3",
+});
+
 globalStyle(`${gameTypeButtons} > button`, {
   fontWeight: 300,
   lineHeight: "2",

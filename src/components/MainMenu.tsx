@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { title, spaceItemsVer } from "./styles/basicStyles.css";
 import { Auth } from "./Auth";
-import { mainMenu, gameTypeButtons } from "./styles/mainMenu.css";
+import { mainMenu, gameTypeButtons, subText } from "./styles/mainMenu.css";
 import { Button } from "./Buttons";
 import { useStorage } from "../storage";
 
@@ -26,6 +26,7 @@ export const MainMenu = () => {
           onClick={() => setGameType("gravity")}
           disabled={gameType === "gravity"}
         />
+        <p className={subText}>only time mode will be pushed to db</p>
       </div>
       <span className={spaceItemsVer}>
         <Link
