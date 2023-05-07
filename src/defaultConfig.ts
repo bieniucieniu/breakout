@@ -30,11 +30,11 @@ const defaultConfig = {
         y: [-32 + 1 / 2, -10 - 1 / 2] as [min: number, max: number],
       },
       maxSpeed: {
-        x: 0.4,
-        y: 0.4,
+        x: 20,
+        y: 20,
       },
 
-      acceleration: 10,
+      acceleration: 50,
       maxSpeedG: {
         x: 5,
         y: 5,
@@ -48,8 +48,8 @@ const defaultConfig = {
       defaultPosition: [0, -10] as [number, number],
       defaultVelocity: [0, 0] as [number, number],
       color: "#FFFFFF",
-      speed: 0.8,
-      minVerticalSpeed: 0.2,
+      speed: 40,
+      minVerticalSpeed: 10,
     },
     brick: {
       args: [6, 3] as [number, number],

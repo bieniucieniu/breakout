@@ -49,7 +49,7 @@ export const Ball = ({
   const ballRadius = ball.radius;
   const brickSize = config.game.brick.args;
 
-  useFrame(() => {
+  useFrame((_, delta) => {
     const ballPosition = ref.current.position;
 
     if (
@@ -98,8 +98,8 @@ export const Ball = ({
           vector.current.setLength(ball.speed);
       }
     }
-    ref.current.position.x += vector.current.x;
-    ref.current.position.y += vector.current.y;
+    ref.current.position.x += vector.current.x * delta;
+    ref.current.position.y += vector.current.y * delta;
 
     for (const brick of bricks) {
       if (brick.points <= 0) continue;
