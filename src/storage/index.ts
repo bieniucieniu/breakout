@@ -46,6 +46,8 @@ type Storage = {
   }) => void;
   gameType: "classic" | "time" | "gravity";
   setGameType: (type: "classic" | "time" | "gravity") => void;
+  lastTime: number;
+  setLastTime: (time: number) => void;
 };
 
 export const useStorage = create<Storage>((set) => ({
@@ -58,6 +60,7 @@ export const useStorage = create<Storage>((set) => ({
   lastScore: { classic: 0, time: 0, gravity: 0 },
   config: JSON.parse(JSON.stringify(defaultConfig)),
   gameType: "classic",
+  lastTime: 0,
   setPause: (paused) => set(() => ({ paused: paused })),
   switchPaused: () => set((state) => ({ paused: !state.paused })),
   increaseScore: (score) => set((state) => ({ score: state.score + score })),
@@ -169,4 +172,5 @@ export const useStorage = create<Storage>((set) => ({
       },
     })),
   setGameType: (type) => set(() => ({ gameType: type })),
+  setLastTime: (time) => set(() => ({ lastTime: time })),
 }));

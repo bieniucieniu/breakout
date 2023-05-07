@@ -3,6 +3,7 @@ import { gameNav } from "./styles/gameNavigation.css";
 import { Button } from "./Buttons";
 import { Display } from "./Display";
 import { useTimer, msToTime } from "../functions/timer";
+import { useEffect } from "react";
 
 export const GameNavigation = () => {
   const paused = useStorage((state) => state.paused);
@@ -12,14 +13,23 @@ export const GameNavigation = () => {
   const score = useStorage((state) => state.score);
   const lives = useStorage((state) => state.lives);
   const gameType = useStorage((state) => state.gameType);
+  const gameStage = useStorage((state) => state.gameStage);
+  const setLastTime = useStorage((state) => state.setLastTime);
 
   const [time] = useTimer({
     ...timerConfig[gameType],
+    isRunning: !paused && gameStage === "playing",
     onEnd:
       gameType === "time"
         ? () => endGame({ push: true, time: time })
         : undefined,
   });
+
+  useEffect(() => {
+    if (gameStage === "over") {
+      setLastTime(time);
+    }
+  }, [gameStage]);
 
   return (
     <nav className={gameNav}>
