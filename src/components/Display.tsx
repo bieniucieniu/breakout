@@ -49,10 +49,10 @@ export const Keys = ({ keys, className, ...props }: Keys) => {
   return (
     <div className={className} {...props}>
       {keys.map((k, i) => (
-        <>
+        <span key={i}>
           {i !== 0 && " / "}
           <span className={key}>{k}</span>
-        </>
+        </span>
       ))}
     </div>
   );
