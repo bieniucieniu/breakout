@@ -18,7 +18,7 @@ export const GameTypeSelector = () => {
         disabled={gameType === "time"}
       />
       <Button
-        name={"greavity"}
+        name={"gravity"}
         onClick={() => setGameType("gravity")}
         disabled={gameType === "gravity"}
       />
