@@ -26,13 +26,6 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
     }
   }, [gameStage]);
 
-  const paddleControllsRef = useRef(useStorage.getState().paddleControlls);
-  useEffect(() =>
-    useStorage.subscribe(
-      (state) => (paddleControllsRef.current = state.paddleControlls)
-    )
-  );
-
   const positionRef = useRef(position);
   const angleRef = useRef(0);
 
