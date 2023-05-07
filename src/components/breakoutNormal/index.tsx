@@ -4,9 +4,17 @@ import { Scene } from "./Scene";
 import { BakeShadows, Preload } from "@react-three/drei";
 import { Suspense } from "react";
 import { Fallback } from "./Fallback";
+import { useWindowFocus } from "../../functions/useWindowFocus";
 
 export default ({ className }: { className?: string }) => {
   const config = useStorage((state) => state.config.game);
+  const { paused, gameStage } = useStorage((state) => ({
+    paused: state.paused,
+    gameStage: state.gameStage,
+  }));
+  const setPause = useStorage((state) => state.setPause);
+
+  useWindowFocus(undefined, () => setPause(true));
 
   return (
     <Canvas
@@ -17,6 +25,7 @@ export default ({ className }: { className?: string }) => {
         near: 70,
         far: 150,
       }}
+      frameloop={paused || gameStage !== "playing" ? "demand" : "always"}
     >
       <Suspense fallback={<Fallback />}>
         <Preload all />
