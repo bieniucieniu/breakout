@@ -4,9 +4,10 @@ import {
   configEditor,
   objectsModule,
   primitivesModule,
-  submitButton,
+  configButtons,
 } from "./styles/configEditor.css";
-import { Button } from "./Buttons";
+import { Button, LinkButton } from "./Buttons";
+import defaultConfig from "../defaultConfig";
 
 type ConfigTypes = String | Number | Boolean | Obj;
 
@@ -82,9 +83,14 @@ const ObjectsModule = ({
     const [open, setOpen] = useState(false);
 
     return (
-      <div className={objectsModule}>
+      <div className={objectsModule} style={{ border: open ? "" : "none" }}>
         <Button name={keyToElement} onClick={() => setOpen(!open)} />
-        <div style={{ height: open ? "" : 0, overflow: open ? "" : "hidden" }}>
+        <div
+          style={{
+            height: open ? "" : 0,
+            overflow: open ? "" : "hidden",
+          }}
+        >
           {keys.map((k) => {
             if (typeof obj[k] === "object") {
               return (
@@ -120,8 +126,13 @@ export const ConfigEditor = () => {
   return (
     <div className={configEditor}>
       <ObjectsModule keyToElement={"game"} parent={ref.current} />
-      <div className={submitButton}>
+      <div className={configButtons}>
+        <LinkButton name={"back"} href={"/"} />
         <Button name={"submit"} onClick={() => setConfig(ref.current)} />
+        <Button
+          name={"reset"}
+          onClick={() => setConfig(JSON.parse(JSON.stringify(defaultConfig)))}
+        />
       </div>
     </div>
   );
