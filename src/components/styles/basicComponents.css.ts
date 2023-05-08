@@ -17,6 +17,7 @@ export const button = style([
     lineHeight: "2.5",
     zIndex: 1,
     width: "auto",
+    userSelect: "none",
     transition:
       "transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out, background-color 0.1s ease-in-out",
 
