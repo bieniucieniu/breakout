@@ -68,6 +68,10 @@ const defaultConfig = {
         "hsl(330, 100%, 50%)",
       ],
       maxPoints: 12,
+      bevel: {
+        thickness: 0.5,
+        size: 0.5,
+      },
     },
     lights: [
       {
