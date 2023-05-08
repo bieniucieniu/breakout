@@ -1,3 +1,5 @@
+#  todo for game breakout 
+
 - [ ] database
   - [x] pushing data
   - [ ] scoreboard page
@@ -6,9 +8,9 @@
   - [ ] user profile
     - [ ] login with discord
     - [ ] login with #???
-- [ ] configuration menu
-  - [ ] difficult levels (1 / 2 / 3)
+- [x] configuration menu
   - [ ] update global config :p
+- [ ] difficult levels (1 / 2 / 3)
 - [ ] update css path/structure/etc
 - [x] paddle movent in 2d
 - [ ] cleanup classNames prop -> React.HTMLProps<HTMLDivElement>
@@ -16,19 +18,19 @@
   - [x] keyboard
   - [x] touch
 - [x] normal breakout
-	- [x] ball
-		- [x] move
-		- [x] collison
-		- [x] paddle angle
-		- [x] pause
-	- [x] paddle
-		- [x] controlls
-		- [x] collison w ball
-		- [x] pause
-		- [x] brick
-		- [x] border
-		- [x] collison
-	- [x] fix brick edge case y axis
-		- [x] add ball radius 😝
-
+  - [x] ball
+    - [x] move
+    - [x] collison
+    - [x] paddle angle
+    - [x] pause
+  - [x] paddle
+    - [x] controlls
+    - [x] collison w ball
+    - [x] pause
+    - [x] brick
+    - [x] border
+    - [x] collison
+  - [x] fix brick edge case y axis
+    - [x] add ball radius 😝
 - [ ] improve onTime triger in timer
+- [ ] add touch controls
