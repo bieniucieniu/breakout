@@ -25,6 +25,16 @@ export const mainMenu = style([
   },
 ]);
 
+export const mainMenuHints = style({
+  display: "flex",
+
+  "@media": {
+    "screen and (max-width: 510px)": {
+      flexDirection: "column",
+    },
+  },
+});
+
 globalStyle(`${mainMenu} > *`, {
   display: "flex",
   justifyContent: "center",

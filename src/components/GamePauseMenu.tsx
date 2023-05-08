@@ -7,7 +7,7 @@ import {
 import { Button, LinkButton } from "./Buttons";
 import { useStorage } from "../storage";
 
-export const PauseMenu = () => {
+export const GamePauseMenu = () => {
   const setPause = useStorage((state) => state.setPause);
   const endGame = useStorage((state) => state.endGame);
   const paused = useStorage((state) => state.paused);

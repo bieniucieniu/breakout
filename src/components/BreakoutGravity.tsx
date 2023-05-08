@@ -2,8 +2,8 @@ import Game from "./breakoutGravity";
 import { GameNavigation } from "./GameNavigation";
 import { breakout, game } from "./styles/breakout.css";
 import { useStorage } from "../storage";
-import { PauseMenu } from "./GamePauseMenu";
-import { StartMenu } from "./StartMenu";
+import { GamePauseMenu } from "./GamePauseMenu";
+import { GameStartMenu } from "./GameStartMenu";
 import { GameOverMenu } from "./GameOverMenu";
 import { useEffect, useRef } from "react";
 import type { KeyboardEvent, TouchEvent } from "react";
@@ -97,8 +97,8 @@ export const BreakoutGravity = () => {
     <div ref={ref} className={breakout} tabIndex={0} {...controlls[gameStage]}>
       {
         {
-          init: <StartMenu />,
-          playing: <PauseMenu />,
+          init: <GameStartMenu />,
+          playing: <GamePauseMenu />,
           over: <GameOverMenu />,
         }[gameStage]
       }

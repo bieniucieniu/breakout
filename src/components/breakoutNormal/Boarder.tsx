@@ -11,13 +11,11 @@ export const Boarder = () => {
   return (
     <>
       <mesh position={[-(boardArgs[0] + border.tickness) / 2, 0, 0]}>
-        <boxBufferGeometry
-          args={[border.tickness, boardArgs[1], border.depth]}
-        />
+        <boxGeometry args={[border.tickness, boardArgs[1], border.depth]} />
         <meshStandardMaterial color={border.color} />
       </mesh>
       <mesh position={[0, (boardArgs[1] + border.tickness) / 2, 0]}>
-        <boxBufferGeometry
+        <boxGeometry
           args={[
             boardArgs[0] + border.tickness * 2,
             border.tickness,
@@ -27,9 +25,7 @@ export const Boarder = () => {
         <meshStandardMaterial color={border.color} />
       </mesh>
       <mesh position={[(boardArgs[0] + border.tickness) / 2, 0, 0]}>
-        <boxBufferGeometry
-          args={[border.tickness, boardArgs[1], border.depth]}
-        />
+        <boxGeometry args={[border.tickness, boardArgs[1], border.depth]} />
         <meshStandardMaterial color={border.color} />
       </mesh>
     </>
