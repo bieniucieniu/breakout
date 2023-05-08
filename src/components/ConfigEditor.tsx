@@ -5,6 +5,8 @@ import {
   objectsModule,
   primitivesModule,
   configButtons,
+  objectOpen,
+  objectClosed,
 } from "./styles/configEditor.css";
 import { Button, LinkButton } from "./Buttons";
 import defaultConfig from "../defaultConfig";
@@ -80,17 +82,12 @@ const ObjectsModule = ({
   if (parent && parent[keyToElement]) {
     const obj = parent[keyToElement] as Obj;
     const keys = Object.keys(parent[keyToElement]);
-    const [open, setOpen] = useState(false);
+    const [closed, setClosed] = useState(true);
 
     return (
-      <div className={objectsModule} style={{ border: open ? "" : "none" }}>
-        <Button name={keyToElement} onClick={() => setOpen(!open)} />
-        <div
-          style={{
-            height: open ? "" : 0,
-            overflow: open ? "" : "hidden",
-          }}
-        >
+      <div className={`${objectsModule}`}>
+        <Button name={keyToElement} onClick={() => setClosed(!closed)} />
+        <div className={closed ? objectClosed : objectOpen}>
           {keys.map((k) => {
             if (typeof obj[k] === "object") {
               return (

@@ -3,17 +3,26 @@ import { globalStyle, style } from "@vanilla-extract/css";
 export const configEditor = style({
   display: "flex",
   flexDirection: "column",
-  gap: "1rem",
   height: "100%",
   width: "100%",
   padding: "1rem",
+  paddingBottom: "5rem",
 });
 
 export const primitivesModule = style({
-  display: "flex",
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
   gap: "1rem",
-  flexDirection: "row",
-  width: "100%",
+  width: "40rem",
+  "@media": {
+    "screen and (max-width: 830px)": {
+      width: "100%",
+    },
+
+    "screen and (max-width: 500px)": {
+      gridTemplateColumns: "1fr",
+    },
+  },
 });
 
 globalStyle(`${primitivesModule} > input`, {
@@ -27,10 +36,25 @@ export const objectsModule = style({
   display: "flex",
   flexDirection: "column",
   gap: "1rem",
-  height: "100%",
-  width: "100%",
-  padding: "1rem",
+  border: "none",
+  marginTop: "0.5rem",
+});
+
+export const objectClosed = style({
+  visibility: "hidden",
+  height: "0",
+  overflow: "hidden",
+});
+
+export const objectOpen = style({
+  display: "flex",
+  flexDirection: "column",
+  visibility: "visible",
+  height: "auto",
+  overflow: "visible",
+  padding: "0.5rem 0.5rem 0.5rem 1.5rem",
   borderStyle: "none solid solid solid",
+  borderColor: "#fff",
 });
 
 export const configButtons = style({
