@@ -1,12 +1,20 @@
 import { useRef, useState } from "react";
 import { useStorage } from "../storage";
-import { configEditor } from "./styles/configEditor.css";
+import {
+  configEditor,
+  objectsModule,
+  primitivesModule,
+  submitButton,
+} from "./styles/configEditor.css";
+import { Button } from "./Buttons";
 
 type ConfigTypes = String | Number | Boolean | Obj;
 
 type Obj = {
   [key: string]: ConfigTypes;
 };
+
+const ArrayModule = ({}: {}) => {};
 
 const PrimitivesModule = ({
   keyToElement,
@@ -24,10 +32,10 @@ const PrimitivesModule = ({
     };
 
     return (
-      <div>
+      <p className={primitivesModule}>
         <span>{keyToElement}</span>
-        <input type="text" value={input} onChange={handlechange} />;
-      </div>
+        <input type="text" value={input} onChange={handlechange} />
+      </p>
     );
   }
   if (typeof parent[keyToElement] === "number") {
@@ -38,10 +46,10 @@ const PrimitivesModule = ({
     };
 
     return (
-      <div>
+      <p className={primitivesModule}>
         <span>{keyToElement}</span>
-        <input type="number" value={input} onChange={handlechange} />;
-      </div>
+        <input type="number" value={input} onChange={handlechange} />
+      </p>
     );
   }
   if (typeof parent[keyToElement] === "boolean") {
@@ -52,10 +60,10 @@ const PrimitivesModule = ({
     };
 
     return (
-      <div>
+      <p className={primitivesModule}>
         <span>{keyToElement}</span>
         <input type="checkbox" checked={input} onChange={handlechange} />;
-      </div>
+      </p>
     );
   }
   return <div>error pre</div>;
@@ -71,29 +79,32 @@ const ObjectsModule = ({
   if (parent && parent[keyToElement]) {
     const obj = parent[keyToElement] as Obj;
     const keys = Object.keys(parent[keyToElement]);
+    const [open, setOpen] = useState(false);
 
     return (
-      <div>
-        <span>{keyToElement}</span>
-        {keys.map((k) => {
-          if (typeof obj[k] === "object") {
-            return (
-              <ObjectsModule
-                key={`Object-${keyToElement}.${k}`}
-                keyToElement={k}
-                parent={obj}
-              />
-            );
-          } else {
-            return (
-              <PrimitivesModule
-                key={`Primitive-${keyToElement}.${k}`}
-                keyToElement={k}
-                parent={obj}
-              />
-            );
-          }
-        })}
+      <div className={objectsModule}>
+        <Button name={keyToElement} onClick={() => setOpen(!open)} />
+        <div style={{ height: open ? "" : 0, overflow: open ? "" : "hidden" }}>
+          {keys.map((k) => {
+            if (typeof obj[k] === "object") {
+              return (
+                <ObjectsModule
+                  key={`Object-${keyToElement}.${k}`}
+                  keyToElement={k}
+                  parent={obj}
+                />
+              );
+            } else {
+              return (
+                <PrimitivesModule
+                  key={`Primitive-${keyToElement}.${k}`}
+                  keyToElement={k}
+                  parent={obj}
+                />
+              );
+            }
+          })}
+        </div>
       </div>
     );
   } else {
@@ -109,7 +120,9 @@ export const ConfigEditor = () => {
   return (
     <div className={configEditor}>
       <ObjectsModule keyToElement={"game"} parent={ref.current} />
-      <button onClick={() => setConfig(ref.current)}>submit</button>
+      <div className={submitButton}>
+        <Button name={"submit"} onClick={() => setConfig(ref.current)} />
+      </div>
     </div>
   );
 };
