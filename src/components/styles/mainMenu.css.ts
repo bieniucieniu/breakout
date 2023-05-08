@@ -4,7 +4,8 @@ import { center } from "./basicStyles.css";
 export const mainMenu = style([
   center,
   {
-    display: "grid",
-    gridTemplateRows: "repeat(5, minmax(0, 1fr))",
+    display: "flex",
+    gap: "1rem",
+    flexDirection: "column",
   },
 ]);

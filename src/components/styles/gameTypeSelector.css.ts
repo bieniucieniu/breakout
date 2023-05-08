@@ -6,7 +6,12 @@ export const gameTypeButtons = style({
   gap: "1rem",
   backgroundColor: "#0000ff",
   padding: "1rem",
-  gridRow: "span 2",
+
+  "@media": {
+    "screen and (max-width: 768px)": {
+      gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
+    },
+  },
 });
 
 globalStyle(`${gameTypeButtons} > button`, {

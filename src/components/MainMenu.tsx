@@ -23,10 +23,10 @@ export const MainMenu = () => {
       <Link href="/scoreboard" className={title}>
         scoreboard
       </Link>
-      <Auth />
       <Link href="/config" className={title}>
         config
       </Link>
+      <Auth />
     </div>
   );
 };
