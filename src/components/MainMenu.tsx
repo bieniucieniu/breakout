@@ -4,6 +4,7 @@ import { Auth } from "./Auth";
 import { mainMenu } from "./styles/mainMenu.css";
 import { useStorage } from "../storage";
 import { GameTypeSelector } from "./GameTypeSelector";
+import { ConfigEditor } from "./ConfigEditor";
 
 export const MainMenu = () => {
   const gameType = useStorage((state) => state.gameType);
@@ -23,6 +24,9 @@ export const MainMenu = () => {
         scoreboard
       </Link>
       <Auth />
+      <Link href="/config" className={title}>
+        config
+      </Link>
     </div>
   );
 };
