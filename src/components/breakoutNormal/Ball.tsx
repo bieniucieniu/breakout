@@ -82,19 +82,12 @@ export const Ball = ({
       vector.current.y *= -1;
       vector.current.rotateAround(new Vector2(0, 0), -r);
 
-      if (vector.current.y > -minVerSpeed) {
-        vector.current.y = -minVerSpeed;
+      if (vector.current.y < minVerSpeed && vector.current.y > 0) {
+        vector.current.y = minVerSpeed;
         vector.current.x = vector.current.x > 0 ? minHorSpeed : -minHorSpeed;
-
-        if (vector.current.length() < ball.speed)
-          vector.current.setLength(ball.speed);
-      } else if (vector.current.y < -ball.speed) {
-        vector.current.y = -ball.speed;
-        vector.current.x = vector.current.x > 0 ? ball.speed : -ball.speed;
-
-        if (vector.current.length() < ball.speed)
-          vector.current.setLength(ball.speed);
       }
+      if (vector.current.length() < ball.speed)
+        vector.current.setLength(ball.speed);
     }
 
     for (const brick of bricks) {
