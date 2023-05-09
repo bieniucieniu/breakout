@@ -2,10 +2,6 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { useStorage } from "../../storage";
 
-function isTouchDevice() {
-  return "ontouchstart" in window || navigator.maxTouchPoints > 0;
-}
-
 const touchControls = () => {
   const ref = useRef<{ x: number | undefined; y: number | undefined }>({
     x: undefined,

@@ -8,6 +8,11 @@ export const game = style({
   height: "100%",
   animation: `${appearFromBottom} .3s ease-in-out`,
   maxHeight: "100vw",
+  touchAction: "none",
+});
+
+export const placeholder = style({
+  touchAction: "none",
 });
 
 export const breakout = style({
