@@ -83,6 +83,7 @@ export const BreakoutNormal = () => {
       }
       <GameNavigation />
       <Game className={game} />
+      <div></div>
     </div>
   );
 };
