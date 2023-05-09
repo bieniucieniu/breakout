@@ -1,6 +1,6 @@
 import Game from "./breakoutGravity";
 import { GameNavigation } from "./GameNavigation";
-import { breakout, game } from "./styles/breakout.css";
+import { breakout, game, placeholder } from "./styles/breakout.css";
 import { useStorage } from "../storage";
 import { GamePauseMenu } from "./GamePauseMenu";
 import { GameStartMenu } from "./GameStartMenu";
@@ -104,6 +104,7 @@ export const BreakoutGravity = () => {
       }
       <GameNavigation />
       <Game className={game} />
+      <div className={placeholder}></div>
     </div>
   );
 };

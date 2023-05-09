@@ -1,6 +1,6 @@
 import Game from "./breakoutNormal";
 import { GameNavigation } from "./GameNavigation";
-import { breakout, game } from "./styles/breakout.css";
+import { breakout, game, placeholder } from "./styles/breakout.css";
 import { useStorage } from "../storage";
 import { GamePauseMenu } from "./GamePauseMenu";
 import { GameStartMenu } from "./GameStartMenu";
@@ -83,7 +83,7 @@ export const BreakoutNormal = () => {
       }
       <GameNavigation />
       <Game className={game} />
-      <div></div>
+      <div className={placeholder}></div>
     </div>
   );
 };
