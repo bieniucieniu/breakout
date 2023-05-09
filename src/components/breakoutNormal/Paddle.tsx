@@ -73,7 +73,6 @@ export const Paddle = ({
   const maxSpeed = [paddle.maxSpeed.x, paddle.maxSpeed.y];
   useFrame(({ mouse }, delta) => {
     if (paused || gameStage !== "playing") return;
-    console.log(touch);
 
     if (touch.x !== undefined && touch.y !== undefined) {
       vector.current = [
