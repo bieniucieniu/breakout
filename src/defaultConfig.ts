@@ -44,7 +44,7 @@ const defaultConfig = {
       defaultPosition: [0, -10] as [number, number],
       defaultVelocity: [0, 0] as [number, number],
       color: "#FFFFFF",
-      speed: 80,
+      speed: 30,
       minAngle: Math.PI / 6,
     },
     brick: {
