@@ -4,7 +4,7 @@ import { Ball } from "./Ball";
 import { BricksGrid } from "./Bricks";
 import { Boarder } from "./Boarder";
 import { Paddle } from "./Paddle";
-import { useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Vector3 } from "three";
 
 export const Scene = () => {
@@ -14,6 +14,7 @@ export const Scene = () => {
     ballPosition: state.ballPosition,
     paddlePosition: state.paddlePosition,
   }));
+  const groupRef = useRef<THREE.Group>(null!);
 
   const { camera } = useThree();
 
@@ -22,10 +23,13 @@ export const Scene = () => {
     const width = window.innerWidth;
     if (width < 500) {
       camera.position.set(...config.camera.position["500"]);
+      groupRef.current.position.set(...config.groupPosition["500"]);
     } else if (width < 700) {
       camera.position.set(...config.camera.position["750"]);
+      groupRef.current.position.set(...config.groupPosition["750"]);
     } else {
       camera.position.set(...config.camera.position["default"]);
+      groupRef.current.position.set(...config.groupPosition["default"]);
     }
   };
 
@@ -40,10 +44,10 @@ export const Scene = () => {
   return (
     <>
       {/* <OrbitControls /> */}
-      {config.lights.map((light, index) => (
-        <pointLight key={index} {...light} />
-      ))}
-      <group>
+      <group ref={groupRef}>
+        {config.lights.map((light, index) => (
+          <pointLight key={index} {...light} />
+        ))}
         <Paddle position={paddlePosition} positionRef={paddlePositionRef} />
         <Boarder />
         <BricksGrid bricks={bricks} />

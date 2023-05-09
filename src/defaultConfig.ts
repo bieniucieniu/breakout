@@ -4,11 +4,16 @@ const defaultConfig = {
     tickRate: 30,
     args: [64, 64] as [number, number],
     gravity: [0, -9.82] as [number, number],
+    groupPosition: {
+      default: [0, 0, 0] as [number, number, number],
+      "750": [0, 20, 0] as [number, number, number],
+      "500": [0, 40, 0] as [number, number, number],
+    },
     camera: {
       position: {
         default: [0, 0, 80] as [number, number, number],
-        "750": [0, -20, 100] as [number, number, number],
-        "500": [0, -40, 140] as [number, number, number],
+        "750": [0, 0, 100] as [number, number, number],
+        "500": [0, 0, 140] as [number, number, number],
       },
       fov: 60,
     },
