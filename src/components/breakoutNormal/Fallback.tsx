@@ -1,19 +1,21 @@
-import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 
 export const Fallback = () => {
-  const ref = useRef<THREE.Mesh>(null!);
+  const [dots, setDots] = useState("");
 
-  useFrame((_, delta) => {
-    ref.current.rotation.x += delta;
-    ref.current.rotation.y += delta;
-    ref.current.rotation.z += delta;
-  });
+  useEffect(() => {
+    const i = setInterval(() => {
+      setDots((dots) => {
+        if (dots.length === 3) {
+          return "";
+        }
+        return dots + ".";
+      });
+    }, 500);
 
-  return (
-    <mesh ref={ref}>
-      <coneGeometry args={[7, 10, 3]} />
-      <meshNormalMaterial />
-    </mesh>
-  );
+    return () => {
+      clearInterval(i);
+    };
+  }, [dots]);
+  return <span>loading{dots}</span>;
 };
