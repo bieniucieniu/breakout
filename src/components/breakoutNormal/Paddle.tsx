@@ -66,17 +66,32 @@ export const Paddle = ({
   const vector = useRef([0, 0] as [number, number]);
   const maxSpeed = [paddle.maxSpeed.x, paddle.maxSpeed.y];
 
+  const controllsType = useRef<"mouse" | "touch">("mouse");
+
+  useEffect(() => {
+    const keyEvent = () => (controllsType.current = "mouse");
+    const touchEvent = () => (controllsType.current = "touch");
+    window.addEventListener("keypress", keyEvent);
+    window.addEventListener("touchstart", touchEvent);
+    return () => {
+      window.removeEventListener("keypress", keyEvent);
+      window.removeEventListener("touchstart", touchEvent);
+    };
+  });
+
   useFrame(({ mouse }, delta) => {
     if (paused || gameStage !== "playing") return;
 
-    if (isTouchDevice()) {
+    if (controllsType.current === "touch") {
       if (touch.x !== undefined && touch.y !== undefined) {
         vector.current = [
-          ((touch.x * viewport.width) / 2 - ref.current.position.x) *
+          ((touch.x * 2 * viewport.width) / 2 - ref.current.position.x) *
             maxSpeed[0],
-          ((touch.y * viewport.height) / 2 - ref.current.position.y) *
+          ((touch.y * 2 * viewport.height) / 2 - ref.current.position.y) *
             maxSpeed[1],
         ];
+      } else {
+        vector.current = [0, 0];
       }
     } else {
       vector.current = [
@@ -85,6 +100,9 @@ export const Paddle = ({
           maxSpeed[1],
       ];
     }
+
+    console.log(controllsType.current);
+
     if (vector.current[1] > maxSpeed[1]) vector.current[1] = maxSpeed[1];
     if (vector.current[1] < -maxSpeed[1]) vector.current[1] = -maxSpeed[1];
 
