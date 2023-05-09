@@ -20,7 +20,7 @@ export default ({ className }: { className?: string }) => {
     <Canvas
       className={className}
       camera={{
-        position: config.camera.position.default,
+        position: config.camera.position,
         fov: config.camera.fov,
         near: 70,
         far: 150,

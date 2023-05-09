@@ -1,6 +1,47 @@
 import { useFrame, useThree } from "@react-three/fiber";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useStorage } from "../../storage";
+
+function isTouchDevice() {
+  return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+}
+
+const touchControls = () => {
+  const ref = useRef<{ x: number | undefined; y: number | undefined }>({
+    x: undefined,
+    y: undefined,
+  });
+
+  const touch = {
+    onTouchStart: (e: TouchEvent) => {
+      ref.current.x = e.touches[0].clientX / window.innerWidth - 0.5;
+      ref.current.y = 0.5 - e.touches[0].clientY / window.innerHeight;
+    },
+
+    onTouchMove: (e: TouchEvent) => {
+      ref.current.x = e.touches[0].clientX / window.innerWidth - 0.5;
+      ref.current.y = 0.5 - e.touches[0].clientY / window.innerHeight;
+    },
+
+    onTouchEnd: (e: TouchEvent) => {
+      ref.current.x = undefined;
+      ref.current.y = undefined;
+    },
+  };
+
+  useEffect(() => {
+    window.addEventListener("touchstart", touch.onTouchStart);
+    window.addEventListener("touchmove", touch.onTouchMove);
+    window.addEventListener("touchend", touch.onTouchEnd);
+    return () => {
+      window.removeEventListener("touchstart", touch.onTouchStart);
+      window.removeEventListener("touchmove", touch.onTouchMove);
+      window.removeEventListener("touchend", touch.onTouchEnd);
+    };
+  }, []);
+
+  return ref.current;
+};
 
 export const Paddle = ({
   positionRef,
@@ -13,19 +54,37 @@ export const Paddle = ({
     paddle: state.config.game.paddle,
     args: state.config.game.args,
   }));
+  const { paused, gameStage } = useStorage((state) => ({
+    paused: state.paused,
+    gameStage: state.gameStage,
+  }));
+  const touch = touchControls();
 
   const ref = useRef<THREE.Mesh>(null!);
 
   const { viewport } = useThree();
-  const vector = useRef([0, 0, 0] as [number, number, number]);
+  const vector = useRef([0, 0] as [number, number]);
   const maxSpeed = [paddle.maxSpeed.x, paddle.maxSpeed.y];
-  useFrame(({ mouse }, delta) => {
-    vector.current = [
-      ((mouse.x * viewport.width) / 2 - ref.current.position.x) * maxSpeed[0],
-      ((mouse.y * viewport.height) / 2 - ref.current.position.y) * maxSpeed[1],
-      0,
-    ];
 
+  useFrame(({ mouse }, delta) => {
+    if (paused || gameStage !== "playing") return;
+
+    if (isTouchDevice()) {
+      if (touch.x !== undefined && touch.y !== undefined) {
+        vector.current = [
+          ((touch.x * viewport.width) / 2 - ref.current.position.x) *
+            maxSpeed[0],
+          ((touch.y * viewport.height) / 2 - ref.current.position.y) *
+            maxSpeed[1],
+        ];
+      }
+    } else {
+      vector.current = [
+        ((mouse.x * viewport.width) / 2 - ref.current.position.x) * maxSpeed[0],
+        ((mouse.y * viewport.height) / 2 - ref.current.position.y) *
+          maxSpeed[1],
+      ];
+    }
     if (vector.current[1] > maxSpeed[1]) vector.current[1] = maxSpeed[1];
     if (vector.current[1] < -maxSpeed[1]) vector.current[1] = -maxSpeed[1];
 

@@ -126,8 +126,8 @@ export const Ball = ({
       }
     }
 
-    ref.current.position.x += vector.current.x * delta;
-    ref.current.position.y += vector.current.y * delta;
+    // ref.current.position.x += vector.current.x * delta;
+    // ref.current.position.y += vector.current.y * delta;
   });
 
   return (

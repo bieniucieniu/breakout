@@ -31,26 +31,6 @@ export const Scene = () => {
     restitution: 0.6,
   });
 
-  const { camera } = useThree();
-
-  const handleCameraPosition = (e?: UIEvent) => {
-    e && e.preventDefault();
-    const width = window.innerWidth;
-    if (width < 500) {
-      camera.position.set(...config.camera.position["500"]);
-    } else if (width < 700) {
-      camera.position.set(...config.camera.position["750"]);
-    } else {
-      camera.position.set(...config.camera.position["default"]);
-    }
-  };
-
-  useEffect(() => {
-    handleCameraPosition();
-    window.addEventListener("resize", handleCameraPosition);
-    return () => window.removeEventListener("resize", handleCameraPosition);
-  }, []);
-
   return (
     <>
       {/* <OrbitControls /> */}
