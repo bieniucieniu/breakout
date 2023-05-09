@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
-export const Fallback = () => {
+type Props = { dotsClassName?: string } & React.HTMLProps<HTMLSpanElement>;
+
+export const Fallback = ({ dotsClassName, ...props }: Props) => {
   const [dots, setDots] = useState("");
 
   useEffect(() => {
@@ -17,5 +19,9 @@ export const Fallback = () => {
       clearInterval(i);
     };
   }, [dots]);
-  return <span>loading{dots}</span>;
+  return (
+    <span {...props}>
+      loading<span className={dotsClassName}>{dots}</span>
+    </span>
+  );
 };
