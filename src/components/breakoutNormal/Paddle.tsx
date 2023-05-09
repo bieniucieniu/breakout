@@ -14,22 +14,16 @@ const touchControls = () => {
 
   const touch = {
     onTouchStart: (e: TouchEvent) => {
-      e.preventDefault();
-
       ref.current.x = e.touches[0].clientX;
       ref.current.y = e.touches[0].clientY;
     },
 
     onTouchMove: (e: TouchEvent) => {
-      e.preventDefault();
-
       ref.current.x = e.touches[0].clientX;
       ref.current.y = e.touches[0].clientY;
     },
 
     onTouchEnd: (e: TouchEvent) => {
-      e.preventDefault();
-
       ref.current.x = undefined;
       ref.current.y = undefined;
     },
@@ -64,31 +58,19 @@ export const Paddle = ({
     paused: state.paused,
     gameStage: state.gameStage,
   }));
-  const touch = touchControls();
 
   const ref = useRef<THREE.Mesh>(null!);
 
   const { viewport } = useThree();
-  const vector = useRef([0, 0, 0] as [number, number, number]);
+  const vector = useRef([0, 0] as [number, number]);
   const maxSpeed = [paddle.maxSpeed.x, paddle.maxSpeed.y];
   useFrame(({ mouse }, delta) => {
     if (paused || gameStage !== "playing") return;
 
-    if (touch.x !== undefined && touch.y !== undefined) {
-      vector.current = [
-        ((touch.x * viewport.width) / 2 - ref.current.position.x) * maxSpeed[0],
-        ((touch.y * viewport.height) / 2 - ref.current.position.y) *
-          maxSpeed[1],
-        0,
-      ];
-    } else {
-      vector.current = [
-        ((mouse.x * viewport.width) / 2 - ref.current.position.x) * maxSpeed[0],
-        ((mouse.y * viewport.height) / 2 - ref.current.position.y) *
-          maxSpeed[1],
-        0,
-      ];
-    }
+    vector.current = [
+      ((mouse.x * viewport.width) / 2 - ref.current.position.x) * maxSpeed[0],
+      ((mouse.y * viewport.height) / 2 - ref.current.position.y) * maxSpeed[1],
+    ];
     if (vector.current[1] > maxSpeed[1]) vector.current[1] = maxSpeed[1];
     if (vector.current[1] < -maxSpeed[1]) vector.current[1] = -maxSpeed[1];
 

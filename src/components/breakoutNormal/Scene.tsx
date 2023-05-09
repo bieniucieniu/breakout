@@ -23,13 +23,10 @@ export const Scene = () => {
     const width = window.innerWidth;
     if (width < 500) {
       camera.position.set(...config.camera.position["500"]);
-      groupRef.current.position.set(...config.groupPosition["500"]);
     } else if (width < 700) {
       camera.position.set(...config.camera.position["750"]);
-      groupRef.current.position.set(...config.groupPosition["750"]);
     } else {
       camera.position.set(...config.camera.position["default"]);
-      groupRef.current.position.set(...config.groupPosition["default"]);
     }
   };
 
