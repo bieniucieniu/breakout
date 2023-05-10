@@ -33,4 +33,5 @@
   - [x] fix brick edge case y axis
     - [x] add ball radius 😝
 - [ ] improve onTime triger in timer
-- [ ] add touch controls
+- [x] add touch controls
+- [ ] ^make it work well^
