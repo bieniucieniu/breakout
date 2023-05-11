@@ -7,7 +7,7 @@ import { msToTime } from "../functions/timer";
 export const GameOverMenu = () => {
   const { lastScore, lastTime } = useStorage((state) => ({
     lastScore: state.lastScore,
-    lastTime: state.lastTime,
+    lastTime: state.time,
   }));
   const gameType = useStorage((state) => state.gameType);
   return (

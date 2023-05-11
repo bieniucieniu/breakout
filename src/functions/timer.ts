@@ -33,12 +33,10 @@ export const useTimer = ({
   onTick,
   onTime = [],
 }: Props) => {
-  const [time, setTime] = useState(start);
   const timeRef = useRef(start);
   const reset = () => {
     const t = timeRef.current;
     isRunning = false;
-    setTime(start);
     timeRef.current = start;
     return t;
   };
@@ -49,7 +47,6 @@ export const useTimer = ({
     if (isRunning) {
       interval = setInterval(() => {
         timeRef.current += delta;
-        setTime(timeRef.current);
         if (delta > 0 ? timeRef.current >= end : timeRef.current <= end) {
           clearInterval(interval);
           onEnd && onEnd();
@@ -69,5 +66,8 @@ export const useTimer = ({
     };
   }, [isRunning, start, end, delta, onTick, onTime]);
 
-  return [time, reset] as [time: number, reset: () => number];
+  return [timeRef, reset] as [
+    time: React.MutableRefObject<number>,
+    reset: () => number
+  ];
 };
