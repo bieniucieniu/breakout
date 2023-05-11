@@ -22,7 +22,7 @@ export const GameNavigation = () => {
     ...timerConfig[gameType],
     isRunning: !paused && gameStage === "playing",
     onTick: (t) => setTime(t),
-    onEnd: gameType === "time" ? () => endGame({ push: true }) : undefined,
+    onEnd: () => endGame(),
   });
 
   useEffect(() => {
