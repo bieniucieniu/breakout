@@ -97,8 +97,6 @@ export const Paddle = ({
       ];
     }
 
-    console.log(controllsType.current);
-
     if (vector.current[1] > maxSpeed[1]) vector.current[1] = maxSpeed[1];
     if (vector.current[1] < -maxSpeed[1]) vector.current[1] = -maxSpeed[1];
 
