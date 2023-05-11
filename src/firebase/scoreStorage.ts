@@ -18,7 +18,7 @@ type Data = {
   score: number;
   timestamp: Timestamp;
   gameType: "classic" | "time" | "gravity";
-  ms?: number | null;
+  ms: number;
 };
 
 export const addScore = ({
@@ -28,7 +28,7 @@ export const addScore = ({
 }: {
   score: number;
   gameType: "classic" | "time" | "gravity";
-  ms?: number | null;
+  ms: number;
 }) => {
   if (!auth.currentUser || score <= 0) return;
 
