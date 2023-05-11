@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 export type Brick = {
   name: string;
   args: [number, number, number?];
@@ -58,7 +60,7 @@ export const createBricksGrid = ({
     position: coords,
     name: `brick[${coords[0].toFixed(2)},${coords[1].toFixed(2)}]`,
     points: maxPoints ? (i % maxPoints) + 1 : 1,
-    key: crypto.randomUUID(),
+    key: uuidv4(),
   }));
 
   return bricks;
