@@ -27,7 +27,7 @@ export const msToTime = (milliseconds: number) => {
 export const useTimer = ({
   isRunning = true,
   start = 0,
-  end = Infinity,
+  end,
   delta = 10,
   onEnd,
   onTick,
@@ -47,10 +47,11 @@ export const useTimer = ({
     if (isRunning) {
       interval = setInterval(() => {
         timeRef.current += delta;
-        if (delta > 0 ? timeRef.current >= end : timeRef.current <= end) {
-          clearInterval(interval);
-          onEnd && onEnd();
-        }
+        if (end)
+          if (delta > 0 ? timeRef.current >= end : timeRef.current <= end) {
+            clearInterval(interval);
+            onEnd && onEnd();
+          }
 
         onTick && onTick(timeRef.current, delta);
 
