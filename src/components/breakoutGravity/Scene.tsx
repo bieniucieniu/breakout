@@ -1,11 +1,9 @@
 import { useContactMaterial } from "@react-three/p2";
-import { useEffect } from "react";
 import { useStorage } from "../../storage";
 import { Ball } from "./Ball";
 import { BricksGrid } from "./Bricks";
 import { Boarder } from "./Boarder";
 import { Paddle } from "./Paddle";
-import { useThree } from "@react-three/fiber";
 
 export const Scene = () => {
   const { config, materials } = useStorage((state) => ({

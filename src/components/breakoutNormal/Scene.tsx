@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useStorage } from "../../storage";
 import { Ball } from "./Ball";
 import { BricksGrid } from "./Bricks";
