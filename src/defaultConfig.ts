@@ -104,7 +104,6 @@ const defaultConfig = {
     timer: {
       classic: {
         start: 0,
-        end: Infinity,
         delta: 10,
       },
       time: {
@@ -114,7 +113,6 @@ const defaultConfig = {
       },
       gravity: {
         start: 0,
-        end: Infinity,
         delta: 10,
       },
     },
