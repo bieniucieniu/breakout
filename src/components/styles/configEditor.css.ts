@@ -2,27 +2,41 @@ import { globalStyle, style } from "@vanilla-extract/css";
 
 export const configEditor = style({
   display: "flex",
+  height: "100vh",
   flexDirection: "column",
+});
+export const listWraper = style({
+  overflowY: "auto",
+  scrollbarGutter: "stable",
+  padding: "0.5rem 0.5rem 0.5rem 1.5rem",
   height: "100%",
+  "::-webkit-scrollbar": {
+    backgroundColor: "rgba(0, 0, 0, 0)",
+    width: "1rem",
+  },
+  "::-webkit-scrollbar-thumb": {
+    backgroundColor: "#00f",
+  },
+});
+
+export const configButtons = style({
   width: "100%",
+  display: "grid",
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gap: "1rem",
   padding: "1rem",
-  paddingBottom: "5rem",
+});
+
+globalStyle(`${configButtons} > button`, {
+  borderStyle: "solid",
+  borderColor: "#00f",
 });
 
 export const primitivesModule = style({
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
+  display: "flex",
+  flexDirection: "row",
   gap: "1rem",
-  width: "40rem",
-  "@media": {
-    "screen and (max-width: 830px)": {
-      width: "100%",
-    },
-
-    "screen and (max-width: 500px)": {
-      gridTemplateColumns: "1fr",
-    },
-  },
+  maxWidth: "40rem",
 });
 
 globalStyle(`${primitivesModule} > input`, {
@@ -30,6 +44,12 @@ globalStyle(`${primitivesModule} > input`, {
   borderStyle: "solid",
   borderColor: "#00f",
   backgroundColor: "black",
+  width: "100%",
+});
+
+globalStyle(`${primitivesModule} > span`, {
+  color: "white",
+  width: "min-content",
 });
 
 export const objectsModule = style({
@@ -55,23 +75,4 @@ export const objectOpen = style({
   padding: "0.5rem 0.5rem 0.5rem 1.5rem",
   borderStyle: "none solid solid solid",
   borderColor: "#fff",
-});
-
-export const configButtons = style({
-  zIndex: 1,
-
-  position: "fixed",
-  bottom: "0",
-  left: "0",
-  width: "100%",
-
-  display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
-  gap: "1rem",
-  padding: "1rem",
-});
-
-globalStyle(`${configButtons} > button`, {
-  borderStyle: "solid",
-  borderColor: "#00f",
 });

@@ -1,6 +1,7 @@
 import { useStorage } from "../storage";
 import { gameNav } from "./styles/gameNavigation.css";
 import { Button } from "./Buttons";
+
 import { Display } from "./Display";
 import { useTimer, msToTime } from "../functions/timer";
 import { useEffect } from "react";
@@ -14,21 +15,20 @@ export const GameNavigation = () => {
   const lives = useStorage((state) => state.lives);
   const gameType = useStorage((state) => state.gameType);
   const gameStage = useStorage((state) => state.gameStage);
-  const setLastTime = useStorage((state) => state.setLastTime);
+  const time = useStorage((state) => state.time);
+  const setTime = useStorage((state) => state.setTime);
 
-  const [time] = useTimer({
+  const [_, reset] = useTimer({
     ...timerConfig[gameType],
     isRunning: !paused && gameStage === "playing",
-    onEnd:
-      gameType === "time"
-        ? () => endGame({ push: true, time: time })
-        : undefined,
+    onTick: (t) => setTime(t),
+    onEnd: () => {
+      endGame();
+    },
   });
 
   useEffect(() => {
-    if (gameStage === "over") {
-      setLastTime(time);
-    }
+    if (gameStage === "init") reset();
   }, [gameStage]);
 
   return (

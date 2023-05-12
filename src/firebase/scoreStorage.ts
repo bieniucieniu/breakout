@@ -18,7 +18,7 @@ type Data = {
   score: number;
   timestamp: Timestamp;
   gameType: "classic" | "time" | "gravity";
-  ms?: number | null;
+  ms: number;
 };
 
 export const addScore = ({
@@ -28,12 +28,12 @@ export const addScore = ({
 }: {
   score: number;
   gameType: "classic" | "time" | "gravity";
-  ms?: number | null;
+  ms: number;
 }) => {
   if (!auth.currentUser || score <= 0) return;
 
   const ref = collection(db, `scores-${gameType}`) as CollectionReference<Data>;
-
+  console.log("adding score", score, gameType, ref);
   addDoc(ref, {
     name: auth.currentUser.displayName || "ku*wa wroclawska",
     gameType,

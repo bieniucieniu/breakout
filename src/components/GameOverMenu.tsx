@@ -5,9 +5,9 @@ import { Keys } from "./Display";
 import { msToTime } from "../functions/timer";
 
 export const GameOverMenu = () => {
-  const { lastScore, lastTime } = useStorage((state) => ({
+  const { lastScore, time } = useStorage((state) => ({
     lastScore: state.lastScore,
-    lastTime: state.lastTime,
+    time: state.time,
   }));
   const gameType = useStorage((state) => state.gameType);
   return (
@@ -17,7 +17,7 @@ export const GameOverMenu = () => {
         <br />
         your score: {lastScore[gameType]}
         <br />
-        your time: {lastTime ? msToTime(lastTime) : "unknown"}
+        your time: {time ? msToTime(time) : "unknown"}
         <br />
         <Keys keys={["Space", "tap screen"]} />
         to restart

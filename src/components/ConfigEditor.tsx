@@ -7,6 +7,7 @@ import {
   configButtons,
   objectOpen,
   objectClosed,
+  listWraper,
 } from "./styles/configEditor.css";
 import { Button, LinkButton } from "./Buttons";
 import defaultConfig from "../defaultConfig";
@@ -115,16 +116,22 @@ const ObjectsModule = ({
   }
 };
 
-export const ConfigEditor = () => {
+export const ConfigEditor = ({
+  className,
+  back,
+  ...props
+}: { back?: () => void } & React.HTMLProps<HTMLDivElement>) => {
   const config = useStorage((state) => state.config);
   const setConfig = useStorage((state) => state.setConfig);
   const ref = useRef(JSON.parse(JSON.stringify(config)));
 
   return (
-    <div className={configEditor}>
-      <ObjectsModule keyToElement={"game"} parent={ref.current} />
+    <div className={`${configEditor} ${className}`} {...props}>
+      <div className={listWraper}>
+        <ObjectsModule keyToElement={"game"} parent={ref.current} />
+      </div>
       <div className={configButtons}>
-        <LinkButton name={"back"} href={"/"} />
+        <Button name="back" onClick={back} />
         <Button name={"submit"} onClick={() => setConfig(ref.current)} />
         <Button
           name={"reset"}

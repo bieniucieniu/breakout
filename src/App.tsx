@@ -14,7 +14,6 @@ export const App = () => {
       <Route path="/breakoutGravity" component={BreakoutGravity} />
       <Route path="/breakoutNormal" component={BreakoutNormal} />
       <Route path="/scoreboard" component={Scoreboard} />
-      <Route path="/config" component={ConfigEditor} />
       <Route>
         <div className={centeredTitle}>nothing here</div>
       </Route>

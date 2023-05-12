@@ -1,19 +1,27 @@
-import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 
-export const Fallback = () => {
-  const ref = useRef<THREE.Mesh>(null!);
+type Props = { dotsClassName?: string } & React.HTMLProps<HTMLSpanElement>;
 
-  useFrame((_, delta) => {
-    ref.current.rotation.x += delta;
-    ref.current.rotation.y += delta;
-    ref.current.rotation.z += delta;
-  });
+export const Fallback = ({ dotsClassName, ...props }: Props) => {
+  const [dots, setDots] = useState("");
 
+  useEffect(() => {
+    const i = setInterval(() => {
+      setDots((dots) => {
+        if (dots.length === 3) {
+          return "";
+        }
+        return dots + ".";
+      });
+    }, 500);
+
+    return () => {
+      clearInterval(i);
+    };
+  }, [dots]);
   return (
-    <mesh ref={ref}>
-      <coneGeometry args={[7, 10, 3]} />
-      <meshNormalMaterial />
-    </mesh>
+    <span {...props}>
+      loading<span className={dotsClassName}>{dots}</span>
+    </span>
   );
 };

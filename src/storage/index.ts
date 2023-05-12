@@ -20,7 +20,7 @@ type Storage = {
   setupGame: () => void;
   gameStage: "init" | "playing" | "over";
   startGame: () => void;
-  endGame: (props?: { score?: number; push?: boolean; time?: number }) => void;
+  endGame: (props?: { score?: number; time?: number }) => void;
   resetGame: () => void;
   ballPosition: [number, number];
   setBallPosition: (position: [number, number]) => void;
@@ -38,8 +38,8 @@ type Storage = {
   }) => void;
   gameType: "classic" | "time" | "gravity";
   setGameType: (type: "classic" | "time" | "gravity") => void;
-  lastTime: number | null;
-  setLastTime: (time: number | null) => void;
+  time: number;
+  setTime: (time: number) => void;
 };
 
 export const useStorage = create<Storage>((set) => ({
@@ -51,7 +51,7 @@ export const useStorage = create<Storage>((set) => ({
   lastScore: { classic: 0, time: 0, gravity: 0 },
   config: JSON.parse(JSON.stringify(defaultConfig)),
   gameType: "classic",
-  lastTime: 0,
+  time: 0,
   ballPosition: [...defaultConfig.game.ball.defaultPosition],
   paddlePosition: [...defaultConfig.game.paddle.defaultPosition],
   setPause: (paused) => set(() => ({ paused: paused })),
@@ -68,7 +68,9 @@ export const useStorage = create<Storage>((set) => ({
       const n = newBricks.reduce((sum, b) => sum + b.points, 0);
 
       if (n <= 0) {
-        state.endGame({ score: state.score + (score || 1) });
+        state.endGame({
+          score: state.score + (score || 1),
+        });
       }
 
       return { bricks: newBricks, score: state.score + (score || 1) };
@@ -112,13 +114,11 @@ export const useStorage = create<Storage>((set) => ({
   endGame: (props) => {
     set((state) => {
       if (state.gameStage === "playing") {
-        if (props?.push !== undefined && props.push) {
-          addScore({
-            gameType: state.gameType,
-            score: props?.score ?? state.score,
-            ms: props?.time,
-          });
-        }
+        addScore({
+          gameType: state.gameType,
+          score: props?.score ?? state.score,
+          ms: state.time,
+        });
 
         state.setLastScore({
           [state.gameType]: props?.score ?? state.score,
@@ -153,7 +153,7 @@ export const useStorage = create<Storage>((set) => ({
       },
     })),
   setGameType: (type) => set(() => ({ gameType: type })),
-  setLastTime: (time) => set(() => ({ lastTime: time })),
+  setTime: (time) => set(() => ({ time: time })),
   setBallPosition: (position) => set(() => ({ ballPosition: position })),
   setPaddlePosition: (position) => set(() => ({ paddlePosition: position })),
 }));
