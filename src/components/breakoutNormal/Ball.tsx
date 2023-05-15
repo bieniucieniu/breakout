@@ -116,8 +116,8 @@ export const Ball = ({
             brick.position[1] - ballPosition.y,
           ];
           if (
-            v[0] > 0 == vector.current.x > 0 &&
-            v[1] > 0 == vector.current.y > 0
+            (v[0] > 0 == vector.current.x > 0) ==
+            (v[1] > 0 == vector.current.y > 0)
           ) {
             vector.current.x *= -1;
             vector.current.y *= -1;
