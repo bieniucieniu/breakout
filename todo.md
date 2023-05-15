@@ -9,7 +9,7 @@
     - [ ] login with discord
     - [ ] login with #???
 - [x] configuration menu
-  - [ ] update global config :p
+  - [x] update global config :p
 - [ ] difficult levels (1 / 2 / 3)
 - [ ] update css path/structure/etc
 - [x] paddle movent in 2d
@@ -35,3 +35,5 @@
 - [ ] improve onTime triger in timer
 - [x] add touch controls
 - [ ] ^make it work well^
+- [ ] main menu styling for phones
+- [ ] quit in game init  

@@ -30,21 +30,22 @@ const PrimitivesModule = ({
   if (parent[keyToElement] === undefined) return <p>error</p>;
 
   const [input, setInput] = useState(parent[keyToElement] as ConfigTypes);
-  let handlechange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-    parent[keyToElement] = e.target.value;
-  };
 
   switch (typeof parent[keyToElement]) {
-    case "string":
+    case "string": {
+      const handlechange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInput(e.target.value);
+        parent[keyToElement] = e.target.value;
+      };
       return (
         <p className={primitivesModule}>
           <span>{keyToElement}</span>
           <input type="text" value={input as string} onChange={handlechange} />
         </p>
       );
+    }
     case "number": {
-      handlechange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const handlechange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInput(Number(e.target.value));
         parent[keyToElement] = Number(e.target.value);
       };
@@ -61,7 +62,7 @@ const PrimitivesModule = ({
       );
     }
     case "boolean": {
-      handlechange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const handlechange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInput(e.target.checked);
         parent[keyToElement] = e.target.checked;
       };
