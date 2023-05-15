@@ -1,4 +1,4 @@
-#  todo for game breakout 
+# todo for game breakout
 
 - [ ] database
   - [x] pushing data
@@ -35,5 +35,5 @@
 - [ ] improve onTime triger in timer
 - [x] add touch controls
 - [ ] ^make it work well^
-- [ ] main menu styling for phones
-- [ ] quit in game init  
+- [x] main menu styling for phones
+- [ ] quit in game init

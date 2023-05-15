@@ -13,7 +13,12 @@ export const mainMenu = style({
   height: "100%",
 
   gridTemplateColumns: "repeat(3, 1fr)",
-  gridTemplateRows: "1fr",
+
+  "@media": {
+    "screen and (max-width: 1000px)": {
+      gridTemplateColumns: "1fr",
+    },
+  },
 });
 export const mainMenuContent = style({
   gridColumn: "1 / 3",
@@ -25,10 +30,18 @@ export const mainMenuContent = style({
   margin: "auto",
   gap: "1rem",
   height: "fit-content",
+
+  "@media": {
+    "screen and (max-width: 1000px)": {
+      gridColumn: "1 / 2",
+      flexDirection: "column-reverse",
+    },
+  },
 });
 
 export const configButton = style({
   gridColumn: "3 / 4",
+
   display: "flex",
   flexDirection: "column",
   justifySelf: "end",
@@ -36,6 +49,14 @@ export const configButton = style({
   height: "fit-content",
   width: "30rem",
   padding: "1.5rem",
+
+  "@media": {
+    "screen and (max-width: 1000px)": {
+      gridColumn: "1 / 2",
+      justifySelf: "center",
+      width: "100%",
+    },
+  },
 });
 
 globalStyle(`${configButton} > button`, {
