@@ -8,6 +8,11 @@ export const game = style({
 
 export const placeholder = style({
   touchAction: "none",
+  "@media": {
+    "screen and (max-width: 650px)": {
+      height: "100vw",
+    },
+  },
 });
 
 export const breakout = style({
