@@ -10,8 +10,8 @@ const touchControls = () => {
 
   const touch = {
     onTouchStart: (e: TouchEvent) => {
-      ref.current.x = e.touches[0].clientX / window.innerWidth - 0.5;
-      ref.current.y = 0.5 - e.touches[0].clientY / window.innerHeight;
+      ref.current.x = (e.touches[0].clientX * 2) / window.innerWidth - 1;
+      ref.current.y = 1 - (e.touches[0].clientY * 2) / window.innerHeight;
     },
 
     onTouchMove: (e: TouchEvent) => {
@@ -58,7 +58,6 @@ export const Paddle = ({
 
   const ref = useRef<THREE.Mesh>(null!);
 
-  const { viewport } = useThree();
   const vector = useRef([0, 0] as [number, number]);
   const maxSpeed = [paddle.maxSpeed.x, paddle.maxSpeed.y];
 
@@ -75,7 +74,7 @@ export const Paddle = ({
     };
   });
 
-  useFrame(({ mouse }, delta) => {
+  useFrame(({ mouse, viewport }, delta) => {
     if (paused || gameStage !== "playing") return;
 
     if (controllsType.current === "touch") {
