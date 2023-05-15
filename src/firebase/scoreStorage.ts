@@ -33,7 +33,6 @@ export const addScore = ({
   if (!auth.currentUser || score <= 0) return;
 
   const ref = collection(db, `scores-${gameType}`) as CollectionReference<Data>;
-  console.log("adding score", score, gameType, ref);
   addDoc(ref, {
     name: auth.currentUser.displayName || "ku*wa wroclawska",
     gameType,
