@@ -1,11 +1,9 @@
-import { globalStyle, style } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 
 export const gameTypeButtons = style({
   display: "grid",
   gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
   gap: "1rem",
-  backgroundColor: "#0000ff",
-  padding: "1rem",
 
   "@media": {
     "screen and (max-width: 768px)": {
@@ -14,7 +12,9 @@ export const gameTypeButtons = style({
   },
 });
 
-globalStyle(`${gameTypeButtons} > button`, {
+export const gameTypeButton = style({
   fontWeight: 300,
   lineHeight: "2",
+  color: "#fff",
+  backgroundColor: "#0000ff",
 });

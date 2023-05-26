@@ -1,6 +1,6 @@
 import { useStorage } from "../storage";
 import { Button } from "./Buttons";
-import { gameTypeButtons } from "./styles/gameTypeSelector.css";
+import { gameTypeButtons, gameTypeButton } from "./styles/gameTypeSelector.css";
 
 export const GameTypeSelector = () => {
   const setGameType = useStorage((state) => state.setGameType);
@@ -10,18 +10,21 @@ export const GameTypeSelector = () => {
       <Button
         onClick={() => setGameType("classic")}
         disabled={gameType === "classic"}
+        className={gameTypeButton}
       >
         classic
       </Button>
       <Button
         onClick={() => setGameType("time")}
         disabled={gameType === "time"}
+        className={gameTypeButton}
       >
         time
       </Button>
       <Button
         onClick={() => setGameType("gravity")}
         disabled={gameType === "gravity"}
+        className={gameTypeButton}
       >
         gravity
       </Button>

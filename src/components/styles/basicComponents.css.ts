@@ -50,6 +50,7 @@ export const linkButton = style([
 export const display = style([
   container,
   {
+    padding: "1rem",
     color: "black",
     display: "flex",
     justifyContent: "center",
