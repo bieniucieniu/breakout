@@ -1,12 +1,45 @@
 import { formatDistance } from "date-fns";
 import { Auth } from "./Auth";
-import { scoreboard, scoreboardNav } from "./styles/scoreboard.css";
-import { useScores } from "../firebase/scoreStorage";
+import { scoreboard, scoreboardNav, table } from "./styles/scoreboard.css";
+import { useScores, type Data } from "../firebase/scoreStorage";
 import { Display } from "./Display";
 import { GameTypeSelector } from "./GameTypeSelector";
+import { useMemo } from "react";
+import { LinkButton } from "./Buttons";
+
+const Row = ({ score, name, timestamp }: Data) => {
+  const date = timestamp?.toDate
+    ? formatDistance(timestamp.toDate(), new Date(), {
+        addSuffix: true,
+      })
+    : "unknown";
+
+  return (
+    <li>
+      <span>{name}</span>
+      <span>{score}</span>
+      <span>{date}</span>
+    </li>
+  );
+};
+
+const Table = ({ scores }: { scores: (Data & { id: string })[] }) => {
+  return (
+    <ol className={table}>
+      {scores.map((score) => (
+        <Row key={score.id} {...score} />
+      ))}
+    </ol>
+  );
+};
 
 export const Scoreboard = () => {
-  const [data, loading, error] = useScores();
+  const [snap, loading, error] = useScores();
+
+  const data = useMemo(
+    () => snap?.docs.map((doc) => ({ ...doc.data(), id: doc.id })) ?? [],
+    [snap]
+  );
 
   return (
     <>
@@ -15,32 +48,17 @@ export const Scoreboard = () => {
         <Display>
           <Auth />
         </Display>
+        <Display>
+          <GameTypeSelector />
+        </Display>
+        <LinkButton href="/">back</LinkButton>
       </nav>
-      <GameTypeSelector />
+
       <div className={scoreboard}>
         <h2>Leaderboard</h2>
-        {loading && <p>Loading...</p>}
+        <p>{loading ? "Loading..." : ""}</p>
         {error && <p>Error: {error.message}</p>}
-        {data && (
-          <ol>
-            {data.docs.map((e) => {
-              const d = e.data();
-              const date = d.timestamp?.toDate
-                ? formatDistance(d.timestamp?.toDate(), new Date(), {
-                    addSuffix: true,
-                  })
-                : "unknown";
-
-              return (
-                <li key={e.id}>
-                  <span>{`${d.score ?? "0"}\t${
-                    d.name ?? "unknown"
-                  }\t${date}`}</span>
-                </li>
-              );
-            })}
-          </ol>
-        )}
+        <Table scores={data} />
       </div>
     </>
   );

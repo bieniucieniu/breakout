@@ -8,20 +8,23 @@ export const GameTypeSelector = () => {
   return (
     <div className={gameTypeButtons}>
       <Button
-        name={"classic"}
         onClick={() => setGameType("classic")}
         disabled={gameType === "classic"}
-      />
+      >
+        classic
+      </Button>
       <Button
-        name={"time"}
         onClick={() => setGameType("time")}
         disabled={gameType === "time"}
-      />
+      >
+        time
+      </Button>
       <Button
-        name={"gravity"}
         onClick={() => setGameType("gravity")}
         disabled={gameType === "gravity"}
-      />
+      >
+        gravity
+      </Button>
     </div>
   );
 };

@@ -22,8 +22,10 @@ export const GamePauseMenu = () => {
       <div className={pauseMenuContent}>
         <h1 className={pauseMenuTitle}>Paused</h1>
         <div className={menuButtons}>
-          <Button name="resume" onClick={() => setPause(false)} />
-          <LinkButton name="quit to menu" href="/" onClick={() => endGame()} />
+          <Button onClick={() => setPause(false)}>resume</Button>
+          <LinkButton href="/" onClick={() => endGame()}>
+            quit to menu
+          </LinkButton>
         </div>
       </div>
     </div>

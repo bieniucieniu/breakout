@@ -14,6 +14,7 @@ import { GameTypeSelector } from "./GameTypeSelector";
 import { ConfigEditor } from "./ConfigEditor";
 import { Button } from "./Buttons";
 import { useState } from "react";
+import { Display } from "./Display";
 
 export const MainMenu = () => {
   const gameType = useStorage((state) => state.gameType);
@@ -35,14 +36,18 @@ export const MainMenu = () => {
             play
           </Link>
           <span style={{ fontSize: "1.5rem", opacity: ".5" }}>{gameType}</span>
-          <GameTypeSelector />
+          <Display>
+            <GameTypeSelector />
+          </Display>
           <Link href="/scoreboard" className={title}>
             scoreboard
           </Link>
-          <Auth />
+          <Display>
+            <Auth />
+          </Display>
         </div>
         <div className={configButton}>
-          <Button name="config" onClick={() => setShowConfig(!showConfig)} />
+          <Button onClick={() => setShowConfig(!showConfig)}>config</Button>
         </div>
       </div>
     </div>

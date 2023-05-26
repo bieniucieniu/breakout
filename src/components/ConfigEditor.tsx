@@ -87,7 +87,7 @@ const ObjectsModule = ({
 
     return (
       <div className={`${objectsModule}`}>
-        <Button name={keyToElement} onClick={() => setClosed(!closed)} />
+        <Button onClick={() => setClosed(!closed)}>{keyToElement}</Button>
         <div className={closed ? objectClosed : objectOpen}>
           {keys.map((k) => {
             if (typeof obj[k] === "object") {
@@ -131,12 +131,13 @@ export const ConfigEditor = ({
         <ObjectsModule keyToElement={"game"} parent={ref.current} />
       </div>
       <div className={configButtons}>
-        <Button name="back" onClick={back} />
-        <Button name={"submit"} onClick={() => setConfig(ref.current)} />
+        <Button onClick={back}>back</Button>
+        <Button onClick={() => setConfig(ref.current)}>submit</Button>
         <Button
-          name={"reset"}
           onClick={() => setConfig(JSON.parse(JSON.stringify(defaultConfig)))}
-        />
+        >
+          reset
+        </Button>
       </div>
     </div>
   );
