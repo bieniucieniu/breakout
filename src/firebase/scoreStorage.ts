@@ -12,7 +12,7 @@ import {
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useStorage } from "../storage";
 
-type Data = {
+export type Data = {
   name: string;
   uid: string;
   score: number;

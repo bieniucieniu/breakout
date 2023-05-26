@@ -37,3 +37,6 @@
 - [ ] ^make it work well^
 - [x] main menu styling for phones
 - [ ] quit in game init
+- [ ] basic scoreboard in pause/game 
+- [ ] add boost on collison w/ paddle
+- [ ] fix corner collison

@@ -65,9 +65,9 @@ export const useStorage = create<Storage>((set) => ({
         }
         return e;
       });
-      const n = newBricks.reduce((sum, b) => sum + b.points, 0);
+      const totalScore = newBricks.reduce((sum, b) => sum + b.points, 0);
 
-      if (n <= 0) {
+      if (totalScore <= 0) {
         state.endGame({
           score: state.score + (score || 1),
         });

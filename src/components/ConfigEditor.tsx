@@ -96,7 +96,7 @@ const ObjectsModule = ({
 
     return (
       <div className={`${objectsModule}`}>
-        <Button name={keyToElement} onClick={() => setClosed(!closed)} />
+        <Button onClick={() => setClosed(!closed)}>{keyToElement}</Button>
         <div className={closed ? objectClosed : objectOpen}>
           {keys.map((k) => {
             if (typeof obj[k] === "object") {
@@ -127,7 +127,7 @@ const ObjectsModule = ({
 
 export const ConfigEditor = ({
   className,
-  back,
+  back: close,
   ...props
 }: { back?: () => void } & React.HTMLProps<HTMLDivElement>) => {
   const config = useStorage((state) => state.config);
@@ -140,12 +140,13 @@ export const ConfigEditor = ({
         <ObjectsModule keyToElement={"game"} parent={ref.current} />
       </div>
       <div className={configButtons}>
-        <Button name="back" onClick={back} />
-        <Button name={"submit"} onClick={() => setConfig(ref.current)} />
+        <Button onClick={close}>close</Button>
+        <Button onClick={() => setConfig(ref.current)}>submit</Button>
         <Button
-          name={"reset"}
           onClick={() => setConfig(JSON.parse(JSON.stringify(defaultConfig)))}
-        />
+        >
+          reset
+        </Button>
       </div>
     </div>
   );

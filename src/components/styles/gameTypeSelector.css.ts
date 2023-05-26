@@ -1,20 +1,34 @@
-import { globalStyle, style } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
+
+export const wraper = style({
+  containerType: "size",
+  height: "100%",
+  width: "100%",
+});
 
 export const gameTypeButtons = style({
   display: "grid",
-  gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+  gridTemplateColumns: "repeat(3, minmax(100px, 1fr))",
   gap: "1rem",
-  backgroundColor: "#0000ff",
-  padding: "1rem",
-
-  "@media": {
-    "screen and (max-width: 768px)": {
-      gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
+  "@container": {
+    "(max-width: 19rem)": {
+      gridTemplateColumns: "repeat(2, minmax(100px, 1fr))",
     },
   },
 });
 
-globalStyle(`${gameTypeButtons} > button`, {
+export const gameTypeButton = style({
   fontWeight: 300,
   lineHeight: "2",
+  color: "#fff",
+  backgroundColor: "#0000ff",
+  flexGrow: "1",
+  flexBasis: "0",
+  "@container": {
+    "(max-width: 19rem)": {
+      ":first-child": {
+        gridColumn: "1 / span 2",
+      },
+    },
+  },
 });

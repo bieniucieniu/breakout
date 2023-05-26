@@ -5,7 +5,6 @@ import { MainMenu } from "./components/MainMenu";
 import { Scoreboard } from "./components/Scoreboard";
 import { centeredTitle } from "./components/styles/basicStyles.css";
 import { BreakoutNormal } from "./components/BreakoutNormal";
-import { ConfigEditor } from "./components/ConfigEditor";
 
 export const App = () => {
   return (

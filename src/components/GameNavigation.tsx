@@ -33,7 +33,7 @@ export const GameNavigation = () => {
 
   return (
     <nav className={gameNav}>
-      <Button onClick={switchPaused} name={paused ? "start" : "stop"} />
+      <Button onClick={switchPaused}>{paused ? "start" : "stop"}</Button>
       <Display text="score" value={score} />
       <Display text="lives" value={lives} />
       <Display text={msToTime(time)} />
