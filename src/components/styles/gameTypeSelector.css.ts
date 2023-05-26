@@ -1,16 +1,20 @@
-import { createContainer, style } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 
-const ref = createContainer("gameTypeSelector");
+export const wraper = style({
+  containerType: "size",
+  height: "100%",
+  width: "100%",
+});
 
 export const gameTypeButtons = style({
-  containerName: ref,
-  containerType: "normal",
-
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
+  display: "grid",
+  gridTemplateColumns: "repeat(3, minmax(100px, 1fr))",
   gap: "1rem",
-  flexGrow: "1",
+  "@container": {
+    "(max-width: 19rem)": {
+      gridTemplateColumns: "repeat(2, minmax(100px, 1fr))",
+    },
+  },
 });
 
 export const gameTypeButton = style({
@@ -20,4 +24,11 @@ export const gameTypeButton = style({
   backgroundColor: "#0000ff",
   flexGrow: "1",
   flexBasis: "0",
+  "@container": {
+    "(max-width: 19rem)": {
+      ":first-child": {
+        gridColumn: "1 / span 2",
+      },
+    },
+  },
 });
