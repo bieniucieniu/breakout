@@ -35,3 +35,6 @@
 - [ ] improve onTime triger in timer
 - [x] add touch controls
 - [ ] ^make it work well^
+- [ ] basic scoreboard in pause/game 
+- [ ] add boost on collison w/ paddle
+- [ ] fix corner collison
