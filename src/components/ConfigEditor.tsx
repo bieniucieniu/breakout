@@ -118,7 +118,7 @@ const ObjectsModule = ({
 
 export const ConfigEditor = ({
   className,
-  back,
+  back: close,
   ...props
 }: { back?: () => void } & React.HTMLProps<HTMLDivElement>) => {
   const config = useStorage((state) => state.config);
@@ -131,7 +131,7 @@ export const ConfigEditor = ({
         <ObjectsModule keyToElement={"game"} parent={ref.current} />
       </div>
       <div className={configButtons}>
-        <Button onClick={back}>back</Button>
+        <Button onClick={close}>close</Button>
         <Button onClick={() => setConfig(ref.current)}>submit</Button>
         <Button
           onClick={() => setConfig(JSON.parse(JSON.stringify(defaultConfig)))}
