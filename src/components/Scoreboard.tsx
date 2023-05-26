@@ -1,35 +1,61 @@
 import { formatDistance } from "date-fns";
 import { Auth } from "./Auth";
-import { scoreboard, scoreboardNav, table } from "./styles/scoreboard.css";
+import {
+  scoreboard,
+  scoreboardNav,
+  table,
+  row,
+  cell,
+  tableHeader,
+  tableContainer,
+} from "./styles/scoreboard.css";
 import { useScores, type Data } from "../firebase/scoreStorage";
 import { Display } from "./Display";
 import { GameTypeSelector } from "./GameTypeSelector";
 import { useMemo } from "react";
 import { LinkButton } from "./Buttons";
 
-const Row = ({ score, name, timestamp }: Data) => {
+const Row = ({
+  score,
+  name,
+  timestamp,
+  ms,
+  index,
+}: Data & { index: number }) => {
   const date = timestamp?.toDate
     ? formatDistance(timestamp.toDate(), new Date(), {
         addSuffix: true,
       })
     : "unknown";
+  const time = ms ? `${ms}ms` : "unknown";
 
   return (
-    <li>
-      <span>{name}</span>
-      <span>{score}</span>
-      <span>{date}</span>
+    <li className={row}>
+      <span className={cell}>{index + 1}</span>
+      <span className={cell}>{name}</span>
+      <span className={cell}>{score}</span>
+      <span className={cell}>{date}</span>
+      <span className={cell}>{time}</span>
     </li>
   );
 };
 
 const Table = ({ scores }: { scores: (Data & { id: string })[] }) => {
   return (
-    <ol className={table}>
-      {scores.map((score) => (
-        <Row key={score.id} {...score} />
-      ))}
-    </ol>
+    <div className={tableContainer}>
+      <div className={tableHeader}>
+        <span className={cell}>#</span>
+        <span className={cell}>Name</span>
+        <span className={cell}>Score</span>
+        <span className={cell}>Date</span>
+        <span className={cell}>Time</span>
+      </div>
+      <ol className={table}>
+        {scores.map((score, i) => (
+          <Row key={score.id} {...score} index={i} />
+        ))}
+      </ol>
+    </div>
   );
 };
 
@@ -44,7 +70,6 @@ export const Scoreboard = () => {
   return (
     <>
       <nav className={scoreboardNav}>
-        <Display>Scoreboard</Display>
         <Display>
           <Auth />
         </Display>
