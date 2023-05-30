@@ -1,20 +1,13 @@
 import { style } from "@vanilla-extract/css";
 
-export const wraper = style({
-  containerType: "size",
-  height: "100%",
-  width: "100%",
-});
-
 export const gameTypeButtons = style({
-  display: "grid",
-  gridTemplateColumns: "repeat(3, minmax(100px, 1fr))",
+  // display: "grid",
+  // gridTemplateColumns: "repeat(3, minmax(100px, 1fr))",
+  display: "flex",
+  flexWrap: "wrap",
+  flexBasis: "1 1 auto",
+  flexShrink: 1,
   gap: "1rem",
-  "@container": {
-    "(max-width: 19rem)": {
-      gridTemplateColumns: "repeat(2, minmax(100px, 1fr))",
-    },
-  },
 });
 
 export const gameTypeButton = style({
@@ -24,11 +17,4 @@ export const gameTypeButton = style({
   backgroundColor: "#0000ff",
   flexGrow: "1",
   flexBasis: "0",
-  "@container": {
-    "(max-width: 19rem)": {
-      ":first-child": {
-        gridColumn: "1 / span 2",
-      },
-    },
-  },
 });
