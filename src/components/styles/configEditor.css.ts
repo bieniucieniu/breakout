@@ -9,6 +9,7 @@ export const listWraper = style({
   overflowY: "auto",
   scrollbarGutter: "stable",
   padding: "0.5rem 0.5rem 0.5rem 1.5rem",
+
   height: "100%",
   "::-webkit-scrollbar": {
     backgroundColor: "rgba(0, 0, 0, 0)",

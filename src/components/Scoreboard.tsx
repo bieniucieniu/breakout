@@ -9,6 +9,7 @@ import {
   tableHeader,
   tableContainer,
 } from "./styles/scoreboard.css";
+import { msToTime } from "../functions/timer";
 import { useScores, type Data } from "../firebase/scoreStorage";
 import { Display } from "./Display";
 import { GameTypeSelector } from "./GameTypeSelector";
@@ -27,7 +28,6 @@ const Row = ({
         addSuffix: true,
       })
     : "unknown";
-  const time = ms ? `${ms}ms` : "unknown";
 
   return (
     <li className={row}>
@@ -35,7 +35,7 @@ const Row = ({
       <span className={cell}>{name}</span>
       <span className={cell}>{score}</span>
       <span className={cell}>{date}</span>
-      <span className={cell}>{time}</span>
+      <span className={cell}>{msToTime(ms)}</span>
     </li>
   );
 };
@@ -43,14 +43,14 @@ const Row = ({
 const Table = ({ scores }: { scores: (Data & { id: string })[] }) => {
   return (
     <div className={tableContainer}>
-      <div className={tableHeader}>
-        <span className={cell}>#</span>
-        <span className={cell}>Name</span>
-        <span className={cell}>Score</span>
-        <span className={cell}>Date</span>
-        <span className={cell}>Time</span>
-      </div>
       <ol className={table}>
+        <li className={tableHeader}>
+          <span className={cell}>#</span>
+          <span className={cell}>Name</span>
+          <span className={cell}>Score</span>
+          <span className={cell}>Date</span>
+          <span className={cell}>Time</span>
+        </li>
         {scores.map((score, i) => (
           <Row key={score.id} {...score} index={i} />
         ))}
@@ -80,9 +80,9 @@ export const Scoreboard = () => {
       </nav>
 
       <div className={scoreboard}>
-        <h2>Leaderboard</h2>
+        <h1>Leaderboard</h1>
         <p>{loading ? "Loading..." : ""}</p>
-        {error && <p>Error: {error.message}</p>}
+        <p>{error ? error.message : ""}</p>
         <Table scores={data} />
       </div>
     </>

@@ -1,4 +1,4 @@
-import { globalKeyframes, globalStyle, style } from "@vanilla-extract/css";
+import { globalStyle, style } from "@vanilla-extract/css";
 import { navbar } from "./navbar.css";
 
 export const scoreboardNav = style([
@@ -9,13 +9,11 @@ export const scoreboardNav = style([
 
     "@media": {
       "screen and (max-width: 600px)": {
-        gridTemplateColumns: "repeat(auto-fit , minmax(50px, 1fr))",
+        gridTemplateColumns: "1fr 1fr",
       },
     },
   },
 ]);
-
-globalStyle(`${scoreboardNav} > *`, {});
 
 export const scoreboard = style({
   margin: "2rem",
@@ -24,6 +22,33 @@ export const scoreboard = style({
   alignItems: "center",
   justifyContent: "center",
   backgroundColor: "blue",
+
+  padding: "1.5rem 1.5rem 1.5rem 2.5rem",
+  overflow: "auto",
+  scrollbarGutter: "stable",
+
+  "::-webkit-scrollbar": {
+    backgroundColor: "rgba(0, 0, 0, 0)",
+    width: "1rem",
+  },
+  "::-webkit-scrollbar-thumb": {
+    backgroundColor: "#00f",
+  },
+});
+
+globalStyle(`${scoreboard} > h1`, {
+  color: "white",
+  fontSize: "2rem",
+  fontWeight: "700",
+});
+
+globalStyle(`${scoreboard} > p`, {
+  color: "white",
+  height: "1rem",
+  lineHeight: "1rem",
+  fontSize: "0.8rem",
+  padding: "0.5rem 0",
+  margin: "0",
 });
 
 export const tableContainer = style({
@@ -46,7 +71,7 @@ export const table = style({
 
 export const row = style({
   display: "Grid",
-  gridTemplateColumns: "2rem repeat(4, 1fr)",
+  gridTemplateColumns: "2rem repeat(4, minmax(4rem, 1fr))",
 });
 
 export const cell = style({
@@ -61,9 +86,6 @@ export const cell = style({
 export const tableHeader = style([
   row,
   {
-    width: "100%",
-    position: "sticky",
-    top: "0",
     transform: "translate(-2px, 2px)",
     boxShadow: "3px 3px 0 #000000",
   },
