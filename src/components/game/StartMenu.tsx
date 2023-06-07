@@ -1,6 +1,6 @@
-import { menuBG, mainMenu, mainMenuHints } from "./styles/gameMenu.css";
-import { title } from "./styles/basicStyles.css";
-import { Keys } from "./Display";
+import { menuBG, mainMenu, mainMenuHints } from "../styles/gameMenu.css";
+import { title } from "../styles/basicStyles.css";
+import { Keys } from "../Display";
 
 export const GameStartMenu = () => {
   return (
