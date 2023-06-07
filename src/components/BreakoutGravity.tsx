@@ -1,10 +1,10 @@
 import Game from "./breakoutGravity";
-import { GameNavigation } from "./GameNavigation";
+import { GameNavigation } from "./game/Navigation";
 import { breakout, game, placeholder } from "./styles/breakout.css";
 import { useStorage } from "../storage";
-import { GamePauseMenu } from "./GamePauseMenu";
-import { GameStartMenu } from "./GameStartMenu";
-import { GameOverMenu } from "./GameOverMenu";
+import { GamePauseMenu } from "./game/PauseMenu";
+import { GameStartMenu } from "./game/StartMenu";
+import { GameOverMenu } from "./game/OverMenu";
 import { useEffect, useRef } from "react";
 import type { KeyboardEvent, TouchEvent } from "react";
 import { gameControllsHints } from "./styles/gameControllsHints.css";
