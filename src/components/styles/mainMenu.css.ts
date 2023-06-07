@@ -12,7 +12,7 @@ export const mainMenu = style({
   width: "100%",
   height: "100%",
 
-  gridTemplateColumns: "repeat(3, 1fr)",
+  gridTemplateColumns: "2fr 1fr",
 
   "@media": {
     "screen and (max-width: 1000px)": {
@@ -21,8 +21,6 @@ export const mainMenu = style({
   },
 });
 export const mainMenuContent = style({
-  gridColumn: "1 / 3",
-
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -40,8 +38,6 @@ export const mainMenuContent = style({
 });
 
 export const configButton = style({
-  gridColumn: "3 / 4",
-
   display: "flex",
   flexDirection: "column",
   justifySelf: "end",
@@ -52,7 +48,6 @@ export const configButton = style({
 
   "@media": {
     "screen and (max-width: 1000px)": {
-      gridColumn: "1 / 2",
       justifySelf: "center",
       width: "100%",
     },
