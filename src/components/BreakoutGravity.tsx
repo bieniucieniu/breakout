@@ -1,5 +1,5 @@
 import Game from "./breakoutGravity";
-import { GameNavigation } from "./GameNavigation";
+import { GameNavigation } from "./game/GameNavigation";
 import { breakout, game, placeholder } from "./styles/breakout.css";
 import { useStorage } from "../storage";
 import { GamePauseMenu } from "./GamePauseMenu";

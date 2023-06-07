@@ -1,9 +1,9 @@
-import { useStorage } from "../storage";
-import { gameNav } from "./styles/gameNavigation.css";
-import { Button } from "./Buttons";
+import { useStorage } from "../../storage";
+import { gameNav } from "../styles/gameNavigation.css";
+import { Button } from "../Buttons";
 
-import { Display } from "./Display";
-import { useTimer, msToTime } from "../functions/timer";
+import { Display } from "../Display";
+import { useTimer, msToTime } from "../../functions/timer";
 import { useEffect } from "react";
 
 export const GameNavigation = () => {
