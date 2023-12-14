@@ -3,9 +3,9 @@ import {
   menuButtons,
   pauseMenuTitle,
   pauseMenuContent,
-} from "../styles/gameMenu.css";
-import { Button, LinkButton } from "../Buttons";
-import { useStorage } from "../../storage";
+} from "@/styles/gameMenu.css";
+import { Button, LinkButton } from "@/components/Buttons";
+import { useStorage } from "@/storage";
 
 export const GamePauseMenu = () => {
   const setPause = useStorage((state) => state.setPause);
