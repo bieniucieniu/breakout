@@ -1,7 +1,7 @@
 import "./index.css";
 import { Route, Switch } from "wouter";
 import MainMenu from "@/components/MainMenu";
-import { centeredTitle } from "@/components/styles/basicStyles.css";
+import { centeredTitle } from "@/styles/basicStyles.css";
 import Breakout from "@/components/Breakout";
 
 export const App = () => {

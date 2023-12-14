@@ -9,6 +9,9 @@ type Storage = {
   score: number;
   increaseScore: (score: number) => void;
 
+  time: number;
+  setTime: (t: number) => void;
+
   lives: number;
   removeLive: () => void;
   resetlives: () => void;
@@ -41,6 +44,9 @@ export const useStorage = create<Storage>((set) => ({
 
   score: 0,
   increaseScore: (score) => set((state) => ({ score: state.score + score })),
+
+  time: 0,
+  setTime: (t) => set(() => ({ time: t })),
 
   lives: 3,
   removeLive: () =>
@@ -87,7 +93,6 @@ export const useStorage = create<Storage>((set) => ({
   config: structuredClone(defaultConfig),
   setConfig: (config) => set({ config: config }),
 
-  time: 0,
   resetGame: () => {
     set((state) => {
       if (state.gameStage === "over" || state.gameStage === "playing") {

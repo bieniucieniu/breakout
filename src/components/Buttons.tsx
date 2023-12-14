@@ -1,5 +1,5 @@
 import { useLocation } from "wouter";
-import { button, linkButton } from "./styles/basicComponents.css";
+import { button, linkButton } from "@/styles/basicComponents.css";
 import React from "react";
 
 type Button = { children?: React.ReactNode } & React.DetailedHTMLProps<
