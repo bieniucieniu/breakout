@@ -27,14 +27,8 @@ type Storage = {
 
   lastScore: {
     classic: number;
-    time: number;
-    gravity: number;
   };
-  setLastScore: (prop: {
-    classic?: number;
-    time?: number;
-    gravity?: number;
-  }) => void;
+  setLastScore: (prop: { classic: number }) => void;
 };
 
 export const useStorage = create<Storage>((set) => ({
@@ -103,13 +97,11 @@ export const useStorage = create<Storage>((set) => ({
     });
   },
 
-  lastScore: { classic: 0, time: 0, gravity: 0 },
-  setLastScore: ({ classic, gravity, time }) =>
+  lastScore: { classic: 0 },
+  setLastScore: ({ classic }) =>
     set((state) => ({
       lastScore: {
-        classic: classic ?? state.lastScore.classic,
-        time: gravity ?? state.lastScore.time,
-        gravity: time ?? state.lastScore.gravity,
+        classic: classic,
       },
     })),
 }));
