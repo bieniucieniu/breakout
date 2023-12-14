@@ -22,7 +22,7 @@ export const MainMenu = () => {
 
       <div className={mainMenu}>
         <div className={mainMenuContent}>
-          <Link href="/breakoutGravity" className={title}>
+          <Link href="/breakout" className={title}>
             play
           </Link>
         </div>

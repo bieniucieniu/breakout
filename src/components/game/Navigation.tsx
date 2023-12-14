@@ -13,13 +13,12 @@ export const GameNavigation = () => {
   const endGame = useStorage((state) => state.endGame);
   const score = useStorage((state) => state.score);
   const lives = useStorage((state) => state.lives);
-  const gameType = useStorage((state) => state.gameType);
   const gameStage = useStorage((state) => state.gameStage);
   const time = useStorage((state) => state.time);
   const setTime = useStorage((state) => state.setTime);
 
   const [_, reset] = useTimer({
-    ...timerConfig[gameType],
+    ...timerConfig["classic"],
     isRunning: !paused && gameStage === "playing",
     onTick: (t) => setTime(t),
     onEnd: () => {
