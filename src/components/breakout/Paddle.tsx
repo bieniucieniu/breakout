@@ -19,7 +19,7 @@ const touchControls = () => {
       ref.current.y = 0.5 - e.touches[0].clientY / window.innerHeight;
     },
 
-    onTouchEnd: (e: TouchEvent) => {
+    onTouchEnd: () => {
       ref.current.x = undefined;
       ref.current.y = undefined;
     },
@@ -74,7 +74,7 @@ export const Paddle = ({
     };
   });
 
-  useFrame(({ mouse, viewport }, delta) => {
+  useFrame(({ pointer, viewport }, delta) => {
     if (paused || gameStage !== "playing") return;
 
     if (controllsType.current === "touch") {
@@ -90,8 +90,9 @@ export const Paddle = ({
       }
     } else {
       vector.current = [
-        ((mouse.x * viewport.width) / 2 - ref.current.position.x) * maxSpeed[0],
-        ((mouse.y * viewport.height) / 2 - ref.current.position.y) *
+        ((pointer.x * viewport.width) / 2 - ref.current.position.x) *
+          maxSpeed[0],
+        ((pointer.y * viewport.height) / 2 - ref.current.position.y) *
           maxSpeed[1],
       ];
     }

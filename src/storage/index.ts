@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Brick, createBricksGrid } from "@/functions/createBricksGrid";
+import { createBricksGrid } from "@/functions/createBricksGrid";
 import defaultConfig from "@/defaultConfig";
 
 type Storage = {
@@ -8,12 +8,9 @@ type Storage = {
   switchPaused: () => void;
   score: number;
   increaseScore: (score: number) => void;
-  brickHit: (brickName: string, score?: number) => void;
   lives: number;
   removeLife: () => void;
   resetlives: () => void;
-  bricks: Brick[];
-  setBricks: (bricks: Brick[]) => void;
   config: typeof defaultConfig;
   setConfig: (config: typeof defaultConfig) => void;
   setupGame: () => void;
@@ -21,10 +18,6 @@ type Storage = {
   startGame: () => void;
   endGame: (props?: { score?: number; time?: number }) => void;
   resetGame: () => void;
-  ballPosition: [number, number];
-  setBallPosition: (position: [number, number]) => void;
-  paddlePosition: [number, number];
-  setPaddlePosition: (position: [number, number]) => void;
   lastScore: {
     classic: number;
     time: number;
@@ -35,8 +28,6 @@ type Storage = {
     time?: number;
     gravity?: number;
   }) => void;
-  time: number;
-  setTime: (time: number) => void;
 };
 
 export const useStorage = create<Storage>((set) => ({
@@ -53,24 +44,6 @@ export const useStorage = create<Storage>((set) => ({
   setPause: (paused) => set(() => ({ paused: paused })),
   switchPaused: () => set((state) => ({ paused: !state.paused })),
   increaseScore: (score) => set((state) => ({ score: state.score + score })),
-  brickHit: (brickName, score) =>
-    set((state) => {
-      const newBricks = state.bricks.map((e) => {
-        if (e.name === brickName) {
-          e.points = e.points - 1;
-        }
-        return e;
-      });
-      const totalScore = newBricks.reduce((sum, b) => sum + b.points, 0);
-
-      if (totalScore <= 0) {
-        state.endGame({
-          score: state.score + (score || 1),
-        });
-      }
-
-      return { bricks: newBricks, score: state.score + (score || 1) };
-    }),
   removeLife: () =>
     set((state) => {
       if (state.lives <= 1) {
@@ -83,7 +56,6 @@ export const useStorage = create<Storage>((set) => ({
       return {};
     }),
   resetlives: () => set((state) => ({ lives: state.config.game.lives })),
-  setBricks: (bricks) => set({ bricks: bricks }),
   setConfig: (config) => set({ config: config }),
   setupGame: () =>
     set((state) => ({
@@ -138,7 +110,4 @@ export const useStorage = create<Storage>((set) => ({
         gravity: time ?? state.lastScore.gravity,
       },
     })),
-  setTime: (time) => set(() => ({ time: time })),
-  setBallPosition: (position) => set(() => ({ ballPosition: position })),
-  setPaddlePosition: (position) => set(() => ({ paddlePosition: position })),
 }));
