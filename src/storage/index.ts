@@ -1,23 +1,27 @@
 import { create } from "zustand";
-import { createBricksGrid } from "@/functions/createBricksGrid";
 import defaultConfig from "@/defaultConfig";
 
 type Storage = {
   paused: boolean;
   setPause: (paused: boolean) => void;
   switchPaused: () => void;
+
   score: number;
   increaseScore: (score: number) => void;
+
   lives: number;
-  removeLife: () => void;
+  removeLive: () => void;
   resetlives: () => void;
+
   config: typeof defaultConfig;
   setConfig: (config: typeof defaultConfig) => void;
   setupGame: () => void;
+
   gameStage: "init" | "playing" | "over";
   startGame: () => void;
   endGame: (props?: { score?: number; time?: number }) => void;
   resetGame: () => void;
+
   lastScore: {
     classic: number;
     time: number;
@@ -32,19 +36,14 @@ type Storage = {
 
 export const useStorage = create<Storage>((set) => ({
   paused: false,
-  score: 0,
-  lives: 3,
-  gameStage: "init",
-  bricks: [],
-  lastScore: { classic: 0, time: 0, gravity: 0 },
-  config: JSON.parse(JSON.stringify(defaultConfig)),
-  time: 0,
-  ballPosition: [...defaultConfig.game.ball.defaultPosition],
-  paddlePosition: [...defaultConfig.game.paddle.defaultPosition],
   setPause: (paused) => set(() => ({ paused: paused })),
   switchPaused: () => set((state) => ({ paused: !state.paused })),
+
+  score: 0,
   increaseScore: (score) => set((state) => ({ score: state.score + score })),
-  removeLife: () =>
+
+  lives: 3,
+  removeLive: () =>
     set((state) => {
       if (state.lives <= 1) {
         state.endGame();
@@ -56,42 +55,39 @@ export const useStorage = create<Storage>((set) => ({
       return {};
     }),
   resetlives: () => set((state) => ({ lives: state.config.game.lives })),
-  setConfig: (config) => set({ config: config }),
+
+  gameStage: "init",
   setupGame: () =>
-    set((state) => ({
+    set(() => ({
       paused: false,
       score: 0,
       lives: 3,
       gameStage: "init",
-      bricks: createBricksGrid({
-        gridSize: state.config.game.grid.gridSize,
-        args: state.config.game.grid.args,
-        position: [0, state.config.game.args[1] / 4],
-        brickSize: state.config.game.brick.args,
-        maxPoints: state.config.game.brick.maxPoints,
-      }),
     })),
   startGame: () => {
     set((state) => {
       if (state.gameStage === "init") {
-        return { gameStage: "playing" };
+        return { gameStage: "playing", paused: false };
       }
       return {};
     });
   },
-  endGame: (props) => {
+  endGame: () => {
     set((state) => {
       if (state.gameStage === "playing") {
         return {
           gameStage: "over",
           paused: true,
-          ballPosition: [...state.config.game.ball.defaultPosition],
-          paddlePosition: [...state.config.game.paddle.defaultPosition],
         };
       }
       return {};
     });
   },
+
+  config: structuredClone(defaultConfig),
+  setConfig: (config) => set({ config: config }),
+
+  time: 0,
   resetGame: () => {
     set((state) => {
       if (state.gameStage === "over" || state.gameStage === "playing") {
@@ -102,6 +98,7 @@ export const useStorage = create<Storage>((set) => ({
     });
   },
 
+  lastScore: { classic: 0, time: 0, gravity: 0 },
   setLastScore: ({ classic, gravity, time }) =>
     set((state) => ({
       lastScore: {

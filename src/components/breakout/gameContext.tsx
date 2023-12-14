@@ -8,7 +8,8 @@ export type Context = {
   ballPosition: React.MutableRefObject<[number, number]>;
   paddlePosition: React.MutableRefObject<[number, number]>;
   bricks: React.MutableRefObject<Brick[]>;
-  brickHit: (brickName: string, score?: number) => void;
+  onBrickHit: (brickName: string, score?: number) => void;
+  onLiveLose: () => void;
 };
 
 const context = createContext<Context | undefined>(undefined);
@@ -20,6 +21,7 @@ export function GameContextProvider({
 }) {
   const endGame = useStorage((s) => s.endGame);
   const score = useStorage((s) => s.score);
+  const removeLive = useStorage((s) => s.removeLive);
 
   const paused = useRef<boolean>(false);
   const time = useRef<number>(0);
@@ -35,7 +37,7 @@ export function GameContextProvider({
         ballPosition,
         paddlePosition,
         bricks,
-        brickHit: (brickName, s) => {
+        onBrickHit: (brickName, s) => {
           const newBricks = bricks.current.map((e) => {
             if (e.name === brickName) {
               e.points = e.points - 1;
@@ -52,6 +54,7 @@ export function GameContextProvider({
 
           return { bricks: newBricks, score: score + (s || 1) };
         },
+        onLiveLose: () => removeLive(),
       }}
     >
       {children}
@@ -64,4 +67,6 @@ export function useGameContext() {
   if (!c) {
     throw new Error("no in game context");
   }
+
+  return c;
 }
