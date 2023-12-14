@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 type Props = {
   isRunning?: boolean;
@@ -42,10 +42,10 @@ export const useTimer = ({
   };
 
   useEffect(() => {
-    let interval: NodeJS.Timer;
+    let interval: number;
 
     if (isRunning) {
-      interval = setInterval(() => {
+      interval = window.setInterval(() => {
         timeRef.current += delta;
         if (end)
           if (delta > 0 ? timeRef.current >= end : timeRef.current <= end) {
@@ -63,12 +63,12 @@ export const useTimer = ({
       }, Math.abs(delta));
     }
     return () => {
-      clearInterval(interval);
+      window.clearInterval(interval);
     };
   }, [isRunning, start, end, delta, onTick, onTime]);
 
   return [timeRef, reset] as [
     time: React.MutableRefObject<number>,
-    reset: () => number
+    reset: () => number,
   ];
 };
