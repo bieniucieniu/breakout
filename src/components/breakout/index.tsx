@@ -5,6 +5,7 @@ import { BakeShadows, Preload } from "@react-three/drei";
 import { Suspense } from "react";
 import { Fallback } from "@/components/Fallback";
 import { useWindowFocus } from "@/functions/useWindowFocus";
+import { GameContextProvider } from "./gameContext";
 
 export default ({ className }: { className?: string }) => {
   const config = useStorage((state) => state.config.game);
@@ -17,21 +18,23 @@ export default ({ className }: { className?: string }) => {
   useWindowFocus(undefined, () => setPause(true));
 
   return (
-    <Suspense fallback={<Fallback />}>
-      <Canvas
-        className={className}
-        camera={{
-          position: config.camera.position,
-          fov: config.camera.fov,
-          near: 70,
-          far: 150,
-        }}
-        frameloop={!paused && gameStage === "playing" ? "always" : "demand"}
-      >
-        <Preload all />
-        <BakeShadows />
-        <Scene />
-      </Canvas>
-    </Suspense>
+    <GameContextProvider>
+      <Suspense fallback={<Fallback />}>
+        <Canvas
+          className={className}
+          camera={{
+            position: config.camera.position,
+            fov: config.camera.fov,
+            near: 70,
+            far: 150,
+          }}
+          frameloop={!paused && gameStage === "playing" ? "always" : "demand"}
+        >
+          <Preload all />
+          <BakeShadows />
+          <Scene />
+        </Canvas>
+      </Suspense>
+    </GameContextProvider>
   );
 };
