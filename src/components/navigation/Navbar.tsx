@@ -6,7 +6,7 @@ import { Display } from "@/components/Display";
 import { useTimer, msToTime } from "@/functions/timer";
 import { useEffect } from "react";
 
-export const GameNavigation = () => {
+export default function GameNavigatioe() {
   const paused = useStorage((state) => state.paused);
   const timerConfig = useStorage((state) => state.config.game.timer);
   const switchPaused = useStorage((state) => state.switchPaused);
@@ -38,4 +38,4 @@ export const GameNavigation = () => {
       <Display text={msToTime(time)} />
     </nav>
   );
-};
+}

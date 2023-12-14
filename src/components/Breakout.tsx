@@ -1,10 +1,10 @@
 import Game from "@/components/breakout";
-import { GameNavigation } from "@/components/game/Navigation";
+import Navbar from "@/components/navigation/Navbar";
 import { breakout, game, placeholder } from "@/styles/breakout.css";
 import { useStorage } from "@/storage";
-import { GamePauseMenu } from "@/components/game/PauseMenu";
-import { GameStartMenu } from "@/components/game/StartMenu";
-import { GameOverMenu } from "@/components/game/OverMenu";
+import { GamePauseMenu } from "@/components/navigation/PauseMenu";
+import { GameStartMenu } from "@/components/navigation/StartMenu";
+import { GameOverMenu } from "@/components/navigation/OverMenu";
 import { useEffect, useRef } from "react";
 import type { KeyboardEvent } from "react";
 
@@ -81,7 +81,7 @@ export default function BreakoutNormal() {
           over: <GameOverMenu />,
         }[gameStage]
       }
-      <GameNavigation />
+      <Navbar />
       <Game className={game} />
       <div className={placeholder}></div>
     </div>
