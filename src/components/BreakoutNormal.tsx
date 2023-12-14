@@ -1,4 +1,4 @@
-import Game from "./breakoutNormal";
+import Game from "./breakout";
 import { GameNavigation } from "./game/Navigation";
 import { breakout, game, placeholder } from "./styles/breakout.css";
 import { useStorage } from "../storage";
@@ -17,7 +17,7 @@ export const BreakoutNormal = () => {
       resetGame: state.resetGame,
       switchPaused: state.switchPaused,
       setupGame: state.setupGame,
-    })
+    }),
   );
 
   const controlls = {

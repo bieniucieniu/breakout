@@ -17,21 +17,21 @@ export default ({ className }: { className?: string }) => {
   useWindowFocus(undefined, () => setPause(true));
 
   return (
-    <Canvas
-      className={className}
-      camera={{
-        position: config.camera.position,
-        fov: config.camera.fov,
-        near: 70,
-        far: 150,
-      }}
-      frameloop={!paused && gameStage === "playing" ? "always" : "demand"}
-    >
-      <Suspense fallback={<Fallback />}>
+    <Suspense fallback={<Fallback />}>
+      <Canvas
+        className={className}
+        camera={{
+          position: config.camera.position,
+          fov: config.camera.fov,
+          near: 70,
+          far: 150,
+        }}
+        frameloop={!paused && gameStage === "playing" ? "always" : "demand"}
+      >
         <Preload all />
         <BakeShadows />
         <Scene />
-      </Suspense>
-    </Canvas>
+      </Canvas>
+    </Suspense>
   );
 };
