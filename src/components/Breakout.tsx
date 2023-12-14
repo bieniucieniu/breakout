@@ -1,14 +1,14 @@
-import Game from "./breakout";
-import { GameNavigation } from "./game/Navigation";
-import { breakout, game, placeholder } from "./styles/breakout.css";
-import { useStorage } from "../storage";
-import { GamePauseMenu } from "./game/PauseMenu";
-import { GameStartMenu } from "./game/StartMenu";
-import { GameOverMenu } from "./game/OverMenu";
+import Game from "@/components/breakout";
+import { GameNavigation } from "@/components/game/Navigation";
+import { breakout, game, placeholder } from "@/components/styles/breakout.css";
+import { useStorage } from "@/storage";
+import { GamePauseMenu } from "@/components/game/PauseMenu";
+import { GameStartMenu } from "@/components/game/StartMenu";
+import { GameOverMenu } from "@/components/game/OverMenu";
 import { useEffect, useRef } from "react";
 import type { KeyboardEvent } from "react";
 
-export const BreakoutNormal = () => {
+export default function BreakoutNormal() {
   const gameStage = useStorage((state) => state.gameStage);
   const paused = useStorage((state) => state.paused);
   const { resetGame, startGame, switchPaused, setupGame } = useStorage(
@@ -86,4 +86,4 @@ export const BreakoutNormal = () => {
       <div className={placeholder}></div>
     </div>
   );
-};
+}

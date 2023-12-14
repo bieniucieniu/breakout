@@ -12,7 +12,7 @@ import { ConfigEditor } from "./ConfigEditor";
 import { Button } from "./Buttons";
 import { useState } from "react";
 
-export const MainMenu = () => {
+export default function MainMenu() {
   const [showConfig, setShowConfig] = useState(false);
   return (
     <div className={mainMenuWraper}>
@@ -32,4 +32,4 @@ export const MainMenu = () => {
       </div>
     </div>
   );
-};
+}
