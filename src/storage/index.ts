@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { Brick, createBricksGrid } from "../functions/createBricksGrid";
 import defaultConfig from "../defaultConfig";
-import { addScore } from "../firebase/scoreStorage";
 
 type Storage = {
   paused: boolean;
@@ -114,12 +113,6 @@ export const useStorage = create<Storage>((set) => ({
   endGame: (props) => {
     set((state) => {
       if (state.gameStage === "playing") {
-        addScore({
-          gameType: state.gameType,
-          score: props?.score ?? state.score,
-          ms: state.time,
-        });
-
         state.setLastScore({
           [state.gameType]: props?.score ?? state.score,
         });
