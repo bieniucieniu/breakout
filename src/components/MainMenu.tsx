@@ -8,15 +8,11 @@ import {
   mainMenuContent,
   mainMenuWraper,
 } from "./styles/mainMenu.css";
-import { useStorage } from "../storage";
-import { GameTypeSelector } from "./GameTypeSelector";
 import { ConfigEditor } from "./ConfigEditor";
 import { Button } from "./Buttons";
 import { useState } from "react";
-import { Display } from "./Display";
 
 export const MainMenu = () => {
-  const gameType = useStorage((state) => state.gameType);
   const [showConfig, setShowConfig] = useState(false);
   return (
     <div className={mainMenuWraper}>
@@ -26,18 +22,9 @@ export const MainMenu = () => {
 
       <div className={mainMenu}>
         <div className={mainMenuContent}>
-          <Link
-            href={
-              gameType === "gravity" ? "/breakoutGravity" : "/breakoutNormal"
-            }
-            className={title}
-          >
+          <Link href="/breakoutGravity" className={title}>
             play
           </Link>
-          <span style={{ fontSize: "1.5rem", opacity: ".5" }}>{gameType}</span>
-          <Display>
-            <GameTypeSelector />
-          </Display>
         </div>
         <div className={configButton}>
           <Button onClick={() => setShowConfig(!showConfig)}>config</Button>

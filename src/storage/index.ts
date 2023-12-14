@@ -35,8 +35,6 @@ type Storage = {
     time?: number;
     gravity?: number;
   }) => void;
-  gameType: "classic" | "time" | "gravity";
-  setGameType: (type: "classic" | "time" | "gravity") => void;
   time: number;
   setTime: (time: number) => void;
 };
@@ -49,7 +47,6 @@ export const useStorage = create<Storage>((set) => ({
   bricks: [],
   lastScore: { classic: 0, time: 0, gravity: 0 },
   config: JSON.parse(JSON.stringify(defaultConfig)),
-  gameType: "classic",
   time: 0,
   ballPosition: [...defaultConfig.game.ball.defaultPosition],
   paddlePosition: [...defaultConfig.game.paddle.defaultPosition],
@@ -113,10 +110,6 @@ export const useStorage = create<Storage>((set) => ({
   endGame: (props) => {
     set((state) => {
       if (state.gameStage === "playing") {
-        state.setLastScore({
-          [state.gameType]: props?.score ?? state.score,
-        });
-
         return {
           gameStage: "over",
           paused: true,
@@ -145,7 +138,6 @@ export const useStorage = create<Storage>((set) => ({
         gravity: time ?? state.lastScore.gravity,
       },
     })),
-  setGameType: (type) => set(() => ({ gameType: type })),
   setTime: (time) => set(() => ({ time: time })),
   setBallPosition: (position) => set(() => ({ ballPosition: position })),
   setPaddlePosition: (position) => set(() => ({ paddlePosition: position })),
