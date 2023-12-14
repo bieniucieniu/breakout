@@ -1,5 +1,5 @@
 import { useMemo, useRef } from "react";
-import { useStorage } from "../../storage";
+import { useStorage } from "@/storage";
 import { useFrame } from "@react-three/fiber";
 import { Vector2 } from "three";
 
@@ -19,7 +19,7 @@ export const Ball = ({
   const removeLife = useStorage((state) => state.removeLife);
   const ref = useRef<THREE.Mesh>(null!);
   const vector = useRef(
-    new Vector2(ball.speed / Math.sqrt(2), ball.speed / Math.sqrt(2))
+    new Vector2(ball.speed / Math.sqrt(2), ball.speed / Math.sqrt(2)),
   );
   const { paused, gameStage } = useStorage((state) => ({
     paused: state.paused,
@@ -33,11 +33,11 @@ export const Ball = ({
 
   const minVerSpeed = useMemo(
     () => Math.sin(ball.minAngle) * ball.speed,
-    [config]
+    [config],
   );
   const minHorSpeed = useMemo(
     () => Math.cos(ball.minAngle) * ball.speed,
-    [config]
+    [config],
   );
 
   useFrame((_, delta) => {

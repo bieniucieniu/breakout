@@ -1,6 +1,6 @@
 import Game from "@/components/breakout";
 import { GameNavigation } from "@/components/game/Navigation";
-import { breakout, game, placeholder } from "@/components/styles/breakout.css";
+import { breakout, game, placeholder } from "@/styles/breakout.css";
 import { useStorage } from "@/storage";
 import { GamePauseMenu } from "@/components/game/PauseMenu";
 import { GameStartMenu } from "@/components/game/StartMenu";

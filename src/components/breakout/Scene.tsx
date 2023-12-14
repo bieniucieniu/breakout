@@ -1,10 +1,9 @@
 import { useRef } from "react";
-import { useStorage } from "../../storage";
+import { useStorage } from "@/storage";
 import { Ball } from "./Ball";
 import { BricksGrid } from "./Bricks";
 import { Boarder } from "./Boarder";
 import { Paddle } from "./Paddle";
-import { useFrame, useThree } from "@react-three/fiber";
 import { Vector3 } from "three";
 
 export const Scene = () => {

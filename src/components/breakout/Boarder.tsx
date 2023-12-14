@@ -1,4 +1,4 @@
-import { useStorage } from "../../storage";
+import { useStorage } from "@/storage";
 
 export const Boarder = () => {
   const { boardArgs, border } = useStorage((state) => ({

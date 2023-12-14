@@ -1,4 +1,5 @@
-import { display } from "./styles/basicComponents.css";
+import { display } from "@/styles/basicComponents.css";
+import { key } from "@/styles/gameMenu.css";
 
 type ValueProps = {
   text?: string;
@@ -38,8 +39,6 @@ export const Display = ({
     </div>
   );
 };
-
-import { key } from "./styles/gameMenu.css";
 
 type Keys = {
   keys: string[];

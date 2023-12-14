@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { title } from "./styles/basicStyles.css";
+import { title } from "@/styles/basicStyles.css";
 import {
   configButton,
   configSideBarHidden,
@@ -7,7 +7,7 @@ import {
   mainMenu,
   mainMenuContent,
   mainMenuWraper,
-} from "./styles/mainMenu.css";
+} from "@/styles/mainMenu.css";
 import { ConfigEditor } from "./ConfigEditor";
 import { Button } from "./Buttons";
 import { useState } from "react";

@@ -8,8 +8,8 @@ import {
   objectOpen,
   objectClosed,
   listWraper,
-} from "./styles/configEditor.css";
-import { Button, LinkButton } from "./Buttons";
+} from "@/styles/configEditor.css";
+import { Button } from "./Buttons";
 import defaultConfig from "../defaultConfig";
 
 type ConfigTypes = String | Number | Boolean;
@@ -17,8 +17,6 @@ type ConfigTypes = String | Number | Boolean;
 type Obj = {
   [key: string]: ConfigTypes | Obj;
 };
-
-const ArrayModule = ({}: {}) => {};
 
 const PrimitivesModule = ({
   keyToElement,

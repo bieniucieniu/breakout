@@ -1,6 +1,6 @@
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
-import { useStorage } from "../../storage";
+import { useStorage } from "@/storage";
 
 const touchControls = () => {
   const ref = useRef<{ x: number | undefined; y: number | undefined }>({

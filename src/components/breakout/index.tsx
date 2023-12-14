@@ -1,10 +1,10 @@
 import { Canvas } from "@react-three/fiber";
-import { useStorage } from "../../storage";
+import { useStorage } from "@/storage";
 import { Scene } from "./Scene";
 import { BakeShadows, Preload } from "@react-three/drei";
 import { Suspense } from "react";
-import { Fallback } from "./Fallback";
-import { useWindowFocus } from "../../functions/useWindowFocus";
+import { Fallback } from "@/components/Fallback";
+import { useWindowFocus } from "@/functions/useWindowFocus";
 
 export default ({ className }: { className?: string }) => {
   const config = useStorage((state) => state.config.game);

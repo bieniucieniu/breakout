@@ -1,5 +1,5 @@
-import { useStorage } from "../../storage";
-import type { Brick } from "../../functions/createBricksGrid";
+import { useStorage } from "@/storage";
+import type { Brick } from "@/functions/createBricksGrid";
 import { Shape, Vector2 } from "three";
 import { useMemo } from "react";
 
@@ -17,7 +17,7 @@ export const BricksGrid = ({ bricks }: { bricks: Brick[] }) => {
         new Vector2(0, 0),
       ]),
 
-    [brickConf.args]
+    [brickConf.args],
   );
 
   const extrudeSettings = {
@@ -53,7 +53,7 @@ export const BricksGrid = ({ bricks }: { bricks: Brick[] }) => {
                 color={colors[brick.points ? brick.points - 1 : 0]}
               />
             </mesh>
-          )
+          ),
       )}
     </>
   );
