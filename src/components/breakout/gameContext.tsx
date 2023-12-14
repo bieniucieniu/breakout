@@ -1,4 +1,4 @@
-import { Brick } from "@/functions/createBricksGrid";
+import { Brick, createBricksGrid } from "@/functions/createBricksGrid";
 import { useStorage } from "@/storage";
 import { createContext, useContext, useRef } from "react";
 
@@ -22,12 +22,21 @@ export function GameContextProvider({
   const endGame = useStorage((s) => s.endGame);
   const score = useStorage((s) => s.score);
   const removeLive = useStorage((s) => s.removeLive);
+  const config = useStorage((s) => s.config);
 
   const paused = useRef<boolean>(false);
   const time = useRef<number>(0);
   const ballPosition = useRef<[number, number]>([0, 0]);
   const paddlePosition = useRef<[number, number]>([0, 0]);
-  const bricks = useRef<Brick[]>([]);
+  const bricks = useRef<Brick[]>(
+    createBricksGrid({
+      gridSize: config.game.grid.gridSize,
+      args: config.game.grid.args,
+      position: [0, config.game.args[1] / 4],
+      brickSize: config.game.brick.args,
+      maxPoints: config.game.brick.maxPoints,
+    }),
+  );
 
   return (
     <context.Provider
