@@ -3,7 +3,11 @@ import type { Brick } from "@/functions/createBricksGrid";
 import { Shape, Vector2 } from "three";
 import { useMemo } from "react";
 
-export const BricksGrid = ({ bricks }: { bricks: Brick[] }) => {
+export default function BricksGrid({
+  bricksRef,
+}: {
+  bricksRef: React.MutableRefObject<Brick[]>;
+}) {
   const colors = useStorage((state) => state.config.game.brick.colors);
   const brickConf = useStorage((state) => state.config.game.brick);
 
@@ -32,7 +36,7 @@ export const BricksGrid = ({ bricks }: { bricks: Brick[] }) => {
 
   return (
     <>
-      {bricks.map(
+      {bricksRef.current.map(
         (brick) =>
           brick.points > 0 && (
             <mesh
@@ -57,4 +61,4 @@ export const BricksGrid = ({ bricks }: { bricks: Brick[] }) => {
       )}
     </>
   );
-};
+}

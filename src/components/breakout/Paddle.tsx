@@ -1,8 +1,9 @@
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { useStorage } from "@/storage";
+import { useGameContext } from "./gameContext";
 
-const touchControls = () => {
+function touchControls() {
   const ref = useRef<{ x: number | undefined; y: number | undefined }>({
     x: undefined,
     y: undefined,
@@ -37,23 +38,20 @@ const touchControls = () => {
   }, []);
 
   return ref.current;
-};
+}
 
-export const Paddle = ({
+export default function Paddle({
   positionRef,
-  position,
 }: {
-  positionRef: React.MutableRefObject<THREE.Vector3>;
-  position: [number, number];
-}) => {
+  positionRef: React.MutableRefObject<[number, number]>;
+}) {
   const { paddle, args } = useStorage((state) => ({
     paddle: state.config.game.paddle,
     args: state.config.game.args,
   }));
-  const { paused, gameStage } = useStorage((state) => ({
-    paused: state.paused,
-    gameStage: state.gameStage,
-  }));
+
+  const { paused } = useGameContext();
+
   const touch = touchControls();
 
   const ref = useRef<THREE.Mesh>(null!);
@@ -75,14 +73,14 @@ export const Paddle = ({
   });
 
   useFrame(({ pointer, viewport }, delta) => {
-    if (paused || gameStage !== "playing") return;
+    if (paused.current || paused.current === undefined) return;
 
     if (controllsType.current === "touch") {
       if (touch.x !== undefined && touch.y !== undefined) {
         vector.current = [
-          ((touch.x * 2 * viewport.width) / 2 - ref.current.position.x) *
+          ((touch.x * 2 * viewport.width) / 2 - positionRef.current[0]) *
             maxSpeed[0],
-          ((touch.y * 2 * viewport.height) / 2 - ref.current.position.y) *
+          ((touch.y * 2 * viewport.height) / 2 - positionRef.current[1]) *
             maxSpeed[1],
         ];
       } else {
@@ -90,9 +88,9 @@ export const Paddle = ({
       }
     } else {
       vector.current = [
-        ((pointer.x * viewport.width) / 2 - ref.current.position.x) *
+        ((pointer.x * viewport.width) / 2 - positionRef.current[0]) *
           maxSpeed[0],
-        ((pointer.y * viewport.height) / 2 - ref.current.position.y) *
+        ((pointer.y * viewport.height) / 2 - positionRef.current[1]) *
           maxSpeed[1],
       ];
     }
@@ -100,28 +98,29 @@ export const Paddle = ({
     if (vector.current[1] > maxSpeed[1]) vector.current[1] = maxSpeed[1];
     if (vector.current[1] < -maxSpeed[1]) vector.current[1] = -maxSpeed[1];
 
-    ref.current.position.x += vector.current[0] * delta;
-    ref.current.position.y += vector.current[1] * delta;
+    positionRef.current[0] += vector.current[0] * delta;
+    positionRef.current[1] += vector.current[1] * delta;
 
-    if (ref.current.position.x >= args[0] / 2 - paddle.args[0] / 2) {
-      ref.current.position.x = args[0] / 2 - paddle.args[0] / 2;
-    } else if (ref.current.position.x <= -args[0] / 2 + paddle.args[0] / 2) {
-      ref.current.position.x = -args[0] / 2 + paddle.args[0] / 2;
+    if (positionRef.current[0] >= args[0] / 2 - paddle.args[0] / 2) {
+      positionRef.current[0] = args[0] / 2 - paddle.args[0] / 2;
+    } else if (positionRef.current[0] <= -args[0] / 2 + paddle.args[0] / 2) {
+      positionRef.current[0] = -args[0] / 2 + paddle.args[0] / 2;
     }
 
-    if (ref.current.position.y >= -2 - paddle.args[1] / 2) {
-      ref.current.position.y = -2 - paddle.args[1] / 2;
-    } else if (ref.current.position.y <= -args[1] / 2 + paddle.args[1] / 2) {
-      ref.current.position.y = -args[1] / 2 + paddle.args[1] / 2;
+    if (positionRef.current[1] >= -2 - paddle.args[1] / 2) {
+      positionRef.current[1] = -2 - paddle.args[1] / 2;
+    } else if (positionRef.current[1] <= -args[1] / 2 + paddle.args[1] / 2) {
+      positionRef.current[1] = -args[1] / 2 + paddle.args[1] / 2;
     }
 
-    positionRef.current = ref.current.position;
+    ref.current.position.setX(positionRef.current[0]);
+    ref.current.position.setY(positionRef.current[1]);
   });
 
   return (
-    <mesh ref={ref} position={[...position, 0]}>
+    <mesh ref={ref} position={[...positionRef.current, 0]}>
       <boxGeometry args={paddle.args} />
       <meshToonMaterial color={"red"} />
     </mesh>
   );
-};
+}

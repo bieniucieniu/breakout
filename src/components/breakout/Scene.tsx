@@ -1,21 +1,15 @@
 import { useRef } from "react";
 import { useStorage } from "@/storage";
 import { Ball } from "./Ball";
-import { BricksGrid } from "./Bricks";
+import Bricks from "./Bricks";
 import { Boarder } from "./Boarder";
-import { Paddle } from "./Paddle";
-import { Vector3 } from "three";
+import Paddle from "./Paddle";
+import { useGameContext } from "./gameContext";
 
 export const Scene = () => {
   const config = useStorage((state) => state.config.game);
-  const bricks = useStorage((state) => state.bricks);
-  const { ballPosition, paddlePosition } = useStorage((state) => ({
-    ballPosition: state.ballPosition,
-    paddlePosition: state.paddlePosition,
-  }));
+  const { ballPosition, paddlePosition, bricks } = useGameContext();
   const groupRef = useRef<THREE.Group>(null!);
-
-  const paddlePositionRef = useRef(new Vector3());
 
   return (
     <>
@@ -24,10 +18,10 @@ export const Scene = () => {
         {config.lights.map((light, index) => (
           <pointLight key={index} {...light} />
         ))}
-        <Paddle position={paddlePosition} positionRef={paddlePositionRef} />
+        <Paddle positionRef={paddlePosition} />
         <Boarder />
-        <BricksGrid bricks={bricks} />
-        <Ball position={ballPosition} paddlePositionRef={paddlePositionRef} />
+        <Bricks bricksRef={bricks} />
+        <Ball positionRef={ballPosition} paddlePositionRef={paddlePosition} />
       </group>
     </>
   );
