@@ -26,8 +26,12 @@ export function GameContextProvider({
 
   const paused = useRef<boolean>(false);
   const time = useRef<number>(0);
-  const ballPosition = useRef<[number, number]>([0, 0]);
-  const paddlePosition = useRef<[number, number]>([0, 0]);
+  const ballPosition = useRef<[number, number]>(
+    config.game.ball.defaultPosition,
+  );
+  const paddlePosition = useRef<[number, number]>(
+    config.game.paddle.defaultPosition,
+  );
   const bricks = useRef<Brick[]>(
     createBricksGrid({
       gridSize: config.game.grid.gridSize,
