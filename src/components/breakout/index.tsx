@@ -2,8 +2,6 @@ import { Canvas } from "@react-three/fiber";
 import { useStorage } from "@/storage";
 import { Scene } from "./Scene";
 import { BakeShadows, Preload } from "@react-three/drei";
-import { Suspense } from "react";
-import { Fallback } from "@/components/Fallback";
 import { useWindowFocus } from "@/functions/useWindowFocus";
 import { GameContextProvider } from "./gameContext";
 
