@@ -19,22 +19,20 @@ export default ({ className }: { className?: string }) => {
 
   return (
     <GameContextProvider>
-      <Suspense fallback={<Fallback />}>
-        <Canvas
-          className={className}
-          camera={{
-            position: config.camera.position,
-            fov: config.camera.fov,
-            near: 70,
-            far: 150,
-          }}
-          frameloop={!paused && gameStage === "playing" ? "always" : "demand"}
-        >
-          <Preload all />
-          <BakeShadows />
-          <Scene />
-        </Canvas>
-      </Suspense>
+      <Canvas
+        className={className}
+        camera={{
+          position: config.camera.position,
+          fov: config.camera.fov,
+          near: 70,
+          far: 150,
+        }}
+        frameloop={!paused && gameStage === "playing" ? "always" : "demand"}
+      >
+        <Preload all />
+        <BakeShadows />
+        <Scene />
+      </Canvas>
     </GameContextProvider>
   );
 };
