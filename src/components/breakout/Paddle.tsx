@@ -1,7 +1,7 @@
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { useStorage } from "@/storage";
-import { useGameContext } from "./gameContext";
+import { useGameContext, useTick } from "./gameContext";
 
 function touchControls() {
   const ref = useRef<{ x: number | undefined; y: number | undefined }>({
@@ -72,7 +72,32 @@ export default function Paddle({
     };
   });
 
-  useFrame(({ pointer, viewport }, delta) => {
+  useTick((delta) => {
+    if (paused.current || paused.current === undefined) return;
+
+    if (vector.current[1] > maxSpeed[1]) vector.current[1] = maxSpeed[1];
+    if (vector.current[1] < -maxSpeed[1]) vector.current[1] = -maxSpeed[1];
+
+    positionRef.current[0] += vector.current[0] * (delta / 1000);
+    positionRef.current[1] += vector.current[1] * (delta / 1000);
+
+    if (positionRef.current[0] >= args[0] / 2 - paddle.args[0] / 2) {
+      positionRef.current[0] = args[0] / 2 - paddle.args[0] / 2;
+    } else if (positionRef.current[0] <= -args[0] / 2 + paddle.args[0] / 2) {
+      positionRef.current[0] = -args[0] / 2 + paddle.args[0] / 2;
+    }
+
+    if (positionRef.current[1] >= -2 - paddle.args[1] / 2) {
+      positionRef.current[1] = -2 - paddle.args[1] / 2;
+    } else if (positionRef.current[1] <= -args[1] / 2 + paddle.args[1] / 2) {
+      positionRef.current[1] = -args[1] / 2 + paddle.args[1] / 2;
+    }
+
+    ref.current.position.setX(positionRef.current[0]);
+    ref.current.position.setY(positionRef.current[1]);
+  });
+
+  useFrame(({ pointer, viewport }) => {
     if (paused.current || paused.current === undefined) return;
 
     if (controllsType.current === "touch") {
@@ -94,27 +119,6 @@ export default function Paddle({
           maxSpeed[1],
       ];
     }
-
-    if (vector.current[1] > maxSpeed[1]) vector.current[1] = maxSpeed[1];
-    if (vector.current[1] < -maxSpeed[1]) vector.current[1] = -maxSpeed[1];
-
-    positionRef.current[0] += vector.current[0] * delta;
-    positionRef.current[1] += vector.current[1] * delta;
-
-    if (positionRef.current[0] >= args[0] / 2 - paddle.args[0] / 2) {
-      positionRef.current[0] = args[0] / 2 - paddle.args[0] / 2;
-    } else if (positionRef.current[0] <= -args[0] / 2 + paddle.args[0] / 2) {
-      positionRef.current[0] = -args[0] / 2 + paddle.args[0] / 2;
-    }
-
-    if (positionRef.current[1] >= -2 - paddle.args[1] / 2) {
-      positionRef.current[1] = -2 - paddle.args[1] / 2;
-    } else if (positionRef.current[1] <= -args[1] / 2 + paddle.args[1] / 2) {
-      positionRef.current[1] = -args[1] / 2 + paddle.args[1] / 2;
-    }
-
-    ref.current.position.setX(positionRef.current[0]);
-    ref.current.position.setY(positionRef.current[1]);
   });
 
   return (
