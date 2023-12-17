@@ -1,6 +1,13 @@
 import { Brick, createBricksGrid } from "@/functions/createBricksGrid";
 import { useStorage } from "@/storage";
-import { createContext, useContext, useEffect, useMemo, useRef } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 export type Context = {
   paused: React.MutableRefObject<boolean>;
@@ -17,7 +24,7 @@ const context = createContext<Context | undefined>(undefined);
 
 export function GameContextProvider({
   children,
-  tickRate = 20,
+  tickRate = 0,
 }: {
   children: React.ReactNode;
   tickRate?: number;
@@ -86,11 +93,27 @@ export function useGameContext() {
   return c;
 }
 
-export default function useTick(fn: (delta: number) => void) {
+export function useTick(fn: (delta: number) => void, depArray?: any[]) {
   const { tickRate } = useGameContext();
-  const delta = useMemo(() => 1000 / tickRate, [tickRate]);
+
+  const delta = useMemo(
+    () => (tickRate === 0 ? 0 : 1000 / tickRate),
+    [tickRate],
+  );
+
+  const [iId, setIID] = useState<number | undefined>(undefined);
+
   useEffect(() => {
-    const interval = window.setInterval(() => fn(delta), delta);
-    return window.clearInterval(interval);
-  }, []);
+    let t0 = Date.now();
+    const interval = window.setInterval(() => {
+      const t = Date.now();
+      const d = t - t0;
+      t0 = t;
+      fn(d);
+    }, delta);
+    setIID(interval);
+    return () => window.clearInterval(interval);
+  }, [delta, ...(depArray ?? [])]);
+
+  return () => clearInterval(iId);
 }
