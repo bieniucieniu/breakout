@@ -22,7 +22,7 @@ type Storage = {
 
   gameStage: "init" | "playing" | "over";
   startGame: () => void;
-  endGame: (props?: { score?: number; time?: number }) => void;
+  endGame: () => void;
   resetGame: () => void;
 
   lastScore: {

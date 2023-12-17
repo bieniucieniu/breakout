@@ -20,7 +20,6 @@ export function GameContextProvider({
   children: React.ReactNode;
 }) {
   const endGame = useStorage((s) => s.endGame);
-  const score = useStorage((s) => s.score);
   const increaseScore = useStorage((s) => s.increaseScore);
   const removeLive = useStorage((s) => s.removeLive);
   const config = useStorage((s) => s.config);
@@ -51,7 +50,7 @@ export function GameContextProvider({
         ballPosition,
         paddlePosition,
         bricks,
-        onBrickHit: (brickName, s = 1) => {
+        onBrickHit: (brickName) => {
           let bricksPointsTotal = 0;
           bricks.current.forEach((e) => {
             if (e.name === brickName) {
@@ -63,9 +62,7 @@ export function GameContextProvider({
           });
 
           if (bricksPointsTotal <= 0) {
-            endGame({
-              score: score + s,
-            });
+            endGame();
           }
         },
         onLiveLose: () => removeLive(),
