@@ -1,6 +1,6 @@
 import { Brick, createBricksGrid } from "@/functions/createBricksGrid";
 import { useStorage } from "@/storage";
-import { createContext, useContext, useRef } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef } from "react";
 
 export type Context = {
   paused: React.MutableRefObject<boolean>;
@@ -10,14 +10,17 @@ export type Context = {
   bricks: React.MutableRefObject<Brick[]>;
   onBrickHit: (brickName: string, score?: number) => void;
   onLiveLose: () => void;
+  tickRate: number;
 };
 
 const context = createContext<Context | undefined>(undefined);
 
 export function GameContextProvider({
   children,
+  tickRate = 20,
 }: {
   children: React.ReactNode;
+  tickRate?: number;
 }) {
   const endGame = useStorage((s) => s.endGame);
   const increaseScore = useStorage((s) => s.increaseScore);
@@ -66,6 +69,7 @@ export function GameContextProvider({
           }
         },
         onLiveLose: () => removeLive(),
+        tickRate,
       }}
     >
       {children}
@@ -80,4 +84,13 @@ export function useGameContext() {
   }
 
   return c;
+}
+
+export default function useTick(fn: (delta: number) => void) {
+  const { tickRate } = useGameContext();
+  const delta = useMemo(() => 1000 / tickRate, [tickRate]);
+  useEffect(() => {
+    const interval = window.setInterval(() => fn(delta), delta);
+    return window.clearInterval(interval);
+  }, []);
 }
