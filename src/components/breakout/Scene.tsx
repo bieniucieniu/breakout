@@ -11,7 +11,9 @@ export const Scene = () => {
 
   return (
     <group ref={groupRef}>
-      <ambientLight intensity={0.4} />
+      <pointLight intensity={500} position={[10, 10, 10]} />
+      <pointLight intensity={500} position={[-10, 10, 10]} />
+      <ambientLight />
       <Paddle positionRef={paddlePosition} />
       <Boarder />
       <Bricks bricksRef={bricks} />

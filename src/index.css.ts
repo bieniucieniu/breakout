@@ -7,7 +7,7 @@ globalStyle("*", {
   fontSize: "1.1rem",
 });
 
-globalStyle("html, body", {
+globalStyle("body", {
   padding: "0",
   margin: "0",
   height: "100vh",

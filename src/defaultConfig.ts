@@ -3,9 +3,8 @@ const defaultConfig = {
     lives: 3,
     tickRate: 30,
     args: [64, 64] as [number, number],
-    gravity: [0, -9.82] as [number, number],
     camera: {
-      position: [0, 0, 80] as [number, number, number],
+      position: [0, 0, 0] as [number, number, number],
       fov: 60,
     },
     border: {
@@ -72,11 +71,7 @@ const defaultConfig = {
     lights: [
       {
         position: [10, 10, 10] as [number, number, number],
-        intensity: 0.4,
-      },
-      {
-        position: [-10, 10, 10] as [number, number, number],
-        intensity: 0.4,
+        intensity: 1000,
       },
     ],
     materials: {
