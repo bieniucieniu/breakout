@@ -1,4 +1,4 @@
-import Game from "./breakoutGravity";
+import Game from "./breakoutGravity/index";
 import { GameNavigation } from "./game/Navigation";
 import { breakout, game, placeholder } from "./styles/breakout.css";
 import { useStorage } from "../storage";
@@ -26,14 +26,12 @@ const GameControllsHints = () => {
 export const BreakoutGravity = () => {
   const gameStage = useStorage((state) => state.gameStage);
   const paused = useStorage((state) => state.paused);
-  const { resetGame, startGame, switchPaused, setupGame } = useStorage(
-    (state) => ({
-      startGame: state.startGame,
-      resetGame: state.resetGame,
-      switchPaused: state.switchPaused,
-      setupGame: state.setupGame,
-    })
-  );
+  const { resetGame, startGame, switchPaused, setupGame } = useStorage((state) => ({
+    startGame: state.startGame,
+    resetGame: state.resetGame,
+    switchPaused: state.switchPaused,
+    setupGame: state.setupGame,
+  }));
 
   const controlls = {
     init: {

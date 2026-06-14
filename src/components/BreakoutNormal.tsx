@@ -1,4 +1,4 @@
-import Game from "./breakoutNormal";
+import Game from "./breakoutNormal/index";
 import { GameNavigation } from "./game/Navigation";
 import { breakout, game, placeholder } from "./styles/breakout.css";
 import { useStorage } from "../storage";
@@ -11,14 +11,12 @@ import type { KeyboardEvent } from "react";
 export const BreakoutNormal = () => {
   const gameStage = useStorage((state) => state.gameStage);
   const paused = useStorage((state) => state.paused);
-  const { resetGame, startGame, switchPaused, setupGame } = useStorage(
-    (state) => ({
-      startGame: state.startGame,
-      resetGame: state.resetGame,
-      switchPaused: state.switchPaused,
-      setupGame: state.setupGame,
-    })
-  );
+  const { resetGame, startGame, switchPaused, setupGame } = useStorage((state) => ({
+    startGame: state.startGame,
+    resetGame: state.resetGame,
+    switchPaused: state.switchPaused,
+    setupGame: state.setupGame,
+  }));
 
   const controlls = {
     init: {

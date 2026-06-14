@@ -18,11 +18,7 @@ export const Boarder = () => {
         material={materials.default}
       />
       <KinematicBox
-        args={[
-          boardArgs[0] + border.tickness * 2,
-          border.tickness,
-          border.depth,
-        ]}
+        args={[boardArgs[0] + border.tickness * 2, border.tickness, border.depth]}
         position={[0, (boardArgs[1] + border.tickness) / 2]}
         color={border.color}
         material={materials.default}

@@ -1,9 +1,4 @@
-import {
-  menuBG,
-  menuButtons,
-  pauseMenuTitle,
-  pauseMenuContent,
-} from "../styles/gameMenu.css";
+import { menuBG, menuButtons, pauseMenuTitle, pauseMenuContent } from "../styles/gameMenu.css";
 import { Button, LinkButton } from "../Buttons";
 import { useStorage } from "../../storage";
 

@@ -16,13 +16,7 @@ import { GameTypeSelector } from "./GameTypeSelector";
 import { useMemo } from "react";
 import { LinkButton } from "./Buttons";
 
-const Row = ({
-  score,
-  name,
-  timestamp,
-  ms,
-  index,
-}: Data & { index: number }) => {
+const Row = ({ score, name, timestamp, ms, index }: Data & { index: number }) => {
   const date = timestamp?.toDate
     ? formatDistance(timestamp.toDate(), new Date(), {
         addSuffix: true,
@@ -64,7 +58,7 @@ export const Scoreboard = () => {
 
   const data = useMemo(
     () => snap?.docs.map((doc) => ({ ...doc.data(), id: doc.id })) ?? [],
-    [snap]
+    [snap],
   );
 
   return (

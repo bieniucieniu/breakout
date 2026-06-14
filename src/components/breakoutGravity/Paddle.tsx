@@ -68,7 +68,7 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
       }
       api.velocity.set(
         vector.current[0] * paddle.acceleration,
-        vector.current[1] * paddle.acceleration
+        vector.current[1] * paddle.acceleration,
       );
       ////angle////angle////
       if (vector.current[0] > 0) {
@@ -103,8 +103,7 @@ export const Paddle = ({ position }: { position: [number, number] }) => {
     ] as [number, number];
     // api.velocity.set(vec.current[0] * 10, vec.current[1] * 10);
     if (vector.current[0] > maxSpeed[0]) vector.current[0] = maxSpeed[0];
-    if (vector.current[0] < -paddle.maxSpeed)
-      vector.current[0] = -paddle.maxSpeed;
+    if (vector.current[0] < -paddle.maxSpeed) vector.current[0] = -paddle.maxSpeed;
     if (vector.current[1] > maxSpeed[1]) vector.current[1] = maxSpeed[1];
     if (vector.current[1] < -maxSpeed[1]) vector.current[1] = -maxSpeed[1];
     movementHandler();

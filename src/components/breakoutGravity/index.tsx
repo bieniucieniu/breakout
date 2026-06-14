@@ -12,7 +12,7 @@ export default ({ className }: { className?: string }) => {
 
   useWindowFocus(
     () => setWindowFocused(true),
-    () => setWindowFocused(false)
+    () => setWindowFocused(false),
   );
   return (
     <Canvas

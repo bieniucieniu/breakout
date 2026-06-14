@@ -26,10 +26,7 @@ export const createCoordsGrid = ({
 
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < columns; j++) {
-      cords.push([
-        x - width / 2 + xStep / 2 + j * xStep,
-        y - height / 2 + yStep / 2 + i * yStep,
-      ]);
+      cords.push([x - width / 2 + xStep / 2 + j * xStep, y - height / 2 + yStep / 2 + i * yStep]);
     }
   }
 

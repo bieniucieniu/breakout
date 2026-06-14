@@ -1,8 +1,10 @@
 # Breakout
-breakout game with 3D models. 
+
+breakout game with 3D models.
 (and one with p2 Physics. Base on gravity and collisions, not working very well 🙃)
 
 tools used:
+
 - [React](https://react.dev/)
 - [typescript](https://www.typescriptlang.org/)
 - [firebase](https://firebase.google.com/)

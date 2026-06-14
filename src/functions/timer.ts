@@ -42,7 +42,7 @@ export const useTimer = ({
   };
 
   useEffect(() => {
-    let interval: NodeJS.Timer;
+    let interval: ReturnType<typeof setInterval>;
 
     if (isRunning) {
       interval = setInterval(() => {
@@ -67,8 +67,5 @@ export const useTimer = ({
     };
   }, [isRunning, start, end, delta, onTick, onTime]);
 
-  return [timeRef, reset] as [
-    time: React.MutableRefObject<number>,
-    reset: () => number
-  ];
+  return [timeRef, reset] as [time: React.MutableRefObject<number>, reset: () => number];
 };

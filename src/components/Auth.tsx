@@ -1,15 +1,6 @@
-import {
-  useSignInWithGoogle,
-  useSignOut,
-  useAuthState,
-} from "react-firebase-hooks/auth";
+import { useSignInWithGoogle, useSignOut, useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
-import {
-  authButton,
-  authWraper,
-  errorStyle,
-  googleButton,
-} from "./styles/auth.css";
+import { authButton, authWraper, errorStyle, googleButton } from "./styles/auth.css";
 import type { AuthError } from "firebase/auth";
 import { useState } from "react";
 

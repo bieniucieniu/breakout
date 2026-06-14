@@ -28,9 +28,7 @@ export const MainMenu = () => {
       <div className={mainMenu}>
         <div className={mainMenuContent}>
           <Link
-            href={
-              gameType === "gravity" ? "/breakoutGravity" : "/breakoutNormal"
-            }
+            href={gameType === "gravity" ? "/breakoutGravity" : "/breakoutNormal"}
             className={title}
           >
             play

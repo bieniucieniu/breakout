@@ -12,16 +12,9 @@ type ChildrenProps = {
   text?: never;
 };
 
-type DisplayProps = (ValueProps | ChildrenProps) &
-  React.HTMLProps<HTMLDivElement>;
+type DisplayProps = (ValueProps | ChildrenProps) & React.HTMLProps<HTMLDivElement>;
 
-export const Display = ({
-  text,
-  value,
-  children,
-  className,
-  ...props
-}: DisplayProps) => {
+export const Display = ({ text, value, children, className, ...props }: DisplayProps) => {
   if (children) {
     return (
       <div className={`${display} ${className}`} {...props}>

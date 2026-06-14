@@ -1,14 +1,14 @@
 import { useMemo, useRef } from "react";
 import { useStorage } from "../../storage";
 import { useFrame } from "@react-three/fiber";
-import { Vector2 } from "three";
+import { Vector2, type Mesh, type Vector3 } from "three";
 
 export const Ball = ({
   position,
   paddlePositionRef,
 }: {
   position: [number, number];
-  paddlePositionRef: React.MutableRefObject<THREE.Vector3>;
+  paddlePositionRef: React.MutableRefObject<Vector3>;
 }) => {
   const { config, ball } = useStorage((state) => ({
     config: state.config,
@@ -17,10 +17,8 @@ export const Ball = ({
   const bricks = useStorage((state) => state.bricks);
   const brickHit = useStorage((state) => state.brickHit);
   const removeLife = useStorage((state) => state.removeLife);
-  const ref = useRef<THREE.Mesh>(null!);
-  const vector = useRef(
-    new Vector2(ball.speed / Math.sqrt(2), ball.speed / Math.sqrt(2))
-  );
+  const ref = useRef<Mesh>(null!);
+  const vector = useRef(new Vector2(ball.speed / Math.sqrt(2), ball.speed / Math.sqrt(2)));
   const { paused, gameStage } = useStorage((state) => ({
     paused: state.paused,
     gameStage: state.gameStage,
@@ -31,40 +29,22 @@ export const Ball = ({
   const ballRadius = ball.radius;
   const brickSize = config.game.brick.args;
 
-  const minVerSpeed = useMemo(
-    () => Math.sin(ball.minAngle) * ball.speed,
-    [config]
-  );
-  const minHorSpeed = useMemo(
-    () => Math.cos(ball.minAngle) * ball.speed,
-    [config]
-  );
+  const minVerSpeed = useMemo(() => Math.sin(ball.minAngle) * ball.speed, [config]);
+  const minHorSpeed = useMemo(() => Math.cos(ball.minAngle) * ball.speed, [config]);
 
   useFrame((_, delta) => {
     if (paused || gameStage !== "playing") return;
     const ballPosition = ref.current.position;
 
-    if (
-      ballPosition.x > config.game.args[0] / 2 - ballRadius &&
-      vector.current.x > 0
-    ) {
+    if (ballPosition.x > config.game.args[0] / 2 - ballRadius && vector.current.x > 0) {
       vector.current.x *= -1;
-    } else if (
-      ballPosition.x < -config.game.args[0] / 2 + ballRadius &&
-      vector.current.x < 0
-    ) {
+    } else if (ballPosition.x < -config.game.args[0] / 2 + ballRadius && vector.current.x < 0) {
       vector.current.x *= -1;
     }
 
-    if (
-      ballPosition.y > config.game.args[1] / 2 - ballRadius &&
-      vector.current.y > 0
-    ) {
+    if (ballPosition.y > config.game.args[1] / 2 - ballRadius && vector.current.y > 0) {
       vector.current.y *= -1;
-    } else if (
-      ballPosition.y < -config.game.args[1] / 2 + ballRadius &&
-      vector.current.y < 0
-    ) {
+    } else if (ballPosition.y < -config.game.args[1] / 2 + ballRadius && vector.current.y < 0) {
       vector.current.y *= -1;
       removeLife();
       ref.current.position.set(...ball.defaultPosition, 0);
@@ -86,8 +66,7 @@ export const Ball = ({
         vector.current.y = minVerSpeed;
         vector.current.x = vector.current.x > 0 ? minHorSpeed : -minHorSpeed;
       }
-      if (vector.current.length() < ball.speed)
-        vector.current.setLength(ball.speed);
+      if (vector.current.length() < ball.speed) vector.current.setLength(ball.speed);
     }
 
     for (const brick of bricks) {
@@ -111,14 +90,8 @@ export const Ball = ({
           vector.current.x *= -1;
           brickHit(brick.name);
         } else {
-          const v = [
-            brick.position[0] - ballPosition.x,
-            brick.position[1] - ballPosition.y,
-          ];
-          if (
-            (v[0] > 0 == vector.current.x > 0) ==
-            (v[1] > 0 == vector.current.y > 0)
-          ) {
+          const v = [brick.position[0] - ballPosition.x, brick.position[1] - ballPosition.y];
+          if ((v[0] > 0 == vector.current.x > 0) == (v[1] > 0 == vector.current.y > 0)) {
             vector.current.x *= -1;
             vector.current.y *= -1;
             brickHit(brick.name);

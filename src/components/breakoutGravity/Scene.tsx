@@ -39,9 +39,7 @@ export const Scene = () => {
         <Boarder />
         <Paddle position={config.paddle.defaultPosition} />
         <BricksGrid bricks={bricks} />
-        {gameStage === "playing" && (
-          <Ball position={config.ball.defaultPosition} />
-        )}
+        {gameStage === "playing" && <Ball position={config.ball.defaultPosition} />}
       </group>
     </>
   );

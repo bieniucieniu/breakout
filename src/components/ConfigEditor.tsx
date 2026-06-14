@@ -12,7 +12,7 @@ import {
 import { Button, LinkButton } from "./Buttons";
 import defaultConfig from "../defaultConfig";
 
-type ConfigTypes = String | Number | Boolean;
+type ConfigTypes = string | number | boolean;
 
 type Obj = {
   [key: string]: ConfigTypes | Obj;
@@ -20,13 +20,7 @@ type Obj = {
 
 const ArrayModule = ({}: {}) => {};
 
-const PrimitivesModule = ({
-  keyToElement,
-  parent,
-}: {
-  keyToElement: string;
-  parent: Obj;
-}) => {
+const PrimitivesModule = ({ keyToElement, parent }: { keyToElement: string; parent: Obj }) => {
   if (parent[keyToElement] === undefined) return <p>error</p>;
 
   const [input, setInput] = useState(parent[keyToElement] as ConfigTypes);
@@ -53,11 +47,7 @@ const PrimitivesModule = ({
       return (
         <p className={primitivesModule}>
           <span>{keyToElement}</span>
-          <input
-            type="number"
-            value={input as number}
-            onChange={handlechange}
-          />
+          <input type="number" value={input as number} onChange={handlechange} />
         </p>
       );
     }
@@ -69,11 +59,7 @@ const PrimitivesModule = ({
       return (
         <p className={primitivesModule}>
           <span>{keyToElement}</span>
-          <input
-            type="checkbox"
-            checked={input as boolean}
-            onChange={handlechange}
-          />
+          <input type="checkbox" checked={input as boolean} onChange={handlechange} />
         </p>
       );
     }
@@ -82,13 +68,7 @@ const PrimitivesModule = ({
   return <div>error pre</div>;
 };
 
-const ObjectsModule = ({
-  keyToElement,
-  parent,
-}: {
-  keyToElement: string;
-  parent: Obj;
-}) => {
+const ObjectsModule = ({ keyToElement, parent }: { keyToElement: string; parent: Obj }) => {
   if (parent && parent[keyToElement]) {
     const obj = parent[keyToElement] as Obj;
     const keys = Object.keys(parent[keyToElement]);
@@ -101,11 +81,7 @@ const ObjectsModule = ({
           {keys.map((k) => {
             if (typeof obj[k] === "object") {
               return (
-                <ObjectsModule
-                  key={`Object-${keyToElement}.${k}`}
-                  keyToElement={k}
-                  parent={obj}
-                />
+                <ObjectsModule key={`Object-${keyToElement}.${k}`} keyToElement={k} parent={obj} />
               );
             } else {
               return (
@@ -142,11 +118,7 @@ export const ConfigEditor = ({
       <div className={configButtons}>
         <Button onClick={close}>close</Button>
         <Button onClick={() => setConfig(ref.current)}>submit</Button>
-        <Button
-          onClick={() => setConfig(JSON.parse(JSON.stringify(defaultConfig)))}
-        >
-          reset
-        </Button>
+        <Button onClick={() => setConfig(JSON.parse(JSON.stringify(defaultConfig)))}>reset</Button>
       </div>
     </div>
   );

@@ -52,8 +52,7 @@ export const googleButton = style([
       width: "20px",
       height: "20px",
       marginTop: "-9px",
-      backgroundImage:
-        "url(https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg)",
+      backgroundImage: "url(https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg)",
       backgroundSize: "20px 20px",
     },
   },

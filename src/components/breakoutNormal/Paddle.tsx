@@ -1,6 +1,7 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { useStorage } from "../../storage";
+import type { Mesh, Vector3 } from "three";
 
 const touchControls = () => {
   const ref = useRef<{ x: number | undefined; y: number | undefined }>({
@@ -43,7 +44,7 @@ export const Paddle = ({
   positionRef,
   position,
 }: {
-  positionRef: React.MutableRefObject<THREE.Vector3>;
+  positionRef: React.MutableRefObject<Vector3>;
   position: [number, number];
 }) => {
   const { paddle, args } = useStorage((state) => ({
@@ -56,7 +57,7 @@ export const Paddle = ({
   }));
   const touch = touchControls();
 
-  const ref = useRef<THREE.Mesh>(null!);
+  const ref = useRef<Mesh>(null!);
 
   const vector = useRef([0, 0] as [number, number]);
   const maxSpeed = [paddle.maxSpeed.x, paddle.maxSpeed.y];
@@ -80,10 +81,8 @@ export const Paddle = ({
     if (controllsType.current === "touch") {
       if (touch.x !== undefined && touch.y !== undefined) {
         vector.current = [
-          ((touch.x * 2 * viewport.width) / 2 - ref.current.position.x) *
-            maxSpeed[0],
-          ((touch.y * 2 * viewport.height) / 2 - ref.current.position.y) *
-            maxSpeed[1],
+          ((touch.x * 2 * viewport.width) / 2 - ref.current.position.x) * maxSpeed[0],
+          ((touch.y * 2 * viewport.height) / 2 - ref.current.position.y) * maxSpeed[1],
         ];
       } else {
         vector.current = [0, 0];
@@ -91,8 +90,7 @@ export const Paddle = ({
     } else {
       vector.current = [
         ((mouse.x * viewport.width) / 2 - ref.current.position.x) * maxSpeed[0],
-        ((mouse.y * viewport.height) / 2 - ref.current.position.y) *
-          maxSpeed[1],
+        ((mouse.y * viewport.height) / 2 - ref.current.position.y) * maxSpeed[1],
       ];
     }
 

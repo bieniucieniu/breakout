@@ -57,7 +57,7 @@ export const useScores = ({
   const q = query(
     collection(db, `scores-${gameType}`) as CollectionReference<Data>,
     orderBy(orderedBy || "score", direction || "desc"),
-    limit(limitedTo || 10)
+    limit(limitedTo || 10),
   );
 
   return useCollection(q, {

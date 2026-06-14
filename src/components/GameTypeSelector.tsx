@@ -3,10 +3,7 @@ import { useStorage } from "../storage";
 import { Button } from "./Buttons";
 import { gameTypeButtons, gameTypeButton } from "./styles/gameTypeSelector.css";
 
-export const GameTypeSelector = ({
-  className,
-  ...props
-}: React.HTMLProps<HTMLDivElement>) => {
+export const GameTypeSelector = ({ className, ...props }: React.HTMLProps<HTMLDivElement>) => {
   const setGameType = useStorage((state) => state.setGameType);
   const gameType = useStorage((state) => state.gameType);
   return (

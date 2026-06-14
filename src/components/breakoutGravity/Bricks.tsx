@@ -34,7 +34,6 @@ const Brick = ({
     //colision handling //colision handling //colision handling //colision handling
   }));
   return (
-    // @ts-expect-error
     <mesh ref={ref} name={name}>
       <boxGeometry args={args} />
       <meshToonMaterial color={color || "hotpink"} />
@@ -58,7 +57,7 @@ export const BricksGrid = ({ bricks }: { bricks: Brick[] }) => {
               material={materials.brick}
               color={colors[brick.points ? brick.points - 1 : 0]}
             />
-          )
+          ),
       )}
     </>
   );

@@ -5,7 +5,7 @@ import { BricksGrid } from "./Bricks";
 import { Boarder } from "./Boarder";
 import { Paddle } from "./Paddle";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Vector3 } from "three";
+import { Vector3, type Group } from "three";
 
 export const Scene = () => {
   const config = useStorage((state) => state.config.game);
@@ -14,7 +14,7 @@ export const Scene = () => {
     ballPosition: state.ballPosition,
     paddlePosition: state.paddlePosition,
   }));
-  const groupRef = useRef<THREE.Group>(null!);
+  const groupRef = useRef<Group>(null!);
 
   const paddlePositionRef = useRef(new Vector3());
 

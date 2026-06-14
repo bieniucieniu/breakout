@@ -31,11 +31,7 @@ type Storage = {
     time: number;
     gravity: number;
   };
-  setLastScore: (prop: {
-    classic?: number;
-    time?: number;
-    gravity?: number;
-  }) => void;
+  setLastScore: (prop: { classic?: number; time?: number; gravity?: number }) => void;
   gameType: "classic" | "time" | "gravity";
   setGameType: (type: "classic" | "time" | "gravity") => void;
   time: number;

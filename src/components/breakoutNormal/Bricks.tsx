@@ -17,7 +17,7 @@ export const BricksGrid = ({ bricks }: { bricks: Brick[] }) => {
         new Vector2(0, 0),
       ]),
 
-    [brickConf.args]
+    [brickConf.args],
   );
 
   const extrudeSettings = {
@@ -38,9 +38,7 @@ export const BricksGrid = ({ bricks }: { bricks: Brick[] }) => {
             <mesh
               name={brick.name}
               position={[
-                brick.position[0] -
-                  brick.args[0] / 2 +
-                  brickConf.bevel.thickness,
+                brick.position[0] - brick.args[0] / 2 + brickConf.bevel.thickness,
                 brick.position[1] - brick.args[1] / 2,
                 0,
               ]}
@@ -49,11 +47,9 @@ export const BricksGrid = ({ bricks }: { bricks: Brick[] }) => {
             >
               {/* <boxGeometry args={brick.args} /> */}
               <extrudeGeometry args={[shape, extrudeSettings]} />
-              <meshToonMaterial
-                color={colors[brick.points ? brick.points - 1 : 0]}
-              />
+              <meshToonMaterial color={colors[brick.points ? brick.points - 1 : 0]} />
             </mesh>
-          )
+          ),
       )}
     </>
   );
