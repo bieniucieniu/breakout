@@ -1,7 +1,7 @@
 import Game from "./breakoutNormal/index";
 import { GameNavigation } from "./game/Navigation";
 import { breakout, game, placeholder } from "./styles/breakout.css";
-import { useStorage } from "../storage";
+import { useStorage, useStorageShallow } from "../storage";
 import { GamePauseMenu } from "./game/PauseMenu";
 import { GameStartMenu } from "./game/StartMenu";
 import { GameOverMenu } from "./game/OverMenu";
@@ -11,7 +11,7 @@ import type { KeyboardEvent } from "react";
 export const BreakoutNormal = () => {
   const gameStage = useStorage((state) => state.gameStage);
   const paused = useStorage((state) => state.paused);
-  const { resetGame, startGame, switchPaused, setupGame } = useStorage((state) => ({
+  const { resetGame, startGame, switchPaused, setupGame } = useStorageShallow((state) => ({
     startGame: state.startGame,
     resetGame: state.resetGame,
     switchPaused: state.switchPaused,

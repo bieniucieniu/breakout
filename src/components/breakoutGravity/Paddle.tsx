@@ -1,10 +1,10 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { useBox } from "@react-three/p2";
 import { useEffect, useRef } from "react";
-import { useStorage } from "../../storage";
+import { useStorage, useStorageShallow } from "../../storage";
 
 export const Paddle = ({ position }: { position: [number, number] }) => {
-  const { paddle, materials } = useStorage((state) => ({
+  const { paddle, materials } = useStorageShallow((state) => ({
     paddle: state.config.game.paddle,
     materials: state.config.game.materials,
   }));

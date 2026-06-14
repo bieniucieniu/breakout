@@ -1,6 +1,6 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
-import { useStorage } from "../../storage";
+import { useStorage, useStorageShallow } from "../../storage";
 import type { Mesh, Vector3 } from "three";
 
 const touchControls = () => {
@@ -47,11 +47,11 @@ export const Paddle = ({
   positionRef: React.MutableRefObject<Vector3>;
   position: [number, number];
 }) => {
-  const { paddle, args } = useStorage((state) => ({
+  const { paddle, args } = useStorageShallow((state) => ({
     paddle: state.config.game.paddle,
     args: state.config.game.args,
   }));
-  const { paused, gameStage } = useStorage((state) => ({
+  const { paused, gameStage } = useStorageShallow((state) => ({
     paused: state.paused,
     gameStage: state.gameStage,
   }));

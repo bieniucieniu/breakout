@@ -1,5 +1,5 @@
 import { useMemo, useRef } from "react";
-import { useStorage } from "../../storage";
+import { useStorage, useStorageShallow } from "../../storage";
 import { useFrame } from "@react-three/fiber";
 import { Vector2, type Mesh, type Vector3 } from "three";
 
@@ -10,7 +10,7 @@ export const Ball = ({
   position: [number, number];
   paddlePositionRef: React.MutableRefObject<Vector3>;
 }) => {
-  const { config, ball } = useStorage((state) => ({
+  const { config, ball } = useStorageShallow((state) => ({
     config: state.config,
     ball: state.config.game.ball,
   }));
@@ -19,7 +19,7 @@ export const Ball = ({
   const removeLife = useStorage((state) => state.removeLife);
   const ref = useRef<Mesh>(null!);
   const vector = useRef(new Vector2(ball.speed / Math.sqrt(2), ball.speed / Math.sqrt(2)));
-  const { paused, gameStage } = useStorage((state) => ({
+  const { paused, gameStage } = useStorageShallow((state) => ({
     paused: state.paused,
     gameStage: state.gameStage,
   }));

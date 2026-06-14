@@ -20,8 +20,8 @@ export default ({ className }: { className?: string }) => {
       camera={{
         position: config.camera.position,
         fov: config.camera.fov,
-        near: 70,
-        far: 150,
+        near: 0.1,
+        far: 200,
       }}
     >
       <Physics

@@ -1,7 +1,8 @@
 import { create } from "zustand";
+import { useShallow } from "zustand/react/shallow";
 import { Brick, createBricksGrid } from "../functions/createBricksGrid";
 import defaultConfig from "../defaultConfig";
-import { addScore } from "../firebase/scoreStorage";
+import { addScore } from "../scores/storage";
 
 type Storage = {
   paused: boolean;
@@ -153,3 +154,6 @@ export const useStorage = create<Storage>((set) => ({
   setBallPosition: (position) => set(() => ({ ballPosition: position })),
   setPaddlePosition: (position) => set(() => ({ paddlePosition: position })),
 }));
+
+export const useStorageShallow = <T>(selector: (state: Storage) => T) =>
+  useStorage(useShallow(selector));

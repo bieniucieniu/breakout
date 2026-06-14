@@ -4,6 +4,9 @@ import { appearFromBottom } from "./animations.css";
 export const game = style({
   animation: `${appearFromBottom} .3s ease-in-out`,
   touchAction: "none",
+  flex: 1,
+  minHeight: 0,
+  width: "100%",
 });
 
 export const placeholder = style({

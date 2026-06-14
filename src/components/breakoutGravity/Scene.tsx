@@ -1,12 +1,12 @@
 import { useContactMaterial } from "@react-three/p2";
-import { useStorage } from "../../storage";
+import { useStorage, useStorageShallow } from "../../storage";
 import { Ball } from "./Ball";
 import { BricksGrid } from "./Bricks";
 import { Boarder } from "./Boarder";
 import { Paddle } from "./Paddle";
 
 export const Scene = () => {
-  const { config, materials } = useStorage((state) => ({
+  const { config, materials } = useStorageShallow((state) => ({
     config: state.config.game,
     materials: state.config.game.materials,
   }));

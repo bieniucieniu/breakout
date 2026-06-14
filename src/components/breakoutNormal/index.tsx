@@ -1,14 +1,28 @@
-import { Canvas } from "@react-three/fiber";
-import { useStorage } from "../../storage";
+import { Canvas, useThree } from "@react-three/fiber";
+import { useStorage, useStorageShallow } from "../../storage";
 import { Scene } from "./Scene";
-import { BakeShadows, Preload } from "@react-three/drei";
-import { Suspense } from "react";
-import { Fallback } from "./Fallback";
+import { Suspense, useEffect } from "react";
 import { useWindowFocus } from "../../functions/useWindowFocus";
+
+const RenderOnChange = ({
+  paused,
+  gameStage,
+}: {
+  paused: boolean;
+  gameStage: "init" | "playing" | "over";
+}) => {
+  const invalidate = useThree((state) => state.invalidate);
+
+  useEffect(() => {
+    invalidate();
+  }, [invalidate, paused, gameStage]);
+
+  return null;
+};
 
 export default ({ className }: { className?: string }) => {
   const config = useStorage((state) => state.config.game);
-  const { paused, gameStage } = useStorage((state) => ({
+  const { paused, gameStage } = useStorageShallow((state) => ({
     paused: state.paused,
     gameStage: state.gameStage,
   }));
@@ -22,14 +36,13 @@ export default ({ className }: { className?: string }) => {
       camera={{
         position: config.camera.position,
         fov: config.camera.fov,
-        near: 70,
-        far: 150,
+        near: 0.1,
+        far: 200,
       }}
       frameloop={!paused && gameStage === "playing" ? "always" : "demand"}
     >
-      <Suspense fallback={<Fallback />}>
-        <Preload all />
-        <BakeShadows />
+      <RenderOnChange paused={paused} gameStage={gameStage} />
+      <Suspense fallback={null}>
         <Scene />
       </Suspense>
     </Canvas>

@@ -1,6 +1,6 @@
 import { Color } from "@react-three/fiber";
 import { useBox } from "@react-three/p2";
-import { useStorage } from "../../storage";
+import { useStorage, useStorageShallow } from "../../storage";
 import type { Brick } from "../../functions/createBricksGrid";
 
 const Brick = ({
@@ -42,7 +42,7 @@ const Brick = ({
 };
 
 export const BricksGrid = ({ bricks }: { bricks: Brick[] }) => {
-  const { colors, materials } = useStorage((state) => ({
+  const { colors, materials } = useStorageShallow((state) => ({
     colors: state.config.game.brick.colors,
     materials: state.config.game.materials,
   }));

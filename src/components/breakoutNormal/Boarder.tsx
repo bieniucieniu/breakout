@@ -1,7 +1,7 @@
-import { useStorage } from "../../storage";
+import { useStorageShallow } from "../../storage";
 
 export const Boarder = () => {
-  const { boardArgs, border } = useStorage((state) => ({
+  const { boardArgs, border } = useStorageShallow((state) => ({
     config: state.config.game,
     border: state.config.game.border,
     boardArgs: state.config.game.args,

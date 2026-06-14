@@ -10,18 +10,15 @@ import {
   tableContainer,
 } from "./styles/scoreboard.css";
 import { msToTime } from "../functions/timer";
-import { useScores, type Data } from "../firebase/scoreStorage";
+import { useScores, type ScoreEntry } from "../scores/storage";
 import { Display } from "./Display";
 import { GameTypeSelector } from "./GameTypeSelector";
-import { useMemo } from "react";
 import { LinkButton } from "./Buttons";
 
-const Row = ({ score, name, timestamp, ms, index }: Data & { index: number }) => {
-  const date = timestamp?.toDate
-    ? formatDistance(timestamp.toDate(), new Date(), {
-        addSuffix: true,
-      })
-    : "unknown";
+const Row = ({ score, name, timestamp, ms, index }: ScoreEntry & { index: number }) => {
+  const date = formatDistance(new Date(timestamp), new Date(), {
+    addSuffix: true,
+  });
 
   return (
     <li className={row}>
@@ -34,7 +31,7 @@ const Row = ({ score, name, timestamp, ms, index }: Data & { index: number }) =>
   );
 };
 
-const Table = ({ scores }: { scores: (Data & { id: string })[] }) => {
+const Table = ({ scores }: { scores: ScoreEntry[] }) => {
   return (
     <div className={tableContainer}>
       <ol className={table}>
@@ -54,12 +51,7 @@ const Table = ({ scores }: { scores: (Data & { id: string })[] }) => {
 };
 
 export const Scoreboard = () => {
-  const [snap, loading, error] = useScores();
-
-  const data = useMemo(
-    () => snap?.docs.map((doc) => ({ ...doc.data(), id: doc.id })) ?? [],
-    [snap],
-  );
+  const { scores, loading, error } = useScores();
 
   return (
     <>
@@ -76,8 +68,8 @@ export const Scoreboard = () => {
       <div className={scoreboard}>
         <h1>Leaderboard</h1>
         <p>{loading ? "Loading..." : ""}</p>
-        <p>{error ? error.message : ""}</p>
-        <Table scores={data} />
+        <p>{error?.message ?? ""}</p>
+        <Table scores={scores} />
       </div>
     </>
   );

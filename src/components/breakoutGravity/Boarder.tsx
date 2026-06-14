@@ -1,8 +1,8 @@
-import { useStorage } from "../../storage";
+import { useStorageShallow } from "../../storage";
 import { KinematicBox } from "./KinenaticBox";
 
 export const Boarder = () => {
-  const { boardArgs, border, materials } = useStorage((state) => ({
+  const { boardArgs, border, materials } = useStorageShallow((state) => ({
     config: state.config.game,
     border: state.config.game.border,
     boardArgs: state.config.game.args,

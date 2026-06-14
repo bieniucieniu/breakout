@@ -1,9 +1,9 @@
 import { useCircle } from "@react-three/p2";
 import { useEffect, useRef } from "react";
-import { useStorage } from "../../storage";
+import { useStorage, useStorageShallow } from "../../storage";
 
 export const Ball = ({ position }: { position: [number, number] }) => {
-  const { config, ball, materials } = useStorage((state) => ({
+  const { config, ball, materials } = useStorageShallow((state) => ({
     config: state.config,
     ball: state.config.game.ball,
     materials: state.config.game.materials,

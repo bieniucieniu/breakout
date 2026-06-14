@@ -1,11 +1,11 @@
 import { menuBG } from "../styles/gameMenu.css";
 import { centeredTitle } from "../styles/basicStyles.css";
-import { useStorage } from "../../storage";
+import { useStorage, useStorageShallow } from "../../storage";
 import { Keys } from "../Display";
 import { msToTime } from "../../functions/timer";
 
 export const GameOverMenu = () => {
-  const { lastScore, time } = useStorage((state) => ({
+  const { lastScore, time } = useStorageShallow((state) => ({
     lastScore: state.lastScore,
     time: state.time,
   }));

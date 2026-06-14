@@ -1,16 +1,15 @@
 import { useRef } from "react";
-import { useStorage } from "../../storage";
+import { useStorage, useStorageShallow } from "../../storage";
 import { Ball } from "./Ball";
 import { BricksGrid } from "./Bricks";
 import { Boarder } from "./Boarder";
 import { Paddle } from "./Paddle";
-import { useFrame, useThree } from "@react-three/fiber";
 import { Vector3, type Group } from "three";
 
 export const Scene = () => {
   const config = useStorage((state) => state.config.game);
   const bricks = useStorage((state) => state.bricks);
-  const { ballPosition, paddlePosition } = useStorage((state) => ({
+  const { ballPosition, paddlePosition } = useStorageShallow((state) => ({
     ballPosition: state.ballPosition,
     paddlePosition: state.paddlePosition,
   }));
@@ -20,7 +19,7 @@ export const Scene = () => {
 
   return (
     <>
-      {/* <OrbitControls /> */}
+      <ambientLight intensity={0.8} />
       <group ref={groupRef}>
         {config.lights.map((light, index) => (
           <pointLight key={index} {...light} />
