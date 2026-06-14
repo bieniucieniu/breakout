@@ -1,5 +1,4 @@
 import { formatDistance } from "date-fns";
-import { Auth } from "./Auth";
 import {
   scoreboard,
   scoreboardNav,
@@ -56,9 +55,6 @@ export const Scoreboard = () => {
   return (
     <>
       <nav className={scoreboardNav}>
-        <Display>
-          <Auth />
-        </Display>
         <Display>
           <GameTypeSelector />
         </Display>

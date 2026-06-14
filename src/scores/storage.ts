@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useStorage } from "../storage";
-import { getStoredUser } from "../auth/user";
 
 export type ScoreEntry = {
   id: string;
@@ -39,13 +38,12 @@ export const addScore = ({
   gameType: ScoreEntry["gameType"];
   ms: number;
 }) => {
-  const user = getStoredUser();
-  if (!user || score <= 0) return;
+  if (score <= 0) return;
 
   const entry: ScoreEntry = {
     id: crypto.randomUUID(),
-    name: user.name,
-    uid: user.uid,
+    name: "Player",
+    uid: "local",
     score,
     timestamp: Date.now(),
     gameType,

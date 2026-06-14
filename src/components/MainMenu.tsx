@@ -1,6 +1,5 @@
 import { Link } from "wouter";
 import { title } from "./styles/basicStyles.css";
-import { Auth } from "./Auth";
 import {
   configButton,
   configSideBarHidden,
@@ -40,9 +39,6 @@ export const MainMenu = () => {
           <Link href="/scoreboard" className={title}>
             scoreboard
           </Link>
-          <Display>
-            <Auth />
-          </Display>
         </div>
         <div className={configButton}>
           <Button onClick={() => setShowConfig(!showConfig)}>config</Button>
