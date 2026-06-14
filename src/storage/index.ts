@@ -66,11 +66,11 @@ export const useStorage = create<Storage>((set) => ({
 
       if (totalScore <= 0) {
         state.endGame({
-          score: state.score + (score || 1),
+          score: state.score + (score ?? 1),
         });
       }
 
-      return { bricks: newBricks, score: state.score + (score || 1) };
+      return { bricks: newBricks, score: state.score + (score ?? 1) };
     }),
   removeLife: () =>
     set((state) => {

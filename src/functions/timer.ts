@@ -47,19 +47,16 @@ export const useTimer = ({
     if (isRunning) {
       interval = setInterval(() => {
         timeRef.current += delta;
-        if (end)
-          if (delta > 0 ? timeRef.current >= end : timeRef.current <= end) {
-            clearInterval(interval);
-            onEnd?.();
-          }
+        if (end && (delta > 0 ? timeRef.current >= end : timeRef.current <= end)) {
+          clearInterval(interval);
+          onEnd?.();
+        }
 
-        onTick && onTick(timeRef.current, delta);
+        onTick?.(timeRef.current, delta);
 
-        onTime.forEach(([onMs, func]) => {
-          if (timeRef.current === onMs) {
-            func(timeRef.current, delta);
-          }
-        });
+        for (const [onMs, func] of onTime) {
+          if (timeRef.current === onMs) func(timeRef.current, delta);
+        }
       }, Math.abs(delta));
     }
     return () => {

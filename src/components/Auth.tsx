@@ -27,7 +27,7 @@ export const SignInWithGoogle = ({ className, ...props }: ButtonProps) => {
       >
         sign In With Google
       </button>
-      {error ? <Error error={error} onDismiss={clearError} /> : null}
+      {error && <Error error={error} onDismiss={clearError} />}
     </div>
   );
 };
@@ -45,7 +45,7 @@ export const SignOut = ({ className, ...props }: ButtonProps) => {
       >
         logout
       </button>
-      {error ? <Error error={error} onDismiss={clearError} /> : null}
+      {error && <Error error={error} onDismiss={clearError} />}
     </div>
   );
 };

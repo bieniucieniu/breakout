@@ -85,8 +85,7 @@ export const BreakoutGravity = () => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!ref.current) return;
-    if (!paused) {
+    if (ref.current && !paused) {
       ref.current.focus();
     }
   }, [paused, gameStage, undefined]);

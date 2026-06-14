@@ -37,7 +37,7 @@ export const LinkButton = ({
     <button
       className={`${linkButton} ${className}`}
       onClick={() => {
-        onClick && onClick();
+        onClick?.();
         setLocation(href);
       }}
       {...props}
