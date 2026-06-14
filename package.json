@@ -8,6 +8,9 @@
     "host": "vp dev --host",
     "build": "tsc && vp build",
     "preview": "vp preview",
+    "format": "vp fmt",
+    "lint": "vp lint",
+    "check": "vp check",
     "prepare": "vp config"
   },
   "dependencies": {
